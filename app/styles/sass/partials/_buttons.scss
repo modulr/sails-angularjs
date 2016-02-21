@@ -1,0 +1,138 @@
+.btn{
+  outline: none !important;
+  border-radius: 0;
+  @include transition(all .2s ease-in-out);
+
+  &:focus{
+    outline: none;
+  }
+}
+
+.btn-link{
+  color: $blue;
+
+  &:hover, &:focus, &:active, &.active{
+    color: $blue-dark-10;
+  }
+}
+
+.btn-default,
+.open > .dropdown-toggle.btn-default{
+  background-color: $white;
+  border-color: $gray-light-30;
+
+  &:hover, &:focus, &:active, &.active{
+    -webkit-box-shadow: none;
+    box-shadow: none ;
+    background-color: $gray-light-30;
+    border-color: $gray-light-30;
+  }
+
+  &:active, &.active{
+    &:hover, &:focus{
+      background-color: $gray-light-30;
+      border-color: $gray-light-30;
+    }
+  }
+}
+// .btn-default.disabled,
+// .btn-default[disabled],
+// fieldset[disabled] .btn-default,
+// .btn-default.disabled:hover,
+// .btn-default[disabled]:hover,
+// fieldset[disabled] .btn-default:hover,
+// .btn-default.disabled:focus,
+// .btn-default[disabled]:focus,
+// fieldset[disabled] .btn-default:focus,
+// .btn-default.disabled.focus,
+// .btn-default[disabled].focus,
+// fieldset[disabled] .btn-default.focus,
+// .btn-default.disabled:active,
+// .btn-default[disabled]:active,
+// fieldset[disabled] .btn-default:active,
+// .btn-default.disabled.active,
+// .btn-default[disabled].active,
+// fieldset[disabled] .btn-default.active{
+//   background-color: $gray-light-30;
+//   border-color: $gray-light-30;
+// }
+.btn-primary,
+.open > .dropdown-toggle.btn-primary{
+  background-color: $blue;
+  border-color: $blue;
+
+  &:hover, &:focus, &:active, &.active{
+    -webkit-box-shadow: none;
+    box-shadow: none ;
+    background-color: $blue-dark-10;
+    border-color: $blue-dark-10;
+  }
+
+  &:active, &.active{
+    &:hover, &:focus{
+      background-color: $blue-dark-10;
+      border-color: $blue-dark-10;
+    }
+  }
+}
+.btn-success,
+.open > .dropdown-toggle.btn-success{
+  background-color: $green;
+  border-color: $green;
+
+  &:hover, &:focus, &:active, &.active{
+    -webkit-box-shadow: none;
+    box-shadow: none ;
+    background-color: $green-dark-10;
+    border-color: $green-dark-10;
+  }
+
+  &:active, &.active{
+    &:hover, &:focus{
+      background-color: $green-dark-10;
+      border-color: $green-dark-10;
+    }
+  }
+}
+
+.close {
+  outline: none;
+}
+/*
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|   btn-circle
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.btn-circle-primary{
+  color: $blue;
+  padding: 0;
+
+  &:hover, &:focus, &:active{
+    color: $blue-dark-10;
+  }
+}
+.btn-circle-success{
+  color: $green;
+  padding: 0;
+
+  &:hover, &:focus, &:active{
+    color: $green-dark-10;
+  }
+}
+
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* fancycheck
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.fancy-check {
+  cursor: pointer;
+
+  &:hover {
+    color: $blue;
+  }
+
+  input{
+    display: none;
+  }
+}

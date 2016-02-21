@@ -1,0 +1,26 @@
+section{
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 230px;
+  background: $gray-light-35;
+  padding: 20px 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  @include transition(all .2s ease);
+
+  &.min{
+    left: 60px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $gray;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba($black, 0.4);
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "modulr",
+  "version": "0.1.0",
+  "authors": [
+    "Alfredo Barron <alfredobarronc@gmail.com>"
+  ],
+  "description": "modulr app",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.5",
+    "sails.io.js": "~0.13.5",
+    "angularSails": "~0.12.1",
+    "angular-animate": "~1.4.5",
+    "angular-cookies": "~1.4.5",
+    "angular-moment": "~0.10.1",
+    "angular-sanitize": "~1.4.5",
+    "angular-translate": "~2.9.0",
+    "angular-translate-loader-static-files": "~2.9.0",
+    "angular-translate-storage-local": "~2.9.0",
+    "angular-ui-router": "~0.2.13",
+    "angular-ui-tree": "~2.13.0",
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.3.5",
+    "fontawesome": "~4.3.0",
+    "animate.css": "~3.2.0",
+    "moment": "~2.10.3",
+    "password-generator": "~2.0.2",
+    "Chart.js": "~1.0.2",
+    "angular-chart.js": "~0.8.8",
+    "ng-tags-input": "~3.0.0",
+    "ng-tasty": "^0.6.1",
+    "select2": "~4.0.1",
+    "smoke": "~3.0.1",
+    "mdr-angular-select2": "~1.0.3",
+    "bootstrap-datepicker": "~1.5.0",
+    "mdr-angular-datepicker": "~1.0.2",
+    "mdr-angular-file": "~1.0.4"
+  }
+}

@@ -1,0 +1,24 @@
+@media (max-width: 768px) {
+  nav{
+    left:0 !important;
+    background-color: $white;
+  }
+  nav.min{
+    left:-230px !important;
+  }
+  section{
+    left: 0 !important;
+  }
+  section.min{
+    left: 0 !important;
+  }
+  .error{
+    max-width: 300px !important;
+
+    span {
+      top: 15% !important;
+      left: 36% !important;
+      font-size: 5em !important
+    }
+  }
+}

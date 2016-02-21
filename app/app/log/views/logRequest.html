@@ -1,0 +1,72 @@
+<div class="page">
+
+  <ul class="nav nav-tabs sections">
+    <li ui-sref-active="active"><a href="" ui-sref="layout.login">{{'LOGIN' | translate}}</a></li>
+    <li ui-sref-active="active"><a href="" ui-sref="layout.request">{{'REQUEST' | translate}}</a></li>
+  </ul>
+  
+  <div class="tab-content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.METHOD' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <canvas class="chart chart-pie" chart-legend="true"
+              chart-data="charts.method.data" chart-labels="charts.method.labels" chart-options="{tooltipTemplate: '<%if (label){%><%=label%>: <%}%><%= value %>%'}">
+            </canvas>
+          </div>
+        </div>
+      </div><!-- /.col -->
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.TIME' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <canvas class="chart chart-line" chart-legend="true"
+              chart-data="charts.time.data" chart-labels="charts.time.labels" chart-series="charts.time.series">
+            </canvas>
+          </div>
+        </div>
+      </div><!-- /.col -->
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.USERS' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>{{ 'LOG.USER' | translate }}</th>
+                  <th>{{ 'LOG.METHOD' | translate }}</th>
+                  <th>url</th>
+                  <th>{{ 'LOG.PARAMETERS' | translate }}</th>
+                  <th>{{ 'LOG.RESPONSETIME' | translate }}</th>
+                  <th>{{ 'LOG.MIDDLEWARELATENCY' | translate }}</th>
+                  <th>{{ 'LOG.DATE' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in table | orderBy:'-createdAt'">
+                  <td>{{item.user.username}}</td>
+                  <td>{{item.method}}</td>
+                  <td>{{item.url}}</td>
+                  <td>{{item.parameters}}</td>
+                  <td>{{item.responseTime}}</td>
+                  <td>{{item.middlewareLatency}}</td>
+                  <td>{{item.createdAt | amDateFormat:'LLLL'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div>
+
+</div><!-- /.page -->

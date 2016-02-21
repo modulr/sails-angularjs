@@ -1,0 +1,62 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+
+<g>
+	<path fill="#414042" d="M97.091,21.566H66.894c-0.972,0-1.761,0.789-1.761,1.761v11.686c0,0.973,0.789,1.761,1.761,1.761h30.197
+		c0.973,0,1.761-0.789,1.761-1.761V23.328C98.852,22.355,98.063,21.566,97.091,21.566z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".7" repeatCount="indefinite"/>
+		 
+	</path>	
+	<path fill="#414042" d="M29.378,36.775h30.197c0.974,0,1.762-0.789,1.762-1.761V23.328c0-0.972-0.788-1.761-1.762-1.761H29.378
+		c-0.972,0-1.761,0.789-1.761,1.761v11.686C27.617,35.986,28.406,36.775,29.378,36.775z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".8" repeatCount="indefinite"/>
+		
+		
+	</path>
+	<path fill="#414042" d="M2.761,36.775h19.902c0.972,0,1.76-0.789,1.76-1.761V23.328c0-0.972-0.788-1.761-1.76-1.761H2.761
+		C1.789,21.566,1,22.355,1,23.328v11.686C1,35.986,1.789,36.775,2.761,36.775z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".9" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M97.091,57.971H66.894c-0.972,0-1.761,0.788-1.761,1.761v11.687c0,0.973,0.789,1.761,1.761,1.761h30.197
+		c0.973,0,1.761-0.788,1.761-1.761V59.731C98.852,58.759,98.063,57.971,97.091,57.971z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".1" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M59.907,57.971H29.709c-0.972,0-1.761,0.788-1.761,1.761v11.687c0,0.973,0.789,1.761,1.761,1.761h30.198
+		c0.974,0,1.761-0.788,1.761-1.761V59.731C61.668,58.759,60.881,57.971,59.907,57.971z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".2" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M22.664,57.971H2.761C1.789,57.971,1,58.759,1,59.731v11.687c0,0.973,0.789,1.761,1.761,1.761h19.902
+		c0.972,0,1.76-0.788,1.76-1.761V59.731C24.424,58.759,23.636,57.971,22.664,57.971z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".3" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M2.761,55.05h30.197c0.973,0,1.761-0.789,1.761-1.762V41.602c0-0.972-0.788-1.761-1.761-1.761H2.761
+		C1.789,39.841,1,40.63,1,41.602v11.686C1,54.261,1.789,55.05,2.761,55.05z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".6" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M38.414,41.602v11.686c0,0.973,0.788,1.762,1.76,1.762h30.199c0.972,0,1.76-0.789,1.76-1.762V41.602
+		c0-0.972-0.788-1.761-1.76-1.761H40.174C39.202,39.841,38.414,40.63,38.414,41.602z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".5" repeatCount="indefinite"/>
+		
+	</path>	
+	<path fill="#414042" d="M97.091,39.841H77.188c-0.972,0-1.76,0.789-1.76,1.761v11.686c0,0.973,0.788,1.762,1.76,1.762h19.902
+		c0.973,0,1.761-0.789,1.761-1.762V41.602C98.852,40.63,98.063,39.841,97.091,39.841z">
+		
+		<animate attributeName="fill" from="white" to="#414042" dur="1.2s" begin=".4" repeatCount="indefinite"/>
+	
+	</path>	
+		
+</g>
+</svg>

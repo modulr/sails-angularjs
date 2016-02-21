@@ -1,0 +1,29 @@
+.table{
+  thead{
+    tr{
+      &.active{
+        td, th{
+          background-color: inherit;;
+        }
+      }
+      td, th{
+        &.active{
+          background-color: inherit;;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      td{
+        &.avatar{
+          img{
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+  }
+}

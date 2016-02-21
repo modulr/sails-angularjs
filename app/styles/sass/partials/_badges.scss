@@ -1,0 +1,8 @@
+.badge {
+  &.badge-danger {
+    background-color: $red;
+  }
+  &.badge-success {
+    background-color: $green;
+  }
+}

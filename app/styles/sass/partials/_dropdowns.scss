@@ -1,0 +1,14 @@
+.dropdown-menu{
+  border-radius: 0;
+  padding: 0;
+  border: none;
+
+  li {
+    a{
+      padding: 8px 20px;
+    }
+  }
+  li.divider{
+    margin: 0
+  }
+}

@@ -1,0 +1,482 @@
+<div class="page">
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="profile-header">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="photo">
+              <img ng-src="{{user.avatar}}" class="img-circle"/>
+              <a href="" class="btn btn-upload" data-toggle="modal" data-target="#modalPhoto">
+                <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>
+              </a>
+            </div>
+            <form class="form-inline" id="formName" ng-show="editMode.name">
+              <div class="form-group">
+                <input type="text" class="form-control input-lg" placeholder="{{ 'PROFILE.NAME' | translate }}" ng-model="formName.firstName">
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control input-lg" placeholder="{{ 'PROFILE.LASTNAME' | translate }}" ng-model="formName.lastName">
+              </div>
+            </form>
+            <div class="info">
+              <h3 ng-hide="editMode.name">{{user.profile.firstName}} {{user.profile.lastName}}</h3>
+              <p>@{{user.username}}, {{'PROFILE.MEMBERSINCE' | translate}} {{user.createdAt | amDateFormat:'LL'}}</p>
+            </div>
+          </div><!-- /.col -->
+          <div class="col-md-12">
+            <div class="nav-center">
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="" data-target="#personal" aria-controls="personal" role="tab" data-toggle="tab">{{ 'PROFILE.INFORMATION' | translate }}</a>
+                </li>
+                <li role="presentation">
+                  <a href="" data-target="#work" aria-controls="work" role="tab" data-toggle="tab">{{ 'PROFILE.WORK' | translate }}</a>
+                </li>
+                <li role="presentation">
+                  <a href="" data-target="#notifications" aria-controls="notifications" role="tab" data-toggle="tab">{{ 'PROFILE.NOTIFICATIONS' | translate }}</a>
+                </li>
+                <li role="presentation">
+                  <a href="" data-target="#settings" aria-controls="settings" role="tab" data-toggle="tab">{{ 'PROFILE.SETTINGS' | translate }}</a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+        <div class="btn-edit">
+          <a href="" class="btn btn-circle-primary" ng-hide="editMode.name" ng-click="editName()">
+            <span class="fa-stack fa-lg" >
+              <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-pencil fa-stack-1x fa-inverse"></i>
+            </span>
+          </a>
+          <button type="button" class="btn btn-primary"  data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-show="editMode.name" ng-click="saveName($event)">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-default" ng-show="editMode.name" ng-click="cancelName()">{{ 'CANCEL' | translate }}</button>
+        </div>
+      </div><!-- /.profile-header-->
+
+      <div class="profile-content">
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="personal">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'PROFILE.PERSONAL' | translate }}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form class="form-horizontal" id="formPersonal">
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.GENDER' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/gender" options="gender.gender | translate for gender in genders | orderBy:'gender' track by gender.gender" model="formPersonal.gender" selected="user.profile.gender"></mdr-select2>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.BIRTHDAY' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-datepicker model="user.profile.birthday" date="formPersonal.birthday" format="d/M/yyyy" placeholder="dd/M/yyyy"></mdr-datepicker>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.RELATIONSHIP' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/relationship" options="relationship.relationship | translate for relationship in relationships | orderBy:'relationship' track by relationship.relationship" model="formPersonal.relationship" selected="user.profile.relationship"></mdr-select2>
+                        </div>
+                      </div>
+                    </form>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="savePersonal($event)">{{ 'SAVE' | translate }}</button>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{'PROFILE.PLACES' | translate}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <dl ng-repeat="item in user.place">
+                      <button type="button" class="close btn-edit" ng-click="editPlace(item, $index)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                      <dt>{{item.adress}}</dt>
+                      <dd ng-if="item.currently">{{'PROFILE.CURRENTLY' | translate}}</dd>
+                    </dl>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <a href="" class="btn btn-circle-success" data-toggle="modal" data-target="#modalPlace">
+                      <span class="fa-stack fa-lg" >
+                        <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{'PROFILE.FAMILY' | translate}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <dl ng-repeat="item in user.family">
+                      <button type="button" class="close btn-edit pull-right" ng-click="editFamily(item, $index)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                      <dt>{{item.name}}</dt>
+                      <dd>{{item.birthday | amDateFormat:'LL'}}, {{item.relation}}</dd>
+                    </dl>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <a href="" class="btn btn-circle-success" data-toggle="modal" data-target="#modalFamily">
+                      <span class="fa-stack fa-lg" >
+                        <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+              </div><!-- /.col -->
+
+              <div class="col-sm-6 col-md-6">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'PROFILE.CONTACT' | translate }}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <dl ng-repeat="item in user.contact | filter:'PHONE'">
+                      <button type="button" class="close btn-edit pull-right" ng-click="editContact(item)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                      <dt>
+                        <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> {{item.contact}}
+                      </dt>
+                    </dl>
+                    <dl ng-repeat="item in user.contact | filter:'EMAIL'">
+                      <button type="button" class="close btn-edit pull-right" ng-click="editContact(item)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                      <dt>
+                        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{item.contact}}
+                      </dt>
+                    </dl>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <a href="" class="btn btn-circle-success" data-toggle="modal" data-target="#modalContact">
+                      <span class="fa-stack fa-lg" >
+                        <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{'PROFILE.EDUCATION' | translate}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <dl ng-repeat="item in user.education">
+                      <button type="button" class="close btn-edit pull-right" ng-click="editEducation(item, $index)"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>
+                      <dt>{{item.schoolName}}</dt>
+                      <dd>{{item.major}}, {{item.startYear}} - {{item.endYear}}</dd>
+                    </dl>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <a href="" class="btn btn-circle-success" data-toggle="modal" data-target="#modalEducation">
+                      <span class="fa-stack fa-lg" >
+                        <i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-plus fa-stack-1x fa-inverse"></i>
+                      </span>
+                    </a>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+              </div><!-- /.col -->
+            </div><!-- /.row  -->
+          </div><!-- /.tab-pane -->
+
+          <div role="tabpanel" class="tab-pane" id="work">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'PROFILE.WORK' | translate }}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form class="form-horizontal" id="formWork">
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.JOB' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/job" options="job.job for job in jobs | orderBy:'job' track by job.job" model="formWork.select.job" selected="user.profile.job"></mdr-select2>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.DEPARTMENT' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/department" options="department.department for department in departments | orderBy:'department' track by department.department" model="formWork.select.department" selected="user.profile.department"></mdr-select2>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.COMPANY' | translate }}</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/company" options="company.company for company in companies | orderBy:'company' track by company.company" model="formWork.select.company" selected="user.profile.company"></mdr-select2>
+                        </div>
+                      </div>
+                    </form>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="saveWork($event)">{{ 'SAVE' | translate }}</button>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+              </div><!-- /.col -->
+            </div><!-- /.row  -->
+            <p>fecha que ingreso a trabajar, inventarios(compu, celular, automovil)</p>
+          </div><!-- /.tab-pane -->
+
+          <div role="tabpanel" class="tab-pane" id="notifications">
+            <h5>{{ 'PROFILE.NOTIFICATIONS' | translate }}</h5>
+            tareas, solicitudes o tickets, autorizaciones
+          </div><!-- /.tab-pane -->
+
+          <div role="tabpanel" class="tab-pane" id="settings">
+            <div class="row">
+              <div class="col-sm-6 col-md-6">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'PROFILE.ACCOUNT' | translate}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form class="form-horizontal" id="formAccount">
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.USERNAME' | translate }}:</label>
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" placeholder="{{ 'USERNAME' | translate }}" ng-model="user.username" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.EMAIL' | translate }}:</label>
+                        <div class="col-sm-9">
+                          <input type="email" class="form-control" placeholder="{{ 'PROFILE.EMAIL' | translate }}" ng-model="user.email" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-sm-3 control-label">{{ 'PROFILE.LANGUAGE' | translate }}:</label>
+                        <div class="col-sm-9">
+                          <mdr-select2 url="{{apiUrl}}/language" options="language.language | translate for language in languages | orderBy:'language' track by language.language" model="formAccount.select.language" selected="user.language" required></mdr-select2>
+                        </div>
+                      </div>
+                    </form>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="deactivateAccount($event)">{{ 'PROFILE.DEACTIVATEACCOUNT' | translate }}</button>
+                    <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="saveAccount($event)">{{ 'SAVE' | translate }}</button>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+              </div><!-- /.col -->
+              <div class="col-sm-6 col-md-6">
+                <div class="panel">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ 'PROFILE.CHANGEPASSWORD' | translate}}</h3>
+                  </div>
+                  <div class="panel-body">
+                    <form id="formPassword">
+                      <div class="form-group">
+                        <label class="control-label">{{ 'PROFILE.OLDPASSWORD' | translate}}</label>
+                        <input type="password" class="form-control" smk-strongPass="weak" required  ng-model="formPassword.oldPassword">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">{{ 'PROFILE.PASSWORD' | translate}}</label>
+                        <input type="password" class="form-control" smk-strongPass="weak" required  id="password" ng-model="formPassword.password">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label">{{ 'PROFILE.REPASSWORD' | translate}}</label>
+                        <input type="password" class="form-control" id="rePassword" ng-model="formPassword.rePassword">
+                      </div>
+                    </form>
+                  </div><!-- /.panel-body -->
+                  <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="savePassword($event)">{{ 'SAVE' | translate }}</button>
+                  </div><!-- /.panel-footer -->
+                </div><!-- /.panel -->
+              </div><!-- /.col -->
+            </div><!-- /.row -->
+          </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+      </div><!-- /.profile-content -->
+
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div><!-- /.page -->
+
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Modals
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<!-- Modal Photo -->
+<div class="modal fade" id="modalPhoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ 'PROFILE.PHOTO' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="nav-center">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="" data-target="#upload" aria-controls="upload" role="tab" data-toggle="tab">{{ 'UPLOAD' | translate }}</a></li>
+            <li role="presentation"><a href="" data-target="#photos" aria-controls="photos" role="tab" data-toggle="tab">{{ 'PROFILE.PHOTOS' | translate }}</a></li>
+          </ul>
+        </div>
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="upload">
+            <mdr-file url="{{apiUrl}}/photo/upload/{{user.id}}" headers="{authorization: token}" model="photoUpload" limit="5" formats="['jpg','png','gif']" text="{{ 'DRAGORCLICK' | translate }}"></mdr-file>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="photos">
+            <div class="row">
+              <div class="col-sm-4 col-md-3" ng-repeat="photo in user.photos">
+                <a href="" class="thumbnail" ng-click="setPhoto($event, photo)">
+                  <img class="img-responsive" ng-src="storage/users/{{user.id}}/{{photo.name}}">
+                </a>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.tab-content -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Place -->
+<div class="modal fade" id="modalPlace" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{ 'PROFILE.PLACES' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formPlace">
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.ADRESS' | translate}}</label>
+            <input type="text" class="form-control" placeholder="795 Folsom Ave, Suite 600
+San Francisco, CA 94107" ng-model="formPlace.adress" required>
+          </div>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" data-smk-noclear ng-model="formPlace.currently"> {{ 'PROFILE.CURRENTLY' | translate}}
+            </label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnPlace" ng-click="deletePlace($event)"><span class="glyphicon glyphicon-trash"></span> {{ 'DELETE' | translate }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+        <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnPlace" ng-click="savePlace($event)">{{ 'SAVE' | translate }}</button>
+        <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnPlace" ng-click="createPlace($event)">{{ 'CREATE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Family -->
+<div class="modal fade" id="modalFamily" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{ 'PROFILE.FAMILY' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formFamily">
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.NAME' | translate}}</label>
+            <input type="text" class="form-control" placeholder="John Doe" ng-model="formFamily.name" required>
+          </div>
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.BIRTHDAY' | translate}}</label>
+            <mdr-datepicker model="formFamily.datepicker.birthday" date="formFamily.birthday" format="d/M/yyyy" placeholder="dd/M/yyyy" required="true"></mdr-datepicker>
+          </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.RELATION' | translate}}</label>
+              <mdr-select2 url="{{apiUrl}}/relation" options="relation.relation | translate for relation in relations | orderBy:'relation' track by relation.relation" model="formFamily.select.relation" selected="formFamily.relation" required="true"></mdr-select2>
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnFamily" data-loading-text="<i class='fa fa-spinner fa-pulse'></i>" ng-click="deleteFamily($event)"><span class="glyphicon glyphicon-trash"></span>  {{ 'DELETE' | translate }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+        <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnFamily" ng-click="saveFamily($event)">{{ 'SAVE' | translate }}</button>
+        <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnFamily" ng-click="createFamily($event)">{{ 'CREATE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Contact -->
+<div class="modal fade" id="modalContact" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{{ 'PROFILE.CONTACT' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formContact">
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.TYPE' | translate}}</label>
+            <mdr-select2 url="{{apiUrl}}/contactType" options="type.type | translate for type in types | orderBy:'type' track by type.type" model="formContact.select.type" selected="formContact.type" required="true"></mdr-select2>
+          </div>
+          <div class="form-group" ng-if="formContact.select.type.type == 'PHONE'">
+            <label class="control-label">{{ 'PHONE' | translate}}</label>
+            <input type="tel" class="form-control" placeholder="1234567890" ng-model="formContact.contact" required>
+          </div>
+          <div class="form-group" ng-if="formContact.select.type.type == 'EMAIL'">
+            <label class="control-label">{{ 'EMAIL' | translate}}</label>
+            <input type="email" class="form-control" placeholder="john.doe@company.com" ng-model="formContact.contact" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnContact" ng-click="deleteContact($event)"><span class="glyphicon glyphicon-trash"></span>  {{ 'DELETE' | translate }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+        <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnContact" ng-click="saveContact($event)">{{ 'SAVE' | translate }}</button>
+        <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnContact" ng-click="createContact($event)">{{ 'CREATE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Education -->
+<div class="modal fade" id="modalEducation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ 'PROFILE.EDUCATION' | translate }}</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formEducation">
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.SCHOOLNAME' | translate}}</label>
+            <input type="text" class="form-control" placeholder="University of Oxford" ng-model="formEducation.schoolName" required>
+          </div>
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.MAJOR' | translate}}</label>
+            <input type="text" class="form-control" placeholder="Medical Sciences" ng-model="formEducation.major" required>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'PROFILE.STARTYEAR' | translate}}</label>
+                <input type="text" class="form-control" placeholder="2005" ng-model="formEducation.startYear" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'PROFILE.ENDYEAR' | translate}}</label>
+                <input type="text" class="form-control" placeholder="2010" ng-model="formEducation.endYear" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label">{{ 'PROFILE.DESCRIPTION' | translate}}</label>
+            <input type="text" class="form-control" placeholder="{{ 'PROFILE.DESCRIPTION' | translate}}" ng-model="formEducation.description">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnEducation" ng-click="deleteEducation($event)"><span class="glyphicon glyphicon-trash"></span>  {{ 'DELETE' | translate }}</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+        <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnEducation" ng-click="saveEducation($event)">{{ 'SAVE' | translate }}</button>
+        <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnEducation" ng-click="createEducation($event)">{{ 'CREATE' | translate }}</button>
+      </div>
+    </div>
+  </div>
+</div>

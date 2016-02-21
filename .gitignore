@@ -1,0 +1,6 @@
+api/node_modules
+api/config/email.js
+app/.sass-cache
+app/bower_components
+app/node_modules
+app/storage

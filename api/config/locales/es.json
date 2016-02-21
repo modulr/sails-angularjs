@@ -1,0 +1,23 @@
+{
+  "hi": "Hola %s",
+  "link-duration": "El enlace tiene una duración de 24 horas",
+  "team": "El equipo de Modulr",
+
+  "signup.subject": "Confirma tu dirección de correo electrónico - Modulr",
+  "signup.paragraph": "¡Te damos la bienvenida a Modulr! Antes de empezar, debes confirmar tu dirección de correo electrónico.",
+  "signup.btn": "Confirmar correo",
+
+  "welcome.subject": "Bienvenido a Modulr",
+  "welcome.paragraph": "¡Te damos la bienvenida a Modulr! Haz completado tu registro y tu cuenta se encuentra activa.",
+
+  "password-reset.subject": "Restablece tu contraseña - Modulr",
+  "password-reset.paragraph": "Hemos recibido una solicitud para restablecer la contraseña de tu cuenta.",
+  "password-reset.paragraph2": "Si tu solicitaste restablecer la contraseña para esta cuenta %s, haz clic en el botón de abajo. Si tu no hiciste este pedido, por favor, ignora este mensaje.",
+  "password-reset.btn": "Restablecer contraseña",
+
+  "password-update.subject": "Contraseña actualizada",
+	"password-update.paragraph": "La contraseña se actualizo correctamente, ya puedes iniciar sesion.",
+
+  "send-user-data.subject": "Datos de tu cuenta - Modulr",
+  "send-user-data.paragraph": "Estos son los datos de tu cuenta en Modulr, es necesario que establezcas tu contraseña para poder acceder."
+}

@@ -1,0 +1,144 @@
+.profile-header {
+  background-color: $blue-dark-20;
+  color: $white;
+  position: relative;
+
+  .photo {
+    position: relative;
+    display: inline-block;
+    margin-top: 35px;
+    margin-bottom: 25px;
+
+    &:hover .btn-upload{
+      opacity: 1;
+    }
+
+    img {
+      border: 6px solid;
+      border-color: rgba($white, 0.2);
+      width: 120px;
+      height: 120px;
+    }
+    .btn-upload {
+      background-color: rgba($black, 0.3);;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+
+      span {
+        font-size: 30px;
+        color: $white;
+        line-height: 120px;
+      }
+    }
+
+  }
+
+  .info{
+
+    h3, p{
+      font-weight: lighter;
+      margin: 0;
+    }
+    h3 {
+      //margin-top: 20px;
+    }
+    p {
+      margin-top: 5px;
+    }
+  }
+
+  form {
+    .form-group {
+      margin-bottom: 0;
+
+      .form-control {
+        background-color: transparent;
+        border-color: transparent;
+        border-bottom-color: $gray-light-30;
+        box-shadow: none;
+        font-weight: lighter;
+        color: $white;
+        text-align: center;
+        font-size: 22px;
+
+        &::-webkit-input-placeholder,
+        &:-moz-placeholder,
+        &:-moz-placeholder,
+        &:-ms-input-placeholder {
+          color: $gray-light-10;
+        }
+      }
+    }
+  }
+
+  .btn-edit {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .nav-tabs {
+    margin-top: 30px;
+
+    > li {
+
+      &.active {
+        > a,
+        a:hover,
+        a:focus {
+          color: $white;
+          border-bottom-color: $white;
+        }
+      }
+
+      > a,
+      a:hover,
+      a:focus {
+        color: $white;
+      }
+    }
+  }
+
+}
+
+.profile-content {
+
+  dl {
+    padding: 8px;
+    margin-bottom: 0;
+
+    .btn-edit {
+      display: none;
+    }
+  }
+
+  dl:hover{
+    background-color: $gray-light-35;
+  }
+  dl:hover .btn-edit {
+    display: inherit;
+  }
+}
+
+// .list-edit{
+//   .list-group-item{
+//     color: $gray-dark-10;
+//     border: none;
+//     border-radius: 0;
+//     .icon{
+//       font-weight: bold;
+//       margin-right: 5px
+//     }
+//     .btn-circle{
+//       display: none;
+//     }
+//   }
+//   :hover .btn-circle{
+//     display: block
+//   }
+// }

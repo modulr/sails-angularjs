@@ -1,0 +1,39 @@
+<div class="auth">
+  <form class="auth-form" id="formLogin" data-smk-icon="glyphicon glyphicon-remove-sign">
+
+    <h2>{{'LOGIN.LOGIN' | translate}}</h2>
+
+    <div class="form-group">
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-user"></span>
+        </span>
+        <input type="text" class="form-control" placeholder="{{'LOGIN.EMAILORUSERNAME' | translate}}" required autofocus ng-model="formLogin.emailOrUsername">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-lock"></span>
+        </span>
+        <input type="password" class="form-control" placeholder="{{'LOGIN.PASSWORD' | translate}}" required smk-strongPass="weak" ng-model="formLogin.password">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+            <input type="checkbox" ng-model="formLogin.rememberMe"> {{'LOGIN.REMEMBERME' | translate}}
+        </label>
+      </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg btn-block" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." autocomplete="off" ng-click="login($event)">{{'LOGIN.LOGIN' | translate}}</button>
+
+    <a class="btn btn-link pull-left" href="/begin_password_reset">{{'LOGIN.FORGOTPASSWORD' | translate}}</a>
+
+    <a class="btn btn-link pull-right" href="/signup">{{'SIGNUP.SIGNUP' | translate}}</a>
+
+  </form>
+</div>

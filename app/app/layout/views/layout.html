@@ -1,0 +1,117 @@
+<header>
+  <a href="" class="logo pull-left" ng-click="toggleClassLayout()">
+    <?xml version="1.0" encoding="utf-8"?>
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    	 viewBox="-527.2 390.3 55.9 29.6" enable-background="new -527.2 390.3 55.9 29.6" xml:space="preserve">
+    <g>
+    	<path fill="#FFFFFF" d="M-489.6,399.1h17.3c0.6,0,1-0.5,1-1v-6.7c0-0.6-0.5-1-1-1h-17.3c-0.6,0-1,0.5-1,1v6.7
+    		C-490.6,398.6-490.1,399.1-489.6,399.1z"/>
+    	<path fill="#FFFFFF" d="M-510.9,399.1h17.3c0.6,0,1-0.5,1-1v-6.7c0-0.6-0.5-1-1-1h-17.3c-0.6,0-1,0.5-1,1v6.7
+    		C-511.9,398.6-511.5,399.1-510.9,399.1z"/>
+    	<path fill="#FFFFFF" d="M-526.2,399.1h11.4c0.6,0,1-0.5,1-1v-6.7c0-0.6-0.5-1-1-1h-11.4c-0.6,0-1,0.5-1,1v6.7
+    		C-527.2,398.6-526.7,399.1-526.2,399.1z"/>
+    	<path fill="#FFFFFF" d="M-472.2,411.2h-17.3c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1h17.3c0.6,0,1-0.5,1-1v-6.7
+    		C-471.2,411.7-471.7,411.2-472.2,411.2z"/>
+    	<path fill="#FFFFFF" d="M-493.6,411.2h-17.3c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1h17.3c0.6,0,1-0.5,1-1v-6.7
+    		C-492.6,411.7-493,411.2-493.6,411.2z"/>
+    	<path fill="#FFFFFF" d="M-514.8,411.2h-11.4c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1h11.4c0.6,0,1-0.5,1-1v-6.7
+    		C-513.7,411.7-514.2,411.2-514.8,411.2z"/>
+    	<path fill="#FFFFFF" d="M-508.8,409.6c0.6,0,1-0.5,1-1v-6.7c0-0.6-0.5-1-1-1h-17.3c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1H-508.8z"
+    		/>
+    	<path fill="#FFFFFF" d="M-504.7,400.8c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1h17.3c0.6,0,1-0.5,1-1v-6.7c0-0.6-0.5-1-1-1H-504.7z"/>
+    	<path fill="#FFFFFF" d="M-472.2,400.8h-11.4c-0.6,0-1,0.5-1,1v6.7c0,0.6,0.5,1,1,1h11.4c0.6,0,1-0.5,1-1v-6.7
+    		C-471.2,401.3-471.7,400.8-472.2,400.8z"/>
+    </g>
+    </svg>
+    <!-- <img src="images/icon-white.svg" alt="Modulr"> -->
+    <img src="images/modulr-white.svg" alt="Modulr" class="hidden-xs">
+  </a>
+
+  <ol class="breadcrumb pull-left hidden-xs">
+    <li ng-repeat="breadcrumb in breadcrumbs as result">
+      <span translate='{{ breadcrumb.name | uppercase }}'></span>
+    </li>
+  </ol>
+
+  <ul class="nav nav-pills pull-right">
+    <li class="dropdown">
+      <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-bell-o fa-lg"></i>
+        <span class="label label-danger animated tada">29</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li class="dropdown-header">Notificaciones</li>
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li><a href="#">Separated link</a></li>
+        <li><a href="#">One more separated link</a></li>
+      </ul>
+    </li>
+
+    <li class="dropdown">
+      <a href="" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-envelope-o fa-lg"></i>
+        <span class="label label-danger animated tada">4</span>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li class="dropdown-header">Mensajes</li>
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li><a href="#">Separated link</a></li>
+        <li><a href="#">One more separated link</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="" ng-click="class.chat=!class.chat">
+        <i class="fa fa-comments-o fa-lg"></i>
+        <span class="label label-danger animated tada" ng-if="notifications.chat > 0"> {{ notifications.chat }}</span>
+      </a>
+    </li>
+    <li class="dropdown userData">
+      <a href="" class="dropdown-toggle user-btn" data-toggle="dropdown">
+        <img src="{{user.avatar}}" class="img-circle"/>
+      </a>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li class="userData-header">
+          <img src="{{user.avatar}}" class="img-circle"/>
+          <p>{{user.username}}<small>{{user.email}}</small></p>
+        </li>
+        <li class="userData-body">
+          <a href="" data-toggle="tooltip" data-placement="top" title='To Do'><i class="fa fa-list fa-lg"></i></a>
+          <a href="" data-toggle="tooltip" data-placement="top" title='Calendar'><i class="fa fa-calendar fa-lg"></i></a>
+          <a href="" data-toggle="tooltip" data-placement="top" title='Mark'><i class="fa fa-bookmark-o fa-lg"></i></a>
+          <a href="" data-toggle="tooltip" data-placement="top" title='Settings'><i class="fa fa-cog fa-lg"></i></a>
+        </li>
+        <li class="userData-footer">
+          <div class="pull-left">
+            <button type="button" class="btn btn-default" ng-click="goToProfile(user.id)">{{ 'PROFILE' | translate}}</button>
+          </div>
+          <div class="pull-right">
+            <button type="button" class="btn btn-default" ng-click="logout()">{{ 'LOGOUT' | translate }}</button>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+    </li>
+  </ul><!-- /.nav .nav-pills -->
+</header>
+
+<nav role="navigation" ng-class="class.layout">
+  <ul class="nav nav-pills nav-stacked">
+    <li ng-repeat="item in navigation | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active">
+      <a href="" ui-sref="{{item.state}}">
+        <i class="fa {{item.icon}} fa-lg fa-fw"></i><span class="text-capitalize">{{item.title}}</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+<aside ng-class="{open: class.chat}">
+  <div ng-include="'app/chat/views/chat.html'"></div>
+</aside>
+
+<section ng-class="class.layout">
+  <div class="container-fluid" ui-view></div>
+</section>

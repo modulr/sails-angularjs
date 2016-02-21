@@ -1,0 +1,19 @@
+.error {
+  position: relative;
+  margin: 12% auto 0 auto;
+  max-width: 500px;
+  //padding: 30px 45px 65px 45px;
+
+  span {
+    position: absolute;
+    top: 17%;
+    left: 36%;
+    font-size: 8em;
+    font-weight: bold;
+    color: $black;
+  }
+
+  h4 {
+    margin-bottom: 100px;
+  }
+}

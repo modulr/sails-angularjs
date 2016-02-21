@@ -1,0 +1,78 @@
+<div class="page">
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{'ACCESS' | translate}}</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{'PROFILE.DEPARTMENT' | translate}}</label>
+              <tags-input class="ui-tags-input" ng-model="tags.department" display-property="department" add-from-autocomplete-only="true">
+                <auto-complete source="loadTagsDepartment($query)" min-length="0" load-on-down-arrow="true"></auto-complete>
+              </tags-input>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>{{'PROFILE.JOB' | translate}}</label>
+              <tags-input class="ui-tags-input" ng-model="tags.job" display-property="job" add-from-autocomplete-only="true">
+                <auto-complete source="loadTagsJob($query)" min-length="0" load-on-down-arrow="true"></auto-complete>
+              </tags-input>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{'USERS' | translate}}</label>
+              <tags-input class="ui-tags-input" ng-model="tags.user" display-property="username" add-from-autocomplete-only="true">
+                <auto-complete source="loadTagsUser($query)" min-length="0" load-on-down-arrow="true"></auto-complete>
+              </tags-input>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div ui-tree data-drag-enabled="false">
+              <ol ui-tree-nodes="" ng-model="modules">
+                <li ng-repeat="item in modules" ui-tree-node collapsed="true">
+                  <div ui-tree-handle class="text-capitalize">
+                    <button type="button" class="close pull-left toggle" data-nodrag ng-if="item.sections && item.sections.length > 0" ng-click="toggle()">
+                      <span class="glyphicon glyphicon-chevron-right" ng-class="{
+                      'glyphicon-chevron-right': collapsed,
+                      'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+                    </button>
+                    <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+                    <label class="pull-right fancy-check" data-nodrag ng-if="tags.user.length">
+                      <input type="checkbox" checkbox data-child-list="item.sections" data-property="access" ng-model="item.access"> <i class="fa fa-lg" ng-class="item.access? 'fa-unlock' : 'fa-lock'"></i>
+                    </label>
+                  </div>
+                  <ol ui-tree-nodes="" ng-model="item.sections" ng-class="{hidden: collapsed}">
+                    <li ng-repeat="subItem in item.sections" ui-tree-node>
+                      <div ui-tree-handle class="text-capitalize">
+                        {{subItem.title}}
+                        <label class="pull-right fancy-check" data-nodrag ng-if="tags.user.length">
+                          <input type="checkbox" ng-model="subItem.access"> <i class="fa fa-lg" ng-class="subItem.access? 'fa-unlock' : 'fa-lock'"></i>
+                        </label>
+                        <label class="pull-right fancy-check" data-nodrag ng-if="tags.user.length">
+                          <input type="checkbox" ng-model="subItem.write"> <i class="fa fa-lg" ng-class="subItem.write? 'fa-pencil' : 'fa-ban'"></i>
+                        </label>
+                      </div>
+                    </li>
+                  </ol>
+                </li>
+              </ol>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.panel-body -->
+      <div class="panel-footer text-right">
+        <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-spinner fa-pulse'></i> Loading..." ng-click="save($event)" ng-if="tags.user.length">{{ 'SAVE' | translate }}</button>
+      </div><!-- /.panel-footer -->
+    </div>
+  </div><!-- /.col -->
+</div><!-- /.row -->
+
+</div><!-- /.page -->

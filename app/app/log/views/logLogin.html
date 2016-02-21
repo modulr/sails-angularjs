@@ -1,0 +1,70 @@
+<div class="page">
+
+  <ul class="nav nav-tabs sections">
+    <li ui-sref-active="active"><a href="" ui-sref="layout.login">{{'LOGIN' | translate}}</a></li>
+    <li ui-sref-active="active"><a href="" ui-sref="layout.request">{{'REQUEST' | translate}}</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.BROWSER' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <canvas class="chart chart-polar-area" chart-legend="true"
+              chart-data="charts.browser.data" chart-labels="charts.browser.labels" chart-options="{tooltipTemplate: '<%if (label){%><%=label%>: <%}%><%= value %>%'}">
+            </canvas>
+          </div>
+        </div>
+      </div><!-- /.col -->
+      <div class="col-md-6">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.OS' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <canvas class="chart chart-doughnut" chart-legend="true"
+              chart-data="charts.os.data" chart-labels="charts.os.labels" chart-options="{tooltipTemplate: '<%if (label){%><%=label%>: <%}%><%= value %>%'}">>
+            </canvas>
+          </div>
+        </div>
+      </div><!-- /.col -->
+      <div class="col-md-12">
+        <div class="panel">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{ 'LOG.USERS' | translate }}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>{{ 'LOG.USER' | translate }}</th>
+                  <th>IP</th>
+                  <th>{{ 'LOG.DEVICE' | translate }}</th>
+                  <th>{{ 'LOG.OS' | translate }}</th>
+                  <th>{{ 'LOG.BROWSER' | translate }}</th>
+                  <th>{{ 'LOG.DATE' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="item in table | orderBy:'-createdAt'">
+                  <td>{{item.user.username}}</td>
+                  <td>{{item.ip | filterIp}}</td>
+                  <td>{{item.device}}</td>
+                  <td>{{item.os}}</td>
+                  <td>{{item.browser}}</td>
+                  <td>{{item.createdAt | amDateFormat:'LLLL'}}</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.col -->
+    </div><!-- /.row -->
+  </div>
+
+</div><!-- /.page -->

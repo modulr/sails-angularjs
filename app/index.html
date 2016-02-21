@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Modulr</title>
+  <link rel="icon" href="images/favicon.ico">
+  <base href="/">
+
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/select2/dist/css/select2.css" />
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" />
+  <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+  <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.min.css" />
+  <link rel="stylesheet" href="bower_components/smoke/dist/css/smoke.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+  <link rel="stylesheet" href="bower_components/mdr-angular-file/dist/mdr-file.css" />
+  <!-- endbower -->
+
+  <!-- styles -->
+  <link rel="stylesheet" href="bower_components/ng-tags-input/ng-tags-input.bootstrap.min.css" />
+  <link href="styles/main.css" rel="stylesheet">
+  <!-- endstyles -->
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body ng-app="modulr">
+
+  <div class="content" ui-view></div>
+
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/sails.io.js/dist/sails.io.js"></script>
+  <script src="bower_components/angularSails/dist/ngsails.io.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular-moment/angular-moment.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
+  <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+  <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+  <script src="bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-ui-tree/dist/angular-ui-tree.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/password-generator/lib/password-generator.js"></script>
+  <script src="bower_components/Chart.js/Chart.js"></script>
+  <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+  <script src="bower_components/ng-tags-input/ng-tags-input.min.js"></script>
+  <script src="bower_components/select2/dist/js/select2.js"></script>
+  <script src="bower_components/smoke/dist/js/smoke.js"></script>
+  <script src="bower_components/mdr-angular-select2/dist/mdr-select2.js"></script>
+  <script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+  <script src="bower_components/mdr-angular-datepicker/dist/mdr-datepicker.js"></script>
+  <script src="bower_components/mdr-angular-file/dist/mdr-file.js"></script>
+  <!-- endbower -->
+  <script src="bower_components/ng-tasty/ng-tasty-tpls.min.js"></script>
+
+  <!-- scripts:js -->
+  <script type="text/javascript">
+    //io.sails.url = "http://192.168.2.173:1337";
+    io.sails.url = 'http://localhost:1337';
+    io.sails.transports = ['websocket','polling'];
+  </script>
+
+  <script src="app.js"></script>
+
+  <!-- Helpers -->
+  <script src="helpers/helpers.js"></script>
+  <script src="helpers/restFul/services/restFulService.js"></script>
+  <script src="helpers/restFul/services/restFulSocketService.js"></script>
+
+  <script src="helpers/sanitize/services/sanitizeService.js"></script>
+
+  <script src="helpers/events/directives/focusDirective.js"></script>
+  <script src="helpers/events/directives/escapeDirective.js"></script>
+  <script src="helpers/events/directives/enterDirective.js"></script>
+  <script src="helpers/events/directives/scrollToBottomDirective.js"></script>
+
+  <script src="helpers/checkbox/directives/checkbox.js"></script>
+
+  <!-- Modulr -->
+  <script src="app/layout/layout.js"></script>
+  <script src="app/layout/controllers/layoutAuthController.js"></script>
+  <script src="app/layout/controllers/layoutController.js"></script>
+
+  <script src="app/auth/auth.js"></script>
+  <script src="app/auth/controllers/loginController.js"></script>
+  <script src="app/auth/controllers/signupController.js"></script>
+  <script src="app/auth/controllers/confirmEmailController.js"></script>
+  <script src="app/auth/controllers/beginPasswordResetController.js"></script>
+  <script src="app/auth/controllers/sendPasswordResetController.js"></script>
+  <script src="app/auth/controllers/passwordResetController.js"></script>
+  <script src="app/auth/services/authService.js"></script>
+  <script src="app/auth/services/interceptorService.js"></script>
+
+  <script src="app/error/error.js"></script>
+  <script src="app/error/controllers/errorController.js"></script>
+  <script src="app/error/services/errorService.js"></script>
+
+  <script src="app/users/users.js"></script>
+  <script src="app/users/controllers/usersController.js"></script>
+  <script src="app/users/controllers/profileController.js"></script>
+
+  <script src="app/access/access.js"></script>
+  <script src="app/access/controllers/accessController.js"></script>
+
+  <script src="app/modules/modules.js"></script>
+  <script src="app/modules/controllers/modulesController.js"></script>
+
+  <script src="app/chat/controllers/chatController.js"></script>
+
+  <script src="app/log/log.js"></script>
+  <script src="app/log/services/logService.js"></script>
+  <script src="app/log/controllers/logLoginController.js"></script>
+  <script src="app/log/controllers/logRequestController.js"></script>
+
+  <!-- Modules -->
+  <script src="modules/dashboard/dashboard.js"></script>
+  <script src="modules/dashboard/controllers/dashboardController.js"></script>
+  <!-- endscripts -->
+</body>
+</html>
