@@ -5,7 +5,9 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var _ = require('lodash');
+
+module.exports = _.merge(_.cloneDeep(require('./base')), {
 
   attributes: {
     user: {
@@ -64,4 +66,4 @@ module.exports = {
     }
   }
 
-};
+});

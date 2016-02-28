@@ -16,4 +16,5 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       required: true
     }
   }
+  
 });

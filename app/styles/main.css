@@ -628,7 +628,7 @@ header {
     line-height: 55px;
     text-decoration: none; }
     header .logo svg {
-      width: 36px;
+      width: 38px;
       margin-bottom: -9px; }
       header .logo svg path {
         -webkit-transition: all 0.2s ease;
@@ -640,7 +640,6 @@ header {
         fill: #fbc27e; }
     header .logo img {
       height: 25px;
-      padding-left: 2px;
       padding-right: 20px;
       border-right: 1px solid #FEFEFE; }
   header .breadcrumb {

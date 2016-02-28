@@ -37,4 +37,5 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'array'
     }
   }
+  
 });

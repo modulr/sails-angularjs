@@ -26,19 +26,19 @@ module.exports = {
     REMEMBER_TOKEN_EXPIRES_IN_MINUTES: 43200, // 30 dias
   },
 
-  email: {
-    transporter: {
-      host: 'hostname',
-      port: 465,
-      secure: true, // use SSL
-      auth: {
-        user: 'your@email.com',
-        pass: 'yourpassword'
-      }
-    },
-    from: 'Modulr <your@email.com>',
-    testMode: false
-  },
+  // email: {
+  //   transporter: {
+  //     host: 'hostname',
+  //     port: 465,
+  //     secure: true, // use SSL
+  //     auth: {
+  //       user: 'your@email.com',
+  //       pass: 'yourpassword'
+  //     }
+  //   },
+  //   from: 'Modulr <your@email.com>',
+  //   testMode: false
+  // },
 
   connections: {
     mongo: {
@@ -71,13 +71,12 @@ module.exports = {
   },
 
   sockets: {
-    // transports: [
-    //   'websocket',
-    //   'htmlfile',
-    //   'polling'
-    // ],
-
-    //origins: '*:*'
+    transports: [
+      'websocket'
+      // 'htmlfile',
+      // 'polling'
+    ]
+  //   origins: '*:*'
   }
 
 };

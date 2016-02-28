@@ -5,7 +5,9 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var _ = require('lodash');
+
+module.exports = _.merge(_.cloneDeep(require('./base')), {
 
   attributes: {
     name: {
@@ -44,10 +46,9 @@ module.exports = {
     },
     toJSON: function() {
       var obj = this.toObject();
-      delete obj.password;
       obj.avatar = this.getAvatar();
       return obj;
     }
   }
 
-};
+});

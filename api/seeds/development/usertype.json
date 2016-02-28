@@ -1,0 +1,11 @@
+[
+  {
+    "type" : "Admin"
+  },
+  {
+    "type" : "User"
+  },
+  {
+    "type" : "Guest"
+  }
+]

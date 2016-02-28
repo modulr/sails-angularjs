@@ -19,10 +19,7 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'string',
       unique: true,
       required: true
-    },
-    toJSON: function() {
-      var obj = this.toObject();
-      return obj;
     }
   }
+  
 });

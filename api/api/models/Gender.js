@@ -5,25 +5,16 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var _ = require('lodash');
 
-    attributes: {
+module.exports = _.merge(_.cloneDeep(require('./base')), {
 
-        gender: {
-          type: 'string',
-          unique: true,
-          required: true
-        },
-        active: {
-            type: 'boolean',
-            defaultsTo: true
-        },
-        toJSON: function() {
-            var obj = this.toObject();
-            delete obj.active;
-            delete obj.createdAt;
-            delete obj.updatedAt;
-            return obj;
-        }
+  attributes: {
+    gender: {
+      type: 'string',
+      unique: true,
+      required: true
     }
-};
+  }
+
+});

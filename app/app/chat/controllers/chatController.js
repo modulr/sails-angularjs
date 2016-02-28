@@ -129,7 +129,7 @@
     $scope.clearMessages = function()
     {
       $scope.chat.name = null;
-      $scope.chat.avatar = '';
+      $scope.chat.avatar = null;
       $scope.chat.logged = false;
       $scope.chat.message.chatId = null;
       $scope.chat.message.to = null;
