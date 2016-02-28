@@ -5,10 +5,11 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var _ = require('lodash');
+
+module.exports = _.merge(_.cloneDeep(require('./base')), {
 
   attributes: {
-
     // Request IP address
     ip: {
       type: 'string'
@@ -65,7 +66,6 @@ module.exports = {
       columnName: 'userId',
       required: true
     }
-
   }
 
-};
+});

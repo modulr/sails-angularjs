@@ -18,10 +18,6 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     },
     user: {
       model: 'user'
-    },
-    toJSON: function() {
-      var obj = this.toObject();
-      return obj;
     }
   }
 

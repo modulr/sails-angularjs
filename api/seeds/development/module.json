@@ -1,0 +1,52 @@
+[
+  {
+    "title" : "dashboard",
+    "icon" : "fa-home",
+    "state" : "layout.dashboard",
+    "url" : "/dashboard",
+    "order" : 1,
+    "active" : true
+  },
+  {
+    "title" : "modules",
+    "icon" : "fa-cubes",
+    "state" : "layout.modules",
+    "url" : "/modules",
+    "order" : 3,
+    "active" : true
+  },
+  {
+    "title" : "access",
+    "icon" : "fa-lock",
+    "state" : "layout.access",
+    "url" : "/access",
+    "order" : 5,
+    "active" : true
+  },
+  {
+    "title" : "users",
+    "icon" : "fa-users",
+    "state" : "layout.users",
+    "url" : "/users",
+    "order" : 4,
+    "active" : true
+  },
+  {
+    "title" : "log",
+    "icon" : "fa-exchange",
+    "state" : "layout.login",
+    "url" : "/log/login",
+    "order" : 2,
+    "active" : true,
+    "sections" : [
+      {
+        "title" : "login",
+        "state" : "layout.log.login"
+      },
+      {
+        "title" : "request",
+        "state" : "layout.log.request"
+      }
+    ]
+  }
+]
