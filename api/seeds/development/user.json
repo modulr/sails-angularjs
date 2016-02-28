@@ -1,0 +1,39 @@
+[
+  {
+    "id" : "56610cabc13eee247069f9ab",
+    "email" : "megusta@modulr.io",
+    "username" : "demo",
+    "password" : "123456",
+    "lang" : "en",
+    "language" : "ENGLISH",
+    "photo" : "avatar.jpg",
+    "logged" : false,
+    "active" : true,
+    "profile" : "56b607d6a92a603f89e0119c",
+    "authorizations" : {
+      "dashboard" : {
+        "access" : true
+      },
+      "log" : {
+        "access" : true,
+        "login" : {
+          "access" : true,
+          "write" : true
+        },
+        "request" : {
+          "access" : true,
+          "write" : true
+        }
+      },
+      "modules" : {
+        "access" : true
+      },
+      "users" : {
+        "access" : true
+      },
+      "access" : {
+        "access" : true
+      }
+    }
+  }
+]
