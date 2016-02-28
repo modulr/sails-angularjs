@@ -26,7 +26,7 @@ Download modulr or clone the repository:
 
 ##Pre-install (debian based)
 
-####Update OS 
+####Update OS
 
 ```
 $ sudo apt-get update
@@ -50,7 +50,7 @@ $ sudo apt-get install python2.7
 ####Install git
 
 ```
-$ sudo apt-get install git 
+$ sudo apt-get install git
 ````
 
 ####Install MongoDB
@@ -96,15 +96,15 @@ $ sudo npm -g install sails
 $ git clone https://github.com/modulr/modulr.git
 ````
 
-####Install npm dependencies 
+####Install npm dependencies
 
 ```
 ~/modulr/api$ sudo npm install -g node-gyp
 ~/modulr/api$ npm install
-~/modulr/app$ npm install 
+~/modulr/app$ npm install
 ````
 
-####Install bower dependencies 
+####Install bower dependencies
 
 ```
 ~/modulr/app$ bower install
@@ -114,13 +114,13 @@ $ git clone https://github.com/modulr/modulr.git
 
 ```
 - Prefix the choice with ! to persist it to bower.json
-- ? Answer 
+- ? Answer
 - 5
 ```
 
 ##Documentation
 
-You can find our documentation in [https://github.com/modulr/modulr/wiki](https://github.com/modulr/modulr/wiki) 
+You can find our documentation in [https://github.com/modulr/modulr/wiki](https://github.com/modulr/modulr/wiki)
 
 
 ##Community
@@ -138,4 +138,3 @@ Alfredo Barron
 
 ##License
 The [MIT©](https://github.com/modulr/modulr/blob/master/LICENSE) License 2016 - Modulr.
- 
