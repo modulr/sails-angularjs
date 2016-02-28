@@ -8,11 +8,13 @@ module.exports = function seeds(sails) {
 
         // Find all seed files by environment.
         glob('seeds/' + sails.config.environment + '/**/*.json',  function (err, files) {
-          
+
           // Populate the model with a given seed.
           function populate(seed, next) {
             var attributes = Object.keys(seed.data[0] || {});
-            sails.models[seed.model].findOrCreateEach(attributes, seed.data, next);
+            var criteria = {};
+            criteria[attributes[0]] = seed.data[0][attributes[0]];
+            sails.models[seed.model].findOrCreate(criteria, seed.data, next);
           }
 
           // Extract seeds data.
