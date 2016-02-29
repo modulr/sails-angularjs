@@ -10,7 +10,7 @@ Before you start take a look at [http://www.modulr.io](http://www.modulr.io)
 
 - [Quick start](#quick-start)
 - [Technologies](#technologies)
-- [Pre-install](#pre-install)
+- [Pre install](#pre-install)
 - [Install modulr](#install-modulr)
 - [Start modulr](#start-modulr)
 - [Documentation](#documentation)
@@ -25,7 +25,7 @@ Before you start take a look at [http://www.modulr.io](http://www.modulr.io)
 
 Download modulr or clone the repository:
 
-- [Download the lates version.](https://github.com/modulr/modulr)
+- [Download the lates version.](https://github.com/modulr/modulr/archive/master.zip)
 - Clone the repository: `git clone https://github.com/modulr/modulr`.
 
 
@@ -48,20 +48,20 @@ Modulr uses this technologies
 
 ##Pre-install (debian based)
 
-####Update OS
+######1. Update OS
 
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
 ```
-####Install basics
+######2. Install basics
 
 ```
 $ sudo apt-get install make
 $ sudo apt-get install build-essential g++
 ```
 
-####Most debian distros come with a pre-installed python but if not use this:
+######3. Most debian distros come with a pre-installed python but if not use this:
 
 ```
 $ sudo add-apt-repository ppa:fkrull/deadsnakes
@@ -69,13 +69,13 @@ $ sudo apt-get update
 $ sudo apt-get install python2.7
 ```
 
-####Install git
+######4. Install git
 
 ```
 $ sudo apt-get install git
 ```
 
-####Install MongoDB
+######5. Install MongoDB
 
 ```
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -85,26 +85,26 @@ $ sudo apt-get install -y mongodb-org
 $ sudo service mongod status
 ```
 
-####Install NodeJS
+######6. Install NodeJS
 
 ```
 $ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 $ sudo apt-get install -y nodejs
 ```
 
-####Install Bower
+######7. Install Bower
 
 ```
 $ sudo npm install -g bower
 ```
 
-####Install Grunt
+######8. Install Grunt
 
 ```
 $ sudo npm install -g grunt-cli
 ```
 
-####Install Sails
+######9. Install Sails
 
 ```
 $ sudo npm -g install sails
@@ -114,13 +114,13 @@ $ sudo npm -g install sails
 
 ##Install modulr
 
-####Clone the modulr repository
+######1. Clone the modulr repository
 
 ```
 $ git clone https://github.com/modulr/modulr.git
 ```
 
-####Install npm dependencies
+######2. Install npm dependencies
 
 ```
 ~/modulr/api$ sudo npm install -g node-gyp
@@ -128,13 +128,13 @@ $ git clone https://github.com/modulr/modulr.git
 ~/modulr/app$ npm install
 ```
 
-####Install bower dependencies
+######3. Install bower dependencies
 
 ```
 ~/modulr/app$ bower install
 ```
 
-####If you receive conflicts notifications please chose no. 5
+> If you receive conflicts notifications please chose no. 5
 
 ```
 - Prefix the choice with ! to persist it to bower.json
@@ -152,25 +152,33 @@ $ git clone https://github.com/modulr/modulr.git
 $ mongod
 ```
 
-####Start sails
+######1. Start sails
 
 ```
 ~/modulr/api$ sails lift
 ```
 
-####Start web server
+######2. Start web server
 
 ```
 ~/modulr/app$ grunt serve
 ```
 
-Finaly go to [http://localhost:3000](http://localhost:3000) in you browser.
+######3. Finaly step
 
-Login credentials
+*Go to [http://localhost:3000](http://localhost:3000) in you browser.*
 
-username: demo
-password: 123456
+>_Login credentials_
 
+*username:* demo
+
+*password:* 123456
+
+
+
+##Documentation
+
+You can find our documentation in [https://github.com/modulr/modulr/wiki](https://github.com/modulr/modulr/wiki)
 
 
 ##How to contribute
@@ -186,11 +194,6 @@ All contributions are very welcome, We love it. There are several ways to help o
 
 There are a few guidelines that we need contributors to follow so that we have a chance of keeping on top of things.
 
-
-
-##Documentation
-
-You can find our documentation in [https://github.com/modulr/modulr/wiki](https://github.com/modulr/modulr/wiki)
 
 
 ##Community
