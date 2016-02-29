@@ -46,7 +46,9 @@ Modulr uses this technologies
 
 
 
-##Pre-install (debian based)
+##Pre install
+
+(debian based)
 
 ######1. Update OS
 
