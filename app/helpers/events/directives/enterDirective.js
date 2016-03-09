@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('mdr.helpers')
+  .module('modulr.helpers')
   .directive('enter', enter);
 
   function enter($timeout) {

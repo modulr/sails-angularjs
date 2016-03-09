@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('mdr.helpers')
+  .module('modulr.helpers')
   .directive('scrollToBottom', [function(){
 
     function linker(scope, element, attrs){

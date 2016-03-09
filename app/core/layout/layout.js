@@ -8,7 +8,7 @@
     $stateProvider
     .state('layoutAuth', {
       abstract: true,
-      templateUrl: 'app/layout/views/layoutAuth.html',
+      templateUrl: 'core/layout/views/layoutAuth.html',
       controller: 'LayoutAuthCtrl',
       data: {
         access : false
@@ -16,7 +16,7 @@
     })
     .state('layout', {
       abstract: true,
-      templateUrl: 'app/layout/views/layout.html',
+      templateUrl: 'core/layout/views/layout.html',
       controller: 'LayoutCtrl',
       data: {
         access : true

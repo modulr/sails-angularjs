@@ -3,6 +3,8 @@
 
   angular
   .module('modulr', [
+
+    // Packages
     'sails.io',
     'ui.router',
     'ngCookies',
@@ -14,33 +16,25 @@
     'ngTagsInput',
     'chart.js',
     'ngTasty',
-
     'mdr.select2',
     'mdr.file',
     'mdr.datepicker',
-    //'mdr.table',
 
     // Helpers
-    'mdr.helpers',
+    'modulr.helpers',
 
-    // App
-    'layout',
-    'auth',
-    'error',
-    'users',
-    'access',
-    'modules',
-    'chat',
-    'log',
+    // core
+    'modulr.core',
 
     // Modules
-    'dashboard'
+    'modulr.modules'
 
   ])
   .constant('config', {
     apiUrl: window.io.sails.url
   })
   .config(['$stateProvider', '$httpProvider', '$sailsSocketProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $httpProvider, $sailsSocketProvider, $locationProvider, $urlRouterProvider, $translateProvider){
+
     /*
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     |   Interceptor
@@ -146,7 +140,7 @@
     // });
 
     $urlRouter.listen();
-
+    
   }]);
 
 }());

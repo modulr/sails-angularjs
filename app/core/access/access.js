@@ -8,7 +8,7 @@
     $stateProvider
     .state('layout.access', {
       url: '/access',
-      templateUrl: 'app/access/views/access.html',
+      templateUrl: 'core/access/views/access.html',
       controller: 'AccessCtrl'
     });
 

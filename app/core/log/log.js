@@ -8,12 +8,12 @@
     $stateProvider
     .state('layout.login', {
       url: '/log/login',
-      templateUrl: 'app/log/views/logLogin.html',
+      templateUrl: 'core/log/views/logLogin.html',
       controller: 'LogLoginCtrl'
     })
     .state('layout.request', {
       url: '/log/request',
-      templateUrl: 'app/log/views/logRequest.html',
+      templateUrl: 'core/log/views/logRequest.html',
       controller: 'LogRequestCtrl'
     });
 

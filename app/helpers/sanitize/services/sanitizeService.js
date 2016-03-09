@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('mdr.helpers')
+  .module('modulr.helpers')
   .factory('sanitizeService', sanitizeService);
 
   sanitizeService.$inject = ['$sanitize'];

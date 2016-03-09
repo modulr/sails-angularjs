@@ -10,7 +10,7 @@
     $stateProvider
     .state('layoutAuth.error', {
       url: '/error/:errorId',
-      templateUrl: 'app/error/views/error.html',
+      templateUrl: 'core/error/views/error.html',
       controller: 'ErrorCtrl',
       data: {
         access : 'always'
