@@ -8,7 +8,7 @@
     $stateProvider
     .state('layout.modules', {
       url: '/modules',
-      templateUrl: 'app/modules/views/modules.html',
+      templateUrl: 'core/modules/views/modules.html',
       controller: 'ModulesCtrl'
     });
 

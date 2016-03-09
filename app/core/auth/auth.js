@@ -8,32 +8,32 @@
     $stateProvider
     .state('layoutAuth.login', {
       url: '/',
-      templateUrl: 'app/auth/views/login.html',
+      templateUrl: 'core/auth/views/login.html',
       controller: 'LoginCtrl'
     })
     .state('layoutAuth.signup', {
       url: '/signup',
-      templateUrl: 'app/auth/views/signup.html',
+      templateUrl: 'core/auth/views/signup.html',
       controller: 'SignupCtrl'
     })
     .state('layoutAuth.confirmEmail', {
       url: '/confirm_email/:token/:tokenId/:userId',
-      templateUrl: 'app/auth/views/confirmEmail.html',
+      templateUrl: 'core/auth/views/confirmEmail.html',
       controller: 'ConfirmEmailCtrl'
     })
     .state('layoutAuth.beginPasswordReset', {
       url: '/begin_password_reset',
-      templateUrl: 'app/auth/views/beginPasswordReset.html',
+      templateUrl: 'core/auth/views/beginPasswordReset.html',
       controller: 'BeginPasswordResetCtrl'
     })
     .state('layoutAuth.sendPasswordReset', {
       url: '/send_password_reset',
-      templateUrl: 'app/auth/views/sendPasswordReset.html',
+      templateUrl: 'core/auth/views/sendPasswordReset.html',
       controller: 'SendPasswordResetCtrl'
     })
     .state('layoutAuth.passwordReset', {
       url: '/password_reset/:token/:tokenId/:userId',
-      templateUrl: 'app/auth/views/passwordReset.html',
+      templateUrl: 'core/auth/views/passwordReset.html',
       controller: 'PasswordResetCtrl'
     });
 

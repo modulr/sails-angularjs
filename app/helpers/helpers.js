@@ -1,5 +1,7 @@
 (function() {
   'use strict';
-  angular.module('mdr.helpers', []);
-  
+  angular.module('modulr.helpers', [
+    
+  ]);
+
 }());

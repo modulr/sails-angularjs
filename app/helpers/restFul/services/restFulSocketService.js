@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('mdr.helpers')
+  .module('modulr.helpers')
   .factory('restFulSocketService', ['$q', '$sailsSocket', function($q, $sailsSocket){
 
     var token = localStorage.getItem('token');

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-  .module('mdr.helpers')
+  .module('modulr.helpers')
   .factory('restFulService', ['$http', '$q', 'config', function($http, $q, config){
 
     return{
