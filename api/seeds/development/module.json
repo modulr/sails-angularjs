@@ -1,52 +1,50 @@
-[
-  {
-    "title" : "dashboard",
-    "icon" : "fa-home",
-    "state" : "layout.dashboard",
-    "url" : "/dashboard",
-    "order" : 1,
-    "active" : true
-  },
-  {
-    "title" : "modules",
-    "icon" : "fa-cubes",
-    "state" : "layout.modules",
-    "url" : "/modules",
-    "order" : 3,
-    "active" : true
-  },
-  {
-    "title" : "access",
-    "icon" : "fa-lock",
-    "state" : "layout.access",
-    "url" : "/access",
-    "order" : 5,
-    "active" : true
-  },
-  {
-    "title" : "users",
-    "icon" : "fa-users",
-    "state" : "layout.users",
-    "url" : "/users",
-    "order" : 4,
-    "active" : true
-  },
-  {
-    "title" : "log",
-    "icon" : "fa-exchange",
-    "state" : "layout.login",
-    "url" : "/log/login",
-    "order" : 2,
-    "active" : true,
-    "sections" : [
-      {
-        "title" : "login",
-        "state" : "layout.log.login"
-      },
-      {
-        "title" : "request",
-        "state" : "layout.log.request"
-      }
-    ]
-  }
-]
+[{
+  "title": "dashboard",
+  "icon": "fa-home",
+  "state": "layout.dashboard",
+  "url": "/dashboard",
+  "order": 1,
+  "active": true
+}, {
+  "title": "log",
+  "icon": "fa-exchange",
+  "state": "layout.login",
+  "url": "/log/login",
+  "order": 2,
+  "active": true,
+  "sections": [{
+    "title": "login",
+    "state": "layout.log.login"
+  }, {
+    "title": "request",
+    "state": "layout.log.request"
+  }]
+}, {
+  "title": "users",
+  "icon": "fa-users",
+  "state": "layout.users",
+  "url": "/users",
+  "order": 3,
+  "active": true,
+  "sections": [{
+    "title": "users",
+    "state": "layout.users"
+  }, {
+    "title": "access",
+    "state": "layout.access"
+  }, {
+    "title": "roles",
+    "state": "layout.roles"
+  }]
+}, {
+  "title": "settings",
+  "icon": "fa-cogs",
+  "state": "layout.modules",
+  "url": "/settings/modules",
+  "order": 4,
+  "active": true,
+  "sections": [{
+    "title": "modules",
+    "state": "layout.modules"
+  }]
+}]

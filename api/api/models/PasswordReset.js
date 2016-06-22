@@ -14,7 +14,8 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       model: 'user'
     },
     token: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     toJSON: function() {
       var obj = this.toObject();

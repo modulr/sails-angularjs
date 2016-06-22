@@ -1,0 +1,200 @@
+.form-group, .input-group, .has-error {
+
+  .form-control {
+    border-radius: 0;
+    @include box-shadow(none);
+
+    &:focus {
+      @include box-shadow(none);
+    }
+  }
+
+  label {
+    font-weight: normal;
+  }
+
+  .input-group-addon {
+    border-radius: 0;
+    background-color: $white;
+  }
+
+  @include placeholder {
+    color: $gray-light-10;
+    font-weight: lighter;
+  }
+
+  // .control-label{
+  //     position: absolute;
+  //     padding: 8px 12px;
+  //     margin-top: -35px;
+  //     pointer-events: none;
+  //     @include transition(all, .2s, ease);
+  // }
+
+  // .form-control:focus + .control-label{
+  //     -webkit-transform: translate3d(0, -30px, 0) scale3d(0.75, 0.75, 1);
+  //     transform: translate3d(0, -30px, 0) scale3d(0.75, 0.75, 1);
+  // }
+}
+.form-group, .input-group {
+  .form-control {
+    border-color: $gray-light-30;
+
+    &:focus {
+      border-color: $gray-light-20;
+    }
+  }
+  .input-group-addon {
+    border-color: $gray-light-30;
+  }
+}
+
+
+
+/*
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|   Select2
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.select2-container {
+  width: 100% !important;
+
+  &.select2-container--open .select2-selection,
+  &.select2-container--focus .select2-selection {
+    border-color: $gray-light-20;
+  }
+
+  .select2-selection {
+    border-radius: 0;
+    border: 1px solid $gray-light-30;
+    height: 34px;
+    outline: none;
+
+    .select2-selection__rendered {
+      line-height: 32px;
+    }
+
+    .select2-selection__arrow {
+      height: 32px;
+    }
+  }
+
+  .select2-dropdown {
+    border-color: $gray-light-20;
+    border-radius: 0;
+
+    .select2-search__field {
+      border-color: $gray-light-20;
+      outline: none;
+    }
+
+    .select2-results {
+      padding: 4px;
+    }
+  }
+
+}
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Datepicker
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today:focus
+.datepicker table tr td.today.focus,
+.datepicker table tr td.today:active,
+.datepicker table tr td.today.active,
+.open > .dropdown-toggle.datepicker table tr td.today,
+.datepicker table tr td.today:active:hover,
+.datepicker table tr td.today.active:hover,
+.open > .dropdown-toggle.datepicker table tr td.today:hover,
+.datepicker table tr td.today:active:focus,
+.datepicker table tr td.today.active:focus,
+.open > .dropdown-toggle.datepicker table tr td.today:focus,
+.datepicker table tr td.today:active.focus,
+.datepicker table tr td.today.active.focus,
+.open > .dropdown-toggle.datepicker table tr td.today.focus {
+  background-color: $orange;
+}
+
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* tags-input
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+tags-input {
+
+  .host {
+    margin: 0;
+  }
+
+  .tags {
+    background-color: #fff;
+    border: 1px solid $gray-light-30;
+    border-radius: 0;
+    @include box-shadow(none);
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+
+    &.focused {
+      border-color: $gray-light-20;
+      @include box-shadow(none);
+    }
+
+    .tag-item {
+      background: none;
+      background-color: $blue;
+      border: 1px solid $blue;
+      border-radius: 0;
+      color: $white;
+
+      &.selected {
+        background: none;
+        background-color: $red;
+        border: 1px solid $red;
+      }
+
+      .remove-button {
+        color: $white;
+      }
+    }
+
+  }
+
+  .autocomplete {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+
+    .suggestion-item{
+
+      &.selected {
+        background-color: $blue;
+
+        em {
+          background: none;
+        }
+      }
+
+      em {
+        background: none;
+      }
+
+    }
+  }
+
+  &[disabled] {
+
+    .tags {
+
+      .tag-item {
+        background: none;
+        background-color: $blue;
+
+      }
+    }
+  }
+
+}

@@ -1,0 +1,19 @@
+<div class="container-fluid" ui-view></div>
+
+<footer>
+  <div class="container">
+    <a href="/">
+      <img src="public/images/logo.svg" alt="Modulr">
+    </a>
+    <div class="btn-group dropup pull-right">
+      <a class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{'LANGUAGE' | translate}}</a>
+      <ul class="dropdown-menu">
+        <li ng-repeat="language in languages track by language.id">
+          <a href="" ng-click="changeLanguage(language.lang)">
+            {{language.language | translate}}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</footer>

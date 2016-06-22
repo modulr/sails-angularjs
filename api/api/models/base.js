@@ -6,37 +6,37 @@
 */
 
 module.exports = {
- schema: true,
+    schema: true,
 
-  attributes: {
-    createdUser: {
-      model: 'User',
-      defaultsTo: null
-      //required: true
-    },
-    updatedUser: {
-      model: 'User',
-      defaultsTo: null
-      //required: true
-    },
-    deletedAt: {
-      type: 'datetime',
-      defaultsTo: null
+    attributes: {
+        createdUser: {
+            model: 'User',
+            defaultsTo: null
+            //required: true
+        },
+        updatedUser: {
+            model: 'User',
+            defaultsTo: null
+            //required: true
+        },
+        deletedAt: {
+            type: 'datetime',
+            defaultsTo: null
+        }
+        // toJSON: function() {
+        //   var obj = this.toObject();
+        //   if (obj.deletedAt === null) {
+        //     obj.toJSON = null;
+        //     delete obj.toJSON;
+        //     return obj;
+        //   }
+        // }
     }
-    // toJSON: function() {
-    //   var obj = this.toObject();
-    //   if (obj.deletedAt === null) {
-    //     obj.toJSON = null;
-    //     delete obj.toJSON;
-    //     return obj;
-    //   }
-    // }
-  }
 
-  //beforeCreate: function(values, cb) {
+    //beforeCreate: function(values, cb) {
     //console.log(values);
     //values.createdUser = values.currentUser;
     //values.updatedUser = values.currentUser;
     //cb();
-  //}
+    //}
 };

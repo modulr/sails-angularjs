@@ -1,0 +1,73 @@
+[
+    {
+        "id" : "56f964859093205f3a5fedb6",
+        "role" : "admin",
+        "authorizations" : {
+            "dashboard" : {
+                "_access" : true
+            },
+            "log" : {
+                "_access" : true,
+                "login" : {
+                    "_access" : true,
+                    "_write" : true
+                },
+                "request" : {
+                    "_access" : true,
+                    "_write" : true
+                }
+            },
+            "configuration" : {
+                "_access" : true,
+                "access" : {
+                    "_access" : true,
+                    "_write" : true
+                },
+                "users" : {
+                    "_access" : true,
+                    "_write" : true
+                },
+                "roles" : {
+                    "_access" : true,
+                    "_write" : true
+                },
+                "modules" : {
+                    "_access" : true,
+                    "_write" : true
+                }
+            }
+        },
+        "createdUser" : "56610cabc13eee247069f9ab"
+    },
+    {
+        "id" : "56f964859093205f3a5fedb7",
+        "role" : "user",
+        "authorizations" : {
+            "dashboard" : {
+                "_access" : true
+            },
+            "log" : {
+                "_access" : true,
+                "login" : {
+                    "_access" : true,
+                    "_write" : true
+                },
+                "request" : {
+                    "_access" : true,
+                    "_write" : true
+                }
+            }
+        },
+        "createdUser" : "56610cabc13eee247069f9ab"
+    },
+    {
+        "id" : "56f964859093205f3a5fedb8",
+        "role" : "guest",
+        "authorizations" : {
+            "dashboard" : {
+                "_access" : true
+            }
+        },
+        "createdUser" : "56610cabc13eee247069f9ab"
+    }
+]

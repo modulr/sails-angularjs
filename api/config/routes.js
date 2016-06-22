@@ -40,6 +40,9 @@ module.exports.routes = {
   'GET /auth/findAccount/:emailOrUsername': 'AuthController.findAccount',
   'GET /auth/findPasswordReset/:token/:tokenId/:userId': 'AuthController.findPasswordReset',
 
+  // profile
+  'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate',
+
 
   /***************************************************************************
   *                                                                          *

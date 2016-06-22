@@ -1,0 +1,122 @@
+<div class="page">
+
+    <ul class="nav nav-tabs sections">
+        <li ui-sref-active="active"><a href="" ui-sref="layout.users">{{'USERS' | translate}}</a></li>
+        <li ui-sref-active="active"><a href="" ui-sref="layout.access">{{'ACCESS' | translate}}</a></li>
+        <li ui-sref-active="active"><a href="" ui-sref="layout.roles">{{'ROLES' | translate}}</a></li>
+    </ul>
+
+    <br>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalRole">
+                                <i class="fa fa-key"></i> {{ 'CREATE' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-md-12">
+                            <div tasty-table bind-resource="tableResource" watch-resource="collection" bind-filters="filters" bind-theme="tableResource.custom">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover">
+                                        <thead tasty-thead bind-not-sort-by="['id']"></thead>
+                                        <tbody>
+                                            <tr ng-repeat="row in rows">
+                                                <td>{{row.role}}</td>
+                                                <td>{{row.createdAt | amDateFormat:'LLLL'}}</td>
+                                                <td class="btn-edit">
+                                                    <a href="" class="pull-right" ng-click="editRole(row)">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div tasty-pagination></div>
+                            </div>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.panel-body -->
+            </div><!-- /.panel -->
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+
+</div><!-- /.page -->
+
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Modals
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<!-- Modal Role -->
+<div class="modal fade" id="modalRole" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel" ng-if="!show.editRole">{{ 'ROLES.NEWROLE' | translate }}</h4>
+                <h4 class="modal-title" id="myModalLabel" ng-if="show.editRole">{{ 'ROLES.EDITROLE' | translate }}</h4>
+            </div>
+            <form id="formRole">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="{{ 'ROLES.ROLE' | translate }}" data-smk-type="alphanumeric" ng-model="formRole.role" required autofocus>
+                            </div>
+                        </div><!-- /.col -->
+                        <div class="col-md-12">
+                            <div ui-tree data-drag-enabled="false">
+                                <ol ui-tree-nodes="" ng-model="modules">
+                                    <li ng-repeat="item in modules" ui-tree-node collapsed="true">
+                                        <div ui-tree-handle class="text-capitalize">
+                                            <button type="button" class="close pull-left toggle" data-nodrag ng-if="item.sections && item.sections.length > 0" ng-click="toggle()">
+                                                <span class="glyphicon glyphicon-chevron-right" ng-class="{
+                                                    'glyphicon-chevron-right': collapsed,
+                                                    'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+                                                </button>
+                                                <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+                                                <label class="pull-right fancy-check" data-nodrag>
+                                                    <input type="checkbox" checkbox data-child-list="item.sections" data-property="_access" ng-model="item._access">
+                                                    <i class="fa fa-lg" ng-class="item._access? 'fa-unlock' : 'fa-lock'"></i>
+                                                </label>
+                                            </div>
+                                            <ol ui-tree-nodes="" ng-model="item.sections" ng-class="{hidden: collapsed}">
+                                                <li ng-repeat="subItem in item.sections" ui-tree-node>
+                                                    <div ui-tree-handle class="text-capitalize">
+                                                        {{subItem.title}}
+                                                        <label class="pull-right fancy-check" data-nodrag>
+                                                            <input type="checkbox" ng-model="subItem._access">
+                                                            <i class="fa fa-lg" ng-class="subItem._access? 'fa-unlock' : 'fa-lock'"></i>
+                                                        </label>
+                                                        <label class="pull-right fancy-check" data-nodrag>
+                                                            <input type="checkbox" ng-model="subItem._write">
+                                                            <i class="fa fa-lg" ng-class="subItem._write? 'fa-pencil' : 'fa-ban'"></i>
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
+                    </div><!-- /.modal-body -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" ng-if="show.editRole && countUsers<1" ng-click="deleteRole($event)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                        <small class="pull-left" ng-if="countUsers>0">{{countUsers}} {{'ROLES.USEDROLE' | translate}}</small>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+                        <button type="submit" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." autocomplete="off" ng-click="createRole($event)" ng-if="!show.editRole">{{ 'ADD' | translate }}</button>
+                        <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." autocomplete="off" ng-click="updateRole($event)" ng-if="show.editRole">{{ 'SAVE' | translate }}</button>
+                    </div><!-- /.modal-footer -->
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->

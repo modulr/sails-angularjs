@@ -38,7 +38,7 @@ Modulr uses this technologies
 - [Node.js](https://nodejs.org/en/) v4.3.1 LTS tested
 - [NPM](https://www.npmjs.com/) v2.14.12 tested
 - [MongoDB](https://www.mongodb.org/) v3.2.3 tested
-- [Grunt](http://gruntjs.com/) v0.4.5 tested
+- [Gulp](http://gulpjs.com/) v3.9.1 tested
 - [Bower](http://bower.io/) v1.7.7 tested
 - [Sails](http://sailsjs.org/) v0.12.1 tested
 - [Angular](https://angularjs.org/) v1.4.5 tested
@@ -101,10 +101,10 @@ $ sudo apt-get install -y nodejs
 $ sudo npm install -g bower
 ```
 
-######8. Install Grunt
+######8. Install Gulp
 
 ```
-$ sudo npm install -g grunt-cli
+$ sudo npm install --global gulp-cli
 ```
 
 ######9. Install Sails
@@ -164,7 +164,7 @@ $ mongod
 ######2. Start web server
 
 ```
-~/modulr/app$ grunt serve
+~/modulr/app$ gulp serve
 ```
 
 ######3. Finaly step
@@ -175,7 +175,7 @@ $ mongod
 
 *username:* demo
 
-*password:* 123456
+*password:* Demo123
 
 
 

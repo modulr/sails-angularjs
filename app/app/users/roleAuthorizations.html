@@ -1,0 +1,32 @@
+<div ui-tree data-drag-enabled="false">
+    <ol ui-tree-nodes="" ng-model="modules">
+        <li ng-repeat="item in modules" ui-tree-node collapsed="true">
+            <div ui-tree-handle class="text-capitalize">
+                <button type="button" class="close pull-left toggle" data-nodrag ng-if="item.sections && item.sections.length > 0" ng-click="toggle()">
+                    <span class="glyphicon glyphicon-chevron-right"
+                    ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+                </button>
+                <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+                <label class="pull-right fancy-check" data-nodrag>
+                    <input type="checkbox" checkbox data-child-list="item.sections" data-property="_access" ng-model="item._access">
+                    <i class="fa fa-lg" ng-class="item._access? 'fa-unlock' : 'fa-lock'"></i>
+                </label>
+            </div>
+            <ol ui-tree-nodes="" ng-model="item.sections" ng-class="{hidden: collapsed}">
+                <li ng-repeat="subItem in item.sections" ui-tree-node>
+                    <div ui-tree-handle class="text-capitalize">
+                        {{subItem.title}}
+                        <label class="pull-right fancy-check" data-nodrag>
+                            <input type="checkbox" ng-model="subItem._access">
+                            <i class="fa fa-lg" ng-class="subItem._access? 'fa-unlock' : 'fa-lock'"></i>
+                        </label>
+                        <label class="pull-right fancy-check" data-nodrag>
+                            <input type="checkbox" ng-model="subItem._write">
+                            <i class="fa fa-lg" ng-class="subItem._write? 'fa-pencil' : 'fa-ban'"></i>
+                        </label>
+                    </div>
+                </li>
+            </ol>
+        </li>
+    </ol>
+</div>

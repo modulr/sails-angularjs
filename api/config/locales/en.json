@@ -1,5 +1,5 @@
 {
-	"hi": "Hi %s",
+	"hi": "Hi %s,",
 	"link-duration": "The link has a duration of 24 hours.",
 	"team": "Team Modulr",
 
@@ -12,12 +12,20 @@
 
 	"password-reset.subject": "Reset your password - Modulr",
 	"password-reset.paragraph": "We received a request to reset the password for your account.",
-	"password-reset.paragraph2": "If you requested a reset for %s, click the button below. If you didn’t make this request, please ignore this email.",
+	"password-reset.paragraph2": "If you requested a reset the password for %s, click the button below. If you didn’t make this request, please ignore this email.",
 	"password-reset.btn": "Reset password",
 
-	"password-update.subject": "Password updated",
-	"password-update.paragraph": "he password was successfully updated, you can now sign.",
+	"password-update.subject": "Password updated - Modulr",
+	"password-update.paragraph": "You have successfully changed the password.",
 
 	"send-user-data.subject": "Your account details - Modulr",
-	"send-user-data.paragraph": "These are the details of your account Modulr, you need to establish your password to access."
+	"send-user-data.paragraph": "These are the details of your account Modulr, you need to establish your password to access.",
+
+	"email-change.subject": "Change your email address - Modulr",
+  "email-change.paragraph": "We received a request to change the email address for your account.",
+  "email-change.paragraph2": "If you requested a change the email address associated with this account %s, you must confirm your email address. If you didn’t make this request, please ignore this email.",
+  "email-change.btn": "Confirm email",
+
+	"email-change-update.subject": "Email updated - Modulr",
+	"email-change-update.paragraph": "You have successfully changed the email associated with your account."
 }

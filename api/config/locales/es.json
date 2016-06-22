@@ -1,5 +1,5 @@
 {
-  "hi": "Hola %s",
+  "hi": "Hola %s,",
   "link-duration": "El enlace tiene una duración de 24 horas",
   "team": "El equipo de Modulr",
 
@@ -15,9 +15,17 @@
   "password-reset.paragraph2": "Si tu solicitaste restablecer la contraseña para esta cuenta %s, haz clic en el botón de abajo. Si tu no hiciste este pedido, por favor, ignora este mensaje.",
   "password-reset.btn": "Restablecer contraseña",
 
-  "password-update.subject": "Contraseña actualizada",
-	"password-update.paragraph": "La contraseña se actualizo correctamente, ya puedes iniciar sesion.",
+  "password-update.subject": "Contraseña actualizada - Modulr",
+	"password-update.paragraph": "Haz cambiado correctamente la contraseña.",
 
   "send-user-data.subject": "Datos de tu cuenta - Modulr",
-  "send-user-data.paragraph": "Estos son los datos de tu cuenta en Modulr, es necesario que establezcas tu contraseña para poder acceder."
+  "send-user-data.paragraph": "Estos son los datos de tu cuenta en Modulr, es necesario que establezcas tu contraseña para poder acceder.",
+
+  "email-change.subject": "Cambia tu correo electrónico - Modulr",
+  "email-change.paragraph": "Hemos recibido una solicitud para cambiar el correo electrónico de tu cuenta.",
+  "email-change.paragraph2": "Si tu solicitaste cambiar el correo electrónico asociado a esta cuenta %s, debes confirmar tu dirección de correo electrónico. Si tu no hiciste este pedido, por favor, ignora este mensaje.",
+  "email-change.btn": "Confirmar correo",
+
+  "email-change-update.subject": "Correo electrónico actualizado - Modulr",
+	"email-change-update.paragraph": "Haz cambiado correctamente el correo electrónico asociado a tu cuenta."
 }
