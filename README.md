@@ -113,6 +113,80 @@ $ sudo npm install -g grunt-cli
 $ sudo npm -g install sails
 ```
 
+####Linux (CentOS based)
+
+######1. Update OS
+
+```
+$ sudo yum upgrade
+```
+######2. Install basics
+
+```
+$ sudo yum groupinstall 'Development Tools'
+```
+
+######3. CentOS come with a pre-installed python, check version with:
+
+```
+$ python --version
+Python 2.7.5
+
+```
+
+If it is not Python 2.7, you should check if python2.7 exists under /usr/bin/ and make a symbolic link to it. 
+
+
+######4. Install git (it may be already installed on step 1)
+
+```
+$ sudo yum install git
+```
+
+######5. Install MongoDB
+
+Create a /etc/yum.repos.d/mongodb-org-3.2.repo file with the following content
+```
+[mongodb-org-3.2]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.2/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.2.asc
+```
+
+then install it with
+
+```
+$ sudo yum install -y mongodb-org
+```
+
+######6. Install NodeJS
+
+```
+$ curl -sL https://rpm.nodesource.com/setup_4.x | bash -
+$ sudo yum install -y nodejs
+```
+
+######7. Install Bower
+
+```
+$ sudo npm install -g bower
+```
+
+######8. Install Grunt
+
+```
+$ sudo npm install -g grunt-cli
+```
+
+######9. Install Sails
+
+```
+$ sudo npm -g install sails
+```
+
+
 
 
 ##Install modulr
