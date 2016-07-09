@@ -25,16 +25,15 @@
             deactive: 0
         };
 
-        $scope.formUser = {
-            active: true
-        };
+        $scope.formUser = {};
 
         $scope.show = {
-            editUser: false
+            editUser: false,
+            password: false
         };
 
-        // $scope.editMode = {
-        //     users: 'disabled'
+        // $scope.disabled = {
+        //     btnEditUsers: true
         // };
 
         /**
@@ -44,9 +43,8 @@
         */
         function getUsers()
         {
-            restFulService.get('user/findWithRole')
+            restFulService.get('user')
             .then(function(response){
-                console.log(response);
                 $scope.users = response;
                 $translate(['USERS.USERNAME', 'USERS.EMAIL', 'USERS.ROLE', 'USERS.ACTIVE', 'USERS.DATE'])
                 .then(function (translations) {
@@ -57,8 +55,7 @@
                             {'email': translations['USERS.EMAIL']},
                             {'role': translations['USERS.ROLE']},
                             {'active': translations['USERS.ACTIVE']},
-                            {'createdAt': translations['USERS.DATE']},
-                            {'id': ''}
+                            {'createdAt': translations['USERS.DATE']}
                         ],
                         "rows": $scope.users,
                         "sortBy": "createdAt",
@@ -91,14 +88,34 @@
         * Events
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
+        $scope.addUser = function()
+        {
+            $scope.show.editUser = false;
+            $scope.show.password = true;
+
+            $scope.formUser = {
+                active: true
+            };
+
+            $('#modalUser').modal('show');
+        };
+
         $scope.createUser = function(event)
         {
+
             if ($('#formUser').smkValidate()) {
 
                 var btn = $(event.target);
                 btn.button('loading');
 
-                $scope.formUser.role = $scope.formUser.role.id;
+                var authorizations = {};
+
+                DeepDiff.observableDiff($scope.formUser.getRole.authorizations, $scope.formUser.getAuthorizations, function (d) {
+                    DeepDiff.applyChange(authorizations, $scope.formUser.getAuthorizations, d);
+                });
+
+                $scope.formUser.role = $scope.formUser.getRole.id;
+                $scope.formUser.authorizations = authorizations;
 
                 restFulService.post('user/create', $scope.formUser)
                 .then(function(response){
@@ -107,7 +124,7 @@
 
                     countUsers();
 
-                    $('#modalCreateUser').modal('hide');
+                    $('#modalUser').modal('hide');
 
                     $translate('USERS.MESSAGES.CREATE.SUCCESS')
                     .then(function (translate) {
@@ -146,16 +163,30 @@
         $scope.editUser = function(row)
         {
             $scope.show.editUser = true;
+            $scope.show.password = false;
 
             $scope.formUser = {
                 index: $scope.users.indexOf(row),
-                id: angular.copy(row.id),
-                username: angular.copy(row.username),
-                email: angular.copy(row.email),
-                role: angular.copy(row.role),
-                setAuthorizations: angular.copy(row.authorizations),
-                active: angular.copy(row.active)
+                id: row.id,
+                username: row.username,
+                email: row.email,
+                role: row.role.id,
+                setAuthorizations: row.role.authorizations,
+                custom: row.custom,
+                active: row.active
             };
+
+            if (row.custom) {
+                var authorizations = row.role.authorizations;
+
+                DeepDiff.observableDiff(authorizations,row.authorizations, function (d) {
+                    if (d.kind == 'E') {
+                        DeepDiff.applyChange(authorizations,row.authorizations, d);
+                    }
+                });
+
+                $scope.formUser.setAuthorizations = authorizations;
+            }
 
             $('#modalUser').modal('show');
         };
@@ -167,94 +198,59 @@
                 var btn = $(event.target);
                 btn.button('loading');
 
-                console.log($scope.formUser);
+                var authorizations = {};
 
-                //$scope.formUser.role = $scope.formUser.role.id;
+                DeepDiff.observableDiff($scope.formUser.getRole.authorizations, $scope.formUser.getAuthorizations, function (d) {
+                    DeepDiff.applyChange(authorizations, $scope.formUser.getAuthorizations, d);
+                });
 
-                // restFulService.put('user/update/' + $scope.formUser.id, $scope.formUser)
-                // .then(function(response){
-                //
-                //     $scope.users.push(response);
-                //
-                //     $('#modalCreateUser').modal('hide');
-                //
-                //     $translate('USERS.MESSAGES.CREATE.SUCCESS')
-                //     .then(function (translate) {
-                //         $.smkAlert({
-                //             text: translate,
-                //             type: 'success',
-                //             position: 'bottom-left'
-                //         });
-                //     });
-                //
-                // })
-                // .catch(function(err){
-                //
-                //     if (err.status == 500) {
-                //
-                //         var value = errorService.getRawMessageValue(err.error.raw.message);
-                //
-                //         $translate('USERS.MESSAGES.CREATE.ERROR', { emailOrUsername: value })
-                //         .then(function (translate) {
-                //             $.smkAlert({
-                //                 text: translate,
-                //                 type: 'warning',
-                //                 position: 'bottom-left'
-                //             });
-                //         });
-                //     }
-                //
-                // })
-                // .finally(function(){
-                //     btn.button('reset');
-                // });
+                $scope.formUser.role = $scope.formUser.getRole.id;
+                $scope.formUser.authorizations = authorizations;
+
+                restFulService.put('user/update/' + $scope.formUser.id, $scope.formUser)
+                .then(function(response){
+
+                    $scope.users[$scope.formUser.index] = response;
+
+                    countUsers();
+
+                    $('#modalUser').modal('hide');
+
+                    $translate('USERS.MESSAGES.CREATE.SUCCESS')
+                    .then(function (translate) {
+                        $.smkAlert({
+                            text: translate,
+                            type: 'success',
+                            position: 'bottom-left'
+                        });
+                    });
+
+                })
+                .catch(function(err){
+
+                    if (err.status == 500) {
+
+                        var value = errorService.getRawMessageValue(err.error.raw.message);
+
+                        $translate('USERS.MESSAGES.CREATE.ERROR', { emailOrUsername: value })
+                        .then(function (translate) {
+                            $.smkAlert({
+                                text: translate,
+                                type: 'warning',
+                                position: 'bottom-left'
+                            });
+                        });
+                    }
+
+                })
+                .finally(function(){
+                    btn.button('reset');
+                });
 
             }
         };
 
-        $scope.activateUser = function(user)
-        {
-            restFulService.put('user/update/' + user.id, { active: true })
-            .then(function(response){
-
-                user.active = response.active;
-
-                countUsers();
-
-                $translate('USERS.MESSAGES.ACTIVATE.SUCCESS')
-                .then(function (translate) {
-                    $.smkAlert({
-                        text: translate,
-                        type: 'success',
-                        position: 'bottom-left'
-                    });
-                });
-
-            });
-        };
-
-        $scope.deactivateUser = function(user)
-        {
-            restFulService.put('user/update/' + user.id, { active: false })
-            .then(function(response){
-
-                user.active = response.active;
-
-                countUsers();
-
-                $translate('USERS.MESSAGES.DEACTIVATE.SUCCESS')
-                .then(function (translate) {
-                    $.smkAlert({
-                        text: translate,
-                        type: 'success',
-                        position: 'bottom-left'
-                    });
-                });
-
-            });
-        };
-
-        $scope.deleteUser = function(user)
+        $scope.deleteUser = function(event)
         {
             $translate(['USERS.MESSAGES.DELETE.CONFIRM', 'USERS.MESSAGES.DELETE.SUCCESS'])
             .then(function (translations) {
@@ -262,17 +258,17 @@
                     text: translations['USERS.MESSAGES.DELETE.CONFIRM']
                 },function(res){
                     if (res) {
-                        restFulService.delete('user/' + user.id)
+                        var btn = $(event.target);
+                        btn.button('loading');
+
+                        restFulService.delete('user/' + $scope.formUser.id)
                         .then(function(response){
 
-                            $scope.users.forEach(function(val, key) {
-                                if (val.id == user.id) {
-                                    $scope.users.splice(key, 1);
-                                    return false;
-                                }
-                            });
+                            $scope.users.splice($scope.formUser.index, 1);
 
                             countUsers();
+
+                            $('#modalUser').modal('hide');
 
                             $.smkAlert({
                                 text: translations['USERS.MESSAGES.DELETE.SUCCESS'],
@@ -280,16 +276,23 @@
                                 position: 'bottom-left'
                             });
 
+                        })
+                        .finally(function(){
+                            btn.button('reset');
                         });
                     }
                 });
             });
         };
 
-        $scope.sendUserData = function (user)
+        $scope.sendUserData = function (event)
         {
-            if (user.active) {
-                restFulService.get('user/sendUserData/' + user.id)
+            if ($scope.formUser.active) {
+
+                var btn = $(event.target);
+                btn.button('loading');
+
+                restFulService.get('user/sendUserData/' + $scope.formUser.id)
                 .then(function(response){
 
                     $translate('USERS.MESSAGES.SEND-USER-DATA.SUCCESS')
@@ -313,6 +316,9 @@
                         });
                     });
 
+                })
+                .finally(function(){
+                    btn.button('reset');
                 });
             }
         };
@@ -451,22 +457,37 @@
         //   }
         // };
 
+        $('#modalUser').on('hide.bs.modal', function (e) {
+            $('#formUser').smkClear();
+            $('#collapseUser').collapse('hide');
+            $scope.formUser = {};
+            if (!$scope.$$phase) {
+                $scope.$apply();
+                // $scope.$apply(function(){
+                //     $scope.formUser = {
+                //         active: true
+                //     };
+                // });
+            }
+        });
+
         /**
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         * Watch
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
-        $scope.$watch('formUser.role', function(nv,ov){
-            console.log(ov);
-            console.log(nv);
-
-            if ( (typeof nv === 'object') && (Object.keys(nv).length > 0) ) {
-                //console.log(nv);
+        $scope.$watch('formUser.getRole.id', function(nv,ov){
+            if ($scope.show.editUser) {
+                if (nv !== undefined && ov !== undefined) {
+                    $scope.formUser.setAuthorizations = $scope.formUser.getRole.authorizations;
+                    $scope.formUser.custom = false;
+                }
+            } else {
+                if (nv !== undefined) {
+                    $scope.formUser.setAuthorizations = $scope.formUser.getRole.authorizations;
+                    $scope.formUser.custom = false;
+                }
             }
-        });
-
-        $('#modalCreateUser').on('hide.bs.modal', function (e) {
-            $('#formUser').smkClear();
         });
 
         getUsers();

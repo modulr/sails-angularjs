@@ -1,71 +1,80 @@
-nav{
-  position: fixed;
-  top: 60px;
-  bottom: 0;
-  left: 0;
-  width: 230px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  z-index: 998;
-  @include transition(all .2s ease);
-
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-
-  &.min {
-    width: 60px;
+nav {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    width: 230px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    z-index: 998;
     @include transition(all .2s ease);
 
-    ul.nav li a span{
-      margin-left: 25px;
+    &::-webkit-scrollbar {
+        width: 0;
     }
-  }
 
-  ul.nav{
-    margin-bottom: 0;
-    width: 230px;
-    padding-top: 20px;
-    //@include transition(all .2s ease);
+    &.min {
+        width: 60px;
+        @include transition(all .2s ease);
 
-    li{
-      margin-top: 0 !important;
-
-
-      a {
-        color: $gray-dark-10;
-        border-radius: 0;
-        padding: 15px 15px 15px 23px;
-
-        &.active,
-        &:hover,
-        &:focus {
-          background-color: transparent;
+        ul.nav li a {
+            padding-left: 20px;
         }
 
-        &:hover i{
-          color: $orange;
+        ul.nav li a span{
+            margin-left: 25px;
         }
-
-        i {
-          @include transition(all .2s ease);
-        }
-
-        span{
-          font-size: 14px;
-          margin-left: 10px;
-          @include transition(all .2s ease);
-        }
-
-      }
-
-      &.active a,
-      &.active a:hover,
-      &.active a:focus{
-        background-color: transparent;
-        color: $orange;
-      }
     }
-  }
+
+    ul.nav{
+        margin-bottom: 0;
+        width: 230px;
+        padding-top: 20px;
+        //@include transition(all .2s ease);
+
+        li{
+            margin-top: 0 !important;
+
+
+            a {
+                color: $gray-dark-10;
+                border-radius: 0;
+                padding: 10px 25px;
+                border-left: 4px solid transparent;
+
+                &.active,
+                &:hover,
+                &:focus {
+                    background-color: transparent;
+                }
+
+                &:hover i{
+                    color: $orange;
+                }
+
+                i {
+                    @include transition(all .2s ease);
+                }
+
+                span{
+                    font-size: 14px;
+                    margin-left: 10px;
+                    @include transition(all .2s ease);
+                }
+
+            }
+
+            &.active a,
+            &.active a:hover,
+            &.active a:focus{
+                background-color: transparent;
+                color: $gray-dark-10;
+                border-left: 4px solid $orange;
+                i{
+                    color: $orange;
+                }
+            }
+        }
+    }
 
 }

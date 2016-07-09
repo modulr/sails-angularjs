@@ -9,16 +9,26 @@ var _ = require('lodash');
 
 module.exports = _.merge(_.cloneDeep(require('./base')), {
 
-    attributes: {
-        role: {
-            type: 'string',
-            unique: true,
-            required: true
-        },
-        authorizations: {
-            type: 'json',
-            defaultsTo: {}
-        }
+  attributes: {
+    // Name of Role
+    role: {
+      type: 'string',
+      unique: true,
+      required: true
+    },
+    // Lock role
+    lock: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    authorizations: {
+      type: 'json',
+      defaultsTo: {}
+    },
+    users: {
+      collection: 'user',
+      via: 'role'
     }
+  }
 
 });

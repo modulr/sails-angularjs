@@ -1,21 +1,21 @@
-.profile-header {
-    background-color: $blue-dark-20;
-    color: $white;
+.panel.profile {
+    background-color: #fff;
     position: relative;
+    padding-bottom: 0;
+
+    .btn-edit {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
 
     .photo {
         position: relative;
         display: inline-block;
-        margin-top: 35px;
-        margin-bottom: 25px;
-
-        &:hover .btn-upload{
-            opacity: 1;
-        }
 
         img {
             border: 6px solid;
-            border-color: rgba($white, 0.2);
+            border-color: rgba($black, 0.1);
             width: 120px;
             height: 120px;
         }
@@ -27,25 +27,28 @@
             position: absolute;
             left: 0;
             top: 0;
-            opacity: 0;
+            @include opacity(0);
 
             span {
                 font-size: 30px;
                 color: $white;
-                line-height: 120px;
+                line-height: 105px;
             }
+        }
+        &:hover .btn-upload{
+            @include opacity(1);
         }
 
     }
 
     .info{
+        margin-top: 15px;
+        margin-bottom: 30px;
 
-        h3, p{
+        h4, p{
+            color: $gray-dark-30;
             font-weight: lighter;
             margin: 0;
-        }
-        h3 {
-            //margin-top: 20px;
         }
         p {
             margin-top: 5px;
@@ -62,9 +65,9 @@
                 border-bottom-color: $gray-light-30;
                 box-shadow: none;
                 font-weight: lighter;
-                color: $white;
+                color: $gray-dark-30;
                 text-align: center;
-                font-size: 22px;
+                font-size: 18px;
 
                 &::-webkit-input-placeholder,
                 &:-moz-placeholder,
@@ -76,14 +79,8 @@
         }
     }
 
-    .btn-edit {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    }
-
     .nav-tabs {
-        margin-top: 30px;
+        margin-bottom: -9px;
 
         > li {
 
@@ -91,38 +88,47 @@
                 > a,
                 a:hover,
                 a:focus {
-                    color: $white;
-                    border-bottom-color: $white;
+                    border-bottom-color: $blue;
                 }
-            }
-
-            > a,
-            a:hover,
-            a:focus {
-                color: $white;
             }
         }
     }
 
 }
 
-.profile-content {
+.tab-content {
 
     dl {
-        padding: 8px;
+        position: relative;
+        padding: 10px;
         margin-bottom: 0;
 
-        .btn-edit {
-            display: none;
+        .btn {
+            color: $gray;
+            border: none;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include opacity(0);
+
+
+            &:hover {
+                color: $blue;
+            }
+        }
+
+        &.dl-edit {
+            &:hover{
+                background-color: $gray-light-35;
+            }
+            &:hover .btn {
+                @include opacity(1);
+            }
         }
     }
 
-    dl:hover{
-        background-color: $gray-light-35;
-    }
-    dl:hover .btn-edit {
-        display: inherit;
-    }
+
 }
 
 // .list-edit{

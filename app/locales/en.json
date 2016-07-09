@@ -124,7 +124,9 @@
         "NEWUSER": "New User",
         "EDITUSER": "Edit User",
         "ROLE": "Role",
+        "ROLECUSTOM": "Role custom",
         "PASSWORD": "Password",
+        "CHANGEPASSWORD": "Change Password",
         "GENERATE": "Generate",
         "MESSAGES": {
             "CREATE": {
@@ -196,7 +198,7 @@
         "EMAIL": "Email",
         "LANGUAGE": "Language",
         "DEACTIVATEACCOUNT": "Deactivate Account",
-        "CHANGEPASSWORD": "Change Password",
+        "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
         "OLDPASSWORD": "Currently password",
         "PASSWORD": "Password",
         "REPASSWORD": "Re-password",
@@ -233,7 +235,7 @@
         "DATE": "@:USERS.DATE",
         "NEWROLE": "New Rol",
         "EDITROLE": "Edit Rol",
-        "USEDROLE": "users used this role.",
+        "USEDROLE": "users used this role",
         "MESSAGES": {
             "DELETE": {
                 "ERROR": "This rol is assigned to one or more users, to delete it, is necesary no user has it assigned"

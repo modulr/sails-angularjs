@@ -1,24 +1,24 @@
 (function(){
-  'use strict';
+    'use strict';
 
-  angular
-  .module('auth')
-  .factory('authService', [function(){
+    angular
+    .module('auth')
+    .factory('authService', [function(){
 
-    return{
+        return{
 
-      isAuthenticated: function(){
+            isAuthenticated: function(){
+                
+                if (localStorage.getItem('token')) {
+                    return true;
+                }
 
-        if (localStorage.getItem('token')) {
-          return true;
-        }
+                return false;
 
-        return false;
+            }
 
-      }
+        };
 
-    };
-
-  }]);
+    }]);
 
 }());

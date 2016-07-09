@@ -15,19 +15,33 @@
     }
     tbody{
         tr{
+            position: relative;
             td{
                 &.avatar{
+                    padding: 5px 8px;
                     img{
                         width: 25px;
                         height: 25px;
                     }
                 }
-                &.btn-edit a{
-                    opacity: 0;
+                &.btn-edit {
+                    position: absolute;
+                    padding: 0;
+                    border: none;
+                    margin-top: 2px;
+                    right: 15px;
+                    a {
+                        @include opacity(0);
+                        color: $gray;
+
+                        &:hover {
+                            color: $blue;
+                        }
+                    }
                 }
             }
             &:hover .btn-edit a{
-                opacity: 1;
+                @include opacity(1);
             }
             &.selected{
                 background-color: $blue-light-10;

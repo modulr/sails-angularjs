@@ -24,15 +24,23 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
             type: 'string',
             required: true
         },
+        firstName: {
+            type: 'string',
+            defaultsTo: ''
+        },
+        lastName: {
+            type: 'string',
+            defaultsTo: ''
+        },
         profile: {
             model: 'profile'
         },
         role: {
             model: 'userrole'
         },
-        authorizations: {
+        authorizations: {//permissions
             type: 'json',
-            defaultsTo: null
+            defaultsTo: {}
         },
         logged: {
             type: 'boolean',
@@ -78,6 +86,13 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
             collection: 'family',
             via: 'userId'
         },
+        getFullName: function () {
+            var fullName = null;
+            if (this.firstName !== '' || this.lastName !== '') {
+                fullName = this.firstName + ' ' + this.lastName;
+            }
+            return fullName;
+        },
         getAvatar: function () {
             var avatar = null;
             if (this.photo == 'avatar.jpg') {
@@ -87,20 +102,40 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
             }
             return avatar;
         },
+        getCustom: function () {
+            var custom = false;
+            if (Object.keys(this.authorizations).length > 0) {
+                custom = true;
+            }
+            return custom;
+        },
         toJSON: function() {
             var obj = this.toObject();
             delete obj.password;
             obj.avatar = this.getAvatar();
+            obj.custom = this.getCustom();
             return obj;
         }
     },
     beforeCreate: function(values, cb){
-        // Se encripta el password
+        // It encrypts the password
         EncryptService.encrypt(values.password, function (err, hash) {
             if(err) return cb(err);
             values.password = hash;
             cb();
         });
+    },
+    beforeUpdate: function(values, cb){
+        // It encrypts the password
+        if (values.password !== undefined) {
+            EncryptService.encrypt(values.password, function (err, hash) {
+                if(err) return cb(err);
+                values.password = hash;
+                cb();
+            });
+        } else {
+            cb();
+        }
     }
 
 });

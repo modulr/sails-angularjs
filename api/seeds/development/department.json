@@ -1,8 +1,8 @@
 [
-  {
-    "department" : "Systems"
-  },
-  {
-    "department" : "Admin"
-  }
+    {
+        "department" : "Systems"
+    },
+    {
+        "department" : "Admin"
+    }
 ]

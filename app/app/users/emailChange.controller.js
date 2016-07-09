@@ -17,6 +17,7 @@
     restFulService.get('emailChange/validate/' + $state.params.token +'/'+ $state.params.tokenId +'/'+ $state.params.userId)
     .then(function(response){
       $scope.email = response.email;
+      $rootScope.user.email = response.email;
       $scope.show.message = true;
     })
     .catch(function(err){

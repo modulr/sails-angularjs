@@ -13,14 +13,6 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     user: {
       model: 'user'
     },
-    firstName: {
-      type: 'string',
-      defaultsTo: ''
-    },
-    lastName: {
-      type: 'string',
-      defaultsTo: ''
-    },
     job: {
       type: 'string',
       defaultsTo: ''
@@ -52,16 +44,8 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
         phones: []
       }
     },
-    getFullName: function () {
-      var fullName = null;
-      if (this.firstName !== '' || this.lastName !== '') {
-        fullName = this.firstName + ' ' + this.lastName;
-      }
-      return fullName;
-    },
     toJSON: function() {
       var obj = this.toObject();
-      obj.fullName = this.getFullName();
       return obj;
     }
   }

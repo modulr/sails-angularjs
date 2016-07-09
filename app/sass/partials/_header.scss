@@ -1,143 +1,166 @@
 header{
-  position: fixed;
-  top: 0 ;
-  left: 0;
-  right: 0;
-  background-color: $orange;
-  z-index: 999;
-  padding: 0 20px;
-  @include transition(all .2s ease);
+    position: fixed;
+    top: 0 ;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 0 20px;
+    @include transition(all .2s ease);
 
-  .logo {
-    height: 60px;
-    line-height: 55px;
-    text-decoration: none;
-
-    svg {
-      width: 38px;
-      margin-bottom: -9px;
-
-      path{
-        @include transition(all .2s ease);
-      }
-
-      path:hover {
-        fill: lighten($orange, 10%);
-      }
+    &.orange {
+        background-color: $orange;
     }
-    // img:first-child {
-    //   margin-top: 6px;
-    //   height: 20px;
-    // }
-    img { //img:last-child
-      height: 25px;
-      padding-right: 20px;
-      border-right: 1px solid $white;
+    &.gray {
+        background-color: $gray-light-35;
     }
-  }
 
-  .breadcrumb{
-    background-color: transparent;
-    border-radius: 0;
-    margin-bottom: 0;
-    line-height: 44px;
-    font-size: 20px;
-    font-weight: lighter;
+    .logo {
+        height: 60px;
+        line-height: 55px;
+        text-decoration: none;
 
-    li{
-      color: $white;
-      margin-right: 5px;
+        svg {
+            width: 38px;
+            margin-bottom: -9px;
+
+            path{
+                @include transition(all .2s ease);
+            }
+
+            path:hover {
+                fill: lighten($orange, 20%);
+            }
+        }
+        // img:first-child {
+        //   margin-top: 6px;
+        //   height: 20px;
+        // }
+        img { //img:last-child
+            height: 25px;
+        }
     }
-    >li+li:before{
-      color: $white;
-      content: ' / ';
-    }
-  }
 
-  ul.nav {
-    li {
-      line-height: 40px;
-
-      a {
-        color: $white;
+    .breadcrumb{
+        background-color: transparent;
         border-radius: 0;
+        margin: 16px 0 0 20px;
+        padding: 0 0 0 20px;
+        border-left: 1px solid $white;
+        font-size: 20px;
+        font-weight: lighter;
 
-        &:hover,
-        &:focus {
-          background: transparent !important;
+        li{
+            color: $white;
+            margin-right: 5px;
         }
+        >li+li:before{
+            color: $white;
+            content: ' / ';
+        }
+    }
 
-        .label {
-          position: absolute;
-          top: 12px;
-          right: 6px;
-          font-size: 9px;
-        }
-      }
-      ul {
-        padding: 0;
-        border-radius: 0;
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background: transparent !important;
+}
 
-        li.dropdown-header {
-          padding: 0 20px;
-          font-size: 16px;
-          color: $black;
-          font-weight: lighter;
-          border-bottom: 1px solid $orange;
-        }
+    .nav {
         li {
-          border-bottom: 1px solid $gray-light-30;
-          a {
-            padding: 10px 20px;
-            color: $gray-dark-10;
-          }
-        }
-      }
-    }
-    li.userData {
-      > a {
-        padding: 10px 0 10px 10px;
-        > img {
-          width: 35px;
-          height: 35px;
-        }
-      }
-      .userData-header {
-        width: 260px;
-        text-align: center;
+            line-height: 40px;
 
-        img {
-          margin-top: 20px;
-          width: 90px;
-          height: 90px;
-        }
-        p {
-          line-height: normal;
-          margin: 10px 0;
-          small {
-            display: block;
-          }
-        }
-      }
-      .userData-body {
-        padding: 4px 6px;
-        text-align: center;
+            a {
+                color: $white;
+                border-radius: 0;
+                padding: 15px 15px 5px 15px;
 
-        a {
-          display: inline-block;
-          &:hover {
-            background-color: $orange !important;
-            color: $white !important;
-          }
+                &:hover,
+                &:focus {
+                    background: transparent !important;
+                }
+
+                .label {
+                    position: absolute;
+                    top: 10px;
+                    left: 4px;
+                    font-size: 12px;
+                }
+            }
+            ul.dropdown-menu {
+                padding: 0;
+                border-radius: 0;
+
+                li.dropdown-header {
+                    padding: 0 20px;
+                    font-size: 16px;
+                    color: $black;
+                    font-weight: lighter;
+                    border-bottom: 1px solid $orange;
+                }
+                li {
+                    border-bottom: 1px solid $gray-light-30;
+                    a {
+                        padding: 10px 20px;
+                        color: $gray-dark-10;
+                    }
+                }
+            }
         }
-      }
-      .userData-footer {
-        padding: 4px 10px;
-        .btn {
-          border: none;
+        li.userData {
+            > a {
+                padding: 10px 0 10px 10px;
+                > img {
+                    width: 35px;
+                    height: 35px;
+                }
+            }
+            .userData-header {
+                width: 260px;
+                text-align: center;
+
+                img {
+                    margin-top: 20px;
+                    width: 90px;
+                    height: 90px;
+                }
+                p {
+                    line-height: normal;
+                    margin: 10px 0;
+                    small {
+                        display: block;
+                    }
+                }
+            }
+            .userData-body {
+                padding: 4px 6px;
+                text-align: center;
+
+                a {
+                    display: inline-block;
+                    &:hover {
+                        background-color: $orange !important;
+                        color: $white !important;
+                    }
+                }
+            }
+            .userData-footer {
+                padding: 4px 10px;
+                .btn {
+                    border: none;
+                }
+            }
         }
-      }
     }
-  }
+
+    .btn-group{
+
+        padding: 12px 0;
+
+        ul.dropdown-menu{
+            padding: 0;
+            border-radius: 0;
+            a {
+                color: $gray-dark-10;
+            }
+        }
+    }
 
 }

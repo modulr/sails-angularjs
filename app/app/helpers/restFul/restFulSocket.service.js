@@ -22,7 +22,11 @@
           deferred.resolve(data);
         }).
         error(function(data, status, headers, config) {
-          $.smkAlert({ text: 'Error en restFulSocketService', type: 'danger' });
+          $.smkAlert({
+              text: 'Error en restFulSocketService',
+              type: 'danger',
+              position: 'bottom-left'
+          });
           deferred.reject(status);
         });
         return deferred.promise;

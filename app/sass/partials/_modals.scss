@@ -1,24 +1,30 @@
-/*
-|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-|   Modal
-|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-*/
 .modal{
-    .modal-dialog{
-        margin: 80px auto;
+  .modal-dialog{
+    margin: 80px auto;
 
-        .modal-content{
-            border-radius: 0;
+    .modal-content{
+      border-radius: 0;
 
-            .modal-header{
-                background-color: $orange;
-                color: $white;
-                padding: 20px 15px;
-            }
+      .modal-header{
+        background-color: $orange;
+        color: $white;
+        padding: 20px 15px;
+      }
 
-            .modal-body {
-                min-height: 200px
-            }
+      .modal-body {
+        min-height: 200px
+      }
+
+      .modal-footer {
+        .btn-delete {
+          float: left;
+          margin-right: 20px;
         }
+        small {
+          float: left;
+          line-height: 33px;
+        }
+      }
     }
+  }
 }

@@ -18,7 +18,7 @@
         'ngTasty',
         'mdr.select2',
         'mdr.file',
-        'mdr.datepicker',
+        'ae-datetimepicker',
 
         // Layouts
         'layout',
@@ -87,11 +87,11 @@
     }])
     .run(['$rootScope', '$state', '$urlRouter', 'authService', 'restFulService', function($rootScope, $state, $urlRouter, authService, restFulService){
 
-        $rootScope.$on('$locationChangeSuccess', function(e) {
+        $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl, newState, oldState) {
 
             if(authService.isAuthenticated() && !angular.isDefined($rootScope.user)){
 
-                e.preventDefault();
+                event.preventDefault();
 
                 restFulService.get('user/findUserByToken')
                 .then(function(response){
@@ -103,51 +103,55 @@
 
         });
 
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-            // if (authService.isAuthenticated()){
-            //
-            //     var parts = toState.name.split('.');
-            //     var state = parts[1];
-            //     var authorizations = $rootScope.user.authorizations;
-            //
-            //     for (var key in authorizations) {
-            //         if (state == key) {
-            //             if (!authorizations[key].a) {
-            //                 event.preventDefault();
-            //                 $state.go('layoutAuth.error', { errorId: 401 });
-            //             }
-            //         }
-            //         for (var k in authorizations[key]) {
-            //             if ((authorizations[key][k].a) !== undefined) {
-            //                 if (state == k) {
-            //                     if (!authorizations[key][k].a) {
-            //                         event.preventDefault();
-            //                         $state.go('layoutAuth.error', { errorId: 401 });
-            //                     }
-            //                 }
-            //             }
-            //
-            //         }
-            //     }
-            // }
+        // $rootScope.$on('$locationChangeSuccess', function(event, newUrl, oldUrl, newState, oldState) {
+        // });
 
-            if (authService.isAuthenticated() && !toState.data.access) {
+        $urlRouter.listen();
+
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+
+            var authorizations = [];
+            var urlArray = toState.url.replace('^', '').substr(1).split('/');
+
+            if ($rootScope.user !== undefined && $rootScope.user !== null){
+                authorizations = $rootScope.user.role.authorizations;
+
+                if($rootScope.user.custom) {
+                    DeepDiff.observableDiff(authorizations,$rootScope.user.authorizations, function (d) {
+                        if (d.kind == 'E') {
+                            DeepDiff.applyChange(authorizations,$rootScope.user.authorizations, d);
+                        }
+                    });
+                }
+            }
+
+            urlArray.forEach(function(v){
+                var firstChar = v.substr(0,1);
+                if (firstChar !== ':') {
+                    if (typeof authorizations[v] === 'object') {
+                        authorizations = authorizations[v];
+                    } else if (v == 'error' || v == 'profile' || v == 'email_change') {
+                        authorizations._access = true;
+                    } else {
+                        authorizations._access = false;
+                    }
+                }
+            });
+
+            if (authService.isAuthenticated() && !authorizations._access) {
                 event.preventDefault();
                 $state.go('layout.dashboard');
             }
         });
 
-        // $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
-        //   // console.log(event);
-        //   console.log(error);
-        // });
-        //
-        // $rootScope.$on('$stateChangeSuccess', function(event) {
-        //   console.log(event);
-        //   // updateBreadcrumbs();
-        // });
+        $rootScope.$on('$stateChangeSuccess', function(event) {
+            setTimeout(function(){
+                $('.loading').fadeOut();
+            }, 500);
+        });
 
-        $urlRouter.listen();
+        // $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+        // });
 
     }]);
 

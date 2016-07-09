@@ -1,6 +1,6 @@
 .list-group{
   .list-group-item {
-    
+
     &:first-child {
       border-top-left-radius: 0;
       border-top-right-radius: 0;
@@ -9,6 +9,23 @@
     &:last-child {
       border-bottom-right-radius: 0;
       border-bottom-left-radius: 0;
+    }
+
+    &.active {
+      background-color: $blue;
+      border-color: $blue;
+    }
+
+  }
+}
+
+.list-img {
+  display: inline;
+  li {
+    padding: 0;
+    img {
+      height: 25px;
+      width: 25px;
     }
   }
 

@@ -1,54 +1,49 @@
 .page{
-  .panel{
-    padding: 20px;
-    border-radius: 0;
-    border-top: 1px solid $gray-light-30;
-    box-shadow: 0 1px 2px 0 rgba($gray, 0.5);
-    -webkit-box-shadow: 0 1px 2px 0 rgba($gray, 0.5);
+    .panel{
+        padding: 20px;
+        border-radius: 0;
+        border-top: 1px solid $gray-light-30;
+        @include box-shadow(0 1px 2px 0 rgba($gray, 0.5));
 
-    .panel-heading{
-      padding: 0 0 12px 0;
-      border-radius: 0;
-      border-bottom: 1px solid $gray-light-30;
+        .panel-heading{
+            padding-top: 0px;
+            margin-bottom: 15px;
+            border-radius: 0;
+            border-bottom: 1px solid $gray-light-30;
 
-      h3{
-        font-weight: lighter;
-        font-size: 16px;
-        color: $gray-dark-30;
-      }
-      .btn-group{
-        margin-top:-22px;
-        margin-right: 10px;
-        .btn{
-          padding: 5px 7px;
+            h3{
+                font-weight: lighter;
+                font-size: 16px;
+                color: $gray-dark-30;
+            }
+            .btn-group{
+            }
         }
-      }
-    }
 
-    .panel-body {
-      padding: 20px 0 10px 0;
-    }
-
-    .panel-footer{
-      padding: 0;
-      background-color: $white;
-      border-top: 1px solid transparent;
-    }
-
-    &.min-box{
-      span{
-        margin-right: 10px
-      }
-      div{
-        display: inline-block;
-        vertical-align: top;
-
-        h2{
-          margin: 15px 0 5px 0;
+        .panel-body {
+            padding: 0;
         }
-      }
+
+        .panel-footer{
+            padding: 0;
+            background-color: $white;
+            border-top: 1px solid transparent;
+        }
+
+        &.min-box{
+            span{
+                margin-right: 10px
+            }
+            div{
+                display: inline-block;
+                vertical-align: top;
+
+                h2{
+                    margin: 15px 0 5px 0;
+                }
+            }
+        }
     }
-  }
 }
 
 /*
@@ -57,16 +52,16 @@
 |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 .sortable-placeholder {
-  border: 2px dashed #CCC;
-  background: none;
+    border: 2px dashed #CCC;
+    background: none;
 }
 /*.sortable-dragging{
 
-  }*/
-  .sortable {
+}*/
+.sortable {
     .panel {
-      .panel-heading{
-        cursor: move;
-      }
+        .panel-heading{
+            cursor: move;
+        }
     }
-  }
+}

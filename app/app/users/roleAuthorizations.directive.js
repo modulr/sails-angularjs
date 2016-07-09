@@ -38,26 +38,26 @@
             });
         }
 
-        function setAuthorizations(json, parent) {
-            for (var key in json) {
-                if (typeof (json[key]) === "object") {
-                    setAuthorizations(json[key], key);
-                } else {
-                    $scope.modules.forEach(function(v, k) {
-                        if (v.title === parent) {
-                            v[key] = json[key];
-                        }
-                        if (v.sections !== undefined) {
-                            v.sections.forEach(function(va, ke){
-                                if (va.title == parent) {
-                                    va[key] = json[key];
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-        }
+        // function setAuthorizations(json, parent) {
+        //     for (var key in json) {
+        //         if (typeof (json[key]) === "object") {
+        //             setAuthorizations(json[key], key);
+        //         } else {
+        //             $scope.modules.forEach(function(v, k) {
+        //                 if (v.title === parent) {
+        //                     v[key] = json[key];
+        //                 }
+        //                 if (v.sections !== undefined) {
+        //                     v.sections.forEach(function(va, ke){
+        //                         if (va.title == parent) {
+        //                             va[key] = json[key];
+        //                         }
+        //                     });
+        //                 }
+        //             });
+        //         }
+        //     }
+        // }
 
         function getAuthorizations()
         {
@@ -95,35 +95,35 @@
             });
         }
 
-        // function setAuthorizations(json) {
-        //     var obj = {};
-        //     $scope.modules.forEach(function(v, k) {
-        //         for (var key in json) {
-        //             if (v.title == key) {
-        //                 v._access = json[key]._access;
-        //                 obj = json[key];
-        //                 delete json[key];
-        //                 break;
-        //             } else {
-        //                 v._access = false;
-        //             }
-        //         }
-        //         if (v.sections !== undefined) {
-        //             v.sections.forEach(function(va, ke) {
-        //                 for (var index in obj) {
-        //                     if (va.title == index) {
-        //                         va._access = obj[index]._access;
-        //                         va._write = obj[index]._write;
-        //                         break;
-        //                     } else {
-        //                         va._access = false;
-        //                         va._write = false;
-        //                     }
-        //                 }
-        //             });
-        //         }
-        //     });
-        // }
+        function setAuthorizations(json) {
+            var obj = {};
+            $scope.modules.forEach(function(v, k) {
+                for (var key in json) {
+                    if (v.title == key) {
+                        v._access = json[key]._access;
+                        obj = json[key];
+                        //delete json[key];
+                        break;
+                    } else {
+                        v._access = false;
+                    }
+                }
+                if (v.sections !== undefined) {
+                    v.sections.forEach(function(va, ke) {
+                        for (var index in obj) {
+                            if (va.title == index) {
+                                va._access = obj[index]._access;
+                                va._write = obj[index]._write;
+                                break;
+                            } else {
+                                va._access = false;
+                                va._write = false;
+                            }
+                        }
+                    });
+                }
+            });
+        }
 
         /**
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -137,6 +137,8 @@
                 } else {
                     clearAuthorizations();
                 }
+            } else {
+                clearAuthorizations();
             }
         });
 
@@ -147,7 +149,6 @@
         }, true);
 
         getModules();
-
 
     }
 

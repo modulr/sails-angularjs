@@ -124,7 +124,9 @@
         "NEWUSER": "Usuario Nuevo",
         "EDITUSER": "Editar Usuario",
         "PASSWORD": "Contraseña",
+        "CHANGEPASSWORD": "Cambiar Contraseña",
         "ROLE": "Rol",
+        "ROLECUSTOM": "Rol personalizado",
         "GENERATE": "Generar",
         "MESSAGES": {
             "CREATE": {
@@ -195,7 +197,7 @@
         "EMAIL": "Correo electrónico",
         "LANGUAGE": "Lenguaje",
         "DEACTIVATEACCOUNT": "Desactivar Cuenta",
-        "CHANGEPASSWORD": "Cambiar Contraseña",
+        "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
         "OLDPASSWORD": "Contraseña actual",
         "PASSWORD": "Contraseña",
         "REPASSWORD": "Repite la contraseña",
@@ -232,7 +234,7 @@
         "DATE": "@:USERS.DATE",
         "NEWROLE": "Nuevo Rol",
         "EDITROLE": "Editar Rol",
-        "USEDROLE": "usuarios usan este rol.",
+        "USEDROLE": "usuarios usan este rol",
         "MESSAGES": {
             "DELETE": {
                 "ERROR": "Este rol esta asignado a uno o varios usuarios, para poder eliminar el rol es necesario que ningun usuario tenga asignado este rol."

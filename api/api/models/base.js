@@ -10,12 +10,12 @@ module.exports = {
 
     attributes: {
         createdUser: {
-            model: 'User',
+            model: 'user',
             defaultsTo: null
             //required: true
         },
         updatedUser: {
-            model: 'User',
+            model: 'user',
             defaultsTo: null
             //required: true
         },

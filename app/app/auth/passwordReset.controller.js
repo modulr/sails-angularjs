@@ -40,6 +40,8 @@
 
           var data = sanitizeService.array($scope.formPasswordReset);
 
+          console.log(data);
+
           restFulService.put('auth/passwordReset/' + $state.params.userId, data)
           .then(function(response){
 

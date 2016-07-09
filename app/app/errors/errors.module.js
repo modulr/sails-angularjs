@@ -1,22 +1,19 @@
 (function(){
-  'use strict';
+    'use strict';
 
-  angular
-  .module('errors', [])
-  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+    angular
+    .module('errors', [])
+    .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-    $urlRouterProvider.otherwise('/error/');
+        $urlRouterProvider.otherwise('/error/');
 
-    $stateProvider
-    .state('layoutAuth.error', {
-      url: '/error/:errorId',
-      templateUrl: 'app/errors/error.html',
-      controller: 'ErrorCtrl',
-      data: {
-        access : 'always'
-      }
-    });
+        $stateProvider
+        .state('layoutAuth.error', {
+            url: '/error/:errorId',
+            templateUrl: 'app/errors/error.html',
+            controller: 'ErrorCtrl'
+        });
 
-  }]);
+    }]);
 
 }());

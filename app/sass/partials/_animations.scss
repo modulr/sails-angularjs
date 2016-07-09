@@ -3,45 +3,36 @@
 * content and container-fluid
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
-.content,
-.container-fluid{
-  @include animation(all .5s);
+.content {
+    @include animation(all .5s);
 }
 
 .content.ng-enter,
-.content.ng-enter-active,
-.container-fluid.ng-enter,
-.container-fluid.ng-enter-active{
-  .auth,
-  .error,
-  .page,
-  footer{
-    @include animation(fadeInUp .5s);
-  }
-  header{
-    @include animation(fadeInDown .5s);
-  }
-  nav{
-    @include animation(fadeInLeft .5s);
-  }
+.content.ng-enter-active {
+    footer,
+    header{
+        @include animation(fadeInDown .5s);
+    }
+    nav{
+        @include animation(fadeInLeft .5s);
+    }
+    .container-fluid {
+        @include animation(fadeIn .5s);
+    }
 }
 
 .content.ng-leave,
-.content.ng-leave-active,
-.container-fluid.ng-leave,
-.container-fluid.ng-leave-active{
-  .auth,
-  .error,
-  .page,
-  footer{
-    @include animation(fadeOutDown .5s);
-  }
-  header{
-    @include animation(fadeOutUp .5s);
-  }
-  nav{
-    @include animation(fadeOutLeft .5s);
-  }
+.content.ng-leave-active {
+    footer,
+    header{
+        @include animation(fadeOutUp .5s);
+    }
+    nav{
+        @include animation(fadeOutLeft .5s);
+    }
+    .container-fluid {
+        @include animation(fadeOut .5s);
+    }
 }
 
 /*
@@ -50,8 +41,8 @@
 |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 .btn.ng-animate {
-  transition:0s none !important;
-  -webkit-transition:0s none !important;
-  animation: 0s none !important;
-  -webkit-animation: 0s none !important;
+    transition:0s none !important;
+    -webkit-transition:0s none !important;
+    animation: 0s none !important;
+    -webkit-animation: 0s none !important;
 }

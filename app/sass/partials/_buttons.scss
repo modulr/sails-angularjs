@@ -1,39 +1,43 @@
 .btn{
-  outline: none !important;
-  border-radius: 0;
-  @include transition(all .2s ease-in-out);
+    outline: none !important;
+    border-radius: 0;
+    @include transition(all .2s ease-in-out);
 
-  &:focus{
-    outline: none;
-  }
+    &:focus{
+        outline: none;
+    }
 }
-
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* link, default, primary, success, danger
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
 .btn-link{
-  color: $blue;
+    color: $blue;
 
-  &:hover, &:focus, &:active, &.active{
-    color: $blue-dark-10;
-  }
+    &:hover, &:focus, &:active, &.active{
+        color: $blue-dark-10;
+    }
 }
 
 .btn-default,
 .open > .dropdown-toggle.btn-default{
-  background-color: $white;
-  border-color: $gray-light-30;
-
-  &:hover, &:focus, &:active, &.active{
-    -webkit-box-shadow: none;
-    box-shadow: none ;
-    background-color: $gray-light-30;
+    background-color: $white;
     border-color: $gray-light-30;
-  }
 
-  &:active, &.active{
-    &:hover, &:focus{
-      background-color: $gray-light-30;
-      border-color: $gray-light-30;
+    &:hover, &:focus, &:active, &.active{
+        -webkit-box-shadow: none;
+        box-shadow: none ;
+        background-color: $gray-light-30;
+        border-color: $gray-light-30;
     }
-  }
+
+    &:active, &.active{
+        &:hover, &:focus{
+            background-color: $gray-light-30;
+            border-color: $gray-light-30;
+        }
+    }
 }
 // .btn-default.disabled,
 // .btn-default[disabled],
@@ -58,66 +62,127 @@
 // }
 .btn-primary,
 .open > .dropdown-toggle.btn-primary{
-  background-color: $blue;
-  border-color: $blue;
+    background-color: $blue;
+    border-color: $blue;
 
-  &:hover, &:focus, &:active, &.active{
-    -webkit-box-shadow: none;
-    box-shadow: none ;
-    background-color: $blue-dark-10;
-    border-color: $blue-dark-10;
-  }
-
-  &:active, &.active{
-    &:hover, &:focus{
-      background-color: $blue-dark-10;
-      border-color: $blue-dark-10;
+    &:hover, &:focus, &:active, &.active{
+        -webkit-box-shadow: none;
+        box-shadow: none ;
+        background-color: $blue-dark-10;
+        border-color: $blue-dark-10;
     }
-  }
+
+    &:active, &.active{
+        &:hover, &:focus{
+            background-color: $blue-dark-10;
+            border-color: $blue-dark-10;
+        }
+    }
 }
 .btn-success,
 .open > .dropdown-toggle.btn-success{
-  background-color: $green;
-  border-color: $green;
+    background-color: $green;
+    border-color: $green;
 
-  &:hover, &:focus, &:active, &.active{
-    -webkit-box-shadow: none;
-    box-shadow: none ;
-    background-color: $green-dark-10;
-    border-color: $green-dark-10;
-  }
-
-  &:active, &.active{
-    &:hover, &:focus{
-      background-color: $green-dark-10;
-      border-color: $green-dark-10;
+    &:hover, &:focus, &:active, &.active{
+        -webkit-box-shadow: none;
+        box-shadow: none ;
+        background-color: $green-dark-10;
+        border-color: $green-dark-10;
     }
-  }
+
+    &:active, &.active{
+        &:hover, &:focus{
+            background-color: $green-dark-10;
+            border-color: $green-dark-10;
+        }
+    }
 }
 
 .close {
-  outline: none;
+    outline: none;
 }
+
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* btn outline
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.btn-outline {
+    border-radius: 50px;
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: $blue;
+}
+
+.btn-success.btn-outline {
+    color: $green;
+}
+
+.btn-info.btn-outline {
+    color: $blue-light-10;
+}
+
+.btn-warning.btn-outline {
+    color: $yellow;
+}
+
+.btn-danger.btn-outline {
+    color: $red;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: $white;
+}
+
 /*
 |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 |   btn-circle
 |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
-.btn-circle-primary{
-  color: $blue;
-  padding: 0;
-
-  &:hover, &:focus, &:active{
-    color: $blue-dark-10;
-  }
+.btn-circle {
+    border-radius: 50px;
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+    transition: all .5s;
+    border-width: 2px;
 }
-.btn-circle-success{
-  color: $green;
-  padding: 0;
 
-  &:hover, &:focus, &:active{
-    color: $green-dark-10;
-  }
+.btn-primary.btn-circle {
+    color: $blue;
+}
+
+.btn-success.btn-circle {
+    color: $green;
+}
+
+.btn-info.btn-circle {
+    color: $blue-light-10;
+}
+
+.btn-warning.btn-circle {
+    color: $yellow;
+}
+
+.btn-danger.btn-circle {
+    color: $red;
+}
+
+.btn-primary.btn-circle:hover,
+.btn-success.btn-circle:hover,
+.btn-info.btn-circle:hover,
+.btn-warning.btn-circle:hover,
+.btn-danger.btn-circle:hover {
+    color: $white;
 }
 
 /**
@@ -126,13 +191,13 @@
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
 .fancy-check {
-  cursor: pointer;
+    cursor: pointer;
 
-  &:hover {
-    color: $blue;
-  }
+    &:hover {
+        color: $blue;
+    }
 
-  input{
-    display: none;
-  }
+    input{
+        display: none;
+    }
 }

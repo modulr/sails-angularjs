@@ -4,11 +4,11 @@
 	"team": "Team Modulr",
 
 	"signup.subject": "Confirm your email address - Modulr",
-  "signup.paragraph": "Welcome to Modulr! Before you begin, you must confirm your email address.",
-  "signup.btn": "Confirm email",
+	"signup.paragraph": "Welcome to Modulr! Before you begin, you must confirm your email address.",
+	"signup.btn": "Confirm email",
 
-  "welcome.subject": "Welcome to Modulr",
-  "welcome.paragraph": "Welcome to Modulr! You have completed your registration and your account is active.",
+	"welcome.subject": "Welcome to Modulr",
+	"welcome.paragraph": "Welcome to Modulr! You have completed your registration and your account is active.",
 
 	"password-reset.subject": "Reset your password - Modulr",
 	"password-reset.paragraph": "We received a request to reset the password for your account.",
@@ -22,9 +22,9 @@
 	"send-user-data.paragraph": "These are the details of your account Modulr, you need to establish your password to access.",
 
 	"email-change.subject": "Change your email address - Modulr",
-  "email-change.paragraph": "We received a request to change the email address for your account.",
-  "email-change.paragraph2": "If you requested a change the email address associated with this account %s, you must confirm your email address. If you didn’t make this request, please ignore this email.",
-  "email-change.btn": "Confirm email",
+	"email-change.paragraph": "We received a request to change the email address for your account.",
+	"email-change.paragraph2": "If you requested a change the email address associated with this account %s, you must confirm your email address. If you didn’t make this request, please ignore this email.",
+	"email-change.btn": "Confirm email",
 
 	"email-change-update.subject": "Email updated - Modulr",
 	"email-change-update.paragraph": "You have successfully changed the email associated with your account."

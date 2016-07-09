@@ -6,6 +6,8 @@
   .controller('LoginCtrl', ['$rootScope', '$scope', '$state', '$translate', 'sanitizeService', 'restFulService', function($rootScope, $scope, $state, $translate, sanitizeService, restFulService){
 
     $scope.formLogin = {
+        emailOrUsername: 'demo',
+        password: 'Demo123',
       rememberMe: false
     };
 

@@ -2,6 +2,7 @@
     {
         "id" : "56f964859093205f3a5fedb6",
         "role" : "admin",
+				"lock" : true,
         "authorizations" : {
             "dashboard" : {
                 "_access" : true
@@ -17,31 +18,25 @@
                     "_write" : true
                 }
             },
-            "configuration" : {
+            "users" : {
+                "_access" : true
+            },
+            "roles" : {
+                "_access" : true
+            },
+            "settings" : {
                 "_access" : true,
-                "access" : {
-                    "_access" : true,
-                    "_write" : true
-                },
-                "users" : {
-                    "_access" : true,
-                    "_write" : true
-                },
-                "roles" : {
-                    "_access" : true,
-                    "_write" : true
-                },
                 "modules" : {
                     "_access" : true,
                     "_write" : true
                 }
             }
-        },
-        "createdUser" : "56610cabc13eee247069f9ab"
+        }
     },
     {
         "id" : "56f964859093205f3a5fedb7",
         "role" : "user",
+				"lock" : true,
         "authorizations" : {
             "dashboard" : {
                 "_access" : true
@@ -56,18 +51,54 @@
                     "_access" : true,
                     "_write" : true
                 }
+            },
+            "users" : {
+                "_access" : false
+            },
+            "roles" : {
+                "_access" : true
+            },
+            "settings" : {
+                "_access" : false,
+                "modules" : {
+                    "_access" : false,
+                    "_write" : false
+                }
             }
-        },
-        "createdUser" : "56610cabc13eee247069f9ab"
+        }
     },
     {
         "id" : "56f964859093205f3a5fedb8",
         "role" : "guest",
+				"lock" : true,
         "authorizations" : {
             "dashboard" : {
                 "_access" : true
+            },
+            "log" : {
+                "_access" : false,
+                "login" : {
+                    "_access" : false,
+                    "_write" : false
+                },
+                "request" : {
+                    "_access" : false,
+                    "_write" : false
+                }
+            },
+            "users" : {
+                "_access" : false
+            },
+            "roles" : {
+                "_access" : true
+            },
+            "settings" : {
+                "_access" : false,
+                "modules" : {
+                    "_access" : false,
+                    "_write" : false
+                }
             }
-        },
-        "createdUser" : "56610cabc13eee247069f9ab"
+        }
     }
 ]

@@ -1,20 +1,20 @@
 [
-  {
-    "relationship" : "SINGLE"
-  },
-  {
-    "relationship" : "MARRIED"
-  },
-  {
-    "relationship" : "COMMITTED"
-  },
-  {
-    "relationship" : "SEPARATE"
-  },
-  {
-    "relationship" : "DIVORCED"
-  },
-  {
-    "relationship" : "WIDOWER"
-  }
+    {
+        "relationship" : "SINGLE"
+    },
+    {
+        "relationship" : "MARRIED"
+    },
+    {
+        "relationship" : "COMMITTED"
+    },
+    {
+        "relationship" : "SEPARATE"
+    },
+    {
+        "relationship" : "DIVORCED"
+    },
+    {
+        "relationship" : "WIDOWER"
+    }
 ]

@@ -7,45 +7,27 @@
 
 module.exports = {
 
-    find: function(req, res, cb)
-    {
-        sails.models.user.find().exec(function(err, users){
-            if(err) return cb(err);
-            res.json(users);
-        });
-    },
+    // find: function(req, res, cb)
+    // {
+    //     sails.models.user.find().exec(function(err, users){
+    //         if(err) return cb(err);
+    //         res.json(users);
+    //     });
+    // },
 
-    findWithRole: function(req, res, cb)
-    {
-        sails.models.user.find().populate('role').exec(function(err, users){
-            if(err) return cb(err);
-            res.json(users);
-        });
-    },
-
-    findWithProfile: function(req, res, cb)
-    {
-        sails.models.user.find().populate('profile').exec(function(err, users){
-            if(err) return cb(err);
-            res.json(users);
-        });
-    },
+    // findWithProfile: function(req, res, cb)
+    // {
+    //     sails.models.user.find().populate('profile').exec(function(err, users){
+    //         if(err) return cb(err);
+    //         res.json(users);
+    //     });
+    // },
 
     findUserByToken: function(req, res, cb)
     {
         var userId = req.token.id;
 
-        sails.models.user.findOne({ id: userId }).exec(function(err, user){
-            if(err) return cb(err);
-            res.json(user);
-        });
-    },
-
-    findByRole: function(req, res, cb)
-    {
-        var roleId = req.params.id;
-
-        sails.models.user.count({ role: roleId }).exec(function(err, user){
+        sails.models.user.findOne({ id: userId }).populate('role').exec(function(err, user){
             if(err) return cb(err);
             res.json(user);
         });
@@ -69,7 +51,12 @@ module.exports = {
                     .exec(function(err, update){
                         if(err) return cb(err);
 
-                        res.json(user);
+                        sails.models.user.findOne({id: update[0].id}).populate('role')
+                        .exec(function (err, usr){
+                            if(err) return cb(err);
+
+                            res.json(usr);
+                        });
                     });
                 });
             });
@@ -85,7 +72,7 @@ module.exports = {
         sails.models.user.update({id: userId}, data).exec(function(err, update){
             if(err) return cb(err);
 
-            sails.models.user.findOne({id: userId}).populate('profile', data.profile).exec(function (err, user){
+            sails.models.user.findOne({id: userId}).populate('profile').populate('role').exec(function (err, user){
                 if(err) return cb(err);
 
                 res.json(user);
@@ -151,7 +138,7 @@ module.exports = {
                         // It send the mail
                         EmailService.send('emailChange', options);
 
-                        res.json(update[0]);
+                        res.json({user: update[0], emailChange: true});
 
                     });
                 });
@@ -161,7 +148,7 @@ module.exports = {
                 sails.models.user.update({id: userId}, data).exec(function(err, update){
                     if(err) return cb(err);
 
-                    res.json(update[0]);
+                    res.json({user: update[0], emailChange: false});
                 });
             }
 
@@ -180,31 +167,28 @@ module.exports = {
             EncryptService.compare(data.oldPassword, user.password, function (err, valid) {
                 // If the passwords are not the same
                 if(!valid) return res.badRequest();
-                // It is encrypt password
-                EncryptService.encrypt(data.password, function (err, hash) {
+
+                // Update the password
+                sails.models.user.update({id: userId}, {password: data.password}).exec(function(err, update){
                     if(err) return cb(err);
-                    // It is updated password
-                    sails.models.user.update({id: userId}, {password: hash}).exec(function(err, update){
-                        if(err) return cb(err);
 
-                        user = user.toJSON();
-                        req.setLocale(user.lang);
+                    user = user.toJSON();
+                    req.setLocale(user.lang);
 
-                        var options = {
-                            to: user.email,
-                            subject: req.__('password-update.subject'),
-                            data: {
-                                hi: req.__('hi', user.profile.fullName || user.username),
-                                paragraph: req.__('password-update.paragraph'),
-                                team: req.__('team')
-                            }
-                        };
+                    var options = {
+                        to: user.email,
+                        subject: req.__('password-update.subject'),
+                        data: {
+                            hi: req.__('hi', user.profile.fullName || user.username),
+                            paragraph: req.__('password-update.paragraph'),
+                            team: req.__('team')
+                        }
+                    };
 
-                        // Its is send mail
-                        EmailService.send('passwordUpdate', options);
+                    // Its is send mail
+                    EmailService.send('passwordUpdate', options);
 
-                        res.ok();
-                    });
+                    res.ok();
                 });
             });
         });
