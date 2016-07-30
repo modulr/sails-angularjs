@@ -70,7 +70,6 @@ header{
             a {
                 color: $white;
                 border-radius: 0;
-                padding: 15px 15px 5px 15px;
 
                 &:hover,
                 &:focus {
@@ -81,7 +80,7 @@ header{
                     position: absolute;
                     top: 10px;
                     left: 4px;
-                    font-size: 12px;
+                    font-size: 10px;
                 }
             }
             ul.dropdown-menu {

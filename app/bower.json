@@ -28,7 +28,8 @@
     "mdr-angular-file": "~1.0.5",
     "sails.io.js": "~0.13.5",
     "deep-diff": "^0.3.4",
-    "angular-eonasdan-datetimepicker": "^0.3.3"
+    "angular-eonasdan-datetimepicker": "^0.3.3",
+    "magnific-popup": "^1.1.0"
   },
   "overrides": {
     "bootstrap": {

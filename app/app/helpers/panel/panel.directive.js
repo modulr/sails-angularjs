@@ -1,14 +1,14 @@
 (function(){
-    'use strict';
+  'use strict';
 
-    angular
-    .module('helpers')
-    .directive('panel', panel);
+  angular
+  .module('helpers')
+  .directive('panel', panel);
 
-    function panel() {
-        return function($scope, elem, attrs) {
-            $(elem).smkPanel();
-        };
-    }
+  function panel() {
+    return function($scope, elem, attrs) {
+      $(elem).smkPanel();
+    };
+  }
 
 })();

@@ -112,6 +112,7 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
         toJSON: function() {
             var obj = this.toObject();
             delete obj.password;
+            obj.fullName = this.getFullName();
             obj.avatar = this.getAvatar();
             obj.custom = this.getCustom();
             return obj;

@@ -7,7 +7,6 @@
 
   function tooltip() {
     return {
-      transclude: true,
       scope: {
         title: '@'
       },

@@ -1,58 +1,102 @@
 [
-    {
-        "title": "dashboard",
-        "icon": "fa-home",
-        "state": "layout.dashboard",
-        "url": "/dashboard",
-        "order": 1,
-        "active": true
-    },
-    {
-        "title": "log",
-        "icon": "fa-exchange",
-        "state": "layout.login",
-        "url": "/log/login",
-        "order": 2,
-        "active": true,
-        "sections": [
-            {
-                "title": "login",
-                "state": "layout.login"
-            },
-            {
-                "title": "request",
-                "state": "layout.request"
-            }
-        ]
-    },
-    {
-        "title": "users",
-        "icon": "fa-users",
-        "state": "layout.users",
-        "url": "/users",
-        "order": 3,
-        "active": true
-    },
-    {
-        "title": "roles",
-        "icon": "fa-lock",
-        "state": "layout.roles",
-        "url": "/roles",
-        "order": 4,
-        "active": true
-    },
-    {
-        "title": "settings",
-        "icon": "fa-cogs",
-        "state": "layout.modules",
-        "url": "/settings/modules",
-        "order": 5,
-        "active": true,
-        "sections": [
-            {
-                "title": "modules",
-                "state": "layout.modules"
-            }
-        ]
+  {
+    "title": "dashboard",
+    "icon": "fa-home",
+    "state": "layout.dashboard",
+    "url": "/dashboard",
+    "order": 1,
+    "active": true,
+    "authorizations": {
+      "access": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
+      }
     }
+  },
+  {
+    "title": "files",
+    "icon": "fa-archive",
+    "state": "layout.files",
+    "url": "/files",
+    "order": 2,
+    "active": true,
+    "authorizations": {
+      "access": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
+      }
+    }
+  },
+  {
+    "title": "log",
+    "icon": "fa-exchange",
+    "state": "layout.login",
+    "url": "/log/login",
+    "order": 3,
+    "active": true,
+    "authorizations": {
+      "access": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      }
+    },
+    "sections": [
+      {
+        "title": "login",
+        "state": "layout.login"
+      },
+      {
+        "title": "request",
+        "state": "layout.request"
+      }
+    ]
+  },
+  {
+    "title": "users",
+    "icon": "fa-users",
+    "state": "layout.users",
+    "url": "/users",
+    "order": 4,
+    "active": true,
+    "authorizations": {
+      "access": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      }
+    }
+  },
+  {
+    "title": "settings",
+    "icon": "fa-cogs",
+    "state": "layout.modules",
+    "url": "/settings/modules",
+    "order": 5,
+    "active": true,
+    "authorizations": {
+      "access": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
+      }
+    },
+    "sections": [
+      {
+        "title": "modules",
+        "state": "layout.modules"
+      },
+      {
+        "title": "roles",
+        "state": "layout.roles"
+      }
+    ]
+  }
 ]

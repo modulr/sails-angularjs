@@ -1,104 +1,20 @@
 [
-    {
-        "id" : "56f964859093205f3a5fedb6",
-        "role" : "admin",
-				"lock" : true,
-        "authorizations" : {
-            "dashboard" : {
-                "_access" : true
-            },
-            "log" : {
-                "_access" : true,
-                "login" : {
-                    "_access" : true,
-                    "_write" : true
-                },
-                "request" : {
-                    "_access" : true,
-                    "_write" : true
-                }
-            },
-            "users" : {
-                "_access" : true
-            },
-            "roles" : {
-                "_access" : true
-            },
-            "settings" : {
-                "_access" : true,
-                "modules" : {
-                    "_access" : true,
-                    "_write" : true
-                }
-            }
-        }
-    },
-    {
-        "id" : "56f964859093205f3a5fedb7",
-        "role" : "user",
-				"lock" : true,
-        "authorizations" : {
-            "dashboard" : {
-                "_access" : true
-            },
-            "log" : {
-                "_access" : true,
-                "login" : {
-                    "_access" : true,
-                    "_write" : true
-                },
-                "request" : {
-                    "_access" : true,
-                    "_write" : true
-                }
-            },
-            "users" : {
-                "_access" : false
-            },
-            "roles" : {
-                "_access" : true
-            },
-            "settings" : {
-                "_access" : false,
-                "modules" : {
-                    "_access" : false,
-                    "_write" : false
-                }
-            }
-        }
-    },
-    {
-        "id" : "56f964859093205f3a5fedb8",
-        "role" : "guest",
-				"lock" : true,
-        "authorizations" : {
-            "dashboard" : {
-                "_access" : true
-            },
-            "log" : {
-                "_access" : false,
-                "login" : {
-                    "_access" : false,
-                    "_write" : false
-                },
-                "request" : {
-                    "_access" : false,
-                    "_write" : false
-                }
-            },
-            "users" : {
-                "_access" : false
-            },
-            "roles" : {
-                "_access" : true
-            },
-            "settings" : {
-                "_access" : false,
-                "modules" : {
-                    "_access" : false,
-                    "_write" : false
-                }
-            }
-        }
-    }
+  {
+    "id" : "56f964859093205f3a5fedb6",
+    "role" : "admin",
+    "description" : "All access",
+    "lock" : true
+  },
+  {
+    "id" : "56f964859093205f3a5fedb7",
+    "role" : "user",
+    "description" : "Basic access",
+    "lock" : true
+  },
+  {
+    "id" : "56f964859093205f3a5fedb8",
+    "role" : "guest",
+    "description" : "Read access",
+    "lock" : true
+  }
 ]

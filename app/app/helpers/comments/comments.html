@@ -1,0 +1,91 @@
+<div class="comentarios">
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>{{count.total}} Comentarios</strong></p>
+        </div>
+        <div class="col-md-4">
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                <input type="text" class="form-control" placeholder="Buscar" ng-model="search">
+            </div>
+        </div>
+        <div class="col-md-2">
+            <select class="form-control" ng-options="order.label for order in orders" ng-model="selectOrder" ng-change="orderComments()"></select>
+        </div>
+    </div>
+    <hr>
+    <form id="formCommentId_{{$id}}">
+        <img class="img-rounded" ng-src="images/{{user.foto}}">
+        <div class="input-group">
+            <input type="text" class="form-control input-lg" placeholder="Agrega un comentario" ng-model="text" required>
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-lg" ng-click="addComment($event)" ng-disabled="btnDisabled">Comentar</button>
+            </span>
+        </div><!-- /input-group -->
+    </form>
+    <div class="media" ng-repeat="comment in collection" ng-include="'commentTree'"></div>
+    <br>
+    <div ng-if="divGetMore">
+        <div>
+            <a href="" ng-click="getMoreComments($event)">Ver más comentarios</a><span class="pull-right">{{count.to}} de {{count.total}} comentarios</span>
+        </div>
+    </div>
+</div><!-- /.comentarios -->
+
+
+<script type="text/ng-template" id="commentTree">
+
+    <div class="media-left">
+        <a href="#"><img class="media-object img-rounded img64_64" ng-src="images/{{comment.usuario.foto}}"></a>
+    </div>
+
+    <div class="media-body">
+        <h4 class="media-heading">{{comment.usuario.nombre_completo}}</h4>
+        <div class="actions">
+            <span class="text-muted"> · {{comment.updated_at | amCalendar}}</span>
+            <span ng-show="comment.parent_id==null"> · <a href="" data-toggle="collapse" data-target="#collapseId_{{comment.id}}">Responder</a></span>
+            <span ng-show="comment.count > 0"> · <a href="" data-toggle="collapse" data-target="#collapseResp_{{comment.id}}" ng-click="getReplies($events, comment)">{{comment.count}} Respuestas</a></span>
+            <a href="" ng-click="editComment(comment, $index)"><span class="glyphicon glyphicon-pencil"></span></a>
+        </div>
+        <p ng-bind-html="comment.comentario | nl2br"></p>
+
+        <div class="row collapse" id="collapseId_{{comment.id}}">
+            <form class="col-md-12 form-child" id="formCommentReplyId_{{comment.id}}">
+                <img class="img-rounded" ng-src="images/{{comment.usuario.foto}}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Agrega un comentario" ng-model="comment.text" required>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" ng-click="addCommentReply($event, comment, $index)">Comentar</button>
+                    </span>
+                </div>
+            </form>
+        </div>
+        <div class="child collapse" id="collapseResp_{{comment.id}}">
+            <div class="media" ng-repeat="comment in comment.children" ng-include="'commentTree'"></div>
+        </div>
+    </div>
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModalEdit_{{$id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Editar</h4>
+            </div>
+            <div class="modal-body">
+                <form id="formEdit_{{$id}}">
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5"  placeholder="Agrega un comentario" ng-model="formEdit.comment" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" ng-click="deleteComment($event)">Borrar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" ng-click="updateComment($event)">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -16,6 +16,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       unique: true,
       required: true
     },
+    description: {
+      type: 'text'
+    },
     // Lock role
     lock: {
       type: 'boolean',

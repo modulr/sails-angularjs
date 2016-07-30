@@ -112,6 +112,7 @@
           index: $scope.roles.indexOf(row),
           id: item.id,
           role: item.role,
+          description: item.description,
           authorizations: item.authorizations,
           users: item.users
         },
@@ -204,12 +205,12 @@
     $scope.getUsers = function(row)
     {
       $scope.role = row;
-      $translate(['ROLES.ROLE', 'ROLES.DATE', 'USERS.USERS'])
+      $translate(['ROLES.DATE', 'USERS.USERNAME'])
       .then(function (translations) {
         $scope.tableUsers = {
           "header": [
-            {'avatar': translations['ROLES.ROLE']},
-            {'user': translations['USERS.USERS']},
+            {'avatar': ''},
+            {'user': translations['USERS.USERNAME']},
             {'createdAt': translations['ROLES.DATE']}
           ],
           "rows": row.users,

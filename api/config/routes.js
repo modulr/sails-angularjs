@@ -43,6 +43,9 @@ module.exports.routes = {
   // profile
   'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate',
 
+  // File
+  'GET /folder/all/:id/:item': 'FolderController.all'
+
 
   /***************************************************************************
   *                                                                          *

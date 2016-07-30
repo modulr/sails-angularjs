@@ -1,274 +1,275 @@
 {
+  "LANGUAGE": "Language",
+
+  "ENGLISH": "English",
+  "SPANISH": "Spanish",
+
+  "LOGIN": {
+    "LOGIN": "Log In",
+    "EMAILORUSERNAME": "Username or email",
+    "PASSWORD": "Password",
+    "REMEMBERME": "Remember me",
+    "FORGOTPASSWORD": "Forgot password?",
+    "MESSAGES": {
+      "ERROR404": "Email or username are not registered or the account is disabled.",
+      "ERROR400": "The password does not match with Email or username, try again."
+    }
+  },
+
+  "SIGNUP": {
+    "SIGNUP": "Sign Up",
+    "EMAIL": "Email",
+    "USERNAME": "Username",
+    "PASSWORD": "@:LOGIN.PASSWORD",
+    "REPASSWORD": "Re-password",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Confirm your email address",
+        "PARAGRAPH": "We send a confirmation message to your email.",
+        "NOTE": "If you don't see the email, check other places it might be, like your junk, spam or other folders."
+      },
+      "ERROR": "Email or username are already taken <strong>{{emailOrUsername}}</strong>, try another."
+    }
+  },
+
+  "CONFIRM-EMAIL": {
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "You have successfully registered",
+        "PARAGRAPH": "Your account is already active, you can now access to Modulr."
+      }
+    }
+  },
+
+  "BEGIN-PASSWORD-RESET": {
+    "HEADLINE": "Find Your Account",
+    "PARAGRAPH": "Enter your email or username.",
+    "EMAILORUSERNAME": "@:LOGIN.EMAILORUSERNAME",
+    "BTN": "Search",
+    "MESSAGES": {
+      "ERROR": "@:LOGIN.MESSAGES.ERROR404"
+    }
+  },
+
+  "SEND-PASSWORD-RESET": {
+    "HEADLINE": "Reset Your Password",
+    "PARAGRAPH": "We found the following information associated with your account.",
+    "PARAGRAPH2": "Email a link to ",
+    "BTN": "Continue",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Check your email",
+        "PARAGRAPH": "We send a message with the steps to reset your password to your email.",
+        "NOTE": "@:SIGNUP.MESSAGES.SUCCESS.NOTE",
+        "LINK": "I didn't receive the email"
+      }
+    }
+  },
+
+  "PASSWORD-RESET": {
+    "HEADLINE": "@:SEND-PASSWORD-RESET.HEADLINE",
+    "PASSWORD": "@:LOGIN.PASSWORD",
+    "REPASSWORD": "@:SIGNUP.REPASSWORD",
+    "BTN": "Reset",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Password updated",
+        "PARAGRAPH": "The password was successfully updated, you can now sign."
+      }
+    }
+  },
+
+  "LOGOUT": "Log Out",
+
+  "DASHBOARD": "Dashboard",
+  "SETTINGS": "Settings",
+  "CONFIGURATION": "Configuration",
+  "ACCESS": "Access",
+  "MODULES": "Modules",
+  "AUTHORIZATION": "Authorization",
+
+  "SEARCH": "Search",
+  "CREATE": "Create",
+  "SAVE": "Save",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "CANCEL": "Cancel",
+  "CLOSE": "Close",
+  "SEND": "Send",
+  "ADD": "Add",
+  "UPLOAD": "Upload",
+  "DRAGORCLICK": "Drag or click here",
+
+  "MESSAGES": {
+    "SUCCESS": "The data is updated correctly."
+  },
+
+  "CHAT": {
+    "CONTACTS": "Contacts",
+    "MESSAGE": "Message",
+    "LOADMORE": "Load more"
+  },
+
+  "USERS": {
+    "USERS": "Users",
+    "USER": "User",
+    "ACTIVE": "Active",
+    "DEACTIVE": "Deactive",
+    "ACTIVATE": "Activate",
+    "DEACTIVATE": "Deactivate",
+    "USERNAME": "Username",
+    "EMAIL": "Email",
+    "DATE": "Date",
+    "INFORMATION": "Information",
+    "NEWUSER": "New User",
+    "EDITUSER": "Edit User",
+    "ROLE": "Role",
+    "ROLECUSTOM": "Role custom",
+    "PASSWORD": "Password",
+    "CHANGEPASSWORD": "Change Password",
+    "GENERATE": "Generate",
+    "MESSAGES": {
+      "CREATE": {
+        "SUCCESS": "The user was created successfully",
+        "ERROR": "Email or username are already taken <strong>{{emailOrUsername}}</strong>, try another."
+      },
+      "ACTIVATE": {
+        "SUCCESS": "The user is successfully activate."
+      },
+      "DEACTIVATE": {
+        "SUCCESS": "The user is successfully deactivate."
+      },
+      "DELETE": {
+        "CONFIRM": "<b>Are you sure to delete the user?</b> <br><br> If the user has a relationship with another table will break and the database may be inconsistent.",
+        "SUCCESS": "The user is successfully removed."
+      },
+      "SEND-USER-DATA": {
+        "SUCCESS": "The information was sent properly.",
+        "ERROR": "The user must be active to send the information."
+      },
+      "ACTIVATES": {
+        "SUCCESS": "Users successfully activate."
+      },
+      "DEACTIVATES": {
+        "SUCCESS": "Users successfully deactivate."
+      },
+      "DELETES": {
+        "SUCCESS": "Users successfully removed."
+      }
+    }
+  },
+
+  "PROFILE": {
+    "PROFILE": "Profile",
+
+    "NAME": "Name",
+    "LASTNAME": "Last name",
+    "MEMBERSINCE": "member since",
+    "PHOTO": "Photo",
+    "PHOTOS": "Photos",
+
+    "INFORMATION": "Information",
+    "PERSONAL": "Personal",
+    "GENDER": "Gender",
+    "BIRTHDAY": "Birthday",
+    "RELATIONSHIP": "Relationship",
+    "PLACES": "Places",
+    "ADRESS": "Adress",
+    "CURRENTLY": "Currently",
+    "FAMILY": "Family",
+    "RELATION": "Relation",
+    "CONTACT": "Contact",
+    "TYPE": "Type",
+    "EDUCATION": "Education",
+    "SCHOOLNAME": "School name",
+    "MAJOR": "Major",
+    "STARTYEAR":  "Start year",
+    "ENDYEAR":  "End year",
+    "DESCRIPTION":  "Description",
+    "WORK": "Work",
+    "JOB": "Job",
+    "DEPARTMENT": "Departament",
+    "COMPANY": "Company",
+
+    "NOTIFICATIONS": "Notifications",
+    "SETTINGS": "@:SETTINGS",
+    "ACCOUNT": "Account",
+    "USERNAME": "Username",
+    "EMAIL": "Email",
     "LANGUAGE": "Language",
-
-    "ENGLISH": "English",
-    "SPANISH": "Spanish",
-
-    "LOGIN": {
-        "LOGIN": "Log In",
-        "EMAILORUSERNAME": "Username or email",
-        "PASSWORD": "Password",
-        "REMEMBERME": "Remember me",
-        "FORGOTPASSWORD": "Forgot password?",
-        "MESSAGES": {
-            "ERROR404": "Email or username are not registered or the account is disabled.",
-            "ERROR400": "The password does not match with Email or username, try again."
-        }
-    },
-
-    "SIGNUP": {
-        "SIGNUP": "Sign Up",
-        "EMAIL": "Email",
-        "USERNAME": "Username",
-        "PASSWORD": "@:LOGIN.PASSWORD",
-        "REPASSWORD": "Re-password",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Confirm your email address",
-                "PARAGRAPH": "We send a confirmation message to your email.",
-                "NOTE": "If you don't see the email, check other places it might be, like your junk, spam or other folders."
-            },
-            "ERROR": "Email or username are already taken <strong>{{emailOrUsername}}</strong>, try another."
-        }
-    },
-
-    "CONFIRM-EMAIL": {
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "You have successfully registered",
-                "PARAGRAPH": "Your account is already active, you can now access to Modulr."
-            }
-        }
-    },
-
-    "BEGIN-PASSWORD-RESET": {
-        "HEADLINE": "Find Your Account",
-        "PARAGRAPH": "Enter your email or username.",
-        "EMAILORUSERNAME": "@:LOGIN.EMAILORUSERNAME",
-        "BTN": "Search",
-        "MESSAGES": {
-            "ERROR": "@:LOGIN.MESSAGES.ERROR404"
-        }
-    },
-
-    "SEND-PASSWORD-RESET": {
-        "HEADLINE": "Reset Your Password",
-        "PARAGRAPH": "We found the following information associated with your account.",
-        "PARAGRAPH2": "Email a link to ",
-        "BTN": "Continue",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Check your email",
-                "PARAGRAPH": "We send a message with the steps to reset your password to your email.",
-                "NOTE": "@:SIGNUP.MESSAGES.SUCCESS.NOTE",
-                "LINK": "I didn't receive the email"
-            }
-        }
-    },
-
-    "PASSWORD-RESET": {
-        "HEADLINE": "@:SEND-PASSWORD-RESET.HEADLINE",
-        "PASSWORD": "@:LOGIN.PASSWORD",
-        "REPASSWORD": "@:SIGNUP.REPASSWORD",
-        "BTN": "Reset",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Password updated",
-                "PARAGRAPH": "The password was successfully updated, you can now sign."
-            }
-        }
-    },
-
-    "LOGOUT": "Log Out",
-
-    "DASHBOARD": "Dashboard",
-    "SETTINGS": "Settings",
-    "CONFIGURATION": "Configuration",
-    "ACCESS": "Access",
-    "MODULES": "Modules",
-    "AUTHORIZATION": "Authorization",
-
-    "SEARCH": "Search",
-    "CREATE": "Create",
-    "SAVE": "Save",
-    "EDIT": "Edit",
-    "DELETE": "Delete",
-    "CANCEL": "Cancel",
-    "CLOSE": "Close",
-    "SEND": "Send",
-    "ADD": "Add",
-    "UPLOAD": "Upload",
-    "DRAGORCLICK": "Drag or click here",
+    "DEACTIVATEACCOUNT": "Deactivate Account",
+    "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
+    "OLDPASSWORD": "Currently password",
+    "PASSWORD": "Password",
+    "REPASSWORD": "Re-password",
 
     "MESSAGES": {
-        "SUCCESS": "The data is updated correctly."
-    },
-
-    "CHAT": {
-        "CONTACTS": "Contacts",
-        "MESSAGE": "Message",
-        "LOADMORE": "Load more"
-    },
-
-    "USERS": {
-        "USERS": "Users",
-        "USER": "User",
-        "ACTIVE": "Active",
-        "DEACTIVE": "Deactive",
-        "ACTIVATE": "Activate",
-        "DEACTIVATE": "Deactivate",
-        "USERNAME": "Username",
-        "EMAIL": "Email",
-        "DATE": "Date",
-        "INFORMATION": "Information",
-        "NEWUSER": "New User",
-        "EDITUSER": "Edit User",
-        "ROLE": "Role",
-        "ROLECUSTOM": "Role custom",
-        "PASSWORD": "Password",
-        "CHANGEPASSWORD": "Change Password",
-        "GENERATE": "Generate",
-        "MESSAGES": {
-            "CREATE": {
-                "SUCCESS": "The user was created successfully",
-                "ERROR": "Email or username are already taken <strong>{{emailOrUsername}}</strong>, try another."
-            },
-            "ACTIVATE": {
-                "SUCCESS": "The user is successfully activate."
-            },
-            "DEACTIVATE": {
-                "SUCCESS": "The user is successfully deactivate."
-            },
-            "DELETE": {
-                "CONFIRM": "<b>Are you sure to delete the user?</b> <br><br> If the user has a relationship with another table will break and the database may be inconsistent.",
-                "SUCCESS": "The user is successfully removed."
-            },
-            "SEND-USER-DATA": {
-                "SUCCESS": "The information was sent properly.",
-                "ERROR": "The user must be active to send the information."
-            },
-            "ACTIVATES": {
-                "SUCCESS": "Users successfully activate."
-            },
-            "DEACTIVATES": {
-                "SUCCESS": "Users successfully deactivate."
-            },
-            "DELETES": {
-                "SUCCESS": "Users successfully removed."
-            }
+      "ACCOUNT": {
+        "ERROR": "Username are already taken <strong>{{username}}</strong>, try another."
+      },
+      "DEACTIVATEACCOUNT": {
+        "CONFIRM":{
+          "TEXT": "Are you sure you want to disable the account?",
+          "BTNACCEPT": "Accept",
+          "BTNCANCEL": "Cancel"
+        },
+        "SUCCESS": "The account was deactivated correctly."
+      },
+      "EMAIL-CHANGE": {
+        "INFO": "We send a confirmation message to <strong>{{email}}</strong>. Please confirm this email address for complete the change email.",
+        "SUCCESS": {
+          "HEADLINE": "Your email changed successfully",
+          "PARAGRAPH": "Now your account is associated with this email "
         }
-    },
+      },
+      "CHANGEPASSWORD": {
+        "SUCCESS": "The password was successfully changed.",
+        "ERROR": "The current password does not match."
+      }
+    }
+  },
 
-    "PROFILE": {
-        "PROFILE": "Profile",
+  "ROLES": {
+    "ROLES": "Roles",
+    "DESCRIPTION": "Description",
+    "ROLE": "@:USERS.ROLE",
+    "DATE": "@:USERS.DATE",
+    "NEWROLE": "New Role",
+    "EDITROLE": "Edit Role",
+    "USEDROLE": "users used this role",
+    "MESSAGES": {
+      "DELETE": {
+        "ERROR": "This role is assigned to one or more users, to delete it, is necesary no user has it assigned"
+      }
+    }
+  },
 
-        "NAME": "Name",
-        "LASTNAME": "Last name",
-        "MEMBERSINCE": "member since",
-        "PHOTO": "Photo",
-        "PHOTOS": "Photos",
+  "MALE": "Male",
+  "FEMALE": "Female",
 
-        "INFORMATION": "Information",
-        "PERSONAL": "Personal",
-        "GENDER": "Gender",
-        "BIRTHDAY": "Birthday",
-        "RELATIONSHIP": "Relationship",
-        "PLACES": "Places",
-        "ADRESS": "Adress",
-        "CURRENTLY": "Currently",
-        "FAMILY": "Family",
-        "RELATION": "Relation",
-        "CONTACT": "Contact",
-        "TYPE": "Type",
-        "EDUCATION": "Education",
-        "SCHOOLNAME": "School name",
-        "MAJOR": "Major",
-        "STARTYEAR":  "Start year",
-        "ENDYEAR":  "End year",
-        "DESCRIPTION":  "Description",
-        "WORK": "Work",
-        "JOB": "Job",
-        "DEPARTMENT": "Departament",
-        "COMPANY": "Company",
+  "SINGLE": "Single",
+  "MARRIED": "Married",
+  "COMMITTED": "Committed",
+  "SEPARATE": "Separate",
+  "DIVORCED": "Divorced",
+  "WIDOWER": "Widower",
 
-        "NOTIFICATIONS": "Notifications",
-        "SETTINGS": "@:SETTINGS",
-        "ACCOUNT": "Account",
-        "USERNAME": "Username",
-        "EMAIL": "Email",
-        "LANGUAGE": "Language",
-        "DEACTIVATEACCOUNT": "Deactivate Account",
-        "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
-        "OLDPASSWORD": "Currently password",
-        "PASSWORD": "Password",
-        "REPASSWORD": "Re-password",
+  "PHONE": "Phone",
+  "EMAIL": "Email",
 
-        "MESSAGES": {
-            "ACCOUNT": {
-                "ERROR": "Username are already taken <strong>{{username}}</strong>, try another."
-            },
-            "DEACTIVATEACCOUNT": {
-                "CONFIRM":{
-                    "TEXT": "Are you sure you want to disable the account?",
-                    "BTNACCEPT": "Accept",
-                    "BTNCANCEL": "Cancel"
-                },
-                "SUCCESS": "The account was deactivated correctly."
-            },
-            "EMAIL-CHANGE": {
-                "INFO": "We send a confirmation message to <strong>{{email}}</strong>. Please confirm this email address for complete the change email.",
-                "SUCCESS": {
-                    "HEADLINE": "Your email changed successfully",
-                    "PARAGRAPH": "Now your account is associated with this email "
-                }
-            },
-            "CHANGEPASSWORD": {
-                "SUCCESS": "The password was successfully changed.",
-                "ERROR": "The current password does not match."
-            }
-        }
-    },
-
-    "ROLES": {
-        "ROLES": "Roles",
-        "ROLE": "@:USERS.ROLE",
-        "DATE": "@:USERS.DATE",
-        "NEWROLE": "New Rol",
-        "EDITROLE": "Edit Rol",
-        "USEDROLE": "users used this role",
-        "MESSAGES": {
-            "DELETE": {
-                "ERROR": "This rol is assigned to one or more users, to delete it, is necesary no user has it assigned"
-            }
-        }
-    },
-
-    "MALE": "Male",
-    "FEMALE": "Female",
-
-    "SINGLE": "Single",
-    "MARRIED": "Married",
-    "COMMITTED": "Committed",
-    "SEPARATE": "Separate",
-    "DIVORCED": "Divorced",
-    "WIDOWER": "Widower",
-
-    "PHONE": "Phone",
-    "EMAIL": "Email",
-
-    "LOG": {
-        "LOG": "Log",
-        "BROWSER": "Browser",
-        "OS": "SO",
-        "USERS": "Users",
-        "USER": "User",
-        "DEVICE": "Device",
-        "DATE": "@:USERS.DATE",
-        "METHOD": "Method",
-        "TIME": "Time",
-        "PARAMETERS": "Parameters",
-        "RESPONSETIME": "Response time",
-        "MIDDLEWARELATENCY": "Middleware latency"
-    },
-    "REQUEST": "Request"
+  "LOG": {
+    "LOG": "Log",
+    "BROWSER": "Browser",
+    "OS": "SO",
+    "USERS": "Users",
+    "USER": "User",
+    "DEVICE": "Device",
+    "DATE": "@:USERS.DATE",
+    "METHOD": "Method",
+    "TIME": "Time",
+    "PARAMETERS": "Parameters",
+    "RESPONSETIME": "Response time",
+    "MIDDLEWARELATENCY": "Middleware latency"
+  },
+  "REQUEST": "Request"
 }

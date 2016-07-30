@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-4 col-md-2" ng-repeat="file in foldersFiles track by $index">
+
+    <div class="thumbnail text-center">
+
+      <div class="buttons">
+        <a href="{{home.storage}}/{{file.item}}/{{file.file}}" download="{{file.name}}">
+          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        </a>
+        <a href="" ng-click="edit(file, $index)">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <a href="" ng-click="openFolder(file)" ng-if="!file.type">
+        <span class="glyphicon glyphicon-folder-close icon" aria-hidden="true"></span>
+      </a>
+
+      <a href="{{home.storage}}/{{file.item}}/{{file.file}}" data-mfp-src="{{home.storage}}/{{file.item}}/{{file.file}}" class="image-link" ng-if="file.type && file.image">
+        <img ng-src="{{home.storage}}/{{file.item}}/{{file.file}}" alt="{{file.name}}">
+      </a>
+
+      <a href="{{home.storage}}/{{file.item}}/{{file.file}}" target="_blank" ng-if="file.type && !file.image">
+        <span class="glyphicon glyphicon-file icon" aria-hidden="true"></span>
+      </a>
+
+      <div class="caption">
+        <p tooltip-placement="top" uib-tooltip="{{file.name}}">
+          {{file.name | limitTo : 12}}
+          <span ng-if="file.name.length > 12">...</span>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+</div>

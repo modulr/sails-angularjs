@@ -32,11 +32,10 @@ module.exports = {
         //   }
         // }
     }
-
-    //beforeCreate: function(values, cb) {
-    //console.log(values);
-    //values.createdUser = values.currentUser;
-    //values.updatedUser = values.currentUser;
-    //cb();
-    //}
+    // beforeCreate: function(values, cb) {
+    //   console.log(values);
+    //   // values.createdUser = values.currentUser;
+    //   // values.updatedUser = values.currentUser;
+    //   cb();
+    // }
 };

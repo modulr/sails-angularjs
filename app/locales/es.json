@@ -1,274 +1,275 @@
 {
+  "LANGUAGE": "Lenguaje",
+
+  "ENGLISH": "Ingles",
+  "SPANISH": "Español",
+
+  "LOGIN": {
+    "LOGIN": "Iniciar sesión",
+    "EMAILORUSERNAME": "Correo electrónico o nombre de usuario",
+    "PASSWORD": "Contraseña",
+    "REMEMBERME": "Recordar mis datos",
+    "FORGOTPASSWORD": "¿Olvidaste tu contraseña?",
+    "MESSAGES": {
+      "ERROR404": "El correo electrónico y/o el nombre de usuario no están registrados o la cuenta esta desactivada",
+      "ERROR400": "La contraseña no coincide con el correo electrónico y/o el nombre de usuario, inténtalo de nuevo."
+    }
+  },
+
+  "SIGNUP": {
+    "SIGNUP": "Regístrate",
+    "EMAIL": "Correo electrónico",
+    "USERNAME": "Nombre de usuario",
+    "PASSWORD": "@:LOGIN.PASSWORD",
+    "REPASSWORD": "Repite la Contraseña",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Confirma tu correo dirección de electronico",
+        "PARAGRAPH": "Enviamos un mensaje de confirmación a tu correo electronico.",
+        "NOTE": "Si no ves el correo electrónico en tu bandeja de entrada, revisa otros lugares donde podría estar, como tus carpetas de papelera, correo no deseado u otras carpetas."
+      },
+      "ERROR": "El correo electrónico y/o el nombre de usuario <strong>{{emailOrUsername}}</strong> ya están registrados, intenta con otro."
+    }
+  },
+
+  "CONFIRM-EMAIL": {
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Te has registrado correctamente",
+        "PARAGRAPH": "Tu cuenta ya esta activa, ahora puedes acceder a Modulr."
+      }
+    }
+  },
+
+  "BEGIN-PASSWORD-RESET": {
+    "HEADLINE": "Encuentra tu cuenta",
+    "PARAGRAPH": "Ingresa tu correo electrónico o nombre de usuario",
+    "EMAILORUSERNAME": "@:LOGIN.EMAILORUSERNAME",
+    "BTN": "Buscar",
+    "MESSAGES": {
+      "ERROR": "@:LOGIN.MESSAGES.ERROR404"
+    }
+  },
+
+  "SEND-PASSWORD-RESET": {
+    "HEADLINE": "Restablece tu contraseña",
+    "PARAGRAPH": "Hemos encontrado la siguiente información asociada a tu cuenta.",
+    "PARAGRAPH2": "Enviar un enlace por correo electrónico a ",
+    "BTN": "Continuar",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Revisa tu correo electrónico",
+        "PARAGRAPH": "Enviamos un mensaje con los pasos para recuperar tu contraseña a tu correo electrónico.",
+        "NOTE": "@:SIGNUP.MESSAGES.SUCCESS.NOTE",
+        "LINK": "No he recibido el correo electrónico"
+      }
+    }
+  },
+
+  "PASSWORD-RESET": {
+    "HEADLINE": "@:SEND-PASSWORD-RESET.HEADLINE",
+    "PASSWORD": "@:LOGIN.PASSWORD",
+    "REPASSWORD": "@:SIGNUP.REPASSWORD",
+    "BTN": "Restablecer",
+    "MESSAGES": {
+      "SUCCESS": {
+        "HEADLINE": "Contraseña actualizada",
+        "PARAGRAPH": "La contraseña se actualizo correctamente, ya puedes iniciar sesion."
+      }
+    }
+  },
+
+  "LOGOUT": "Salir",
+
+  "DASHBOARD": "Dashboard",
+  "SETTINGS": "Configuración",
+  "CONFIGURATION": "Configuración",
+  "ACCESS": "Accesos",
+  "MODULES": "Modulos",
+  "AUTHORIZATION": "Autorizacion",
+
+  "SEARCH": "Buscar",
+  "CREATE": "Crear",
+  "SAVE": "Guardar",
+  "EDIT": "Editar",
+  "DELETE": "Borrar",
+  "CANCEL": "Cancelar",
+  "CLOSE": "Cerrar",
+  "SEND": "Enviar",
+  "ADD": "Agregar",
+  "UPLOAD": "Subir",
+  "DRAGORCLICK": "Arrastra o haz click",
+
+  "MESSAGES": {
+    "SUCCESS": "Los datos se actualizaron correctamente."
+  },
+
+  "CHAT": {
+    "CONTACTS": "Contactos",
+    "MESSAGE": "Mensaje",
+    "LOADMORE": "Cargar más"
+  },
+
+  "USERS": {
+    "USERS": "Usuarios",
+    "USER": "Usuario",
+    "ACTIVE": "Activo",
+    "DEACTIVE": "Desactivo",
+    "ACTIVATE": "Activar",
+    "DEACTIVATE": "Desactivar",
+    "USERNAME": "Nombre de usuario",
+    "EMAIL": "Correo electrónico",
+    "DATE": "Fecha",
+    "INFORMATION": "Información",
+    "NEWUSER": "Usuario Nuevo",
+    "EDITUSER": "Editar Usuario",
+    "PASSWORD": "Contraseña",
+    "CHANGEPASSWORD": "Cambiar Contraseña",
+    "ROLE": "Rol",
+    "ROLECUSTOM": "Rol personalizado",
+    "GENERATE": "Generar",
+    "MESSAGES": {
+      "CREATE": {
+        "SUCCESS": "El usuario se creo correctamente.",
+        "ERROR": "El correo electrónico y/o el nombre de usuario <strong>{{emailOrUsername}}</strong> ya están registrados, intenta con otro."
+      },
+      "ACTIVATE": {
+        "SUCCESS": "El usuario se activo correctamente."
+      },
+      "DEACTIVATE": {
+        "SUCCESS": "El usuario se desactivo correctamente."
+      },
+      "DELETE": {
+        "CONFIRM": "<b>¿Estas seguro en eliminar al usuario?</b> <br><br> Si el usuario tiene alguna relación con otra tabla se romperán y la base de datos podrá ser inconsistente.",
+        "SUCCESS": "El usuario se elimino correctamente."
+      },
+      "SEND-USER-DATA": {
+        "SUCCESS": "La información se envio correctamente.",
+        "ERROR": "El usuario debe de estar activo para poder enviar la información."
+      },
+      "ACTIVATES": {
+        "SUCCESS": "Los usuarios se activaron correctamente."
+      },
+      "DEACTIVATES": {
+        "SUCCESS": "Los usuarios se desactivaron correctamente."
+      },
+      "DELETES": {
+        "SUCCESS": "Los usuarios se eliminaron correctamente."
+      }
+    }
+  },
+
+  "PROFILE": {
+    "PROFILE": "Perfil",
+
+    "NAME": "Nombre",
+    "LASTNAME": "Apellido",
+    "MEMBERSINCE": "miembro desde",
+    "PHOTO": "Foto",
+    "PHOTOS": "Fotos",
+
+    "INFORMATION": "Información",
+    "PERSONAL": "Personal",
+    "GENDER": "Sexo",
+    "BIRTHDAY": "Fecha de nacimiento",
+    "RELATIONSHIP": "Estado civil",
+    "PLACES": "Lugares",
+    "ADRESS": "Dirección",
+    "CURRENTLY": "Actual",
+    "FAMILY": "Familia",
+    "RELATION": "Relation",
+    "CONTACT": "Contacto",
+    "TYPE": "Tipo",
+    "EDUCATION": "Educación",
+    "SCHOOLNAME": "Escuela",
+    "MAJOR": "Estudios",
+    "STARTYEAR":  "Inicio",
+    "ENDYEAR":  "Fin",
+    "DESCRIPTION":  "Descripción",
+    "WORK": "Trabajo",
+    "JOB": "Ocupación",
+    "DEPARTMENT": "Departamento",
+    "COMPANY": "Empresa",
+    "NOTIFICATIONS": "Notificaciones",
+    "SETTINGS": "@:SETTINGS",
+    "ACCOUNT": "Cuenta",
+    "USERNAME": "Nombre de usuario",
+    "EMAIL": "Correo electrónico",
     "LANGUAGE": "Lenguaje",
-
-    "ENGLISH": "Ingles",
-    "SPANISH": "Español",
-
-    "LOGIN": {
-        "LOGIN": "Iniciar sesión",
-        "EMAILORUSERNAME": "Correo electrónico o nombre de usuario",
-        "PASSWORD": "Contraseña",
-        "REMEMBERME": "Recordar mis datos",
-        "FORGOTPASSWORD": "¿Olvidaste tu contraseña?",
-        "MESSAGES": {
-            "ERROR404": "El correo electrónico y/o el nombre de usuario no están registrados o la cuenta esta desactivada",
-            "ERROR400": "La contraseña no coincide con el correo electrónico y/o el nombre de usuario, inténtalo de nuevo."
-        }
-    },
-
-    "SIGNUP": {
-        "SIGNUP": "Regístrate",
-        "EMAIL": "Correo electrónico",
-        "USERNAME": "Nombre de usuario",
-        "PASSWORD": "@:LOGIN.PASSWORD",
-        "REPASSWORD": "Repite la Contraseña",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Confirma tu correo dirección de electronico",
-                "PARAGRAPH": "Enviamos un mensaje de confirmación a tu correo electronico.",
-                "NOTE": "Si no ves el correo electrónico en tu bandeja de entrada, revisa otros lugares donde podría estar, como tus carpetas de papelera, correo no deseado u otras carpetas."
-            },
-            "ERROR": "El correo electrónico y/o el nombre de usuario <strong>{{emailOrUsername}}</strong> ya están registrados, intenta con otro."
-        }
-    },
-
-    "CONFIRM-EMAIL": {
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Te has registrado correctamente",
-                "PARAGRAPH": "Tu cuenta ya esta activa, ahora puedes acceder a Modulr."
-            }
-        }
-    },
-
-    "BEGIN-PASSWORD-RESET": {
-        "HEADLINE": "Encuentra tu cuenta",
-        "PARAGRAPH": "Ingresa tu correo electrónico o nombre de usuario",
-        "EMAILORUSERNAME": "@:LOGIN.EMAILORUSERNAME",
-        "BTN": "Buscar",
-        "MESSAGES": {
-            "ERROR": "@:LOGIN.MESSAGES.ERROR404"
-        }
-    },
-
-    "SEND-PASSWORD-RESET": {
-        "HEADLINE": "Restablece tu contraseña",
-        "PARAGRAPH": "Hemos encontrado la siguiente información asociada a tu cuenta.",
-        "PARAGRAPH2": "Enviar un enlace por correo electrónico a ",
-        "BTN": "Continuar",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Revisa tu correo electrónico",
-                "PARAGRAPH": "Enviamos un mensaje con los pasos para recuperar tu contraseña a tu correo electrónico.",
-                "NOTE": "@:SIGNUP.MESSAGES.SUCCESS.NOTE",
-                "LINK": "No he recibido el correo electrónico"
-            }
-        }
-    },
-
-    "PASSWORD-RESET": {
-        "HEADLINE": "@:SEND-PASSWORD-RESET.HEADLINE",
-        "PASSWORD": "@:LOGIN.PASSWORD",
-        "REPASSWORD": "@:SIGNUP.REPASSWORD",
-        "BTN": "Restablecer",
-        "MESSAGES": {
-            "SUCCESS": {
-                "HEADLINE": "Contraseña actualizada",
-                "PARAGRAPH": "La contraseña se actualizo correctamente, ya puedes iniciar sesion."
-            }
-        }
-    },
-
-    "LOGOUT": "Salir",
-
-    "DASHBOARD": "Dashboard",
-    "SETTINGS": "Configuración",
-    "CONFIGURATION": "Configuración",
-    "ACCESS": "Accesos",
-    "MODULES": "Modulos",
-    "AUTHORIZATION": "Autorizacion",
-
-    "SEARCH": "Buscar",
-    "CREATE": "Crear",
-    "SAVE": "Guardar",
-    "EDIT": "Editar",
-    "DELETE": "Borrar",
-    "CANCEL": "Cancelar",
-    "CLOSE": "Cerrar",
-    "SEND": "Enviar",
-    "ADD": "Agregar",
-    "UPLOAD": "Subir",
-    "DRAGORCLICK": "Arrastra o haz click",
+    "DEACTIVATEACCOUNT": "Desactivar Cuenta",
+    "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
+    "OLDPASSWORD": "Contraseña actual",
+    "PASSWORD": "Contraseña",
+    "REPASSWORD": "Repite la contraseña",
 
     "MESSAGES": {
-        "SUCCESS": "Los datos se actualizaron correctamente."
-    },
-
-    "CHAT": {
-        "CONTACTS": "Contactos",
-        "MESSAGE": "Mensaje",
-        "LOADMORE": "Cargar más"
-    },
-
-    "USERS": {
-        "USERS": "Usuarios",
-        "USER": "Usuario",
-        "ACTIVE": "Activo",
-        "DEACTIVE": "Desactivo",
-        "ACTIVATE": "Activar",
-        "DEACTIVATE": "Desactivar",
-        "USERNAME": "Nombre de usuario",
-        "EMAIL": "Correo electrónico",
-        "DATE": "Fecha",
-        "INFORMATION": "Información",
-        "NEWUSER": "Usuario Nuevo",
-        "EDITUSER": "Editar Usuario",
-        "PASSWORD": "Contraseña",
-        "CHANGEPASSWORD": "Cambiar Contraseña",
-        "ROLE": "Rol",
-        "ROLECUSTOM": "Rol personalizado",
-        "GENERATE": "Generar",
-        "MESSAGES": {
-            "CREATE": {
-                "SUCCESS": "El usuario se creo correctamente.",
-                "ERROR": "El correo electrónico y/o el nombre de usuario <strong>{{emailOrUsername}}</strong> ya están registrados, intenta con otro."
-            },
-            "ACTIVATE": {
-                "SUCCESS": "El usuario se activo correctamente."
-            },
-            "DEACTIVATE": {
-                "SUCCESS": "El usuario se desactivo correctamente."
-            },
-            "DELETE": {
-                "CONFIRM": "<b>¿Estas seguro en eliminar al usuario?</b> <br><br> Si el usuario tiene alguna relación con otra tabla se romperán y la base de datos podrá ser inconsistente.",
-                "SUCCESS": "El usuario se elimino correctamente."
-            },
-            "SEND-USER-DATA": {
-                "SUCCESS": "La información se envio correctamente.",
-                "ERROR": "El usuario debe de estar activo para poder enviar la información."
-            },
-            "ACTIVATES": {
-                "SUCCESS": "Los usuarios se activaron correctamente."
-            },
-            "DEACTIVATES": {
-                "SUCCESS": "Los usuarios se desactivaron correctamente."
-            },
-            "DELETES": {
-                "SUCCESS": "Los usuarios se eliminaron correctamente."
-            }
+      "ACCOUNT": {
+        "ERROR": "El nombre de usuario <strong>{{username}}</strong> ya esta registrado, intenta con otro."
+      },
+      "DEACTIVATEACCOUNT": {
+        "CONFIRM": {
+          "TEXT": "¿Estas seguro que quieres desactivar la cuenta?",
+          "BTNACCEPT": "Aceptar",
+          "BTNCANCEL": "Cancelar"
+        },
+        "SUCCESS": "La cuenta se desactivo correctamente."
+      },
+      "EMAIL-CHANGE": {
+        "INFO": "Enviamos un mensaje de confirmación a <strong>{{email}}</strong>. Por favor confirma esta direccion de correo electrónico para completar el cambio de correo electrónico.",
+        "SUCCESS": {
+          "HEADLINE": "Tu correo electrónico se cambio correctamente.",
+          "PARAGRAPH": "Ahora tu cuenta esta asociada a este correo electrónico "
         }
-    },
+      },
+      "CHANGEPASSWORD": {
+        "SUCCESS": "La contraseña se cambio correctamente.",
+        "ERROR": "La contraseña actual no coincide."
+      }
+    }
+  },
 
-    "PROFILE": {
-        "PROFILE": "Perfil",
+  "ROLES": {
+    "ROLES": "Roles",
+    "DESCRIPTION": "Descripción",
+    "ROLE": "@:USERS.ROLE",
+    "DATE": "@:USERS.DATE",
+    "NEWROLE": "Nuevo Rol",
+    "EDITROLE": "Editar Rol",
+    "USEDROLE": "usuarios usan este rol",
+    "MESSAGES": {
+      "DELETE": {
+        "ERROR": "Este rol esta asignado a uno o varios usuarios, para poder eliminar el rol es necesario que ningun usuario tenga asignado este rol."
+      }
+    }
+  },
 
-        "NAME": "Nombre",
-        "LASTNAME": "Apellido",
-        "MEMBERSINCE": "miembro desde",
-        "PHOTO": "Foto",
-        "PHOTOS": "Fotos",
+  "MALE": "Hombre",
+  "FEMALE": "Mujer",
 
-        "INFORMATION": "Información",
-        "PERSONAL": "Personal",
-        "GENDER": "Sexo",
-        "BIRTHDAY": "Fecha de nacimiento",
-        "RELATIONSHIP": "Estado civil",
-        "PLACES": "Lugares",
-        "ADRESS": "Dirección",
-        "CURRENTLY": "Actual",
-        "FAMILY": "Familia",
-        "RELATION": "Relation",
-        "CONTACT": "Contacto",
-        "TYPE": "Tipo",
-        "EDUCATION": "Educación",
-        "SCHOOLNAME": "Escuela",
-        "MAJOR": "Estudios",
-        "STARTYEAR":  "Inicio",
-        "ENDYEAR":  "Fin",
-        "DESCRIPTION":  "Descripción",
-        "WORK": "Trabajo",
-        "JOB": "Ocupación",
-        "DEPARTMENT": "Departamento",
-        "COMPANY": "Empresa",
-        "NOTIFICATIONS": "Notificaciones",
-        "SETTINGS": "@:SETTINGS",
-        "ACCOUNT": "Cuenta",
-        "USERNAME": "Nombre de usuario",
-        "EMAIL": "Correo electrónico",
-        "LANGUAGE": "Lenguaje",
-        "DEACTIVATEACCOUNT": "Desactivar Cuenta",
-        "CHANGEPASSWORD": "@:USERS.CHANGEPASSWORD",
-        "OLDPASSWORD": "Contraseña actual",
-        "PASSWORD": "Contraseña",
-        "REPASSWORD": "Repite la contraseña",
+  "SINGLE": "Soltero",
+  "MARRIED": "Casado",
+  "COMMITTED": "Comprometido",
+  "SEPARATE": "Separado",
+  "DIVORCED": "Divorciado",
+  "WIDOWER": "Viudo",
 
-        "MESSAGES": {
-            "ACCOUNT": {
-                "ERROR": "El nombre de usuario <strong>{{username}}</strong> ya esta registrado, intenta con otro."
-            },
-            "DEACTIVATEACCOUNT": {
-                "CONFIRM": {
-                    "TEXT": "¿Estas seguro que quieres desactivar la cuenta?",
-                    "BTNACCEPT": "Aceptar",
-                    "BTNCANCEL": "Cancelar"
-                },
-                "SUCCESS": "La cuenta se desactivo correctamente."
-            },
-            "EMAIL-CHANGE": {
-                "INFO": "Enviamos un mensaje de confirmación a <strong>{{email}}</strong>. Por favor confirma esta direccion de correo electrónico para completar el cambio de correo electrónico.",
-                "SUCCESS": {
-                    "HEADLINE": "Tu correo electrónico se cambio correctamente.",
-                    "PARAGRAPH": "Ahora tu cuenta esta asociada a este correo electrónico "
-                }
-            },
-            "CHANGEPASSWORD": {
-                "SUCCESS": "La contraseña se cambio correctamente.",
-                "ERROR": "La contraseña actual no coincide."
-            }
-        }
-    },
+  "PHONE": "Teléfono",
+  "EMAIL": "Correo electrónico",
 
-    "ROLES": {
-        "ROLES": "Roles",
-        "ROLE": "@:USERS.ROLE",
-        "DATE": "@:USERS.DATE",
-        "NEWROLE": "Nuevo Rol",
-        "EDITROLE": "Editar Rol",
-        "USEDROLE": "usuarios usan este rol",
-        "MESSAGES": {
-            "DELETE": {
-                "ERROR": "Este rol esta asignado a uno o varios usuarios, para poder eliminar el rol es necesario que ningun usuario tenga asignado este rol."
-            }
-        }
-    },
-
-    "MALE": "Hombre",
-    "FEMALE": "Mujer",
-
-    "SINGLE": "Soltero",
-    "MARRIED": "Casado",
-    "COMMITTED": "Comprometido",
-    "SEPARATE": "Separado",
-    "DIVORCED": "Divorciado",
-    "WIDOWER": "Viudo",
-
-    "PHONE": "Teléfono",
-    "EMAIL": "Correo electrónico",
-
-    "LOG": {
-        "LOG": "Registro",
-        "BROWSER": "Navegador",
-        "OS": "SO",
-        "USERS": "Usuarios",
-        "USER": "Usuario",
-        "DEVICE": "Dispositivo",
-        "DATE": "@:USERS.DATE",
-        "METHOD": "Método",
-        "TIME": "Tiempo",
-        "PARAMETERS": "Parametros",
-        "RESPONSETIME": "Tiempo de respuesta",
-        "MIDDLEWARELATENCY": "Latencia de middleware"
-    },
-    "REQUEST": "Peticiones"
+  "LOG": {
+    "LOG": "Registro",
+    "BROWSER": "Navegador",
+    "OS": "SO",
+    "USERS": "Usuarios",
+    "USER": "Usuario",
+    "DEVICE": "Dispositivo",
+    "DATE": "@:USERS.DATE",
+    "METHOD": "Método",
+    "TIME": "Tiempo",
+    "PARAMETERS": "Parametros",
+    "RESPONSETIME": "Tiempo de respuesta",
+    "MIDDLEWARELATENCY": "Latencia de middleware"
+  },
+  "REQUEST": "Peticiones"
 
 }

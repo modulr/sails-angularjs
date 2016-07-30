@@ -15,7 +15,7 @@
                 setAuthorizations: '=',
                 getAuthorizations: '='
             },
-            templateUrl: 'app/users/roleAuthorizations.html'
+            templateUrl: 'app/roles/roleAuthorizations.html'
         };
         return directive;
 

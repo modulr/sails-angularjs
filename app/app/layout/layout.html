@@ -38,7 +38,7 @@
 
         <li class="dropdown">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-bell-o fa-2x"></i>
+                <i class="fa fa-bell-o fa-lg"></i>
                 <span class="label label-danger animated tada">29</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-right">
@@ -52,7 +52,7 @@
         </li>
         <li>
             <a href="" ng-click="class.chat=!class.chat">
-                <i class="fa fa-comments-o fa-2x"></i>
+                <i class="fa fa-comments-o fa-lg"></i>
                 <span class="label label-danger animated tada" ng-if="notifications.chat > 0"> {{ notifications.chat }}</span>
             </a>
         </li>
@@ -66,10 +66,10 @@
                     <p>{{user.username}}<small>{{user.email}}</small></p>
                 </li>
                 <li class="userData-body">
-                    <a href="" data-toggle="tooltip" data-placement="top" title='To Do'><i class="fa fa-list fa-lg"></i></a>
-                    <a href="" data-toggle="tooltip" data-placement="top" title='Calendar'><i class="fa fa-calendar fa-lg"></i></a>
-                    <a href="" data-toggle="tooltip" data-placement="top" title='Mark'><i class="fa fa-bookmark-o fa-lg"></i></a>
-                    <a href="" data-toggle="tooltip" data-placement="top" title='Settings'><i class="fa fa-cog fa-lg"></i></a>
+                    <a href="" tooltip data-placement="top" title='To Do'><i class="fa fa-list fa-lg"></i></a>
+                    <a href="" tooltip data-placement="top" title='Calendar'><i class="fa fa-calendar fa-lg"></i></a>
+                    <a href="" tooltip data-placement="top" title='Mark'><i class="fa fa-bookmark-o fa-lg"></i></a>
+                    <a href="" tooltip data-placement="top" title='Settings'><i class="fa fa-cog fa-lg"></i></a>
                 </li>
                 <li class="userData-footer">
                     <div class="pull-left">
@@ -85,11 +85,15 @@
     </ul><!-- /.nav .nav-pills -->
 </header>
 
-<nav role="navigation" ng-class="class.layout" ng-click="class.chat=false">
+<nav role="navigation" ng-class="class.layout">
     <ul class="nav nav-pills nav-stacked">
-        <li ng-repeat="item in modules | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active">
+        <li ng-repeat="item in navigation | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active">
             <a href="" ui-sref="{{item.state}}">
-                <i class="fa {{item.icon}} fa-lg fa-fw"></i>
+                <!-- <i class="fa {{item.icon}} fa-lg fa-fw"></i> -->
+                <span class="fa-stack fa-lg fa-fw">
+                  <i class="fa fa-circle fa-stack-2x"></i>
+                  <i class="fa {{item.icon}} fa-stack-1x"></i>
+                </span>
                 <span class="text-capitalize">{{item.title}}</span>
             </a>
         </li>
@@ -100,7 +104,7 @@
     <div ng-include="'app/chat/chat.html'"></div>
 </aside>
 
-<section ng-class="class.layout" ng-click="class.chat=false">
+<section ng-class="class.layout" ng-click="close()">
     <ul class="nav nav-tabs sections" ng-if="sections.length > 0">
         <li ng-repeat="item in sections" ui-sref-active="active">
             <a href="" ui-sref="{{item.state}}">{{item.title}}</a>

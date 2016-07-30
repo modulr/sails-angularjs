@@ -1,0 +1,46 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th></th>
+      <th class="text-right">Tamaño</th>
+      <th class="text-right">Creación</th>
+      <th class="text-right">Modificación</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="file in foldersFiles track by $index">
+
+      <td ng-if="!file.type">
+        <a href="" ng-click="openFolder(file)" title="{{file.name}}">
+          <span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>
+          {{file.name | limitTo : 35}}
+          <span ng-if="file.name.length > 35">...</span>
+        </a>
+      </td>
+      <td ng-if="file.type">
+        <a href="{{home.storage}}/{{file.item}}/{{file.file}}" data-mfp-src="{{home.storage}}/{{file.item}}/{{file.file}}" class="image-link" ng-if="file.image" title="{{file.name}}">
+          <span class="glyphicon glyphicon-picture" aria-hidden="true"></span>
+          {{file.name | limitTo : 35}}
+          <span ng-if="file.name.length > 35">...</span>
+        </a>
+        <a href="{{home.storage}}/{{file.item}}/{{file.file}}" target="_blank" ng-if="!file.image" title="{{file.name}}">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          {{file.name | limitTo : 35}}
+          <span ng-if="file.name.length > 35">...</span>
+        </a>
+      </td>
+      <td>
+        <a href="{{home.storage}}/{{file.item}}/{{file.file}}" target="_blank" download="{{file.name}}" class="btn-edit">
+          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+        </a>
+        <a href="" class="btn-edit" ng-click="edit(file, $index)">
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </a>
+      </td>
+      <td class="text-right"><small>{{file.size}}</small></td>
+      <td class="text-right"><small>{{file.createdAt | amDateFormat:'DD/MMM/YYYY'}}</small></td>
+      <td class="text-right"><small>{{file.updatedAt | amDateFormat:'DD/MMM/YYYY'}}</small></td>
+    </tr>
+  </tbody>
+</table>

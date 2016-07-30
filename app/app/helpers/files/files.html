@@ -1,0 +1,100 @@
+<div class="row files">
+  <div class="col-sm-8">
+    <ol class="breadcrumb">
+      <li ng-repeat="item in breadcrumb track by $index">
+        <a href="" ng-click="openFolder(item)">{{item.name}}</a>
+        <!-- <span ng-if="$last">{{item.name}}</span> -->
+      </li>
+    </ol>
+  </div>
+  <div class="col-sm-4 text-right">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalUpload_{{$id}}" tooltip tooltip-placement="top" data-title="Subir">
+        <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalFolder_{{$id}}" tooltip tooltip-placement="top" data-title="Crear">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+      <button type="button" class="btn btn-default" ng-click="toggleLayout()">
+        <span class="glyphicon" aria-hidden="true" ng-class="{'glyphicon-th-list': layout=='list', 'glyphicon-th': layout=='grid' }"></span>
+      </button>
+    </div>
+  </div>
+  <div class="col-sm-12 files">
+    <div ng-hide="loading" ng-include src="'app/helpers/files/'+ layout + '.html'"></div>
+    <div ng-show="loading" class="text-center">Loading...</div>
+  </div>
+</div><!-- /.row -->
+
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Modals
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<!-- Upload file -->
+<div class="modal fade bs-example-modal-lg" id="modalUpload_{{$id}}">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Upload file</h4>
+      </div>
+      <div class="modal-body">
+        <mdr-file url="{{uploadUrl}}" headers="uploadHeaders" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Update file -->
+<div class="modal fade" id="modalEdit_{{$id}}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Editar archivo</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formEdit_{{$id}}">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" class="form-control" placeholder="nombre del archivo" ng-model="formEdit.name" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" ng-click="delete($event)">Eliminar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="save($event)">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Create folder -->
+<div class="modal fade" id="modalFolder_{{$id}}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar carpeta</h4>
+      </div>
+      <div class="modal-body">
+        <form id="formFolder_{{$id}}">
+          <div class="form-group">
+            <label >Nombre de la carpeta</label>
+            <input type="text" class="form-control" placeholder="My Folder" ng-model="formFolder.name" required>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" ng-click="createFolder($event)">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>

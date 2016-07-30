@@ -17,12 +17,8 @@ nav {
         width: 60px;
         @include transition(all .2s ease);
 
-        ul.nav li a {
-            padding-left: 20px;
-        }
-
-        ul.nav li a span{
-            margin-left: 25px;
+        ul.nav li a .text-capitalize{
+            margin-left: 20px;
         }
     }
 
@@ -39,8 +35,6 @@ nav {
             a {
                 color: $gray-dark-10;
                 border-radius: 0;
-                padding: 10px 25px;
-                border-left: 4px solid transparent;
 
                 &.active,
                 &:hover,
@@ -48,17 +42,20 @@ nav {
                     background-color: transparent;
                 }
 
-                &:hover i{
-                    color: $orange;
+                &:hover .fa-stack .fa-circle{
+                    color: $gray-light-30;
                 }
 
-                i {
+                .fa-stack {
                     @include transition(all .2s ease);
+                    .fa-circle {
+                      color: transparent;
+                    }
                 }
 
-                span{
+                .text-capitalize{
                     font-size: 14px;
-                    margin-left: 10px;
+                    margin-left: 5px;
                     @include transition(all .2s ease);
                 }
 
@@ -69,9 +66,11 @@ nav {
             &.active a:focus{
                 background-color: transparent;
                 color: $gray-dark-10;
-                border-left: 4px solid $orange;
-                i{
+                .fa-stack .fa-circle {
                     color: $orange;
+                };
+                .fa-stack .fa-stack-1x {
+                    color: $gray-light-35;
                 }
             }
         }
