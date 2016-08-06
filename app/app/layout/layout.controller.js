@@ -16,7 +16,7 @@
 
     $scope.navigation = [];
     $scope.breadcrumbs = [];
-    $scope.sections = [];
+    $scope.submodules = [];
 
     /*
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -31,7 +31,7 @@
         }
       });
 
-      setSections();
+      setSubmodules();
 
       setBreadcrumbs();
 
@@ -66,16 +66,16 @@
       // });
     }
 
-    function setSections()
+    function setSubmodules()
     {
       var urlArray = $state.current.url.replace('^', '').substr(1).split('/');
 
-      $scope.sections = [];
+      $scope.submodules = [];
 
       $rootScope.modules.forEach(function(v, k) {
         //if (v.state == $state.current.name) {
         if (v.title == urlArray[0]) {
-          $scope.sections = v.sections;
+          $scope.submodules = v.children;
         }
       });
     }
@@ -140,9 +140,9 @@
     |   Watch & Calls
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
-    // Si cambia el state se crea sections y breadcrumb
+    // Si cambia el state se crea submodules y breadcrumb
     $rootScope.$on('$stateChangeSuccess', function() {
-      setSections();
+      setSubmodules();
       setBreadcrumbs();
     });
 

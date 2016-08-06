@@ -1,53 +1,53 @@
 .table{
-    thead{
-        tr{
-            &.active{
-                td, th{
-                    background-color: inherit;
-                }
-            }
-            td, th{
-                &.active{
-                    background-color: inherit;
-                }
-            }
+  thead{
+    tr{
+      &.active{
+        td, th{
+          background-color: inherit;
         }
-    }
-    tbody{
-        tr{
-            position: relative;
-            td{
-                &.avatar{
-                    padding: 5px 8px;
-                    img{
-                        width: 25px;
-                        height: 25px;
-                    }
-                }
-                &.btn-edit {
-                    position: absolute;
-                    padding: 0;
-                    border: none;
-                    margin-top: 2px;
-                    right: 15px;
-                    a {
-                        @include opacity(0);
-                        color: $gray;
-
-                        &:hover {
-                            color: $blue;
-                        }
-                    }
-                }
-            }
-            &:hover .btn-edit a{
-                @include opacity(1);
-            }
-            &.selected{
-                background-color: $blue-light-10;
-                color: $white;
-            }
+      }
+      td, th{
+        &.active{
+          background-color: inherit;
         }
-
+      }
     }
+  }
+  tbody{
+    tr{
+      position: relative;
+      td{
+        &.avatar{
+          padding: 5px 8px;
+          img{
+            width: 25px;
+            height: 25px;
+          }
+        }
+        &.btn-edit {
+          position: absolute;
+          padding: 0;
+          border: none;
+          margin-top: 2px;
+          right: 15px;
+          a {
+            @include opacity(0);
+            color: $gray;
+
+            &:hover {
+              color: $blue;
+            }
+          }
+        }
+      }
+      &:hover .btn-edit a{
+        @include opacity(1);
+      }
+      &.selected{
+        background-color: $blue-light-10;
+        color: $white;
+      }
+    }
+
+  }
 }

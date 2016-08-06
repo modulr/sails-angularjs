@@ -16,7 +16,7 @@
         */
         function getModules()
         {
-            restFulService.get('module/navSettings')
+            restFulService.get('module/all')
             .then(function(response){
                 $scope.modules = response;
             });

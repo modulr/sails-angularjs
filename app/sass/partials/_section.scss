@@ -1,29 +1,29 @@
 section{
-    position: absolute;
-    top: 60px;
-    right: 0;
-    bottom: 0;
-    left: 230px;
-    background: $gray-light-35;
-    overflow-y: auto;
-    overflow-x: hidden;
-    @include transition(all .2s ease);
+  position: absolute;
+  top: 60px;
+  right: 0;
+  bottom: 0;
+  left: 230px;
+  background: $gray-light-35;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  @include transition(all .2s ease);
 
-    &.min{
-        left: 60px;
-    }
+  &.min{
+    left: 60px;
+  }
 
-    &::-webkit-scrollbar {
-        width: 5px;
-    }
-    &::-webkit-scrollbar-thumb {
-        background: $gray;
-    }
-    &::-webkit-scrollbar-thumb:window-inactive {
-        background: rgba($black, 0.4);
-    }
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $gray;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba($black, 0.4);
+  }
 
-    .page > .row:first-child {
-        margin-top: 20px;
-    }
+  .page > .row:first-child {
+    margin-top: 20px;
+  }
 }

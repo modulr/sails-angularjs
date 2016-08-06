@@ -9,12 +9,11 @@
 
     return {
       restrict: 'E',
-      require: 'ngModel',
+      //require: 'ngModel',
       scope: {
-        files: '=ngModel',
-        filesUrl: '@',
-        uploadUrl: '@',
-        uploadHeaders: '=',
+        //files: '=ngModel',
+        folderId: '@',
+        item: '=',
         uploadSize: '=',
         uploadLimit: '=',
         uploadFormats: '=',
@@ -23,7 +22,10 @@
         uploadText: '@'
       },
       templateUrl: 'app/helpers/files/files.html',
-      controller: ['$rootScope', '$scope', 'restFulService', function($rootScope, $scope, restFulService){
+      controller: ['$rootScope', '$scope', 'restFulService', 'config', function($rootScope, $scope, restFulService, config){
+
+        $scope.urlAPI = config.urlAPI;
+        $scope.token = localStorage.getItem('token');
 
         $scope.layout = 'list';
         $scope.home = {};
@@ -79,7 +81,6 @@
           } else {
             $scope.formEdit.editUrl = 'folder';
           }
-          console.log($scope.formEdit);
         };
 
         $scope.save = function(event)
@@ -170,14 +171,16 @@
         * watch
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
-        $scope.$watch('filesUrl', function(nv, ov) {
+        $scope.$watch('item', function(nv, ov) {
           if (nv !== undefined && nv !== null) {
-            restFulService.get(nv)
+            restFulService.get('folder/byItem/' + $scope.folderId +'/'+ nv)
             .then(function(response) {
               $scope.loading = false;
               $scope.breadcrumb.push(response.home);
               $scope.foldersFiles = response.children;
               $scope.home = response.home;
+              $scope.home.item = nv;
+              $scope.home.currentFolderId = $scope.folderId;
             });
           }
         });

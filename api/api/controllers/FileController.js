@@ -13,7 +13,7 @@ module.exports = {
 
     var id = req.param('id');
 
-    sails.models.file.find({folder:id})
+    sails.models.file.find({folderId:id})
     .exec(function(err, result){
       if(err) return cb(err);
       res.json(result);
@@ -23,10 +23,9 @@ module.exports = {
 
   upload: function (req, res, cb) {
 
-    var id = req.param('id');
     var data = req.body;
 
-    var folder = sails.config.settings.STORAGE + data.url +'/'+ id;
+    var folder = sails.config.settings.STORAGE + data.url +'/'+ data.item;
 
     req.file('file').upload({
       // Save file into folder
@@ -40,7 +39,7 @@ module.exports = {
           name: file[0].filename,
           size: FileService.getHumanFileSize(file[0].size),
           type: file[0].type,
-          item: id,
+          item: data.item,
           folderId: data.currentFolderId,
           owner: req.token.id
         }).exec(function(err, file){

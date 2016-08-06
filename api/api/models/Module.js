@@ -40,13 +40,13 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
           roles: [],
           users: []
         },
-        write: {
+        readonly: {
           roles: [],
           users: []
         }
       }
     },
-    sections: {
+    children: {
       type: 'array',
       defaultsTo: []
     }

@@ -105,8 +105,8 @@
 </aside>
 
 <section ng-class="class.layout" ng-click="close()">
-    <ul class="nav nav-tabs sections" ng-if="sections.length > 0">
-        <li ng-repeat="item in sections" ui-sref-active="active">
+    <ul class="nav nav-tabs submodules" ng-if="submodules.length > 0">
+        <li ng-repeat="item in submodules" ui-sref-active="active">
             <a href="" ui-sref="{{item.state}}">{{item.title}}</a>
         </li>
     </ul>

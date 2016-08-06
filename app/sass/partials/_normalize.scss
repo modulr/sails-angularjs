@@ -49,6 +49,18 @@ a {
 * bg-color
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 */
+.bg-success{
+    background-color: $green;
+}
+.bg-primary{
+    background-color: $blue;
+}
+.bg-danger{
+    background-color: $red;
+}
+.bg-warning{
+    background-color: $yellow;
+}
 // .bg-primary, .bg-success, .bg-info, .bg-warning, .bg-danger{
 //     padding: 15px;
 // }

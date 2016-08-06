@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  all: function(req, res, cb) {
+  byItem: function(req, res, cb) {
 
     var id = req.param('id');
     var item = req.param('item');

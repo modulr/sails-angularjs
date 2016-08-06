@@ -1,4 +1,4 @@
-<div class="row files">
+<div class="row">
   <div class="col-sm-8">
     <ol class="breadcrumb">
       <li ng-repeat="item in breadcrumb track by $index">
@@ -20,6 +20,9 @@
       </button>
     </div>
   </div>
+</div>
+<hr>
+<div class="row files">
   <div class="col-sm-12 files">
     <div ng-hide="loading" ng-include src="'app/helpers/files/'+ layout + '.html'"></div>
     <div ng-show="loading" class="text-center">Loading...</div>
@@ -41,7 +44,7 @@
         <h4 class="modal-title">Upload file</h4>
       </div>
       <div class="modal-body">
-        <mdr-file url="{{uploadUrl}}" headers="uploadHeaders" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+        <mdr-file url="{{urlAPI}}/file/upload" headers="{authorization: token}" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

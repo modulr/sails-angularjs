@@ -8,10 +8,12 @@
     "active": true,
     "authorizations": {
       "access": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"],
+        "users": []
       },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
+      "readonly": {
+        "roles": ["56f964859093205f3a5fedb8"],
+        "users": []
       }
     }
   },
@@ -26,8 +28,8 @@
       "access": {
         "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
       },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
+      "readonly": {
+        "roles": ["56f964859093205f3a5fedb8"]
       }
     }
   },
@@ -41,12 +43,9 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
       }
     },
-    "sections": [
+    "children": [
       {
         "title": "login",
         "state": "layout.login"
@@ -67,11 +66,18 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
       }
-    }
+    },
+    "children": [
+      {
+        "title": "users",
+        "state": "layout.users"
+      },
+      {
+        "title": "roles",
+        "state": "layout.roles"
+      }
+    ]
   },
   {
     "title": "settings",
@@ -83,19 +89,12 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
       }
     },
-    "sections": [
+    "children": [
       {
         "title": "modules",
         "state": "layout.modules"
-      },
-      {
-        "title": "roles",
-        "state": "layout.roles"
       }
     ]
   }

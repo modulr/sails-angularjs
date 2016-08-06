@@ -64,7 +64,7 @@
 
     function getModules()
     {
-      restFulService.get('module/navSettings')
+      restFulService.get('module/all')
       .then(function(response){
         $scope.modules = response;
       });
@@ -205,16 +205,16 @@
     $scope.getUsers = function(row)
     {
       $scope.role = row;
-      $translate(['ROLES.DATE', 'USERS.USERNAME'])
+      $translate(['ROLES.DATE', 'USERS.USERNAME', 'USERS.FULLNAME'])
       .then(function (translations) {
         $scope.tableUsers = {
           "header": [
             {'avatar': ''},
             {'user': translations['USERS.USERNAME']},
-            {'createdAt': translations['ROLES.DATE']}
+            {'fullName': translations['USERS.FULLNAME']}
           ],
           "rows": row.users,
-          "sortBy": "createdAt",
+          "sortBy": "id",
           "sortOrder": "dsc"
         };
       });

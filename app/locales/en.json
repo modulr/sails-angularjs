@@ -118,6 +118,7 @@
     "ACTIVATE": "Activate",
     "DEACTIVATE": "Deactivate",
     "USERNAME": "Username",
+    "FULLNAME": "Name",
     "EMAIL": "Email",
     "DATE": "Date",
     "INFORMATION": "Information",

@@ -1,198 +1,185 @@
 aside {
-    position: fixed;
-    top: 60px;
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  right: -280px;
+  width: 280px;
+  background-color: $white;
+  border-left: 1px solid $gray-light-30;
+  z-index: 998;
+  @include transition(all .2s ease);
+  @include box-shadow(0 1px 2px 0 rgba($gray, 0.5));
+  &.open {
+    right: 0px;
+  }
+
+  .users {
+    position: absolute;
+    top: 0;
     bottom: 0;
-    right: -280px;
-    width: 280px;
-    background-color: $white;
-    border-left: 1px solid $gray-light-30;
-    z-index: 998;
-    @include transition(all .2s ease);
-    @include box-shadow(0 1px 2px 0 rgba($gray, 0.5));
-    &.open {
-        right: 0px;
+    left: 0;
+    right: 0;
+
+    .search {
+      margin: 7px 5px;
     }
 
-    .users {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+    .user-list {
+      position: absolute;
+      top: 47px;
+      bottom: 0;
+      margin-bottom: 0;
+      overflow-y: scroll;
+      overflow-x: hidden;
 
-        .search {
-            position: absolute;
-            top: 0;
-            border-bottom: 1px solid $gray-light-30;
+      .list-group-item {
+        border-left: none;
+        border-right: none;
+        border-top: 1px solid $gray-light-30;
+        border-bottom: 1px solid $gray-light-30;
+        color: $gray-dark-10;
 
-            .input-group-addon {
-                border: none;
-                color: $gray-light-20;
-            }
-            .form-control {
-                border: none;
-                padding-left: 0;
-                -webkit-box-shadow: none;
-                box-shadow: none;
-            }
-        }
-
-        .user-list {
-            position: absolute;
-            top: 47px;
-            bottom: 0;
-            margin-bottom: 0;
-            overflow-y: scroll;
-            overflow-x: hidden;
-
-            .list-group-item {
-                border-left: none;
-                border-right: none;
-                border-top: 1px solid $gray-light-30;
-                border-bottom: 1px solid $gray-light-30;
-                color: $gray-dark-10;
-
-                .media {
-                    .media-left {
-
-                        img {
-                            width: 40px;
-                            height: 40px;
-                            margin: 1px;
-                            border: 2px solid transparent;
-
-                            &.active {
-                                border: 2px solid $green;
-                            }
-                        }
-                    }
-                    .media-body {
-                        vertical-align: middle;
-
-                        p {
-                            margin-bottom: 0;
-
-                            .date {
-                                float: right;
-                            }
-                            .badge {
-                                float: right;
-                                margin-top: 5px;
-                                padding: 5px 3px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-
-    .messages {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 280px;
-        right: -280px;
-        z-index: 2;
-        @include transition(all .2s ease);
-
-        &.open {
-            left: 0px;
-            right: 0px;
-        }
-
-        > .btn {
-            position: absolute;
-            padding: 9px 10px;
-            top: 0;
-            left: 0;
-            text-align: left;
-            border: none;
-            border-bottom: 1px solid $gray-light-30;
-
-            .glyphicon {
-                padding-right: 10px;
-                margin-right: 5px;
-                border-right: 1px solid $gray-light-30;
-            }
+        .media {
+          .media-left {
 
             img {
-                width: 30px;
-                height: 30px;
-                margin-right: 5px;
-                border: 2px solid transparent;
+              width: 40px;
+              height: 40px;
+              margin: 1px;
+              border: 2px solid transparent;
 
-                &.active {
-                    border: 2px solid $green;
-                }
+              &.active {
+                border: 2px solid $green;
+              }
             }
+          }
+          .media-body {
+            vertical-align: middle;
 
+            p {
+              margin-bottom: 0;
+
+              .date {
+                float: right;
+              }
+              .badge {
+                float: right;
+                margin-top: 5px;
+                padding: 5px 3px;
+              }
+            }
+          }
         }
-        .list-group {
-            position: absolute;
-            top: 49px;
-            bottom: 35px;
-            left: 0;
-            width: 100%;
-            margin-bottom: 0;
-            padding: 0;
-            overflow-x: hidden;
-            overflow-y: scroll;
-            background-color: $white;
-
-            .list-group-item {
-                border: none;
-                padding: 5px;
-                background-color: transparent;
-
-                &.text-right {
-                    p {
-                        background-color: $gray-light-35;
-                        text-align: left;
-                    }
-                }
-
-                p {
-                    max-width: 80%;
-                    display: inline-block;
-                    padding: 5px 10px;
-                    border: 1px solid $gray-light-30;
-                    margin: 0;
-                    font-weight: lighter;
-                }
-
-            }
-        }
-        .input-group {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            border-top: 1px solid $gray-light-30;
-
-            .form-control {
-                border: none;
-            }
-            .btn {
-                border: none;
-                font-size: 16px;
-                padding-right: 20px !important;
-
-                &:hover, &:focus, &:active, &.active{
-                    background-color: $white;
-                    border-color: transparent;
-                }
-
-                &[disabled]
-                {
-                    background-color: $white;
-                    border-color: transparent;
-                }
-
-                i{
-                    color: $blue
-                }
-            }
-        }
+      }
     }
+  }
+
+
+  .messages {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 280px;
+    right: -280px;
+    z-index: 2;
+    @include transition(all .2s ease);
+
+    &.open {
+      left: 0px;
+      right: 0px;
+    }
+
+    > .btn {
+      position: absolute;
+      padding: 9px 10px;
+      top: 0;
+      left: 0;
+      text-align: left;
+      border: none;
+      border-bottom: 1px solid $gray-light-30;
+
+      .glyphicon {
+        padding-right: 10px;
+        margin-right: 5px;
+        border-right: 1px solid $gray-light-30;
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        border: 2px solid transparent;
+
+        &.active {
+          border: 2px solid $green;
+        }
+      }
+
+    }
+    .list-group {
+      position: absolute;
+      top: 49px;
+      bottom: 35px;
+      left: 0;
+      width: 100%;
+      margin-bottom: 0;
+      padding: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      background-color: $white;
+
+      .list-group-item {
+        border: none;
+        padding: 5px;
+        background-color: transparent;
+
+        &.text-right {
+          p {
+            background-color: $gray-light-35;
+            text-align: left;
+          }
+        }
+
+        p {
+          max-width: 80%;
+          display: inline-block;
+          padding: 5px 10px;
+          border: 1px solid $gray-light-30;
+          margin: 0;
+          font-weight: lighter;
+        }
+
+      }
+    }
+    .input-group {
+      position: absolute;
+      width: 96.5%;
+      bottom: 7px;
+      left: 5px;
+
+      .form-control {
+        border-right: none;
+        &:focus {
+          border-color: $gray-light-30;
+        }
+      }
+      .btn {
+        border-left: none;
+
+        &:hover, &:focus, &:active, &.active{
+          background-color: $white;
+        }
+
+        &[disabled]
+        {
+          background-color: $white;
+          border-color: transparent;
+        }
+
+        i{
+          color: $blue
+        }
+      }
+    }
+  }
 }

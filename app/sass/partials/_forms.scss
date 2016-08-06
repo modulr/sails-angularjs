@@ -49,6 +49,21 @@
   }
 }
 
+.search {
+  .input-group-addon {
+    border-right: none;
+    color: $gray-light-20;
+  }
+  .form-control {
+    border-left: none;
+    padding-left: 0;
+
+    &:focus {
+      border-color: $gray-light-30;
+    }
+  }
+}
+
 
 
 /*

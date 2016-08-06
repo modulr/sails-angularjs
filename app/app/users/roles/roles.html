@@ -3,44 +3,45 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel">
-        <div class="panel-body">
+
+        <div class="panel-heading">
           <div class="row">
             <div class="col-md-12 text-right">
               <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">
                 <i class="fa fa-key"></i> {{ 'ADD' | translate }}
               </button>
             </div>
-            <div class="col-md-12">
-              <div tasty-table bind-resource="tableRoles" watch-resource="collection" bind-filters="filters" bind-theme="tableRoles.custom">
-                <div class="table-responsive">
-                  <table class="table table-striped table-hover">
-                    <thead tasty-thead></thead>
-                    <tbody>
-                      <tr ng-repeat="row in rows">
-                        <td>{{row.role}}<br><small>{{row.description}}</small></td>
-                        <td>
-                          <ul class="list-inline list-img">
-                            <li ng-repeat="user in row.users | limitTo: 3">
-                              <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
-                            </li>
-                          </ul>
-                          <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 3 > 0">{{row.users.length - 3}}+</a>
-                        </td>
-                        <td>{{row.createdAt | amDateFormat:'LLLL'}}</td>
-                        <td class="btn-edit">
-                          <a href="" class="btn btn-link" ng-click="edit(row)">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div tasty-pagination></div>
-              </div>
-            </div><!-- /.col -->
           </div><!-- /.row -->
-        </div><!-- /.panel-body -->
+        </div><!-- /.panel-heading -->
+        <div tasty-table bind-resource="tableRoles" watch-resource="collection" bind-filters="filters" bind-theme="tableRoles.custom">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead tasty-thead></thead>
+              <tbody>
+                <tr ng-repeat="row in rows">
+                  <td>{{row.role}}<br><small>{{row.description}}</small></td>
+                  <td>
+                    <ul class="list-inline list-img">
+                      <li ng-repeat="user in row.users | limitTo: 3">
+                        <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
+                      </li>
+                    </ul>
+                    <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 3 > 0">{{row.users.length - 3}}+</a>
+                  </td>
+                  <td>{{row.createdAt | amDateFormat:'LLLL'}}</td>
+                  <td class="btn-edit">
+                    <a href="" class="btn btn-link" ng-click="edit(row)">
+                      <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel-footer">
+            <div tasty-pagination></div>
+          </div><!-- /.panel-footer -->
+        </div><!-- /tasty-table-->
       </div><!-- /.panel -->
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -74,37 +75,7 @@
               </div>
             </div><!-- /.col -->
             <div class="col-md-12">
-              <div ui-tree data-drag-enabled="false">
-                <ol ui-tree-nodes="" ng-model="modules">
-                  <li ng-repeat="item in modules" ui-tree-node collapsed="true">
-                    <div ui-tree-handle class="text-capitalize">
-                      <button type="button" class="close pull-left toggle" data-nodrag ng-if="item.sections && item.sections.length > 0" ng-click="toggle()">
-                        <span class="glyphicon glyphicon-chevron-right" ng-class="{'glyphicon-chevron-right': collapsed, 'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
-                      </button>
-                      <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
-                      <label class="pull-right fancy-check" data-nodrag>
-                        <input type="checkbox" checkbox data-child-list="item.sections" data-property="_access" ng-model="item._access">
-                        <i class="fa fa-lg" ng-class="item._access? 'fa-unlock' : 'fa-lock'"></i>
-                      </label>
-                    </div>
-                    <ol ui-tree-nodes="" ng-model="item.sections" ng-class="{hidden: collapsed}">
-                      <li ng-repeat="subItem in item.sections" ui-tree-node>
-                        <div ui-tree-handle class="text-capitalize">
-                          {{subItem.title}}
-                          <label class="pull-right fancy-check" data-nodrag>
-                            <input type="checkbox" ng-model="subItem._access">
-                            <i class="fa fa-lg" ng-class="subItem._access? 'fa-unlock' : 'fa-lock'"></i>
-                          </label>
-                          <label class="pull-right fancy-check" data-nodrag>
-                            <input type="checkbox" ng-model="subItem._write">
-                            <i class="fa fa-lg" ng-class="subItem._write? 'fa-pencil' : 'fa-ban'"></i>
-                          </label>
-                        </div>
-                      </li>
-                    </ol>
-                  </li>
-                </ol>
-              </div>
+              <role-authorizations type="roles" id="form.values.id"></role-authorizations>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.modal-body -->
@@ -145,13 +116,13 @@
           <div class="col-md-12">
             <div tasty-table bind-resource="tableUsers" watch-resource="collection" bind-filters="filters" bind-theme="tableUsers.custom">
               <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                  <thead tasty-thead></thead>
+                <table class="table">
+                  <thead tasty-thead bind-not-sort-by="['avatar']"></thead>
                   <tbody>
                     <tr ng-repeat="row in rows">
                       <td class="avatar"><img class="img-circle" src="{{row.avatar}}" alt=""></td>
-                      <td>{{row.username}}</td>
-                      <td>{{row.createdAt}}</td>
+                      <td><a class="btn-link" href="/profile/{{row.id}}">{{ row.username }}</a></td>
+                      <td>{{row.fullName}}</td>
                     </tr>
                   </tbody>
                 </table>
