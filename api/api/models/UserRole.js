@@ -19,14 +19,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     description: {
       type: 'text'
     },
-    // Lock role
     lock: {
       type: 'boolean',
       defaultsTo: false
-    },
-    authorizations: {
-      type: 'json',
-      defaultsTo: {}
     },
     users: {
       collection: 'user',

@@ -118,8 +118,8 @@ aside {
     }
     .list-group {
       position: absolute;
-      top: 49px;
-      bottom: 35px;
+      top: 50px;
+      bottom: 40px;
       left: 0;
       width: 100%;
       margin-bottom: 0;
@@ -127,6 +127,16 @@ aside {
       overflow-x: hidden;
       overflow-y: scroll;
       background-color: $white;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $gray;
+      }
+      &::-webkit-scrollbar-thumb:window-inactive {
+        background: rgba($black, 0.4);
+      }
 
       .list-group-item {
         border: none;

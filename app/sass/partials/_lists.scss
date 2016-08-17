@@ -19,8 +19,15 @@
   }
 }
 
+.list-img,
+.list-text {
+  display: inline-block;
+  &+ul {
+    margin-left: 10px;
+  }
+}
+
 .list-img {
-  display: inline;
   li {
     padding: 0;
     img {
@@ -28,5 +35,14 @@
       width: 25px;
     }
   }
+}
 
+.list-text {
+  li {
+    padding: 0;
+    &+li:before {
+      content: ',';
+      padding-right: 5px;
+    }
+  }
 }

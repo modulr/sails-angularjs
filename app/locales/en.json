@@ -84,7 +84,6 @@
   "DASHBOARD": "Dashboard",
   "SETTINGS": "Settings",
   "CONFIGURATION": "Configuration",
-  "ACCESS": "Access",
   "MODULES": "Modules",
   "AUTHORIZATION": "Authorization",
 
@@ -245,18 +244,13 @@
     }
   },
 
-  "MALE": "Male",
-  "FEMALE": "Female",
-
-  "SINGLE": "Single",
-  "MARRIED": "Married",
-  "COMMITTED": "Committed",
-  "SEPARATE": "Separate",
-  "DIVORCED": "Divorced",
-  "WIDOWER": "Widower",
-
-  "PHONE": "Phone",
-  "EMAIL": "Email",
+  "ACCESS": {
+    "ACCESS": "Access",
+    "ROLESACCESS": "roles have access to this module",
+    "ROLESWRITE": "roles can write in this module",
+    "USERSACCESS": "users have access to this module",
+    "USERSWRITE": "users can write in this module"
+  },
 
   "LOG": {
     "LOG": "Log",
@@ -272,5 +266,19 @@
     "RESPONSETIME": "Response time",
     "MIDDLEWARELATENCY": "Middleware latency"
   },
-  "REQUEST": "Request"
+  "REQUEST": "Request",
+
+  "MALE": "Male",
+  "FEMALE": "Female",
+
+  "SINGLE": "Single",
+  "MARRIED": "Married",
+  "COMMITTED": "Committed",
+  "SEPARATE": "Separate",
+  "DIVORCED": "Divorced",
+  "WIDOWER": "Widower",
+
+  "PHONE": "Phone",
+  "EMAIL": "Email"
+
 }

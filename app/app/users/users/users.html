@@ -1,7 +1,7 @@
 <div class="page">
 
   <div class="row">
-    <div class="col-sm-4">
+    <div class="col-xs-4">
       <div class="panel panel-box">
         <div class="panel-item bg-primary">
           <i class="fa fa-users fa-4x fa-inverse"></i>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-xs-4">
       <div class="panel panel-box">
         <div class="panel-item bg-success">
           <i class="fa fa-user fa-4x fa-inverse"></i>
@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-xs-4">
       <div class="panel panel-box">
         <div class="panel-item bg-danger">
           <i class="fa fa-user-secret fa-4x fa-inverse"></i>
@@ -41,15 +41,7 @@
       <div class="panel">
         <div class="panel-heading">
           <div class="row">
-            <div class="col-sm-4">
-              <div class="input-group search">
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                </span>
-                <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="filters">
-              </div>
-            </div><!-- /.col -->
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-8">
               <button type="button" class="btn btn-success" ng-click="addUser()">
                 <i class="fa fa-user-plus"></i> {{ 'ADD' | translate }}
               </button>
@@ -60,9 +52,18 @@
               <i class="fa fa-key"></i> {{ 'ACCESS' | translate }}
             </a> -->
           </div><!-- /.col -->
+            <div class="col-sm-4 text-right">
+              <div class="input-group search">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span>
+                <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="filters">
+              </div>
+            </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.panel-heading -->
-      <div tasty-table bind-resource="tableResource" watch-resource="collection" bind-filters="filters" bind-theme="tableResource.custom">
+      <div class="panel-body">
+        <div tasty-table bind-resource="tableResource" watch-resource="collection" bind-filters="filters" bind-theme="tableResource.custom">
         <div class="table-responsive">
           <table class="table table-hover">
             <thead tasty-thead bind-not-sort-by="['avatar']"></thead>
@@ -71,7 +72,7 @@
                 <td class="avatar"><img ng-src="{{row.avatar}}" class="img-circle"></td>
                 <td><a class="btn-link" href="/profile/{{row.id}}">{{ row.username }}</a></td>
                 <td>{{ row.email }}</td>
-                <td>{{ row.role.role }} <span ng-if="row.custom">*</span></td>
+                <td>{{ row.role.role }}</td>
                 <td>
                   <span class="glyphicon" aria-hidden="true" ng-class="{'glyphicon-ok-circle text-success': row.active, 'glyphicon-ban-circle text-danger': ! row.active}"></span>
                 </td>
@@ -89,6 +90,7 @@
           <div tasty-pagination></div>
         </div>
       </div><!-- /tasty-table-->
+      </div><!-- /.panel-body -->
     </div><!-- /.panel -->
   </div><!-- /.col -->
 </div><!-- /.row -->
@@ -100,8 +102,8 @@
 * Modals
 * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 -->
-<!-- Modal Create User -->
-<div class="modal fade" id="modalUser" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- Modal User -->
+<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -139,32 +141,20 @@
                 <label class="control-label">{{ 'USERS.ROLE' | translate }}</label>
                 <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formUser.getRole" selected="formUser.role" required="true"></mdr-select2>
               </div>
-              <div class"form-group">
-                <label class="control-label"></label>
-                <div class="list-group">
-                  <a href="#" class="list-group-item" checked-list-box ng-model="formUser.active"> Active</a>
-                </div>
-              </div>
               <div class="form-group">
-                <a class="btn btn-default btn-outline" role="button" data-toggle="collapse" data-target="#collapseUser" aria-expanded="false" aria-controls="collapseUser">
-                  {{ 'USERS.ROLECUSTOM' | translate}} <span ng-if="formUser.custom">*</span>
-                </a>
-                <a class="btn btn-default btn-outline pull-right" href="" ng-click="sendUserData($event)">
-                  <i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}
-                </a>
-              </div>
-              <div class"form-group">
-                <div class="collapse" id="collapseUser">
-                  <role-authorizations set-authorizations="formUser.setAuthorizations" get-authorizations="formUser.getAuthorizations"></role-authorizations>
+                <div class="list-group">
+                  <a href="#" class="list-group-item checked-list-box" checked-list-box ng-model="formUser.active"> Active</a>
                 </div>
               </div>
-
             </div><!-- /.col -->
 
           </div><!-- /.row -->
         </div><!-- /.modal-body -->
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" ng-if="show.editUser" ng-disabled="formUser.id == user.id" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deleteUser($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default btn-outline pull-left"  ng-if="show.editUser" ng-click="sendUserData($event)">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}
+          </button>
           <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
           <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="createUser($event)" ng-if="!show.editUser">{{ 'ADD' | translate }}</button>
           <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="updateUser($event)" ng-if="show.editUser">{{ 'SAVE' | translate }}</button>

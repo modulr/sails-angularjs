@@ -9,60 +9,152 @@
 
     return {
       restrict: 'E',
+      require: 'ngModel',
       scope: {
+        modules: '=',
         type: '@',
-        id: '=',
-        setAuthorizations: '=',
-        getAuthorizations: '='
+        id: '='
       },
       templateUrl: 'app/users/roles/roleAuthorizations.html',
-      controller: ['$scope', 'restFulService', function($scope, restFulService) {
-
-        $scope.modules = [];
+      link: function(scope, elem, attrs, modelCtrl) {
 
         /**
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         * Methods
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
-        function getModules()
-        {
-          restFulService.get('module/all')
-          .then(function(response){
-            $scope.modules = response;
-          });
-        }
+        function getAuthorizations(modules, type, id) {
 
-        function setAuthorizations(type, id) {
+          modules.forEach(function(v, k) {
 
-          $scope.modules.forEach(function(v, k) {
+            v._access = false;
+            v._write = false;
 
-            if (v.authorizations !== undefined) {  
-              if (v.authorizations.access[type].indexOf(id) >= 0) {
-                v._access = true;
-              } else {
-                v._access = false;
+            if (v.authorizations) {
+              if (v.authorizations.access) {
+                if (v.authorizations.access[type].indexOf(id) >= 0) {
+                  v._access = true;
+                }
+              }
+              if (v.authorizations.write) {
+                if (v.authorizations.write[type].indexOf(id) >= 0) {
+                  v._write = true;
+                }
               }
             }
 
-            if (v.sections !== undefined) {
-              v.sections.forEach(function(va, ke) {
-                if (va.authorizations !== undefined) {
-                  if (va.authorizations.access[type].indexOf(id) >= 0) {
-                    va._access = true;
-                  } else {
-                    va._access = false;
+            if (v.children) {
+              v.children.forEach(function(va, ke) {
+
+                va._access = false;
+                va._write = false;
+
+                if (va.authorizations) {
+
+                  if (va.authorizations.access) {
+                    if (va.authorizations.access[type].indexOf(id) >= 0) {
+                      va._access = true;
+                    }
                   }
-                  if (va.authorizations.write[type].indexOf(id) >= 0) {
-                    va._write = true;
-                  } else {
-                    va._write = false;
+
+                  if (va.authorizations.write) {
+                    if (va.authorizations.write[type].indexOf(id) >= 0) {
+                      va._write = true;
+                    }
                   }
+
                 }
+
               });
             }
+
           });
 
+        }
+
+        function setAuthorizations(modules, type, id) {
+
+          var m = angular.copy(modules);
+
+          m.forEach(function(v, k) {
+
+            if (v.authorizations) {
+
+              if (v.authorizations.access) {
+                var keyA = v.authorizations.access[type].indexOf(id);
+                if (v._access) {
+                  if (keyA < 0) {
+                    v.authorizations.access[type].push(id);
+                  }
+                } else {
+                  if (keyA >= 0) {
+                    v.authorizations.access[type].splice(keyA, 1);
+                  }
+                }
+              }
+
+              if (v.authorizations.write) {
+                var keyW = v.authorizations.write[type].indexOf(id);
+                if (v._write) {
+                  if (keyW < 0) {
+                    v.authorizations.write[type].push(id);
+                  }
+                } else {
+                  if (keyW >= 0) {
+                    v.authorizations.write[type].splice(keyW, 1);
+                  }
+                }
+              }
+
+            }
+
+            if (v.children) {
+              v.children.forEach(function(va, ke) {
+
+                if (va.authorizations) {
+
+                  if (va.authorizations.access) {
+
+                    var indexA = va.authorizations.access[type].indexOf(id);
+
+                    if (va._access) {
+                      if (indexA < 0) {
+                        va.authorizations.access[type].push(id);
+                      }
+                    } else {
+                      if (indexA >= 0) {
+                        va.authorizations.access[type].splice(indexA, 1);
+                      }
+                    }
+                    delete va._access;
+
+                  }
+
+                  if (va.authorizations.write) {
+
+                    var indexW = va.authorizations.write[type].indexOf(id);
+
+                    if (va._write) {
+                      if(indexW < 0) {
+                        va.authorizations.write[type].push(id);
+                      }
+                    } else {
+                      if (indexW >= 0) {
+                        va.authorizations.write[type].splice(indexW, 1);
+                      }
+                    }
+                    delete va._write;
+
+                  }
+
+                }
+
+              });
+            }
+
+          });
+
+          return m;
         }
 
         /**
@@ -70,138 +162,22 @@
         * Watch
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
-        $scope.$watch('id', function(nv,ov){
-          if ($scope.type!== undefined && nv !== undefined) {
-            setAuthorizations($scope.type, nv);
-          } else {
-            //clearAuthorizations();
+        scope.$watch('id', function(nv, ov) {
+          if (scope.type && nv) {
+            getAuthorizations(scope.modules, scope.type, nv);
           }
         });
-        getModules();
 
-      }]
+        scope.$watch('modules', function(nv, ov) {
+          if (nv.length > 0 && scope.type && scope.id) {
+            modelCtrl.$setViewValue(setAuthorizations(nv, scope.type, scope.id));
+          }
+        }, true);
+
+      }
+
     };
 
   }
-
-  // function RoleAuthorizationsCtrl($scope, restFulService){
-  //
-  //
-  //
-  //
-  //
-  //   // function setAuthorizations(json, parent) {
-  //   //     for (var key in json) {
-  //   //         if (typeof (json[key]) === "object") {
-  //   //             setAuthorizations(json[key], key);
-  //   //         } else {
-  //   //             $scope.modules.forEach(function(v, k) {
-  //   //                 if (v.title === parent) {
-  //   //                     v[key] = json[key];
-  //   //                 }
-  //   //                 if (v.sections !== undefined) {
-  //   //                     v.sections.forEach(function(va, ke){
-  //   //                         if (va.title == parent) {
-  //   //                             va[key] = json[key];
-  //   //                         }
-  //   //                     });
-  //   //                 }
-  //   //             });
-  //   //         }
-  //   //     }
-  //   // }
-  //
-  //   function getAuthorizations()
-  //   {
-  //     var authorizations = {};
-  //     $scope.modules.forEach(function(v, k) {
-  //       if (v._access === undefined) {
-  //         v._access = false;
-  //       }
-  //       authorizations[v.title] = {_access: v._access};
-  //       if (v.sections !== undefined) {
-  //         v.sections.forEach(function(va, ke){
-  //           if (va._access === undefined) {
-  //             va._access = false;
-  //           }
-  //           if (va._write === undefined) {
-  //             va._write = false;
-  //           }
-  //           authorizations[v.title][va.title] = {_access: va._access, _write: va._write};
-  //         });
-  //       }
-  //     });
-  //     return authorizations;
-  //   }
-  //
-  //   function clearAuthorizations()
-  //   {
-  //     $scope.modules.forEach(function(v, k) {
-  //       v._access = false;
-  //       if (v.sections !== undefined) {
-  //         v.sections.forEach(function(va, ke){
-  //           va._access = false;
-  //           va._write = false;
-  //         });
-  //       }
-  //     });
-  //   }
-  //
-  //   function setAuthorizations(json) {
-  //     var obj = {};
-  //     $scope.modules.forEach(function(v, k) {
-  //       for (var key in json) {
-  //         if (v.title == key) {
-  //           v._access = json[key]._access;
-  //           obj = json[key];
-  //           //delete json[key];
-  //           break;
-  //         } else {
-  //           v._access = false;
-  //         }
-  //       }
-  //       if (v.sections !== undefined) {
-  //         v.sections.forEach(function(va, ke) {
-  //           for (var index in obj) {
-  //             if (va.title == index) {
-  //               va._access = obj[index]._access;
-  //               va._write = obj[index]._write;
-  //               break;
-  //             } else {
-  //               va._access = false;
-  //               va._write = false;
-  //             }
-  //           }
-  //         });
-  //       }
-  //     });
-  //   }
-  //
-  //   /**
-  //   * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   * Watch
-  //   * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  //   */
-  //   $scope.$watch('setAuthorizations', function(nv,ov){
-  //     if (nv !== undefined) {
-  //       if ( (typeof nv === 'object') && (Object.keys(nv).length > 0) ) {
-  //         setAuthorizations(nv);
-  //       } else {
-  //         clearAuthorizations();
-  //       }
-  //     } else {
-  //       clearAuthorizations();
-  //     }
-  //   });
-  //
-  //   $scope.$watch('modules', function(nv,ov) {
-  //     if (nv !== undefined && nv.length > 0) {
-  //       $scope.getAuthorizations = getAuthorizations();
-  //     }
-  //   }, true);
-  //
-  //
-  //
-  // }
 
 })();

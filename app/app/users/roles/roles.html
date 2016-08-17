@@ -3,32 +3,28 @@
   <div class="row">
     <div class="col-md-12">
       <div class="panel">
-
         <div class="panel-heading">
-          <div class="row">
-            <div class="col-md-12 text-right">
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">
-                <i class="fa fa-key"></i> {{ 'ADD' | translate }}
-              </button>
-            </div>
-          </div><!-- /.row -->
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">
+            <i class="fa fa-key"></i> {{ 'ADD' | translate }}
+          </button>
         </div><!-- /.panel-heading -->
-        <div tasty-table bind-resource="tableRoles" watch-resource="collection" bind-filters="filters" bind-theme="tableRoles.custom">
+        <div class="panel-body">
+          <div tasty-table bind-resource="tableRoles" watch-resource="collection" bind-filters="filters" bind-theme="tableRoles.custom">
           <div class="table-responsive">
             <table class="table table-hover">
               <thead tasty-thead></thead>
               <tbody>
                 <tr ng-repeat="row in rows">
-                  <td>{{row.role}}<br><small>{{row.description}}</small></td>
+                  <td>{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
                   <td>
                     <ul class="list-inline list-img">
-                      <li ng-repeat="user in row.users | limitTo: 3">
+                      <li ng-repeat="user in row.users | limitTo: 5">
                         <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
                       </li>
+                      <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 5 > 0">{{row.users.length - 5}}+</a>
                     </ul>
-                    <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 3 > 0">{{row.users.length - 3}}+</a>
                   </td>
-                  <td>{{row.createdAt | amDateFormat:'LLLL'}}</td>
+                  <td>{{row.createdAt | amDateFormat:'LL'}}</td>
                   <td class="btn-edit">
                     <a href="" class="btn btn-link" ng-click="edit(row)">
                       <span class="glyphicon glyphicon-pencil"></span>
@@ -42,6 +38,7 @@
             <div tasty-pagination></div>
           </div><!-- /.panel-footer -->
         </div><!-- /tasty-table-->
+        </div><!-- /.panel-body -->
       </div><!-- /.panel -->
     </div><!-- /.col -->
   </div><!-- /.row -->
@@ -75,7 +72,7 @@
               </div>
             </div><!-- /.col -->
             <div class="col-md-12">
-              <role-authorizations type="roles" id="form.values.id"></role-authorizations>
+              <role-authorizations ng-if="!form.config.add" modules="modules" type="roles" id="form.values.id" ng-model="form.values.authorizations"></role-authorizations>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.modal-body -->

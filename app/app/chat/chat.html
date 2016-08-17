@@ -7,6 +7,7 @@
       </span>
       <input type="text" class="form-control" ng-model="search" placeholder="{{'SEARCH' | translate}}" >
     </div><!-- /.search -->
+
     <div class="list-group user-list">
       <a href="" class="list-group-item animated flipInX" ng-click="createChat(user)" ng-repeat="user in contacts | filter:search" >
         <div class="media">
@@ -14,14 +15,12 @@
             <img ng-src="{{user.avatar}}" class="img-circle" ng-class="{'active': user.logged}"/>
           </div>
           <div class="media-body">
-            <p>
-              {{user.name}}
-            </p>
+            <p>{{user.name}}</p>
           </div>
         </div>
       </a>
     </div>
-  </div><!-- /users -->
+  </div><!-- /.user-list -->
 
   <div class="messages" ng-class="{open: chat.open}">
 
@@ -40,10 +39,11 @@
           <i class="fa fa-circle-o-notch fa-spin fa-lg"></i>
         </p>
       </li><!-- /loadMore-->
+
       <li class="list-group-item" scroll-to-bottom ng-class="{'text-right': item.from == chat.message.from}" ng-repeat="item in chat.messages | orderBy:'createdAt'" >
         <p data-toggle="collapse" data-target="#date-{{$index}}">{{item.msg}}</p>
         <div class="collapse" id="date-{{$index}}">
-          <small am-time-ago="item.createdAt" am-without-suffix="true"></small>
+          <small class="text-muted" am-time-ago="item.createdAt" am-without-suffix="true"></small>
         </div>
       </li><!-- /messages -->
     </ul>
@@ -59,9 +59,10 @@
 
     <audio id="audio">
       <source src="http://i.cloudup.com/y29czRwU3R.m4a" type="audio/mp4">
-        <source src="http://i.cloudup.com/baNnhH1I7M.ogg" type="audio/wav">
-          <p>Your browser does not support the <code>audio</code> element.</p>
-        </audio>
-      </div><!-- /.messages -->
+      <source src="http://i.cloudup.com/baNnhH1I7M.ogg" type="audio/wav">
+      <p>Your browser does not support the <code>audio</code> element.</p>
+    </audio>
 
-    </div><!-- /.content -->
+  </div><!-- /.messages -->
+
+</div><!-- /.content -->

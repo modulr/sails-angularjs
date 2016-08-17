@@ -1,16 +1,16 @@
-.angular-ui-tree-handle{
+.angular-ui-tree-handle,
+.tree-node-content {
   background-color: $white;
   border: 1px solid $gray-light-30;
   padding: 10px;
   margin-bottom: 10px;
-  font-weight: lighter;
   font-weight: normal;
 
   .toggle {
     margin-right: 10px;
   }
 
-  >label:first-child {
+  label {
     margin-left: 15px;
   }
 }

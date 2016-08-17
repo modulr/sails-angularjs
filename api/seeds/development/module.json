@@ -11,8 +11,8 @@
         "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"],
         "users": []
       },
-      "readonly": {
-        "roles": ["56f964859093205f3a5fedb8"],
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"],
         "users": []
       }
     }
@@ -28,8 +28,8 @@
       "access": {
         "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
       },
-      "readonly": {
-        "roles": ["56f964859093205f3a5fedb8"]
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
       }
     }
   },
@@ -43,16 +43,35 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
       }
     },
     "children": [
       {
         "title": "login",
-        "state": "layout.login"
+        "state": "layout.login",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
       },
       {
         "title": "request",
-        "state": "layout.request"
+        "state": "layout.request",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
       }
     ]
   },
@@ -66,16 +85,47 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
       }
     },
     "children": [
       {
         "title": "users",
-        "state": "layout.users"
+        "state": "layout.users",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
       },
       {
         "title": "roles",
-        "state": "layout.roles"
+        "state": "layout.roles",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
+      },
+      {
+        "title": "access",
+        "state": "layout.access",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
       }
     ]
   },
@@ -89,12 +139,23 @@
     "authorizations": {
       "access": {
         "roles": ["56f964859093205f3a5fedb6"]
+      },
+      "write": {
+        "roles": ["56f964859093205f3a5fedb6"]
       }
     },
     "children": [
       {
         "title": "modules",
-        "state": "layout.modules"
+        "state": "layout.modules",
+        "authorizations": {
+          "access": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          },
+          "write": {
+            "roles": ["56f964859093205f3a5fedb6"]
+          }
+        }
       }
     ]
   }

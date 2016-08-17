@@ -3,9 +3,9 @@
 
   angular
   .module('users')
-  .controller('RolesCtrl', ['$scope', 'restFulService', 'rolesService', '$translate', RolesCtrl]);
+  .controller('RolesCtrl', ['$scope', 'restFulService', '$translate', RolesCtrl]);
 
-  function RolesCtrl($scope, restFulService, rolesService, $translate){
+  function RolesCtrl($scope, restFulService, $translate){
 
     $scope.tableRoles = {
       "custom": {
@@ -26,8 +26,13 @@
     };
 
     $scope.roles = [];
+
     $scope.modules = [];
+
+    $scope.authorizations = [];
+
     $scope.countUsers = 0;
+
     $scope.form = {
       config:{
         add: true,
@@ -81,8 +86,6 @@
         var btn = $(event.target);
         btn.button('loading');
 
-        $scope.form.values.authorizations = rolesService.getAuthorizations($scope.modules);
-
         restFulService.post('userrole/', $scope.form.values)
         .then(function(response){
           $scope.roles.push(response);
@@ -103,13 +106,11 @@
       }
     };
 
-    $scope.edit = function(row)
+    $scope.edit = function(item)
     {
-      var item = angular.copy(row);
-
       $scope.form = {
         values: {
-          index: $scope.roles.indexOf(row),
+          index: $scope.roles.indexOf(item),
           id: item.id,
           role: item.role,
           description: item.description,
@@ -122,24 +123,21 @@
         }
       };
 
-      rolesService.setAuthorizations($scope.modules, $scope.form.values.authorizations);
-
       $('#modal').modal('show');
+
     };
 
     $scope.update = function(event)
     {
-
       if ($('#form').smkValidate()) {
         var btn = $(event.target);
         btn.button('loading');
 
-        $scope.form.values.authorizations = rolesService.getAuthorizations($scope.modules);
-
         restFulService.put('userrole/' + $scope.form.values.id, $scope.form.values)
         .then(function(response){
 
-          $scope.roles[$scope.form.values.index] = response;
+          $scope.roles[$scope.form.values.index] = response.role;
+          $scope.modules = response.modules;
 
           $('#modal').modal('hide');
 
@@ -185,27 +183,10 @@
       });
     };
 
-    $('#modal').on('hidden.bs.modal', function (e) {
-      if (!$scope.$$phase) {
-        $scope.$apply(function() {
-          $scope.countUsers = 0;
-          rolesService.clearAuthorizations($scope.modules);
-          $scope.form = {
-            config:{
-              add: true,
-              disabled: true
-            },
-            values:{}
-          };
-        });
-      }
-      //$('#form').smkClear();
-    });
-
     $scope.getUsers = function(row)
     {
       $scope.role = row;
-      $translate(['ROLES.DATE', 'USERS.USERNAME', 'USERS.FULLNAME'])
+      $translate(['USERS.USERNAME', 'USERS.FULLNAME'])
       .then(function (translations) {
         $scope.tableUsers = {
           "header": [
@@ -227,6 +208,18 @@
     * Watch
     * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
+    $('#modal').on('hidden.bs.modal', function (e) {
+      $scope.countUsers = 0;
+      $scope.form = {
+        config:{
+          add: true,
+          disabled: true
+        },
+        values:{}
+      };
+      $scope.$apply();
+    });
+
     getRoles();
     getModules();
 

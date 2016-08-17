@@ -84,7 +84,6 @@
   "DASHBOARD": "Dashboard",
   "SETTINGS": "Configuración",
   "CONFIGURATION": "Configuración",
-  "ACCESS": "Accesos",
   "MODULES": "Modulos",
   "AUTHORIZATION": "Autorizacion",
 
@@ -244,18 +243,13 @@
     }
   },
 
-  "MALE": "Hombre",
-  "FEMALE": "Mujer",
-
-  "SINGLE": "Soltero",
-  "MARRIED": "Casado",
-  "COMMITTED": "Comprometido",
-  "SEPARATE": "Separado",
-  "DIVORCED": "Divorciado",
-  "WIDOWER": "Viudo",
-
-  "PHONE": "Teléfono",
-  "EMAIL": "Correo electrónico",
+  "ACCESS": {
+    "ACCESS": "Accesos",
+    "ROLESACCESS": "roles tienen acceso a este modulo",
+    "ROLESWRITE": "roles pueden escribir en este modulo",
+    "USERSACCESS": "usuarios tienen acceso a este modulo",
+    "USERSWRITE": "usuarios pueden escribir en este modulo"
+  },
 
   "LOG": {
     "LOG": "Registro",
@@ -271,6 +265,19 @@
     "RESPONSETIME": "Tiempo de respuesta",
     "MIDDLEWARELATENCY": "Latencia de middleware"
   },
-  "REQUEST": "Peticiones"
+  "REQUEST": "Peticiones",
+
+  "MALE": "Hombre",
+  "FEMALE": "Mujer",
+
+  "SINGLE": "Soltero",
+  "MARRIED": "Casado",
+  "COMMITTED": "Comprometido",
+  "SEPARATE": "Separado",
+  "DIVORCED": "Divorciado",
+  "WIDOWER": "Viudo",
+
+  "PHONE": "Teléfono",
+  "EMAIL": "Correo electrónico"
 
 }

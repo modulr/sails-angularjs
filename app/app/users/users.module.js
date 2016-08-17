@@ -8,7 +8,7 @@
         $stateProvider
         .state('layout.users', {
             url: '/users',
-            templateUrl: 'app/users/users.html',
+            templateUrl: 'app/users/users/users.html',
             controller: 'UsersCtrl'
         })
         .state('layout.roles', {
