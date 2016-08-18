@@ -6,7 +6,8 @@
   .config(['$stateProvider', function($stateProvider){
 
     $stateProvider
-    .state('layout.dashboard', {
+    .state('dashboard', {
+      parent: 'layout',
       url: '/dashboard',
       templateUrl: 'app/dashboard/dashboard.html',
       controller: 'DashboardCtrl'

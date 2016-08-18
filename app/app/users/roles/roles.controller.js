@@ -3,9 +3,9 @@
 
   angular
   .module('users')
-  .controller('RolesCtrl', ['$scope', 'restFulService', '$translate', RolesCtrl]);
+  .controller('RolesCtrl', ['$scope', 'restFulService', 'errorService', '$translate', RolesCtrl]);
 
-  function RolesCtrl($scope, restFulService, $translate){
+  function RolesCtrl($scope, restFulService, errorService, $translate){
 
     $scope.tableRoles = {
       "custom": {
@@ -28,8 +28,6 @@
     $scope.roles = [];
 
     $scope.modules = [];
-
-    $scope.authorizations = [];
 
     $scope.countUsers = 0;
 
@@ -100,6 +98,23 @@
             });
           });
         })
+        .catch(function(err){
+
+          if (err.status == 500) {
+
+            var msg = errorService.getRawMessageValue(err.error.raw.message);
+
+            $translate('ROLES.MESSAGES.CREATE.ERROR', { role: msg })
+            .then(function (translate) {
+              $.smkAlert({
+                text: translate,
+                type: 'warning',
+                position: 'bottom-left'
+              });
+            });
+          }
+
+        })
         .finally(function(){
           btn.button('reset');
         });
@@ -114,7 +129,7 @@
           id: item.id,
           role: item.role,
           description: item.description,
-          authorizations: item.authorizations,
+          permissions: angular.copy(item.permissions),
           users: item.users
         },
         config: {
@@ -136,8 +151,7 @@
         restFulService.put('userrole/' + $scope.form.values.id, $scope.form.values)
         .then(function(response){
 
-          $scope.roles[$scope.form.values.index] = response.role;
-          $scope.modules = response.modules;
+          $scope.roles[$scope.form.values.index] = response;
 
           $('#modal').modal('hide');
 
@@ -149,6 +163,23 @@
               position: 'bottom-left'
             });
           });
+        })
+        .catch(function(err){
+
+          if (err.status == 500) {
+
+            var msg = errorService.getRawMessageValue(err.error.raw.message);
+
+            $translate('ROLES.MESSAGES.CREATE.ERROR', { role: msg })
+            .then(function (translate) {
+              $.smkAlert({
+                text: translate,
+                type: 'warning',
+                position: 'bottom-left'
+              });
+            });
+          }
+
         })
         .finally(function(){
           btn.button('reset');

@@ -11,7 +11,7 @@
     };
 
     if ($rootScope.account === undefined)
-      $state.go('layoutAuth.beginPasswordReset');
+      $state.go('beginPasswordReset');
 
     $scope.sendPasswordReset = function(event){
 

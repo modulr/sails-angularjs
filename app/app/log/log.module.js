@@ -6,12 +6,14 @@
   .config(['$stateProvider', function($stateProvider){
 
     $stateProvider
-    .state('layout.login', {
+    .state('logLogin', {
+      parent: 'layout',
       url: '/log/login',
       templateUrl: 'app/log/logLogin.html',
       controller: 'LogLoginCtrl'
     })
-    .state('layout.request', {
+    .state('logRequest', {
+      parent: 'layout',
       url: '/log/request',
       templateUrl: 'app/log/logRequest.html',
       controller: 'LogRequestCtrl'

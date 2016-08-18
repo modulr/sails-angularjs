@@ -1,28 +1,30 @@
 (function(){
-    'use strict';
+  'use strict';
 
-    angular
-    .module('users', [])
-    .config(['$stateProvider', function($stateProvider){
+  angular
+  .module('users', [])
+  .config(['$stateProvider', function($stateProvider){
 
-        $stateProvider
-        .state('layout.users', {
-            url: '/users',
-            templateUrl: 'app/users/users/users.html',
-            controller: 'UsersCtrl'
-        })
-        .state('layout.roles', {
-            url: '/users/roles',
-            templateUrl: 'app/users/roles/roles.html',
-            controller: 'RolesCtrl'
-        })
+    $stateProvider
+    .state('users', {
+      parent: 'layout',
+      url: '/users',
+      templateUrl: 'app/users/users/users.html',
+      controller: 'UsersCtrl'
+    })
+    .state('roles', {
+      parent: 'layout',
+      url: '/users/roles',
+      templateUrl: 'app/users/roles/roles.html',
+      controller: 'RolesCtrl'
+    })
+    .state('access', {
+      parent: 'layout',
+      url: '/users/access',
+      templateUrl: 'app/users/access/access.html',
+      controller: 'AccessCtrl'
+    });
 
-        .state('layout.access', {
-            url: '/users/access',
-            templateUrl: 'app/users/access.html',
-            controller: 'AccessCtrl'
-        });
-
-    }]);
+  }]);
 
 }());

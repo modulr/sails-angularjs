@@ -35,9 +35,6 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     profile: {
       model: 'profile'
     },
-    role: {
-      model: 'userrole'
-    },
     logged: {
       type: 'boolean',
       defaultsTo: false
@@ -58,13 +55,20 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'string',
       defaultsTo: 'avatar.jpg'
     },
-    photos: {
-      collection: 'photo',
-      via: 'user'
+    role: {
+      model: 'userrole'
+    },
+    permissions: {
+      type: 'json',
+      defaultsTo: {}
     },
     chats: {
       collection: 'chat',
       via: 'participants'
+    },
+    photos: {
+      collection: 'photo',
+      via: 'user'
     },
     contact: {
       collection: 'contact',

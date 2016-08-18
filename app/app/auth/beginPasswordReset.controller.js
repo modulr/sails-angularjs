@@ -24,7 +24,7 @@
 
           $rootScope.account = response;
           $rootScope.account.email = $.smkHideEmail(response.email);
-          $state.go('layoutAuth.sendPasswordReset');
+          $state.go('sendPasswordReset');
 
         })
         .catch(function(err){

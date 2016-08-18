@@ -4,6 +4,30 @@
   "ENGLISH": "Ingles",
   "SPANISH": "Español",
 
+  "LOGOUT": "Salir",
+
+  "DASHBOARD": "Dashboard",
+  "SETTINGS": "Configuración",
+  "CONFIGURATION": "Configuración",
+  "MODULES": "Modulos",
+  "AUTHORIZATION": "Autorizacion",
+
+  "SEARCH": "Buscar",
+  "CREATE": "Crear",
+  "SAVE": "Guardar",
+  "EDIT": "Editar",
+  "DELETE": "Borrar",
+  "CANCEL": "Cancelar",
+  "CLOSE": "Cerrar",
+  "SEND": "Enviar",
+  "ADD": "Agregar",
+  "UPLOAD": "Subir",
+  "DRAGORCLICK": "Arrastra o haz click",
+
+  "MESSAGES": {
+    "SUCCESS": "Los datos se actualizaron correctamente."
+  },
+
   "LOGIN": {
     "LOGIN": "Iniciar sesión",
     "EMAILORUSERNAME": "Correo electrónico o nombre de usuario",
@@ -77,30 +101,6 @@
         "PARAGRAPH": "La contraseña se actualizo correctamente, ya puedes iniciar sesion."
       }
     }
-  },
-
-  "LOGOUT": "Salir",
-
-  "DASHBOARD": "Dashboard",
-  "SETTINGS": "Configuración",
-  "CONFIGURATION": "Configuración",
-  "MODULES": "Modulos",
-  "AUTHORIZATION": "Autorizacion",
-
-  "SEARCH": "Buscar",
-  "CREATE": "Crear",
-  "SAVE": "Guardar",
-  "EDIT": "Editar",
-  "DELETE": "Borrar",
-  "CANCEL": "Cancelar",
-  "CLOSE": "Cerrar",
-  "SEND": "Enviar",
-  "ADD": "Agregar",
-  "UPLOAD": "Subir",
-  "DRAGORCLICK": "Arrastra o haz click",
-
-  "MESSAGES": {
-    "SUCCESS": "Los datos se actualizaron correctamente."
   },
 
   "CHAT": {
@@ -237,6 +237,9 @@
     "EDITROLE": "Editar Rol",
     "USEDROLE": "usuarios usan este rol",
     "MESSAGES": {
+      "CREATE": {
+        "ERROR": "El rol <strong>{{role}}</strong> ya esta registrado, intenta con otro."
+      },
       "DELETE": {
         "ERROR": "Este rol esta asignado a uno o varios usuarios, para poder eliminar el rol es necesario que ningun usuario tenga asignado este rol."
       }

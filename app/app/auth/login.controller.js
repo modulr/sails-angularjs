@@ -6,8 +6,8 @@
   .controller('LoginCtrl', ['$rootScope', '$scope', '$state', '$translate', 'sanitizeService', 'restFulService', function($rootScope, $scope, $state, $translate, sanitizeService, restFulService){
 
     $scope.formLogin = {
-        emailOrUsername: 'demo',
-        password: 'Demo123',
+      emailOrUsername: 'admin',
+      password: 'Admin123',
       rememberMe: false
     };
 
@@ -30,13 +30,13 @@
           localStorage.setItem('token', response.token);
           $translate.use(response.user.lang);
 
-          $state.go('layout.dashboard');
+          $state.go('dashboard');
 
           // // Se redirecciona a la ruta indicada
           // if ($rootScope.url.state !== null) {
           //   $state.go($rootScope.url.state, $rootScope.url.params);
           // } else{
-            //
+          //
           //}
         })
         .catch(function(err){

@@ -33,20 +33,7 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'boolean',
       defaultsTo: true
     },
-    authorizations: {
-      type: 'object',
-      defaultsTo: {
-        access: {
-          roles: [],
-          users: []
-        },
-        readonly: {
-          roles: [],
-          users: []
-        }
-      }
-    },
-    children: {
+    submodules: {
       type: 'array',
       defaultsTo: []
     }

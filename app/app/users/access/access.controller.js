@@ -48,7 +48,7 @@
     */
     function getModules()
     {
-      restFulService.get('module/allAccess')
+      restFulService.get('module/all')
       .then(function(response){
         console.log(response);
         $scope.modules = response;

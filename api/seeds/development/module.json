@@ -2,160 +2,70 @@
   {
     "title": "dashboard",
     "icon": "fa-home",
-    "state": "layout.dashboard",
+    "state": "dashboard",
     "url": "/dashboard",
     "order": 1,
-    "active": true,
-    "authorizations": {
-      "access": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"],
-        "users": []
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"],
-        "users": []
-      }
-    }
+    "active": true
   },
   {
     "title": "files",
     "icon": "fa-archive",
-    "state": "layout.files",
+    "state": "files",
     "url": "/files",
     "order": 2,
-    "active": true,
-    "authorizations": {
-      "access": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7", "56f964859093205f3a5fedb8"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6", "56f964859093205f3a5fedb7"]
-      }
-    }
+    "active": true
   },
   {
     "title": "log",
     "icon": "fa-exchange",
-    "state": "layout.login",
+    "state": "logLogin",
     "url": "/log/login",
     "order": 3,
     "active": true,
-    "authorizations": {
-      "access": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      }
-    },
-    "children": [
+    "submodules": [
       {
         "title": "login",
-        "state": "layout.login",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "logLogin"
       },
       {
         "title": "request",
-        "state": "layout.request",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "logRequest"
       }
     ]
   },
   {
     "title": "users",
     "icon": "fa-users",
-    "state": "layout.users",
+    "state": "users",
     "url": "/users",
     "order": 4,
     "active": true,
-    "authorizations": {
-      "access": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      }
-    },
-    "children": [
+    "submodules": [
       {
         "title": "users",
-        "state": "layout.users",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "users"
       },
       {
         "title": "roles",
-        "state": "layout.roles",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "roles"
       },
       {
         "title": "access",
-        "state": "layout.access",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "access"
       }
     ]
   },
   {
     "title": "settings",
     "icon": "fa-cogs",
-    "state": "layout.modules",
+    "state": "modules",
     "url": "/settings/modules",
     "order": 5,
     "active": true,
-    "authorizations": {
-      "access": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      },
-      "write": {
-        "roles": ["56f964859093205f3a5fedb6"]
-      }
-    },
-    "children": [
+    "submodules": [
       {
         "title": "modules",
-        "state": "layout.modules",
-        "authorizations": {
-          "access": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          },
-          "write": {
-            "roles": ["56f964859093205f3a5fedb6"]
-          }
-        }
+        "state": "modules"
       }
     ]
   }

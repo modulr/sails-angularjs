@@ -15,48 +15,6 @@ module.exports = {
     });
   },
 
-  allAccess: function(req, res, cb)
-  {
-    sails.models.module.find({sort: 'order ASC'}).exec(function(err, modules){
-      if(err) return cb(err);
-
-      async.each(modules, function(module, callback) {
-
-        sails.models.userrole.find({id: module.authorizations.access.roles})
-        .populate('users')
-        .exec(function(err, roles){
-          if(err) return cb(err);
-
-          var x = [];
-          roles.forEach(function(role){
-            x.push(role.toJSON());
-          });
-
-          module.authorizations.access.roles = x;
-
-          sails.models.user.find({id: module.authorizations.access.users})
-          .exec(function(err, users){
-            if(err) return cb(err);
-
-            var y = [];
-            users.forEach(function(user){
-              y.push(user.toJSON());
-            });
-
-            module.authorizations.access.users = y;
-
-            callback();
-          });
-
-        });
-
-      }, function(err) {
-          res.json(modules);
-      });
-
-    });
-  },
-
   nav: function(req, res, cb)
   {
     sails.models.module.find({where: {active: true}, sort: 'order ASC'}).exec(function(err, modules){

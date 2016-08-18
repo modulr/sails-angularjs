@@ -14,68 +14,67 @@
       chat: 0
     };
 
-    $scope.navigation = [];
-    $scope.breadcrumbs = [];
+    $scope.modules = [];
     $scope.submodules = [];
+    $scope.breadcrumbs = [];
 
     /*
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     |   Methods
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
-    function setNavigation(modules)
+    function getModules()
     {
-      modules.forEach(function(v,k){
-        if (v.authorizations.access.roles.indexOf($rootScope.user.role.id) >= 0) {
-          $scope.navigation.push(v);
-        }
+      restFulService.get('module/nav')
+      .then(function(response){
+        setModules(response);
+        setSubmodules();
+        setBreadcrumbs();
       });
+    }
 
-      setSubmodules();
+    function setModules(modules)
+    {
+      var permissions = $rootScope.user.role.permissions;
 
-      setBreadcrumbs();
-
-      // var authorizations = $rootScope.user.role.authorizations;
-      //
       // if ($rootScope.user.custom) {
       //
-      //   DeepDiff.observableDiff(authorizations,$rootScope.user.authorizations, function (d) {
+      //   DeepDiff.observableDiff(permissions,$rootScope.user.permissions, function (d) {
       //     if (d.kind == 'E') {
-      //       DeepDiff.applyChange(authorizations,$rootScope.user.authorizations, d);
+      //       DeepDiff.applyChange(permissions,$rootScope.user.permissions, d);
       //     }
       //   });
       // }
-      //
-      // modules.forEach(function(v){
-      //
-      //   if (v.title in authorizations) {
-      //     if (authorizations[v.title]._access ) {
-      //
-      //       if (v.sections !== undefined) {
-      //         v.sections.forEach(function(va, ke, object){
-      //           if (!authorizations[v.title][va.title]._access) {
-      //             object.splice(ke,1);
-      //           }
-      //         });
-      //       }
-      //
-      //       $rootScope.modules.push(v);
-      //     }
-      //   }
-      //
-      // });
+
+      modules.forEach(function(module){
+
+        if (module.title in permissions) {
+          if (permissions[module.title]._access) {
+
+            if (module.submodules !== undefined) {
+              module.submodules.forEach(function(submodule, index, object){
+                if (!permissions[module.title][submodule.title]._access) {
+                  object.splice(index,1);
+                }
+              });
+            }
+
+            $scope.modules.push(module);
+          }
+        }
+
+      });
     }
 
     function setSubmodules()
     {
-      var urlArray = $state.current.url.replace('^', '').substr(1).split('/');
+      var partsUrl = $state.current.url.replace('^', '').substr(1).split('/');
 
       $scope.submodules = [];
 
-      $rootScope.modules.forEach(function(v, k) {
-        //if (v.state == $state.current.name) {
-        if (v.title == urlArray[0]) {
-          $scope.submodules = v.children;
+      $scope.modules.forEach(function(v, k) {
+        if (v.title == partsUrl[0]) {
+          $scope.submodules = v.submodules;
         }
       });
     }
@@ -104,7 +103,7 @@
     |   Events
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
-    $scope.toggleClassLayout = function() {
+    $scope.toggleNav = function() {
 
       if ($scope.class.layout === '' || $scope.class.layout === null){
         $scope.class.layout = 'min';
@@ -116,13 +115,12 @@
 
     };
 
-    $scope.close = function() {
+    $scope.closeChat = function() {
       $scope.class.chat = false;
-      //$scope.class.layout = 'min';
     };
 
     $scope.goToProfile = function(id) {
-      $state.go('layout.profile', { id: id });
+      $state.go('profile', { id: id });
     };
 
     $scope.logout = function() {
@@ -131,7 +129,7 @@
         // Se remueve el token y se envia al login
         localStorage.removeItem('token');
         $rootScope.user = null;
-        $state.go('layoutAuth.login');
+        $state.go('login');
       });
     };
 
@@ -146,11 +144,7 @@
       setBreadcrumbs();
     });
 
-    $rootScope.$watch('modules', function(nv,ov){
-      if (nv !== undefined && $state.current.name !== '') {
-        setNavigation(nv);
-      }
-    });
+    getModules();
 
   }]);
 

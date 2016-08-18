@@ -7,7 +7,8 @@
 
     // Create routes
     $stateProvider
-    .state('layout.hello', {
+    .state('hello', {
+      parent: 'layout',
       url: '/hello',
       templateUrl: 'app/helloWorld/hello.html',
       controller: 'HelloCtrl'

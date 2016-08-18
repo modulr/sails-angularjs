@@ -303,7 +303,7 @@
 
     $scope.goToProfile = function(userId)
     {
-      $state.go('layout.profile', { id: userId });
+      $state.go('profile', { id: userId });
     };
 
     // $scope.selectedRow = function(row)

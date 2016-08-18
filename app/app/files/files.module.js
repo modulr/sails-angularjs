@@ -7,7 +7,8 @@
 
     // Create routes
     $stateProvider
-    .state('layout.files', {
+    .state('files', {
+      parent: 'layout',
       url: '/files',
       templateUrl: 'app/files/files.html',
       controller: 'FilesCtrl'

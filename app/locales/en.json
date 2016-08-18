@@ -4,6 +4,30 @@
   "ENGLISH": "English",
   "SPANISH": "Spanish",
 
+  "LOGOUT": "Log Out",
+
+  "DASHBOARD": "Dashboard",
+  "SETTINGS": "Settings",
+  "CONFIGURATION": "Configuration",
+  "MODULES": "Modules",
+  "AUTHORIZATION": "Authorization",
+
+  "SEARCH": "Search",
+  "CREATE": "Create",
+  "SAVE": "Save",
+  "EDIT": "Edit",
+  "DELETE": "Delete",
+  "CANCEL": "Cancel",
+  "CLOSE": "Close",
+  "SEND": "Send",
+  "ADD": "Add",
+  "UPLOAD": "Upload",
+  "DRAGORCLICK": "Drag or click here",
+
+  "MESSAGES": {
+    "SUCCESS": "The data is updated correctly."
+  },
+
   "LOGIN": {
     "LOGIN": "Log In",
     "EMAILORUSERNAME": "Username or email",
@@ -77,30 +101,6 @@
         "PARAGRAPH": "The password was successfully updated, you can now sign."
       }
     }
-  },
-
-  "LOGOUT": "Log Out",
-
-  "DASHBOARD": "Dashboard",
-  "SETTINGS": "Settings",
-  "CONFIGURATION": "Configuration",
-  "MODULES": "Modules",
-  "AUTHORIZATION": "Authorization",
-
-  "SEARCH": "Search",
-  "CREATE": "Create",
-  "SAVE": "Save",
-  "EDIT": "Edit",
-  "DELETE": "Delete",
-  "CANCEL": "Cancel",
-  "CLOSE": "Close",
-  "SEND": "Send",
-  "ADD": "Add",
-  "UPLOAD": "Upload",
-  "DRAGORCLICK": "Drag or click here",
-
-  "MESSAGES": {
-    "SUCCESS": "The data is updated correctly."
   },
 
   "CHAT": {
@@ -238,6 +238,9 @@
     "EDITROLE": "Edit Role",
     "USEDROLE": "users used this role",
     "MESSAGES": {
+      "CREATE": {
+        "ERROR": "Role are already taken <strong>{{role}}</strong>, try another."
+      },
       "DELETE": {
         "ERROR": "This role is assigned to one or more users, to delete it, is necesary no user has it assigned"
       }

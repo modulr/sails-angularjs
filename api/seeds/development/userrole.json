@@ -3,18 +3,156 @@
     "id" : "56f964859093205f3a5fedb6",
     "role" : "admin",
     "description" : "All access",
-    "lock" : true
+    "lock" : true,
+    "permissions": {
+      "dashboard" : {
+        "_access" : true,
+        "_write" : true
+      },
+      "files" : {
+        "_access" : true,
+        "_write" : true
+      },
+      "log" : {
+        "_access" : true,
+        "_write" : true,
+        "login" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "request" : {
+          "_access" : true,
+          "_write" : true
+        }
+      },
+      "users":{
+        "_access" : true,
+        "_write" : true,
+        "users" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "roles" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "access" : {
+          "_access" : true,
+          "_write" : true
+        }
+      },
+      "settings" : {
+        "_access" : true,
+        "_write" : true,
+        "modules" : {
+          "_access" : true,
+          "_write" : true
+        }
+      }
+    }
   },
   {
     "id" : "56f964859093205f3a5fedb7",
     "role" : "user",
     "description" : "Basic access",
-    "lock" : true
+    "lock" : true,
+    "permissions": {
+      "dashboard" : {
+        "_access" : true,
+        "_write" : true
+      },
+      "files" : {
+        "_access" : true,
+        "_write" : true
+      },
+      "log" : {
+        "_access" : true,
+        "_write" : true,
+        "login" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "request" : {
+          "_access" : true,
+          "_write" : true
+        }
+      },
+      "users":{
+        "_access" : false,
+        "_write" : false,
+        "users" : {
+          "_access" : false,
+          "_write" : false
+        },
+        "roles" : {
+          "_access" : false,
+          "_write" : false
+        },
+        "access" : {
+          "_access" : false,
+          "_write" : false
+        }
+      },
+      "settings" : {
+        "_access" : false,
+        "_write" : false,
+        "modules" : {
+          "_access" : false,
+          "_write" : false
+        }
+      }
+    }
   },
   {
     "id" : "56f964859093205f3a5fedb8",
     "role" : "guest",
     "description" : "Read access",
-    "lock" : true
+    "lock" : true,
+    "permissions": {
+      "dashboard" : {
+        "_access" : true,
+        "_write" : false
+      },
+      "files" : {
+        "_access" : true,
+        "_write" : false
+      },
+      "log" : {
+        "_access" : true,
+        "_write" : false,
+        "login" : {
+          "_access" : true,
+          "_write" : false
+        },
+        "request" : {
+          "_access" : true,
+          "_write" : false
+        }
+      },
+      "users":{
+        "_access" : false,
+        "_write" : false,
+        "users" : {
+          "_access" : false,
+          "_write" : false
+        },
+        "roles" : {
+          "_access" : false,
+          "_write" : false
+        },
+        "access" : {
+          "_access" : false,
+          "_write" : false
+        }
+      },
+      "settings" : {
+        "_access" : false,
+        "_write" : false,
+        "modules" : {
+          "_access" : false,
+          "_write" : false
+        }
+      }
+    }
   }
 ]
