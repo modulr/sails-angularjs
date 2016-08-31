@@ -745,8 +745,8 @@
     if($state.params.id === '')
     $location.path('error');
 
-    // var authorizations = $rootScope.user.role.authorizations;
-    //
+    var permissions = $rootScope.user.role.permissions;
+
     // if($rootScope.user.custom) {
     //   DeepDiff.observableDiff(authorizations,$rootScope.user.authorizations, function (d) {
     //     if (d.kind == 'E') {
@@ -754,12 +754,12 @@
     //     }
     //   });
     // }
-    //
-    // if (authorizations.users._access) {
-    //   $scope.editMode.profile = true;
-    // } else if ($rootScope.user.id == $state.params.id) {
-    //   $scope.editMode.profile = true;
-    // }
+
+    if (permissions.users._access) {
+      $scope.editMode.profile = true;
+    } else if ($rootScope.user.id == $state.params.id) {
+      $scope.editMode.profile = true;
+    }
 
     // Se cargan los datos del usuario
     getUser($state.params.id);

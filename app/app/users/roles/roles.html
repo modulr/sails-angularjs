@@ -87,11 +87,11 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">
             {{ 'CLOSE' | translate }}
           </button>
-          <button type="submit" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." autocomplete="off" ng-click="create($event)" ng-if="form.config.add">
+          <button type="submit" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="create($event)" ng-if="form.config.add">
             {{ 'ADD' | translate }}
           </button>
           {{form.value.lock}}
-          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." autocomplete="off" ng-click="update($event)" ng-disabled="form.config.disabled" ng-show="!form.config.add">
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="update($event)" ng-disabled="form.config.disabled" ng-show="!form.config.add">
             {{ 'SAVE' | translate }}
           </button>
         </div><!-- /.modal-footer -->
