@@ -44,7 +44,7 @@
         <h4 class="modal-title">Upload file</h4>
       </div>
       <div class="modal-body">
-        <mdr-file url="{{urlAPI}}/file/upload" headers="{authorization: token}" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+        <mdr-file url="{{urlAPI}}/file/upload/{{home.item}}" headers="{authorization: token}" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

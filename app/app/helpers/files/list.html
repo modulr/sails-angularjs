@@ -24,7 +24,6 @@
           {{file.name | limitTo : 35}}
           <span ng-if="file.name.length > 35">...</span>
         </a>
-        {{home.storage}}
         <a href="{{home.storage}}/{{file.item}}/{{file.file}}" target="_blank" ng-if="!file.image" title="{{file.name}}">
           <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
           {{file.name | limitTo : 35}}

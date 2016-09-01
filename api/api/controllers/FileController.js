@@ -23,12 +23,9 @@ module.exports = {
 
   upload: function (req, res, cb) {
 
-    console.log(req);
-    console.log('---------------');
-    var data = req.params.all();
-    console.log(data);
+    var item = req.param('id');
 
-    var folder = sails.config.settings.STORAGE + data.url +'/'+ data.item;
+    var folder = sails.config.settings.STORAGE +'/users/files/'+ item;
 
     req.file('file').upload({
       // Save file into folder
@@ -36,19 +33,20 @@ module.exports = {
 
     },function (err, file) {
       if (err) return cb(err);
-        // Create registry in DB
-        sails.models.file.create({
-          file: FileService.getRealFileName(file[0]),
-          name: file[0].filename,
-          size: FileService.getHumanFileSize(file[0].size),
-          type: file[0].type,
-          item: data.item,
-          folderId: data.currentFolderId,
-          owner: req.token.id
-        }).exec(function(err, file){
-          if(err) return cb(err);
-          res.json(file);
-        });
+
+      // Create registry in DB
+      sails.models.file.create({
+        file: FileService.getRealFileName(file[0]),
+        name: file[0].filename,
+        size: FileService.getHumanFileSize(file[0].size),
+        type: file[0].type,
+        item: item,
+        folderId: req.body.currentFolderId,
+        owner: req.token.id
+      }).exec(function(err, file){
+        if(err) return cb(err);
+        res.json(file);
+      });
 
     });
 
