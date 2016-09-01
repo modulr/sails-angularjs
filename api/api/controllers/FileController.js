@@ -23,7 +23,7 @@ module.exports = {
 
   upload: function (req, res, cb) {
 
-    var values = req.body;
+    var values = req;
     console.log(values);
     var data = req.allParams();
     console.log(data);
