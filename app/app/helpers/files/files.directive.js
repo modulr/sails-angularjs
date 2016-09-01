@@ -175,6 +175,7 @@
           if (nv !== undefined && nv !== null) {
             restFulService.get('folder/byItem/' + $scope.folderId +'/'+ nv)
             .then(function(response) {
+              console.log(response);
               $scope.loading = false;
               $scope.breadcrumb.push(response.home);
               $scope.foldersFiles = response.children;
