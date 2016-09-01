@@ -23,9 +23,9 @@ module.exports = {
 
   upload: function (req, res, cb) {
 
-    var values = req;
-    console.log(values);
-    var data = req.allParams();
+    console.log(req);
+    console.log('---------------');
+    var data = req.params.all();
     console.log(data);
 
     var folder = sails.config.settings.STORAGE + data.url +'/'+ data.item;
