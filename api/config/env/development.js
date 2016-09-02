@@ -18,8 +18,7 @@ module.exports = {
   ***************************************************************************/
 
   settings: {
-    APP_URL: 'http://localhost:3000',
-    //IMAGES_URL: '../app/images',
+    APP_URL: 'http://ec2-52-37-151-240.us-west-2.compute.amazonaws.com:3000',
     STORAGE: '../app/storage',
     TOKEN_SECRET: 'shhhhh',
     TOKEN_EXPIRES_IN_MINUTES: 1440, // 1 dia
