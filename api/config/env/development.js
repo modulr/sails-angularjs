@@ -26,19 +26,19 @@ module.exports = {
     REMEMBER_TOKEN_EXPIRES_IN_MINUTES: 43200, // 30 dias
   },
 
-  // email: {
-  //   transporter: {
-  //     host: 'hostname',
-  //     port: 465,
-  //     secure: true, // use SSL
-  //     auth: {
-  //       user: 'your@email.com',
-  //       pass: 'yourpassword'
-  //     }
-  //   },
-  //   from: 'Modulr <your@email.com>',
-  //   testMode: false
-  // },
+  email: {
+    transporter: {
+      host: 'p3plcpnl0565.prod.phx3.secureserver.net',
+      port: 465,
+      secure: true, // use SSL
+      auth: {
+        user: 'no-reply@modulr.io',
+        pass: '0pensourcE10'
+      }
+    },
+    from: 'Modulr <no-reply@modulr.io>',
+    testMode: false
+  },
 
   connections: {
     mongo: {
