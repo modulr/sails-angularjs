@@ -1,4 +1,4 @@
 {
   "APP_PORT": "3000",
-  "API_URL": "http://ec2-52-37-151-240.us-west-2.compute.amazonaws.com:1337"
+  "API_URL": "http://localhost:1337"
 }

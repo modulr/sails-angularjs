@@ -17,22 +17,65 @@ module.exports = {
    * environment (see config/connections.js and config/models.js )           *
    ***************************************************************************/
 
-  // models: {
-  //   connection: 'someMysqlServer'
-  // },
+   settings: {
+     APP_URL: 'http://localhost:3000',
+     STORAGE: '../app/storage',
+     TOKEN_SECRET: 'shhhhh',
+     TOKEN_EXPIRES_IN_MINUTES: 1440, // 1 dia
+     REMEMBER_TOKEN_EXPIRES_IN_MINUTES: 43200, // 30 dias
+   },
 
-  /***************************************************************************
-   * Set the port in the production environment to 80                        *
-   ***************************************************************************/
+   email: {
+     transporter: {
+       host: 'localhost',
+       port: 465,
+       secure: true, // use SSL
+       auth: {
+         user: 'email@modulr.io',
+         pass: 'password'
+       }
+     },
+     from: 'Modulr <no-reply@modulr.io>',
+     testMode: false
+   },
 
-  // port: 80,
+   connections: {
+     mongo: {
+       adapter: 'sails-mongo',
+       host: 'localhost',
+       port: 27017,
+       // user: 'username',
+       // password: 'password',
+       database: 'modulr',
+       socketOptions: {
+         noDelay: true,
+         connectTimeoutMS: 0,
+         socketTimeoutMS: 0
+       }
+     }
+   },
 
-  /***************************************************************************
-   * Set the log level in production environment to "silent"                 *
-   ***************************************************************************/
+   models: {
+     connection: 'mongo',
+     migrate: 'alter'
+   },
 
-  // log: {
-  //   level: "silent"
-  // }
+   cors: {
+     allRoutes: true,
+     headers: 'content-type, access-control-allow-origin, authorization'
+   },
+
+   globals: {
+     models: false
+   },
+
+   sockets: {
+     transports: [
+       'websocket'
+       // 'htmlfile',
+       // 'polling'
+     ]
+   //   origins: '*:*'
+   }
 
 };

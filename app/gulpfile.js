@@ -1,82 +1,118 @@
 var gulp = require('gulp'),
-    serverFactory = require('spa-server'),
-    sass = require('gulp-sass'),
-    rename = require('gulp-rename'),
-    concat = require('gulp-concat'),
-    sourcemaps = require('gulp-sourcemaps'),
-    ngAnnotate = require('gulp-ng-annotate'),
-    uglify = require('gulp-uglify'),
-    mainBowerFiles = require('main-bower-files'),
-    inject = require('gulp-inject'),
-    jsonmin = require('gulp-jsonmin'),
-    imagemin = require('gulp-imagemin'),
-    preprocess = require('gulp-preprocess'),
-    fs = require('fs');
+  sass = require('gulp-sass'),
+  cleanCSS = require('gulp-clean-css'),
+  sourcemaps = require('gulp-sourcemaps'),
+  rename = require('gulp-rename'),
+  concat = require('gulp-concat'),
+  ngAnnotate = require('gulp-ng-annotate'),
+  uglify = require('gulp-uglify'),
+  mainBowerFiles = require('main-bower-files'),
+  inject = require('gulp-inject'),
+  jsonmin = require('gulp-jsonmin'),
+  imagemin = require('gulp-imagemin'),
+  preprocess = require('gulp-preprocess'),
+  nodemon = require('gulp-nodemon'),
+  fs = require('fs');
 
+var dest = 'public/';
 var config = null;
 
 gulp.task('env:dev', function () {
-    config = JSON.parse(fs.readFileSync('config/env/development.json'));
+  config = JSON.parse(fs.readFileSync('config/env/development.json'));
 });
 
 gulp.task('env:prod', function () {
-    config = JSON.parse(fs.readFileSync('config/env/production.json'));
-});
-
-gulp.task('webserver', function () {
-    var server = serverFactory.create({
-        path: '.',
-        port: config.APP_PORT,
-        fallback: 'public/index.html'
-    });
-    server.start();
+  config = JSON.parse(fs.readFileSync('config/env/production.json'));
 });
 
 gulp.task('sass', function () {
-    gulp.src('sass/**/*.scss')
+  gulp.src('sass/**/*.scss')
     //.pipe(sass().on('error', sass.logError))
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('public/styles'));
+    .pipe(gulp.dest(dest + 'styles'));
 });
 
 gulp.task('js', function () {
-    gulp.src(['app/**/*.module.js','app/**/*.js'])
+  gulp.src(['app/**/*.module.js','app/**/*.js'])
     .pipe(sourcemaps.init())
     .pipe(concat('app.min.js'))
     .pipe(ngAnnotate())
     .pipe(uglify())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public/scripts'));
+    .pipe(gulp.dest(dest + 'scripts'));
+});
+
+gulp.task('vendorcss', function(){
+  gulp.src(mainBowerFiles("**/*.css"))
+    .pipe(concat('vendor.min.css'))
+    .pipe(cleanCSS())
+    .pipe(gulp.dest(dest + 'styles'));
+});
+
+gulp.task('vendorjs', function(){
+  gulp.src(mainBowerFiles("**/*.js"))
+    .pipe(uglify())
+    .pipe(concat('vendor.min.js'))
+    .pipe(gulp.dest(dest + 'scripts'));
 });
 
 gulp.task('jsonmin', function () {
-    gulp.src(['locales/**/*.json'])
+  gulp.src(['locales/**/*.json'])
     .pipe(jsonmin())
     .pipe(rename({ extname: '.min.json' }))
-    .pipe(gulp.dest('public/locales'));
+    .pipe(gulp.dest(dest + 'locales'));
 });
 
 gulp.task('imagemin', function () {
-    gulp.src('images/**/*')
+  gulp.src('images/**/*')
     .pipe(imagemin())
-    .pipe(gulp.dest('public/images'));
+    .pipe(gulp.dest(dest + 'images'));
 });
 
-gulp.task('inject', ['js', 'sass'], function() {
-    gulp.src('app/index.html')
-    .pipe(preprocess({context: {API_URL: config.API_URL}}))
-    .pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower'}))
-    .pipe(inject(gulp.src(['public/scripts/*.js', 'public/styles/*.css'], {read: true})))
-    .pipe(gulp.dest('public'));
+gulp.task('inject', function() {
+  gulp.src('app/index.html')
+  .pipe(preprocess({context: {API_URL: config.API_URL}}))
+  //.pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower'}))
+  //.pipe(inject(gulp.src(['public/scripts/*.js', 'public/styles/*.css'], {read: true})))
+  .pipe(gulp.dest(dest));
+});
+
+gulp.task('copyvendor', function () {
+  gulp.src('bower_components/sails.io.js/**')
+    .pipe(gulp.dest(dest + 'bower_components/sails.io.js'));
+  gulp.src('bower_components/fontawesome/fonts/*')
+    .pipe(gulp.dest(dest + 'fonts'));
+  gulp.src('bower_components/bootstrap/fonts/*')
+    .pipe(gulp.dest(dest + 'fonts'));
+});
+
+gulp.task('copyhtml', function () {
+  gulp.src('app/**/*.html')
+    .pipe(gulp.dest(dest + 'app'));
 });
 
 gulp.task('watch', function () {
-    gulp.watch('sass/**/*.scss', ['sass']);
-    gulp.watch('app/**/*.js', ['js']);
-    gulp.watch('locales/**/*.json', ['jsonmin']);
-    gulp.watch('images/**/*', ['imagemin']);
+  gulp.watch('sass/**/*.scss', ['sass']);
+  gulp.watch('app/**/*.js', ['js']);
+  gulp.watch('locales/**/*.json', ['jsonmin']);
+  gulp.watch('images/**/*', ['imagemin']);
+  gulp.watch('app/**/*.html', ['copyhtml']);
 });
 
-gulp.task('serve', ['env:dev', 'jsonmin', 'imagemin', 'inject', 'webserver', 'watch']);
-gulp.task('serve:prod', ['env:prod', 'jsonmin', 'imagemin', 'inject', 'webserver', 'watch']);
+gulp.task('compile', ['sass', 'js', 'jsonmin', 'imagemin', 'copyhtml', 'vendorjs', 'vendorcss', 'inject', 'copyvendor']);
+
+gulp.task('build', ['env:prod', 'compile']);
+
+gulp.task('default', ['env:dev', 'compile', 'watch'], function () {
+  nodemon({
+    script: 'server.js',
+    tasks: ['env:dev', 'compile', 'watch']
+    //env: { 'NODE_ENV': 'development' }
+  });
+  // .on('start', ['watch'])
+  // .on('change', ['watch']);
+  // .on('restart', function () {
+  //   console.log('restarted!');
+  // });
+});

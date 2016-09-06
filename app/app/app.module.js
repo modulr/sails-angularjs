@@ -64,7 +64,7 @@
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
     $translateProvider.useStaticFilesLoader({
-      prefix: 'public/locales/',
+      prefix: 'locales/',
       suffix: '.min.json'
     });
     $translateProvider.preferredLanguage('en');

@@ -96,7 +96,7 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     getAvatar: function () {
       var avatar = null;
       if (this.photo == 'avatar.jpg') {
-        avatar = 'public/images/' + this.photo;
+        avatar = 'images/' + this.photo;
       } else {
         avatar = 'storage/users/' + this.id + '/' + this.photo;
       }
