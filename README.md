@@ -142,7 +142,7 @@ $ git clone https://github.com/modulr/modulr.git
 ```
 - Prefix the choice with ! to persist it to bower.json
 - ? Answer
-- 5) angular#~1.4.5 which resolved to 1.4.9 and is required by modulr
+- angular#~1.4.5 which resolved to 1.4.12 and is required by modulr
 ```
 
 
@@ -170,13 +170,6 @@ $ mongod
 ######3. Finaly step
 
 *Go to [http://localhost:3000](http://localhost:3000) in you browser.*
-
->_Login credentials_
-
-*username:* demo
-
-*password:* Demo123
-
 
 
 ##Documentation
