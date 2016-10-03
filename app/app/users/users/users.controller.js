@@ -165,7 +165,8 @@
         username: row.username,
         email: row.email,
         role: row.role.id,
-        active: row.active
+        active: row.active,
+        lock: row.lock
       };
 
       $('#modal').modal('show');

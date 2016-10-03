@@ -33,6 +33,10 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'boolean',
       defaultsTo: true
     },
+    lock: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     submodules: {
       type: 'array',
       defaultsTo: []

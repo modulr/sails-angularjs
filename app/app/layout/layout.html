@@ -87,13 +87,13 @@
 
 <nav role="navigation" ng-class="class.layout">
   <ul class="nav nav-pills nav-stacked">
-    <li ng-repeat="item in modules | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active">
+    <li ng-repeat="item in modules | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active" ng-hide="item.state == 'profile'">
       <a href="" ui-sref="{{item.state}}">
         <span class="fa-stack fa-lg fa-fw">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa {{item.icon}} fa-stack-1x"></i>
         </span>
-        <span class="text-capitalize">{{item.title}}</span>
+        <span class="text-capitalize">{{item.title | uppercase | translate}}</span>
       </a>
     </li>
   </ul>
@@ -104,9 +104,9 @@
 </aside>
 
 <section ng-class="class.layout" ng-click="closeChat()">
-  <ul class="nav nav-tabs submodules" ng-if="submodules.length > 0">
+  <ul class="nav nav-tabs submodules" ng-if="submodules.length > 0" ng-hide="isProfile">
     <li ng-repeat="item in submodules" ui-sref-active="active">
-      <a href="" ui-sref="{{item.state}}">{{item.title}}</a>
+      <a href="" ui-sref="{{item.state}}">{{item.title | uppercase | translate}}</a>
     </li>
   </ul>
   <div class="container-fluid" ui-view></div>

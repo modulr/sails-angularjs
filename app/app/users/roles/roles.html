@@ -77,10 +77,10 @@
           </div><!-- /.row -->
         </div><!-- /.modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-delete" ng-if="!form.config.add" ng-disabled="form.values.users.length > 0 || form.config.disabled" ng-click="delete($event)">
+          <button type="button" class="btn btn-default pull-left" ng-if="!form.config.add" ng-disabled="form.values.users.length > 0 || form.config.disabled" ng-click="delete($event)">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
-          <small ng-if="form.values.users.length > 0">
+          <small class="pull-left" ng-if="form.values.users.length > 0">
             {{form.values.users.length}} {{'ROLES.USEDROLE' | translate}}
           </small>
 
@@ -129,7 +129,7 @@
         </div><!-- /.row -->
       </div><!-- /.modal-body -->
       <div class="modal-footer">
-        <small>
+        <small class="pull-left">
           {{role.users.length}} {{'ROLES.USEDROLE' | translate}}
         </small>
         <button type="button" class="btn btn-default" data-dismiss="modal">

@@ -12,7 +12,13 @@ var gulp = require('gulp'),
   imagemin = require('gulp-imagemin'),
   preprocess = require('gulp-preprocess'),
   nodemon = require('gulp-nodemon'),
-  fs = require('fs');
+  fs = require('fs'),
+  vfs = require('vinyl-fs');
+
+gulp.task('symlink', function () {
+  vfs.src('storage/')
+    .pipe(vfs.symlink('public/storage'));
+});
 
 var dest = 'public/';
 var config = null;
@@ -23,6 +29,14 @@ gulp.task('env:dev', function () {
 
 gulp.task('env:prod', function () {
   config = JSON.parse(fs.readFileSync('config/env/production.json'));
+});
+
+gulp.task('preprocess', function() {
+  gulp.src('app/index.html')
+  .pipe(preprocess({context: {API_URL: config.API_URL, STORAGE_URL: config.STORAGE_URL}}))
+  //.pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower'}))
+  //.pipe(inject(gulp.src(['public/scripts/*.js', 'public/styles/*.css'], {read: true})))
+  .pipe(gulp.dest(dest));
 });
 
 gulp.task('sass', function () {
@@ -43,6 +57,19 @@ gulp.task('js', function () {
     .pipe(gulp.dest(dest + 'scripts'));
 });
 
+gulp.task('jsonmin', function () {
+  gulp.src(['locales/**/*.json'])
+    .pipe(jsonmin())
+    .pipe(rename({ extname: '.min.json' }))
+    .pipe(gulp.dest(dest + 'locales'));
+});
+
+gulp.task('imagemin', function () {
+  gulp.src('images/**/*')
+    .pipe(imagemin())
+    .pipe(gulp.dest(dest + 'images'));
+});
+
 gulp.task('vendorcss', function(){
   gulp.src(mainBowerFiles("**/*.css"))
     .pipe(concat('vendor.min.css'))
@@ -57,25 +84,9 @@ gulp.task('vendorjs', function(){
     .pipe(gulp.dest(dest + 'scripts'));
 });
 
-gulp.task('jsonmin', function () {
-  gulp.src(['locales/**/*.json'])
-    .pipe(jsonmin())
-    .pipe(rename({ extname: '.min.json' }))
-    .pipe(gulp.dest(dest + 'locales'));
-});
-
-gulp.task('imagemin', function () {
-  gulp.src('images/**/*')
-    .pipe(imagemin())
-    .pipe(gulp.dest(dest + 'images'));
-});
-
-gulp.task('inject', function() {
-  gulp.src('app/index.html')
-  .pipe(preprocess({context: {API_URL: config.API_URL}}))
-  //.pipe(inject(gulp.src(mainBowerFiles(), {read: false}), {name: 'bower'}))
-  //.pipe(inject(gulp.src(['public/scripts/*.js', 'public/styles/*.css'], {read: true})))
-  .pipe(gulp.dest(dest));
+gulp.task('copyhtml', function () {
+  gulp.src('app/**/*.html')
+    .pipe(gulp.dest(dest + 'app'));
 });
 
 gulp.task('copyvendor', function () {
@@ -87,11 +98,6 @@ gulp.task('copyvendor', function () {
     .pipe(gulp.dest(dest + 'fonts'));
 });
 
-gulp.task('copyhtml', function () {
-  gulp.src('app/**/*.html')
-    .pipe(gulp.dest(dest + 'app'));
-});
-
 gulp.task('watch', function () {
   gulp.watch('sass/**/*.scss', ['sass']);
   gulp.watch('app/**/*.js', ['js']);
@@ -100,18 +106,22 @@ gulp.task('watch', function () {
   gulp.watch('app/**/*.html', ['copyhtml']);
 });
 
-gulp.task('compile', ['sass', 'js', 'jsonmin', 'imagemin', 'copyhtml', 'vendorjs', 'vendorcss', 'inject', 'copyvendor']);
+gulp.task('compile', ['preprocess', 'sass', 'js', 'jsonmin', 'imagemin', 'vendorjs', 'vendorcss', 'copyhtml', 'copyvendor', 'symlink']);
 
 gulp.task('build', ['env:prod', 'compile']);
 
 gulp.task('default', ['env:dev', 'compile', 'watch'], function () {
   nodemon({
     script: 'server.js',
-    tasks: ['env:dev', 'compile', 'watch']
+    //tasks: ['env:dev', 'compile']
     //env: { 'NODE_ENV': 'development' }
   });
-  // .on('start', ['watch'])
-  // .on('change', ['watch']);
+  // .on('start', function() {
+  //   console.log('start');
+  // })
+  // .on('change', function() {
+  //   console.log('change');
+  // })
   // .on('restart', function () {
   //   console.log('restarted!');
   // });

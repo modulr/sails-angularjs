@@ -12,7 +12,6 @@
       templateUrl: 'app/profile/profile.html',
       controller: 'ProfileCtrl',
     })
-
     .state('email_change', {
       parent: 'layoutAuth',
       url: '/email_change/:token/:tokenId/:userId',

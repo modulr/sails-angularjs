@@ -11,6 +11,10 @@
   "CONFIGURATION": "Configuration",
   "MODULES": "Modules",
   "AUTHORIZATION": "Authorization",
+  "INFORMATION": "Information",
+  "WORK": "Work",
+  "PERMISSIONS": "Permissions",
+  "FILES": "Files",
 
   "SEARCH": "Search",
   "CREATE": "Create",
@@ -23,6 +27,8 @@
   "ADD": "Add",
   "UPLOAD": "Upload",
   "DRAGORCLICK": "Drag or click here",
+  "ENABLED": "Enabled",
+  "DISABLED": "Disabled",
 
   "MESSAGES": {
     "SUCCESS": "The data is updated correctly."

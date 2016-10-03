@@ -30,7 +30,7 @@
     "rc": "~0.5.0",
     "sails": "~0.11.0",
     "sails-disk": "~0.10.0",
-    "sails-hook-apianalytics": "^0.3.0",
+    "sails-hook-apianalytics": "^1.0.0",
     "sails-hook-email": "^0.12.0",
     "sails-mongo": "^0.11.1",
     "ua-parser": "^0.3.5"

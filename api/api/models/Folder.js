@@ -22,20 +22,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     parentId: {
       type: 'string'
     },
-    item: {
-      type: 'string'
-    },
     files: {
       collection:'file',
       via: 'folderId'
-    },
-    getStorage: function () {
-      return '/storage'+ this.url;
-    },
-    toJSON: function() {
-        var obj = this.toObject();
-        obj.storage = this.getStorage();
-        return obj;
     }
   }
 

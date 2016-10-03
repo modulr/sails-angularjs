@@ -3,7 +3,6 @@
   background-color: transparent;
 
   & > li + li:before {
-    content: "\00BB";
     color: #aaa;
   }
 }

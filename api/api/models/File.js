@@ -25,9 +25,6 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     owner: {
       model: 'user'
     },
-    item: {
-      type: 'string'
-    },
     folderId: {
       model: 'folder'
     },
@@ -40,9 +37,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       return image;
     },
     toJSON: function() {
-        var obj = this.toObject();
-        obj.image = this.getImage();
-        return obj;
+      var obj = this.toObject();
+      obj.image = this.getImage();
+      return obj;
     }
   }
 

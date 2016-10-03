@@ -49,6 +49,8 @@
   }
 }
 
+
+
 .search {
   .input-group-addon {
     border-right: none;
@@ -64,6 +66,29 @@
   }
 }
 
+
+
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* checkbox
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.fancy-check {
+  cursor: pointer;
+
+  &:hover {
+    color: $blue;
+  }
+
+  input{
+    display: none;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+    color: $gray;
+  }
+}
 .checked-list-box {
   padding: 7px 15px;
   border-color: $gray-light-30;

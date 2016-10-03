@@ -9,7 +9,7 @@
     .state('modules', {
       parent: 'layout',
       url: '/settings/modules',
-      templateUrl: 'app/settings/modules.html',
+      templateUrl: 'app/settings/modules/modules.html',
       controller: 'ModulesCtrl'
     });
 

@@ -41,10 +41,7 @@ module.exports.routes = {
   'GET /auth/findPasswordReset/:token/:tokenId/:userId': 'AuthController.findPasswordReset',
 
   // profile
-  'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate',
-
-  // File
-  'GET /folder/byItem/:id/:item': 'FolderController.byItem'
+  'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate'
 
 
   /***************************************************************************

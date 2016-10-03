@@ -5,6 +5,8 @@
   .module('layout')
   .controller('LayoutCtrl', ['$rootScope', '$scope', '$state', 'restFulService', function($rootScope, $scope, $state, restFulService){
 
+    $scope.isProfile = $state.is('profile') ? true : false;
+
     $scope.class = {
       layout: localStorage.getItem('layout'),
       chat: false
@@ -14,7 +16,7 @@
       chat: 0
     };
 
-    $scope.modules = [];
+    $rootScope.modules = [];
     $scope.submodules = [];
     $scope.breadcrumbs = [];
 
@@ -59,7 +61,7 @@
               });
             }
 
-            $scope.modules.push(module);
+            $rootScope.modules.push(module);
           }
         }
 
@@ -72,7 +74,7 @@
 
       $scope.submodules = [];
 
-      $scope.modules.forEach(function(v, k) {
+      $rootScope.modules.forEach(function(v, k) {
         if (v.title == partsUrl[0]) {
           $scope.submodules = v.submodules;
         }
@@ -142,6 +144,7 @@
     $rootScope.$on('$stateChangeSuccess', function() {
       setSubmodules();
       setBreadcrumbs();
+      $scope.isProfile = $state.is('profile') ? true : false;
     });
 
     getModules();

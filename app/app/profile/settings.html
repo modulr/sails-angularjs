@@ -1,0 +1,75 @@
+<div ng-controller="ProfileSettingsCtrl">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'PROFILE.ACCOUNT' | translate}}</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" id="formAccount">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.USERNAME' | translate }}:</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="{{ 'USERNAME' | translate }}" ng-model="user.username" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.EMAIL' | translate }}:</label>
+              <div class="col-sm-9">
+                <input type="email" class="form-control" placeholder="{{ 'PROFILE.EMAIL' | translate }}" ng-model="user.email" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.LANGUAGE' | translate }}:</label>
+              <div class="col-sm-9">
+                <mdr-select2 url="{{urlAPI}}/language" options="language.language | translate for language in languages | orderBy:'language' track by language.language" model="formAccount.language" selected="user.language" required></mdr-select2>
+              </div>
+            </div>
+          </form>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right">
+          <button type="button" class="btn btn-danger pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deactivateAccount($event)">{{ 'PROFILE.DEACTIVATEACCOUNT' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="saveAccount($event)">{{ 'SAVE' | translate }}</button>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.account -->
+
+    </div><!-- /.col -->
+    <div class="col-sm-6 col-md-6">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'PROFILE.CHANGEPASSWORD' | translate}}</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" id="formPassword">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.OLDPASSWORD' | translate}}</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" smk-strongPass="weak" required  ng-model="formPassword.oldPassword">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.PASSWORD' | translate}}</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" data-smk-strongPass="strong" required  id="password" ng-model="formPassword.password">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.REPASSWORD' | translate}}</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="rePassword" ng-model="formPassword.rePassword">
+              </div>
+            </div>
+          </form>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right">
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="savePassword($event)">{{ 'SAVE' | translate }}</button>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.change-password -->
+
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</div>

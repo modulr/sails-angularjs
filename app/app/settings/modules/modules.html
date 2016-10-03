@@ -1,0 +1,29 @@
+<div class="page">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div ui-tree="treeOptions">
+                <ol ui-tree-nodes="" ng-model="modules">
+                  <li ng-repeat="item in modules" ui-tree-node>
+                    <div ui-tree-handle class="text-capitalize">
+                      <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+                      <button type="button" class="btn btn-default btn-xs pull-right" ng-disabled="item.lock" ng-click="toggleModule(item)" data-nodrag>
+                        <span ng-if="!item.active">{{ 'ENABLED' | translate }}</span>
+                        <span ng-if="item.active">{{ 'DISABLED' | translate }}</span>
+                      </button>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.panel-body -->
+      </div>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</div><!-- /.page -->

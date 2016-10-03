@@ -11,6 +11,10 @@
   "CONFIGURATION": "Configuración",
   "MODULES": "Modulos",
   "AUTHORIZATION": "Autorizacion",
+  "INFORMATION": "Información",
+  "WORK": "Trabajo",
+  "PERMISSIONS": "Permisos",
+  "FILES": "Archivos",
 
   "SEARCH": "Buscar",
   "CREATE": "Crear",
@@ -23,6 +27,8 @@
   "ADD": "Agregar",
   "UPLOAD": "Subir",
   "DRAGORCLICK": "Arrastra o haz click",
+  "ENABLED": "Habilitar",
+  "DISABLED": "Deshabilitar",
 
   "MESSAGES": {
     "SUCCESS": "Los datos se actualizaron correctamente."

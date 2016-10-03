@@ -2,7 +2,10 @@
   <div class="col-sm-8">
     <ol class="breadcrumb">
       <li ng-repeat="item in breadcrumb track by $index">
-        <a href="" ng-click="openFolder(item)">{{item.name}}</a>
+        <a href="" ng-click="openFolder(item)">
+          <span class="glyphicon glyphicon-home" aria-hidden="true" ng-if="$first"></span>
+          <span ng-if="!$first">{{item.name}}</span>
+        </a>
         <!-- <span ng-if="$last">{{item.name}}</span> -->
       </li>
     </ol>
@@ -44,7 +47,7 @@
         <h4 class="modal-title">Upload file</h4>
       </div>
       <div class="modal-body">
-        <mdr-file url="{{urlAPI}}/file/upload/{{home.item}}" headers="{authorization: token}" data="home" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+        <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{folder.currentFolderId}}" headers="{authorization: token}" data="folder" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -53,7 +56,7 @@
   </div>
 </div>
 
-<!-- Update file -->
+<!-- Update file or folder -->
 <div class="modal fade" id="modalEdit_{{$id}}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -70,7 +73,6 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" ng-click="delete($event)">Eliminar</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" ng-click="save($event)">Guardar</button>
       </div>
@@ -97,6 +99,30 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" ng-click="createFolder($event)">Crear</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info -->
+<div class="modal fade" id="modalInfo_{{$id}}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <dl class="row">
+          <div class="col-md-6"><p>Nombre</p></div>
+          <div class="col-md-6"><p>{{info.name}}</p></div>
+          <div class="col-md-6"><p>Tipo</p></div>
+          <div class="col-md-6"><p>{{info.type}}</p></div>
+          <div class="col-md-6"><p>Tamaño</p></div>
+          <div class="col-md-6"><p>{{info.size}}</p></div>
+          <div class="col-md-6"><p>Propietario</p></div>
+          <div class="col-md-6"><p>{{info.owner.fullName}}</p></div>
+          <div class="col-md-6"><p>Creado</p></div>
+          <div class="col-md-6"><p>{{info.createdAt | amDateFormat: 'll'}} <small>por {{info.createdUser.fullName}}</small></p></div>
+          <div class="col-md-6"><p>Modificado</p></div>
+          <div class="col-md-6"><p>{{info.updatedAt | amDateFormat: 'll'}} <small>por {{info.updatedUser.fullName}}</small></p></div>
+        </dl>
       </div>
     </div>
   </div>

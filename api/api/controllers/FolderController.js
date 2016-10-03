@@ -7,27 +7,32 @@
 
 module.exports = {
 
-  byItem: function(req, res, cb) {
+  getFolderAndFiles: function(req, res, cb) {
 
     var id = req.param('id');
-    var item = req.param('item');
 
     sails.models.folder.findOne({id:id})
     .exec(function(err, result){
       if(err) return cb(err);
 
       var response = {
-        home: result,
+        folder: result,
         children: []
       };
 
-      sails.models.folder.find({parentId:id, item:item})
+      sails.models.folder.find({parentId:id})
+      .populate('createdUser')
+      .populate('updatedUser')
+      .populate('owner')
       .exec(function(err, result){
         if(err) return cb(err);
 
         response.children = result;
 
-        sails.models.file.find({folderId:id, item:item})
+        sails.models.file.find({folderId:id})
+        .populate('createdUser')
+        .populate('updatedUser')
+        .populate('owner')
         .exec(function(err, result){
           if(err) return cb(err);
 
@@ -46,17 +51,23 @@ module.exports = {
 
   },
 
-  byParent: function(req, res, cb) {
+  getFolderAndFilesByParent: function(req, res, cb) {
 
     var id = req.param('id');
 
     sails.models.folder.find({parentId:id})
+    .populate('createdUser')
+    .populate('updatedUser')
+    .populate('owner')
     .exec(function(err, result){
       if(err) return cb(err);
 
       var response = result;
 
       sails.models.file.find({folderId:id})
+      .populate('createdUser')
+      .populate('updatedUser')
+      .populate('owner')
       .exec(function(err, result){
         if(err) return cb(err);
 

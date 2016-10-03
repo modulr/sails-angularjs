@@ -5,7 +5,8 @@
     "state": "dashboard",
     "url": "/dashboard",
     "order": 1,
-    "active": true
+    "active": true,
+    "lock": true
   },
   {
     "title": "files",
@@ -22,6 +23,7 @@
     "url": "/log/login",
     "order": 3,
     "active": true,
+    "lock": true,
     "submodules": [
       {
         "title": "login",
@@ -40,6 +42,7 @@
     "url": "/users",
     "order": 4,
     "active": true,
+    "lock": true,
     "submodules": [
       {
         "title": "users",
@@ -56,12 +59,40 @@
     ]
   },
   {
+    "title": "profile",
+    "icon": "fa-user",
+    "state": "profile",
+    "url": "/profile",
+    "order": 6,
+    "active": true,
+    "lock": true,
+    "submodules": [
+      {
+        "title": "information",
+        "state": "information"
+      },
+      {
+        "title": "work",
+        "state": "work"
+      },
+      {
+        "title": "settings",
+        "state": "settings"
+      },
+      {
+        "title": "permissions",
+        "state": "permissions"
+      }
+    ]
+  },
+  {
     "title": "settings",
     "icon": "fa-cogs",
     "state": "modules",
     "url": "/settings/modules",
     "order": 5,
     "active": true,
+    "lock": true,
     "submodules": [
       {
         "title": "modules",

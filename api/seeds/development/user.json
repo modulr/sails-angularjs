@@ -9,6 +9,7 @@
     "photo" : "avatar.jpg",
     "logged" : false,
     "active" : true,
+    "lock" : true,
     "profile" : "56b607d6a92a603f89e0119c",
     "role" : "56f964859093205f3a5fedb6"
   },

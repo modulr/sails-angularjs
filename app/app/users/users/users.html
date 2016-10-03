@@ -116,17 +116,15 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <label class="control-label">{{ 'USERS.USERNAME' | translate }}</label>
+                <label class="control-label">{{ 'USERS.USERNAME' | translate }}*</label>
                 <input type="text" class="form-control" placeholder="john" data-smk-type="alphanumeric" ng-model="formUser.username" required autofocus>
               </div>
               <div class="form-group">
-                <label class="control-label">{{ 'USERS.EMAIL' | translate }}</label>
+                <label class="control-label">{{ 'USERS.EMAIL' | translate }}*</label>
                 <input type="email" class="form-control" placeholder="john.doe@company.com" ng-model="formUser.email" required>
               </div>
               <div class="form-group">
-                <label class="control-label">
-                  {{ 'USERS.PASSWORD' | translate }}
-                </label>
+                <label class="control-label">{{ 'USERS.PASSWORD' | translate }}*</label>
                 <div class="input-group">
                   <span class="input-group-addon" ng-if="show.editUser">
                     <input type="checkbox" ng-model="show.password">
@@ -138,8 +136,8 @@
                 </div><!-- /input-group -->
               </div>
               <div class="form-group">
-                <label class="control-label">{{ 'USERS.ROLE' | translate }}</label>
-                <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formUser.getRole" selected="formUser.role" required="true"></mdr-select2>
+                <label class="control-label">{{ 'USERS.ROLE' | translate }}*</label>
+                <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formUser.getRole" selected="formUser.role" required="true" disabled="formUser.lock"></mdr-select2>{{formUser.lock}}
               </div>
               <div class="form-group">
                 <div class="list-group">
@@ -151,13 +149,21 @@
           </div><!-- /.row -->
         </div><!-- /.modal-body -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" ng-if="show.editUser" ng-disabled="formUser.id == user.id" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deleteUser($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default pull-left" ng-if="show.editUser" ng-disabled="formUser.id == user.id" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deleteUser($event)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
           <button type="button" class="btn btn-default btn-outline pull-left"  ng-if="show.editUser" ng-click="sendUserData($event)">
             <i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}
           </button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
-          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="createUser($event)" ng-if="!show.editUser">{{ 'ADD' | translate }}</button>
-          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="updateUser($event)" ng-if="show.editUser">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{ 'CLOSE' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="createUser($event)" ng-if="!show.editUser">
+            {{ 'ADD' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="updateUser($event)" ng-if="show.editUser">
+            {{ 'SAVE' | translate }}
+          </button>
         </div><!-- /.modal-footer -->
       </form>
     </div><!-- /.modal-content -->

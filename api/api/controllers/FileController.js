@@ -21,11 +21,11 @@ module.exports = {
 
   },
 
-  upload: function (req, res, cb) {
+  uploadInFolder: function (req, res, cb) {
 
-    var item = req.param('id');
+    var folderId = req.param('id');
 
-    var folder = sails.config.settings.STORAGE +'/users/files/'+ item;
+    var folder = sails.config.settings.STORAGE +'/files/'+ folderId;
 
     req.file('file').upload({
       // Save file into folder
@@ -40,9 +40,10 @@ module.exports = {
         name: file[0].filename,
         size: FileService.getHumanFileSize(file[0].size),
         type: file[0].type,
-        item: item,
         folderId: req.body.currentFolderId,
-        owner: req.token.id
+        owner: req.token.id,
+        createdUser: req.token.id,
+        updatedUser: req.token.id
       }).exec(function(err, file){
         if(err) return cb(err);
         res.json(file);

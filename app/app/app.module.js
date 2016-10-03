@@ -42,6 +42,7 @@
   .constant(
     'config', {
       'urlAPI': window.io.sails.url,
+      'storageUrl': window.storageUrl,
     }
   )
   .config(['$stateProvider', '$httpProvider', '$sailsSocketProvider', '$locationProvider', '$urlRouterProvider', '$translateProvider', function($stateProvider, $httpProvider, $sailsSocketProvider, $locationProvider, $urlRouterProvider, $translateProvider){

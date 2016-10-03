@@ -36,7 +36,7 @@ module.exports = {
       }
     },
     from: 'Modulr <no-reply@modulr.io>',
-    testMode: false
+    testMode: true
   },
 
   connections: {

@@ -1,0 +1,43 @@
+<div ng-controller="ProfileWorkCtrl">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'PROFILE.WORK' | translate }}</h3>
+        </div>
+        <div class="panel-body">
+          <form class="form-horizontal" id="formWork">
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.JOB' | translate }}</label>
+              <div class="col-sm-9">
+                <mdr-select2 url="{{urlAPI}}/job" options="job.job for job in jobs | orderBy:'job' track by job.job" model="formWork.job" selected="user.profile.job"></mdr-select2>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.DEPARTMENT' | translate }}</label>
+              <div class="col-sm-9">
+                <mdr-select2 url="{{urlAPI}}/department" options="department.department for department in departments | orderBy:'department' track by department.department" model="formWork.department" selected="user.profile.department"></mdr-select2>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">{{ 'PROFILE.COMPANY' | translate }}</label>
+              <div class="col-sm-9">
+                <mdr-select2 url="{{urlAPI}}/company" options="company.company for company in companies | orderBy:'company' track by company.company" model="formWork.company" selected="user.profile.company"></mdr-select2>
+              </div>
+            </div>
+          </form>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right">
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="saveWork($event)">{{ 'SAVE' | translate }}</button>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.work -->
+
+    </div><!-- /.col -->
+    <div class="col-sm-6 col-md-6">
+      <p>fecha que ingreso a trabajar, inventarios(compu, celular, automovil) Archivos(comp. estudios, acta de nacimiento, cedula, etc)</p>
+    </div>
+  </div><!-- /.row  -->
+
+</div>

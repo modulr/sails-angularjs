@@ -41,6 +41,26 @@
           "_write" : true
         }
       },
+      "profile":{
+        "_access" : true,
+        "_write" : true,
+        "information" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "work" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "settings" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "permissions" : {
+          "_access" : true,
+          "_write" : true
+        }
+      },
       "settings" : {
         "_access" : true,
         "_write" : true,
@@ -93,6 +113,26 @@
           "_write" : false
         }
       },
+      "profile":{
+        "_access" : true,
+        "_write" : true,
+        "information" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "work" : {
+          "_access" : true,
+          "_write" : false
+        },
+        "settings" : {
+          "_access" : true,
+          "_write" : true
+        },
+        "permissions" : {
+          "_access" : false,
+          "_write" : false
+        }
+      },
       "settings" : {
         "_access" : false,
         "_write" : false,
@@ -141,6 +181,26 @@
           "_write" : false
         },
         "access" : {
+          "_access" : false,
+          "_write" : false
+        }
+      },
+      "profile":{
+        "_access" : true,
+        "_write" : false,
+        "information" : {
+          "_access" : true,
+          "_write" : false
+        },
+        "work" : {
+          "_access" : true,
+          "_write" : false
+        },
+        "settings" : {
+          "_access" : true,
+          "_write" : false
+        },
+        "permissions" : {
           "_access" : false,
           "_write" : false
         }

@@ -62,6 +62,10 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'json',
       defaultsTo: {}
     },
+    lock: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     chats: {
       collection: 'chat',
       via: 'participants'
@@ -87,7 +91,7 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       via: 'userId'
     },
     getFullName: function () {
-      var fullName = null;
+      var fullName = this.username;
       if (this.firstName !== '' || this.lastName !== '') {
         fullName = this.firstName + ' ' + this.lastName;
       }
