@@ -110,7 +110,7 @@ gulp.task('compile', ['preprocess', 'sass', 'js', 'jsonmin', 'imagemin', 'vendor
 
 gulp.task('build', ['env:prod', 'compile']);
 
-gulp.task('default', ['env:dev', 'compile', 'watch'], function () {
+gulp.task('serve', ['env:dev', 'compile', 'watch'], function () {
   nodemon({
     script: 'server.js',
     //tasks: ['env:dev', 'compile']

@@ -137,7 +137,7 @@ $ git clone https://github.com/modulr/modulr.git
 ~/modulr/app$ bower install
 ```
 
-> If you receive conflicts notifications please chose no. 5
+> If you receive conflicts notifications please chose "angular#~1.4.5 which resolved to 1.4.12 and is required by modulr"
 
 ```
 - Prefix the choice with ! to persist it to bower.json
@@ -155,19 +155,26 @@ $ git clone https://github.com/modulr/modulr.git
 $ mongod
 ```
 
-######1. Start sails
+######1. Configure env files
+
+```
+~/modulr/api/config$ rename development.example.js development.js
+~/modulr/app/config$ rename development.example.json development.json
+```
+
+######2. Start sails
 
 ```
 ~/modulr/api$ sails lift
 ```
 
-######2. Start web server
+######3. Start web server
 
 ```
 ~/modulr/app$ gulp serve
 ```
 
-######3. Finaly step
+######4. Finaly step
 
 *Go to [http://localhost:3000](http://localhost:3000) in you browser.*
 
