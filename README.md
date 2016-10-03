@@ -155,11 +155,11 @@ $ git clone https://github.com/modulr/modulr.git
 $ mongod
 ```
 
-######1. Configure env files
+######1. Configure enviroment files
 
 ```
-~/modulr/api/config$ rename development.example.js development.js
-~/modulr/app/config$ rename development.example.json development.json
+~/modulr/api/config$ mv development.example.js development.js
+~/modulr/app/config$ mv development.example.json development.json
 ```
 
 ######2. Start sails
