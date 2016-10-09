@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "cd api && npm install -g node-gyp && npm install && cd ../app && npm install && bower install",
+    "install": "cd api && npm install && cd ../app && npm install && bower install",
     "start": "cd api && npm start ; cd ../app && npm start"
   },
   "repository": {
