@@ -1,6 +1,9 @@
 {
   "name": "modulr-app",
-  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "fs": "0.0.2",

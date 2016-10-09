@@ -11,7 +11,7 @@ app.get('*', function(req, res, next) {
 });
 
 app.listen(port, function(err) {
-  if (err) return console.log(), process.exit(1);
+  if (err) return console.log(err), process.exit(1);
 
   console.log('modulr app listen port ' + port);
 });

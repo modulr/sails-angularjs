@@ -18,7 +18,7 @@ module.exports = {
    ***************************************************************************/
 
    settings: {
-     APP_URL: 'http://localhost:3000',
+     APP_URL: 'http://localhost',
      STORAGE: '../app/storage',
      TOKEN_SECRET: 'shhhhh',
      TOKEN_EXPIRES_IN_MINUTES: 1440, // 1 dia
@@ -53,6 +53,14 @@ module.exports = {
          socketTimeoutMS: 0
        }
      }
+   },
+
+   session: {
+    adapter: 'mongo',
+    host: 'localhost',
+    port: 27017,
+    db: 'modulr',
+    collection: 'sessions'
    },
 
    models: {

@@ -1,10 +1,10 @@
 api/node_modules
-api/config/development.js
-api/config/production.js
+api/config/env/development.js
+api/config/env/production.js
 app/.sass-cache
 app/bower_components
 app/node_modules
-app/config/development.json
-app/config/production.json
+app/config/env/development.json
+app/config/env/production.json
 app/public/*
 app/storage/*

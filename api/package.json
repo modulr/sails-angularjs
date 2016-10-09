@@ -1,10 +1,12 @@
 {
   "name": "modulr-api",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sails lift"
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "connect-mongo": "^0.8.2",
     "ejs": "~0.8.4",
     "glob": "^7.0.0",
     "grunt": "0.4.2",
@@ -33,6 +35,7 @@
     "sails-hook-apianalytics": "^1.0.0",
     "sails-hook-email": "^0.12.0",
     "sails-mongo": "^0.11.1",
+    "skipper-s3": "^0.5.6",
     "ua-parser": "^0.3.5"
   }
 }

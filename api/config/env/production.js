@@ -18,7 +18,7 @@ module.exports = {
    ***************************************************************************/
 
    settings: {
-     APP_URL: 'http://localhost:3000',
+     APP_URL: 'http://localhost',
      STORAGE: '../app/storage',
      TOKEN_SECRET: 'shhhhh',
      TOKEN_EXPIRES_IN_MINUTES: 1440, // 1 dia
@@ -27,12 +27,12 @@ module.exports = {
 
    email: {
      transporter: {
-       host: 'localhost',
+       host: 'p3plcpnl0565.prod.phx3.secureserver.net',
        port: 465,
        secure: true, // use SSL
        auth: {
-         user: 'email@modulr.io',
-         pass: 'password'
+         user: 'no-reply@modulr.io',
+         pass: '0pensourcE10'
        }
      },
      from: 'Modulr <no-reply@modulr.io>',
@@ -53,6 +53,14 @@ module.exports = {
          socketTimeoutMS: 0
        }
      }
+   },
+
+   session: {
+    adapter: 'mongo',
+    host: 'localhost',
+    port: 27017,
+    db: 'modulr',
+    collection: 'sessions'
    },
 
    models: {

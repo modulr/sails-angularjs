@@ -45,8 +45,8 @@ module.exports = {
       parameters: log.diagnostic.routeParams,
       body: log.diagnostic.bodyParams,
       query: log.diagnostic.queryParams,
-      responseTime: log.responseTime,
-      middlewareLatency: log.diagnostic.middlewareLatency,
+      responseTime: log.responseTime || 0,
+      middlewareLatency: log.diagnostic.middlewareLatency || 0,
       user: req.token || 0
     })
     .exec(function(err, created) {

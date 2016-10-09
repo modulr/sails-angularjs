@@ -19,6 +19,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     owner: {
       model: 'user'
     },
+    shared: {
+      type: 'array'
+    },
     parentId: {
       type: 'string'
     },

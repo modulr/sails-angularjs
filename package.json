@@ -1,0 +1,26 @@
+{
+  "name": "modulr",
+  "version": "3.0.0",
+  "description": "The Base for Developing any Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd api && npm install -g node-gyp && npm install && cd ../app && npm install && bower install",
+    "start": "cd api && npm start ; cd ../app && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/modulr/modulr.git"
+  },
+  "keywords": [
+    "framework",
+    "erp",
+    "opensource"
+  ],
+  "author": "modulr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/modulr/modulr/issues"
+  },
+  "homepage": "https://github.com/modulr/modulr#readme"
+}

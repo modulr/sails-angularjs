@@ -29,7 +29,11 @@ module.exports = {
 
     req.file('file').upload({
       // Save file into folder
-      dirname: path.resolve(folder)
+      dirname: path.resolve(folder),
+      adapter: require('skipper-s3'),
+      key: 'AKIAJONXXZMPWX3OWGLA',
+      secret: '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',
+      bucket: 'modulrdemo'
 
     },function (err, file) {
       if (err) return cb(err);
