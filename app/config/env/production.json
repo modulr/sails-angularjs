@@ -1,5 +1,0 @@
-{
-  "APP_PORT": "3000",
-  "API_URL": "http://localhost:1337",
-  "STORAGE_URL": "storage"
-}
