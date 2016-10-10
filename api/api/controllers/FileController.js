@@ -31,9 +31,9 @@ module.exports = {
       // Save file into folder
       dirname: path.resolve(folder),
       adapter: require('skipper-s3'),
-      key: 'AKIAJONXXZMPWX3OWGLA',
-      secret: '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',
-      bucket: 'modulrdemo'
+      key: sails.config.settings.AWS_S3_KEY,
+      secret: sails.config.settings.AWS_S3_SECRET,
+      bucket: sails.config.settings.AWS_S3_BUCKETNAME
 
     },function (err, file) {
       if (err) return cb(err);

@@ -17,7 +17,7 @@
         </a>
       </td>
       <td ng-if="file.type" style="vertical-align: middle">
-        <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.image" title="{{file.name}}">
+        <a href="" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.image" title="{{file.name}}">
           <i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i>
           <span style="vertical-align: super">{{file.name | limitTo : 35}}<span ng-if="file.name.length > 35">...</span></span>
         </a>

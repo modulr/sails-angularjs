@@ -7,7 +7,7 @@
         <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i>
       </a>
 
-      <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.type && file.image">
+      <a href="" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.type && file.image">
         <img ng-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" alt="{{file.name}}">
       </a>
 
@@ -16,18 +16,18 @@
       </a>
 
       <div class="caption">
-        <a href="" ng-click="openFolder(file)" ng-if="!file.type">
+        <p ng-if="!file.type">
           {{file.name | limitTo : 12}}
           <span ng-if="file.name.length > 12">...</span>
-        </a>
-        <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.type && file.image">
+        </p>
+        <p ng-if="file.type && file.image">
           {{file.name | limitTo : 12}}
           <span ng-if="file.name.length > 12">...</span>
-        </a>
-        <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" target="_blank" ng-if="file.type && !file.image">
+        </p>
+        <p ng-if="file.type && !file.image">
           {{file.name | limitTo : 12}}
           <span ng-if="file.name.length > 12">...</span>
-        </a>
+        </p>
         <span class="dropdown pull-right">
           <a href="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
@@ -41,8 +41,6 @@
           </ul>
         </divspan>
       </div>
-
-
 
     </div>
 
