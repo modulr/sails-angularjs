@@ -7,4 +7,4 @@ app/node_modules
 app/config/env/development.json
 app/config/env/production.json
 app/public/*
-app/storage/*
+app/storage/**

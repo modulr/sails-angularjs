@@ -126,25 +126,17 @@ $ git clone https://github.com/modulr/modulr.git
 ######2. Install npm dependencies
 
 ```
-~/modulr/api$ sudo npm install -g node-gyp
-~/modulr/api$ npm install
-~/modulr/app$ npm install
+$ sudo npm install -g node-gyp
+~/modulr$ npm run install
 ```
 
-######3. Install bower dependencies
+> If you receive conflicts notifications please chose "angular#~1.5.0 which resolved to 1.5.8 and is required by modulr-app"
 
 ```
-~/modulr/app$ bower install
+Prefix the choice with ! to persist it to bower.json
+? Answer
+angular#~1.5.0 which resolved to 1.5.8 and is required by modulr-app
 ```
-
-> If you receive conflicts notifications please chose "angular#~1.4.5 which resolved to 1.4.12 and is required by modulr"
-
-```
-- Prefix the choice with ! to persist it to bower.json
-- ? Answer
-- angular#~1.4.5 which resolved to 1.4.12 and is required by modulr
-```
-
 
 
 ##Start modulr
@@ -171,7 +163,7 @@ $ mongod
 ######3. Start web server
 
 ```
-~/modulr/app$ gulp serve
+~/modulr/app$ gulp
 ```
 
 ######4. Finaly step
