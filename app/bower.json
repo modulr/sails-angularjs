@@ -38,6 +38,11 @@
         "dist/js/bootstrap.js"
       ]
     },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    },
     "select2": {
       "main": [
         "dist/css/select2.css",
