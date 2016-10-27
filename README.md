@@ -1,6 +1,6 @@
 #[Modulr](http://www.modulr.io)
 
-Open Source Framework for ERP´s Development
+The Base for Developing any Project
 
 Before you start take a look at [http://www.modulr.io](http://www.modulr.io)
 
