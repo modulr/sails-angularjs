@@ -13,14 +13,14 @@
     font-weight: normal;
   }
 
-  .input-group-addon {
-    border-radius: 0;
-    background-color: $white;
-  }
-
   @include placeholder {
     color: $gray-light-10;
     font-weight: lighter;
+  }
+
+  .input-group-addon {
+    border-radius: 0;
+    background-color: $white;
   }
 
   // .control-label{
@@ -76,7 +76,11 @@
 .fancy-check {
   cursor: pointer;
 
-  &:hover {
+  &:hover, &:focus {
+    color: inherit;
+  }
+
+  .fa-check-square {
     color: $blue;
   }
 
@@ -190,7 +194,7 @@ tags-input {
 
     .tag-item {
       background: none;
-      background-color: $blue;
+      background-color: $blue-light-10;
       border: 1px solid $blue;
       border-radius: 0;
       color: $white;
@@ -206,6 +210,10 @@ tags-input {
       }
     }
 
+    .input {
+      font-family: $font;
+    }
+
   }
 
   .autocomplete {
@@ -216,7 +224,7 @@ tags-input {
     .suggestion-item{
 
       &.selected {
-        background-color: $blue;
+        background-color: $blue-light-10;
 
         em {
           background: none;
@@ -242,4 +250,31 @@ tags-input {
     }
   }
 
+  &.round .tags .tag-item {
+    border-radius: 25px;
+    padding: 0 10px;
+  }
+
+  &.template .tags .tag-item {
+    padding-left: 1px;
+  }
+}
+
+.tag-template {
+  border-radius: 25px;
+}
+.tag-template .left-panel {
+  float: left;
+}
+
+.tag-template .left-panel img {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.tag-template .right-panel {
+  float: left;
+  margin-left: 5px;
 }

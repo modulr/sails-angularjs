@@ -92,7 +92,7 @@ gulp.task('copyhtml', function () {
 gulp.task('copyvendor', function () {
   gulp.src('bower_components/sails.io.js/**')
     .pipe(gulp.dest(dest + 'bower_components/sails.io.js'));
-  gulp.src('bower_components/fontawesome/fonts/*')
+  gulp.src('bower_components/font-awesome/fonts/*')
     .pipe(gulp.dest(dest + 'fonts'));
   gulp.src('bower_components/bootstrap/fonts/*')
     .pipe(gulp.dest(dest + 'fonts'));

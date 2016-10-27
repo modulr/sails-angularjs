@@ -1,0 +1,25 @@
+.comments .media-list {
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $gray;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba($black, 0.4);
+  }
+}
+
+.comments form .input-group .input-group-addon {
+  border: none;
+  vertical-align: top;
+  padding: 0 12px 0 0;
+}
+
+.comments form .input-group textarea {
+  resize: none;
+}

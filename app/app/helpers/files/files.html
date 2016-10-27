@@ -1,129 +1,149 @@
 <div class="row">
-  <div class="col-sm-8">
-    <ol class="breadcrumb">
-      <li ng-repeat="item in breadcrumb track by $index">
-        <a href="" ng-click="openFolder(item)">
-          <span class="glyphicon glyphicon-home" aria-hidden="true" ng-if="$first"></span>
-          <span ng-if="!$first">{{item.name}}</span>
+
+  <div ng-class="{'col-sm-12':!showInfo, 'col-sm-8':showInfo}">
+    <div class="panel">
+      <div class="panel-heading">
+        <ol class="breadcrumb pull-left">
+          <li ng-repeat="item in breadcrumb">
+            <a href="" ng-click="openFolder(item)">
+              <span class="glyphicon glyphicon-home" aria-hidden="true" ng-if="$first"></span>
+              <span ng-if="!$first">{{item.name}}</span>
+            </a>
+            <!-- <span ng-if="$last">{{item.name}}</span> -->
+          </li>
+        </ol>
+        <div class="btn-group pull-right" role="group">
+          <form class="form-inline" id="formFolder_{{$id}}">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="My Folder" focus="showCreateFolderInput" ng-show="showCreateFolderInput" enter="createFolder()" ng-model="formFolder.name" required>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Crear" ng-click="createFolder()">
+                  <i class="fa fa-plus" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Subir" data-toggle="collapse" data-target="#collapseUpload_{{$id}}">
+                  <i class="fa fa-upload" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Vista" ng-click="toggleLayout()">
+                  <i class="fa" aria-hidden="true"ng-class="{'fa-list': layout=='list', 'fa-th': layout=='grid' }"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+        <div class="clearfix"></div>
+      </div><!-- /.panel-heading -->
+      <div class="panel-body files">
+        <div class="collapse" id="collapseUpload_{{$id}}">
+          <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+          <hr>
+        </div>
+        <div ng-hide="loading" ng-include src="'app/helpers/files/'+ layout + '.html'"></div>
+        <div ng-show="loading" class="lead loading-panel text-center">Loading...</div>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel -->
+  </div><!-- /.col -->
+
+  <div class="col-sm-4" ng-show="showInfo">
+    <div class="panel">
+      <div class="panel-heading text-right">
+        <img ng-src="{{folderOrFile.owner.avatar}}" class="img-circle avatar-md pull-left" tooltip data-placement="bottom" data-title="Propietario">
+
+        <a href="{{storageUrl}}/{{folderOrFile.folderId}}/{{folderOrFile.file}}" class="btn btn-default btn-circle" target="_blank" download="{{folderOrFile.name}}" tooltip data-placement="bottom" data-title="Descargar" ng-show="folderOrFile.type">
+          <span class="fa-stack">
+            <i class="fa fa-download" aria-hidden="true"></i>
+          </span>
         </a>
-        <!-- <span ng-if="$last">{{item.name}}</span> -->
-      </li>
-    </ol>
-  </div>
-  <div class="col-sm-4 text-right">
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalUpload_{{$id}}" tooltip tooltip-placement="top" data-title="Subir">
-        <span class="glyphicon glyphicon-open" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalFolder_{{$id}}" tooltip tooltip-placement="top" data-title="Crear">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </button>
-      <button type="button" class="btn btn-default" ng-click="toggleLayout()">
-        <span class="glyphicon" aria-hidden="true" ng-class="{'glyphicon-th-list': layout=='list', 'glyphicon-th': layout=='grid' }"></span>
-      </button>
-    </div>
-  </div>
-</div>
-<hr>
-<div class="row files">
-  <div class="col-sm-12 files">
-    <div ng-hide="loading" ng-include src="'app/helpers/files/'+ layout + '.html'"></div>
-    <div ng-show="loading" class="text-center">Loading...</div>
-  </div>
+        <button type="button" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Guardar" ng-disabled="user.id!=folderOrFile.owner.id" ng-click="save($event)">
+          <span class="fa-stack">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+          </span>
+        </button>
+        <button type="button" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Borrar" ng-disabled="user.id!=folderOrFile.owner.id" ng-click="delete($event)">
+          <span class="fa-stack">
+            <i class="fa fa-trash-o" aria-hidden="true"></i>
+          </span>
+        </button>
+        <a href="" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Cerrar" ng-click="showInfo=false">
+          <span class="fa-stack">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </span>
+        </a>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <form id="formFolderOrFile_{{$id}}">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="nombre del archivo" ng-model="folderOrFile.name" required>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="2" placeholder="Descripcion" ng-model="folderOrFile.description"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Compartir</label>
+                <tags-input class="ui-tags-input round template"
+                  ng-model="folderOrFile.shared"
+                  display-property="fullName"
+                  add-from-autocomplete-only="true"
+                  replace-spaces-with-dashes="false"
+                  template="tag-template"
+                  placeholder="Compartir">
+                  <auto-complete
+                    source="loadUsers($query)"
+                    template="autocomplete-template">
+                  </auto-complete>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <a href="" data-toggle="collapse" data-target="#collapseMore_{{$id}}">
+                <small>Más <i class="fa fa-angle-down" aria-hidden="true"></i></small>
+              </a>
+            </div>
+            <div class="collapse" id="collapseMore_{{$id}}">
+              <small><b>{{folderOrFile.owner.fullName}}</b> propietario</small><br>
+              <small><b>{{folderOrFile.createdUser.fullName}}</b> creado {{folderOrFile.createdAt | amDateFormat: 'll'}}</small><br>
+              <small><b>{{folderOrFile.updatedUser.fullName}}</b> modificado {{folderOrFile.updatedAt | amDateFormat: 'll'}}</small><br>
+              <small>{{folderOrFile.type || 'Folder'}}<span ng-show="folderOrFile.size"> -- {{folderOrFile.size}}</span></small>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-md-12">
+            <comments model="isFileOrFolder" item="folderOrFile.id" src="folderOrFile.comments"></comments>
+          </div>
+        </div>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel-->
+
+  </div><!-- /.col -->
+
 </div><!-- /.row -->
 
 
-<!--
-* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-* Modals
-* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
--->
-<!-- Upload file -->
-<div class="modal fade bs-example-modal-lg" id="modalUpload_{{$id}}">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Upload file</h4>
-      </div>
-      <div class="modal-body">
-        <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{folder.currentFolderId}}" headers="{authorization: token}" data="folder" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
+<script type="text/ng-template" id="tag-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <img class="img-circle" ng-src="{{data.avatar}}"/>
+    </div>
+    <div class="right-panel">
+      <span>{{$getDisplayText()}}</span>
+      <a class="remove-button" ng-click="$removeTag()">×</a>
     </div>
   </div>
-</div>
+</script>
 
-<!-- Update file or folder -->
-<div class="modal fade" id="modalEdit_{{$id}}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Editar archivo</h4>
-      </div>
-      <div class="modal-body">
-        <form id="formEdit_{{$id}}">
-          <div class="form-group">
-            <label>Nombre</label>
-            <input type="text" class="form-control" placeholder="nombre del archivo" ng-model="formEdit.name" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" ng-click="save($event)">Guardar</button>
-      </div>
+<script type="text/ng-template" id="autocomplete-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <img class="img-circle" ng-src="{{data.avatar}}" />
+    </div>
+    <div class="right-panel">
+      <span ng-bind-html="$highlight($getDisplayText())"></span>
     </div>
   </div>
-</div>
-
-<!-- Create folder -->
-<div class="modal fade" id="modalFolder_{{$id}}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Agregar carpeta</h4>
-      </div>
-      <div class="modal-body">
-        <form id="formFolder_{{$id}}">
-          <div class="form-group">
-            <label >Nombre de la carpeta</label>
-            <input type="text" class="form-control" placeholder="My Folder" ng-model="formFolder.name" required>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" ng-click="createFolder($event)">Crear</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- info -->
-<div class="modal fade" id="modalInfo_{{$id}}">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-        <dl class="row">
-          <div class="col-md-6"><p>Nombre</p></div>
-          <div class="col-md-6"><p>{{info.name}}</p></div>
-          <div class="col-md-6"><p>Tipo</p></div>
-          <div class="col-md-6"><p>{{info.type}}</p></div>
-          <div class="col-md-6"><p>Tamaño</p></div>
-          <div class="col-md-6"><p>{{info.size}}</p></div>
-          <div class="col-md-6"><p>Propietario</p></div>
-          <div class="col-md-6"><p>{{info.owner.fullName}}</p></div>
-          <div class="col-md-6"><p>Creado</p></div>
-          <div class="col-md-6"><p>{{info.createdAt | amDateFormat: 'll'}} <small>por {{info.createdUser.fullName}}</small></p></div>
-          <div class="col-md-6"><p>Modificado</p></div>
-          <div class="col-md-6"><p>{{info.updatedAt | amDateFormat: 'll'}} <small>por {{info.updatedUser.fullName}}</small></p></div>
-        </dl>
-      </div>
-    </div>
-  </div>
-</div>
+</script>

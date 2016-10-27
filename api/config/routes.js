@@ -41,7 +41,11 @@ module.exports.routes = {
   'GET /auth/findPasswordReset/:token/:tokenId/:userId': 'AuthController.findPasswordReset',
 
   // profile
-  'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate'
+  'GET /emailChange/validate/:token/:tokenId/:userId': 'EmailChangeController.validate',
+
+  // Comments
+  'POST /comment/create/:model/:id': 'CommentController.create',
+
 
 
   /***************************************************************************

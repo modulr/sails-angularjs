@@ -150,8 +150,8 @@ $ mongod
 ######1. Configure enviroment files
 
 ```
-~/modulr/api/config$ mv development.example.js development.js
-~/modulr/app/config$ mv development.example.json development.json
+~/modulr/api/config/env$ mv development.example.js development.js
+~/modulr/app/config/env$ mv development.example.json development.json
 ```
 
 ######2. Start sails

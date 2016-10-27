@@ -15,7 +15,7 @@
               <thead tasty-thead></thead>
               <tbody>
                 <tr ng-repeat="row in rows">
-                  <td>{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
+                  <td ng-click="edit(row)">{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
                   <td>
                     <ul class="list-inline list-img">
                       <li ng-repeat="user in row.users | limitTo: 5">
@@ -24,11 +24,13 @@
                       <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 5 > 0">{{row.users.length - 5}}+</a>
                     </ul>
                   </td>
-                  <td>{{row.createdAt | amDateFormat:'LL'}}</td>
+                  <td ng-click="edit(row)">{{row.createdAt | amDateFormat:'LL'}}</td>
                   <td class="btn-edit">
-                    <a href="" class="btn btn-link" ng-click="edit(row)">
-                      <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
+                    <div class="btn-group">
+                      <a href="" class="btn" ng-click="edit(row)">
+                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
                   </td>
                 </tr>
               </tbody>

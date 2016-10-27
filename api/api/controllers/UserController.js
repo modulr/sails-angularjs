@@ -33,6 +33,21 @@ module.exports = {
     });
   },
 
+  findByUsernameOrFullname: function(req, res, cb)
+  {
+    var name = req.params.id;
+    sails.models.user.find({
+      or : [
+        { username: { 'like': '%' + name + '%'} },
+        { firstName: { 'like': '%' + name + '%'} },
+        { lastName: { 'like': '%' + name + '%'} }
+      ]
+    }).exec(function(err, users){
+      if(err) return cb(err);
+      res.json(users);
+    });
+  },
+
   create: function(req, res, cb)
   {
     var data = req.body;

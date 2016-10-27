@@ -35,7 +35,12 @@
 
   <ul class="nav nav-pills pull-right">
 
-    <li class="dropdown">
+    <li>
+      <a href="" tooltip data-placement="left" data-title="Ayuda proximamente...">
+        <i class="fa fa-question-circle-o fa-lg"></i>
+      </a>
+    </li>
+    <!-- <li class="dropdown">
       <a href="" class="dropdown-toggle" data-toggle="dropdown">
         <i class="fa fa-bell-o fa-lg"></i>
         <span class="label label-danger animated tada">29</span>
@@ -48,7 +53,7 @@
         <li><a href="#">Separated link</a></li>
         <li><a href="#">One more separated link</a></li>
       </ul>
-    </li>
+    </li> -->
     <li>
       <a href="" ng-click="class.chat=!class.chat">
         <i class="fa fa-comments-o fa-lg"></i>
@@ -64,12 +69,12 @@
           <img src="{{user.avatar}}" class="img-circle"/>
           <p>{{user.username}}<small>{{user.email}}</small></p>
         </li>
-        <li class="userData-body">
+        <!-- <li class="userData-body">
           <a href="" tooltip data-placement="top" title='To Do'><i class="fa fa-list fa-lg"></i></a>
           <a href="" tooltip data-placement="top" title='Calendar'><i class="fa fa-calendar fa-lg"></i></a>
           <a href="" tooltip data-placement="top" title='Mark'><i class="fa fa-bookmark-o fa-lg"></i></a>
           <a href="" tooltip data-placement="top" title='Settings'><i class="fa fa-cog fa-lg"></i></a>
-        </li>
+        </li> -->
         <li class="userData-footer">
           <div class="pull-left">
             <button type="button" class="btn btn-default" ng-click="goToProfile(user.id)">{{ 'PROFILE' | translate}}</button>

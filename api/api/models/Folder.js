@@ -13,6 +13,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     name: {
       type: 'string'
     },
+    description: {
+      type: 'string'
+    },
     url: {
       type: 'string'
     },
@@ -20,6 +23,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       model: 'user'
     },
     shared: {
+      type: 'array'
+    },
+    comments: {
       type: 'array'
     },
     parentId: {

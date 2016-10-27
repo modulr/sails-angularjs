@@ -26,20 +26,23 @@
         }
         &.btn-edit {
           position: absolute;
-          padding: 0;
           border: none;
           right: 35px;
-          a {
-            @include opacity(0);
-            color: $gray;
+          padding: 0;
+          margin: 2px;
 
-            &:hover {
+          > div {
+            background-color: #f5f5f5;
+            @include opacity(0);
+            //color: $gray;
+
+            a:hover {
               color: $blue;
             }
           }
         }
       }
-      &:hover .btn-edit a{
+      &:hover .btn-edit > div {
         @include opacity(1);
       }
       &.selected{

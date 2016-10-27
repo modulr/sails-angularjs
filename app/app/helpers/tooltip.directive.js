@@ -7,13 +7,13 @@
 
   function tooltip() {
     return {
-      scope: {
-        title: '@'
-      },
+      restrict: 'A',
       link: function (scope, elem, attrs) {
         $(elem).tooltip({
           container: 'body',
-          title : scope.title
+          title : attrs.title,
+          placement : attrs.placement,
+          html: true
         });
       }
     };

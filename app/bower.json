@@ -12,7 +12,6 @@
     "angular-ui-router": "~0.2.13",
     "angularSails": "~0.12.1",
     "bootstrap": "~3.3.6",
-    "fontawesome": "~4.3.0",
     "animate.css": "~3.2.0",
     "moment": "~2.10.3",
     "angular-moment": "~0.10.1",
@@ -29,7 +28,8 @@
     "sails.io.js": "~0.13.5",
     "deep-diff": "^0.3.4",
     "angular-eonasdan-datetimepicker": "^0.3.3",
-    "magnific-popup": "^1.1.0"
+    "magnific-popup": "^1.1.0",
+    "font-awesome": "^4.6.3"
   },
   "overrides": {
     "bootstrap": {

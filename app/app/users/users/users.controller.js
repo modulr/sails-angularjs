@@ -46,12 +46,13 @@
       restFulService.get('user')
       .then(function(response){
         $scope.users = response;
-        $translate(['USERS.USERNAME', 'USERS.EMAIL', 'USERS.ROLE', 'USERS.ACTIVE', 'USERS.DATE'])
+        console.log(response);
+        $translate(['USERS.USERNAME', 'USERS.FULLNAME', 'USERS.EMAIL', 'USERS.ROLE', 'USERS.ACTIVE', 'USERS.DATE'])
         .then(function (translations) {
           $scope.tableResource = {
             "header": [
-              {'avatar': ''},
               {'username': translations['USERS.USERNAME']},
+              {'fullName': translations['USERS.FULLNAME']},
               {'email': translations['USERS.EMAIL']},
               {'role': translations['USERS.ROLE']},
               {'active': translations['USERS.ACTIVE']},

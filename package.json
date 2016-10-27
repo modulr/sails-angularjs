@@ -1,6 +1,6 @@
 {
   "name": "modulr",
-  "version": "3.0.0",
+  "version": "3.0.0-beta",
   "description": "The Base for Developing any Project",
   "main": "index.js",
   "scripts": {

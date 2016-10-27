@@ -1,48 +1,27 @@
 <div class="row">
-  <div class="col-sm-4 col-md-2" ng-repeat="file in foldersFiles track by $index">
-
-    <div class="thumbnail">
-
-      <a href="" ng-click="openFolder(file)" ng-if="!file.type">
+  <div class="col-sm-4 col-md-2" ng-repeat="item in foldersAndFiles">
+    <div class="thumbnail text-center" ng-click="view(item)">
+      <!-- Icon Folder -->
+      <a href="" ng-click="openFolder(item)" ng-if="!item.type">
         <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i>
       </a>
-
-      <a href="" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.type && file.image">
-        <img ng-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" alt="{{file.name}}">
-      </a>
-
-      <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" target="_blank" ng-if="file.type && !file.image">
+      <!-- Icon File -->
+      <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image">
         <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
+      </a>
+      <!-- Thumnail -->
+      <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="image-link" ng-if="item.type && item.image">
+        <img ng-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" alt="{{item.name}}">
       </a>
 
       <div class="caption">
-        <p ng-if="!file.type">
-          {{file.name | limitTo : 12}}
-          <span ng-if="file.name.length > 12">...</span>
+        <p>
+          <small>
+            {{item.name | limitTo : 12}}<span ng-if="item.name.length > 12">...</span>
+          </small>
         </p>
-        <p ng-if="file.type && file.image">
-          {{file.name | limitTo : 12}}
-          <span ng-if="file.name.length > 12">...</span>
-        </p>
-        <p ng-if="file.type && !file.image">
-          {{file.name | limitTo : 12}}
-          <span ng-if="file.name.length > 12">...</span>
-        </p>
-        <span class="dropdown pull-right">
-          <a href="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-            <li ng-if="file.type"><a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" target="_blank" download="{{file.name}}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Descargar</a></li>
-            <li><a href="" ng-click="edit(file, $index)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Renombrar</a></li>
-            <li><a href="#" ng-click="delete(file, $index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Información</a></li>
-          </ul>
-        </divspan>
       </div>
 
     </div>
-
   </div>
 </div>

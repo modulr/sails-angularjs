@@ -1,48 +1,43 @@
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Propietario</th>
-      <th>Creado</th>
-      <th>Modificado</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="file in foldersFiles track by $index" ng-dblclick="openFolder(file)">
-      <td ng-if="!file.type" style="vertical-align: middle">
-        <a href="" ng-click="openFolder(file)" title="{{file.name}}">
-          <i class="fa fa-folder-o fa-2x fa-fw" aria-hidden="true"></i>
-          <span style="vertical-align: super">{{file.name | limitTo : 35}}<span ng-if="file.name.length > 35">...</span></span>
-        </a>
-      </td>
-      <td ng-if="file.type" style="vertical-align: middle">
-        <a href="" data-mfp-src="{{storageUrl}}/{{file.folderId}}/{{file.file}}" class="image-link" ng-if="file.image" title="{{file.name}}">
-          <i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i>
-          <span style="vertical-align: super">{{file.name | limitTo : 35}}<span ng-if="file.name.length > 35">...</span></span>
-        </a>
-        <a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" target="_blank" ng-if="!file.image" title="{{file.name}}">
-          <i class="fa fa-file-o fa-2x fa-fw" aria-hidden="true"></i>
-          <span style="vertical-align: super">{{file.name | limitTo : 35}}<span ng-if="file.name.length > 35">...</span></span>
-        </a>
-      </td>
-      <td>{{file.owner.fullName}}</td>
-      <td><small><b>{{file.createdAt | amDateFormat:'DD/MMM/YYYY'}}</b><br>{{file.createdUser.fullName}}</small></td>
-      <td><small><b>{{file.updatedAt | amDateFormat:'DD/MMM/YYYY'}}</b><br>{{file.updatedUser.fullName}}</small></td>
-      <td class="text-right" style="vertical-align: middle">
-        <div class="dropdown">
-          <a href="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-            <span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span>
+<div class="table-responsive">
+  <table class="table table-hover">
+
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="item in foldersAndFiles" ng-class="{'active': item.id == folderOrFile.id}">
+
+        <td ng-click="view(item)">
+          <!-- Icon Folder -->
+          <a href="" ng-click="openFolder(item)" title="{{item.name}}" ng-if="!item.type">
+            <i class="fa fa-folder-o fa-2x fa-fw" aria-hidden="true"></i>
+            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-            <li ng-if="file.type"><a href="{{storageUrl}}/{{file.folderId}}/{{file.file}}" target="_blank" download="{{file.name}}"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Descargar</a></li>
-            <li><a href="" ng-click="edit(file, $index)"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Renombrar</a></li>
-            <li><a href="" ng-click="delete(file, $index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Borrar</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="" ng-click="view(file)"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> Información</a></li>
-          </ul>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          <!-- Icon File -->
+          <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image" title="{{item.name}}">
+            <i class="fa fa-file-o fa-2x fa-fw" aria-hidden="true"></i>
+            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
+          </a>
+          <!-- Icon Image -->
+          <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="image-link" ng-if="item.type && item.image" title="{{item.name}}">
+            <i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i>
+            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
+          </a>
+        </td>
+
+        <td class="text-right" ng-click="view(item)">
+          <i class="fa fa-share-alt text-muted fa-fw" aria-hidden="true" tooltip data-placement="bottom" data-title="Compartido" ng-show="item.shared.length>0">&nbsp;</i>
+          <i class="fa fa-comment-o text-muted fa-fw" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios" ng-show="item.comments.length>0">&nbsp;</i>
+          <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
+          <i class="fa fa-angle-right text-muted" aria-hidden="true"></i>
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+</div>

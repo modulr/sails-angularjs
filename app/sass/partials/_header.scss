@@ -20,8 +20,8 @@ header{
     text-decoration: none;
 
     svg {
-      width: 38px;
-      margin-bottom: -9px;
+      width: 28px;
+      margin-bottom: -6px;
 
       path{
         @include transition(all .2s ease);
@@ -36,7 +36,7 @@ header{
     //   height: 20px;
     // }
     img { //img:last-child
-      height: 25px;
+      height: 20px;
     }
   }
 
@@ -46,7 +46,7 @@ header{
     margin: 16px 0 0 20px;
     padding: 0 0 0 20px;
     border-left: 1px solid $white;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: lighter;
 
     li{
