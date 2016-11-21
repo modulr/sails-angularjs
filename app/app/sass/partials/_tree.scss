@@ -1,0 +1,20 @@
+.angular-ui-tree-handle,
+.tree-node-content {
+  background-color: $white;
+  border: 1px solid $gray-light-30;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: normal;
+
+  .toggle {
+    margin-right: 10px;
+  }
+
+  label {
+    margin-left: 15px;
+  }
+}
+.angular-ui-tree-placeholder {
+  border: 2px dashed $gray-light-20;
+  background-color: $gray-light-35
+}

@@ -1,0 +1,194 @@
+<div class="page">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div ui-tree data-drag-enabled="false">
+                <ol ui-tree-nodes ng-model="modules">
+                  <li ng-repeat="item in modules" ui-tree-node collapsed="true">
+                    <div class="tree-node-content text-capitalize">
+                      <button type="button" class="close pull-left toggle" ng-if="item.children && item.children.length > 0" ng-click="toggle()">
+                        <span class="glyphicon glyphicon-chevron-right"
+                        ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+                      </button>
+                      <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+                      <span class="pull-right">
+                        <ul class="list-inline list-text" ng-if="item.authorizations.access.roles.length">
+                          <li ng-repeat="role in item.authorizations.access.roles | limitTo: 3">
+                            <small>{{role.role}}</small>
+                          </li>
+                          <a href="" ng-click="getAccessDetail(item)" ng-if="item.authorizations.access.roles.length - 3 > 0"><small>{{item.authorizations.access.roles.length - 3}}+</small></a>
+                        </ul>
+                        <ul class="list-inline list-img" ng-if="item.authorizations.access.users.length">
+                          <li ng-repeat="user in item.authorizations.access.users | limitTo: 3">
+                            <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
+                          </li>
+                          <a href="" ng-click="getAccessDetail(item)" ng-if="item.authorizations.access.users.length - 3 > 0">{{item.authorizations.access.users.length - 3}}+</a>
+                        </ul>
+                      </span>
+                    </div>
+                    <ol ui-tree-nodes ng-model="item.children" ng-class="{hidden: collapsed}">
+                      <li ng-repeat="subItem in item.children" ui-tree-node>
+                        <div class="tree-node-content text-capitalize">
+                          {{subItem.title}}
+                        </div>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </div>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.panel-body -->
+      </div><!-- /.panel -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</div><!-- /.page -->
+
+
+<!-- Modal Users -->
+<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-capitalize" id="myModalLabel">{{ module.title }}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#rolesAccess" aria-expanded="false">
+                  {{module.authorizations.access.roles.length}} {{'ACCESS.ROLESACCESS' | translate}}
+                </a>
+              </div>
+              <div id="rolesAccess" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                  <div tasty-table bind-resource="tableRolesAccess" watch-resource="collection" bind-filters="filters" bind-theme="tableRolesAccess.custom">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead tasty-thead></thead>
+                        <tbody>
+                          <tr ng-repeat="row in rows">
+                            <td>{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
+                            <td>
+                              <ul class="list-inline list-img" ng-if="row.users.length">
+                                <li ng-repeat="user in row.users | limitTo: 5">
+                                  <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
+                                </li>
+                                <a href="users/roles" target="_blank" ng-if="row.users.length - 5 > 0">{{row.users.length - 5}}+</a>
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab">
+
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#rolesWrite" aria-expanded="false">
+                      {{module.authorizations.write.roles.length}} {{'ACCESS.ROLESWRITE' | translate}}
+                    </a>
+
+                </div>
+                <div id="rolesWrite" class="panel-collapse collapse" role="tabpanel">
+                  <div class="panel-body">
+                    <div tasty-table bind-resource="tableRolesAccess" watch-resource="collection" bind-filters="filters" bind-theme="tableRolesAccess.custom">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead tasty-thead></thead>
+                          <tbody>
+                            <tr ng-repeat="row in rows">
+                              <td>{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
+                              <td>
+                                <ul class="list-inline list-img" ng-if="row.users.length">
+                                  <li ng-repeat="user in row.users | limitTo: 5">
+                                    <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
+                                  </li>
+                                  <a href="users/roles" target="_blank" ng-if="row.users.length - 5 > 0">{{row.users.length - 5}}+</a>
+                                </ul>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+              <div class="panel-heading" role="tab">
+
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#usersAccess" aria-expanded="false">
+                    {{module.authorizations.access.users.length}} {{'ACCESS.USERSACCESS' | translate}}
+                  </a>
+
+              </div>
+              <div id="usersAccess" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                  <div tasty-table bind-resource="tableUsersAccess" watch-resource="collection" bind-filters="filters" bind-theme="tableUsersAccess.custom">
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead tasty-thead bind-not-sort-by="['avatar']"></thead>
+                        <tbody>
+                          <tr ng-repeat="row in rows">
+                            <td class="avatar"><img class="img-circle" src="{{row.avatar}}" alt=""></td>
+                            <td><a class="btn-link" href="/profile/{{row.id}}">{{ row.username }}</a></td>
+                            <td>{{row.fullName}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab">
+
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#usersWrite" aria-expanded="false">
+                      {{module.authorizations.access.write.length}} {{'ACCESS.USERSWRITE' | translate}}
+                    </a>
+
+                </div>
+                <div id="usersWrite" class="panel-collapse collapse" role="tabpanel">
+                  <div class="panel-body">
+                    <div tasty-table bind-resource="tableUsersWrite" watch-resource="collection" bind-filters="filters" bind-theme="tableUsersWrite.custom">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead tasty-thead bind-not-sort-by="['avatar']"></thead>
+                          <tbody>
+                            <tr ng-repeat="row in rows">
+                              <td class="avatar"><img class="img-circle" src="{{row.avatar}}" alt=""></td>
+                              <td><a class="btn-link" href="/profile/{{row.id}}">{{ row.username }}</a></td>
+                              <td>{{row.fullName}}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          {{ 'CLOSE' | translate }}
+        </button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

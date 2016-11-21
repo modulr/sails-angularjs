@@ -1,0 +1,48 @@
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* content and container-fluid
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.content {
+    @include animation(all .5s);
+}
+
+.content.ng-enter,
+.content.ng-enter-active {
+    footer,
+    header{
+        @include animation(fadeInDown .5s);
+    }
+    nav{
+        @include animation(fadeInLeft .5s);
+    }
+    .container-fluid {
+        @include animation(fadeIn .5s);
+    }
+}
+
+.content.ng-leave,
+.content.ng-leave-active {
+    footer,
+    header{
+        @include animation(fadeOutUp .5s);
+    }
+    nav{
+        @include animation(fadeOutLeft .5s);
+    }
+    .container-fluid {
+        @include animation(fadeOut .5s);
+    }
+}
+
+/*
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+|   Buttons
+|- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
+.btn.ng-animate {
+    transition:0s none !important;
+    -webkit-transition:0s none !important;
+    animation: 0s none !important;
+    -webkit-animation: 0s none !important;
+}

@@ -1,0 +1,233 @@
+<div class="row">
+
+  <div ng-class="{'col-md-12':!showInfo, 'col-md-8':showInfo}">
+    <div class="panel">
+      <div class="panel-heading">
+        <!--
+        * Breadcrumb
+        -->
+        <ol class="breadcrumb pull-left">
+          <li ng-repeat="item in breadcrumb">
+            <a href="" ng-click="openFolder(item)">
+              <span class="glyphicon glyphicon-home" aria-hidden="true" ng-show="$first"></span>
+              <span ng-show="!$last && !$first">{{item.name}}</span>
+            </a>
+            <a href="" ng-show="$last && !$first" ng-click="view(item)">
+              {{item.name}}
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+            <!-- <span ng-if="$last">{{item.name}}</span> -->
+          </li>
+        </ol>
+        <!--
+        * Buttons Create, Upload and ViewMode
+        -->
+        <div class="btn-group pull-right" role="group">
+          <form class="form-inline" id="formFolder_{{$id}}">
+            <div class="input-group" id="step1">
+              <input type="text" class="form-control" placeholder="My Folder" focus="showCreateFolderInput" ng-show="showCreateFolderInput" enter="createFolder()" ng-model="formFolder.name" required>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="createFolder()">
+                  <i class="fa fa-plus" aria-hidden="true"></i> Carpeta
+                </button>
+                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseUpload_{{$id}}">
+                  <i class="fa fa-upload" aria-hidden="true"></i> Cargar
+                </button>
+                <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Vista" ng-click="toggleLayout()">
+                  <i class="fa" aria-hidden="true"ng-class="{'fa-list': layout=='list', 'fa-th': layout=='grid' }"></i>
+                </button>
+              </span>
+            </div>
+            <a href="" class="btn btn-default" tooltip data-placement="bottom" data-title="Ayuda" ng-click="CallMe()">
+              <i class="fa fa-question-circle-o fa-lg"></i>
+            </a>
+          </form>
+        </div>
+        <div class="clearfix"></div>
+      </div><!-- /.panel-heading -->
+      <div class="panel-body files">
+        <!--
+        * Upload Dran&Drop
+        -->
+        <div class="collapse" id="collapseUpload_{{$id}}">
+          <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+          <hr>
+        </div>
+        <!--
+        * List Folders & Files
+        -->
+        <div ng-include src="'app/helpers/files/'+ layout + '.html'" id="step2"></div>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel -->
+  </div><!-- /.col -->
+  <!--
+  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  * Info Folder & File
+  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  -->
+  <div class="col-md-4" ng-show="showInfo">
+    <div class="panel" id="step3">
+      <div class="panel-heading">
+        <!--
+        * Owner
+        -->
+        <img ng-src="{{folderOrFile.owner.avatar}}" class="img-circle avatar-md" tooltip data-placement="right" data-title="Propietario"> <span>{{folderOrFile.owner.fullName}}</span>
+        <!--
+        * Buttons
+        -->
+        <div class="pull-right">
+          <a class="btn btn-default btn-circle" href="{{storageUrl}}/{{folderOrFile.folderId}}/{{folderOrFile.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{folderOrFile.name}}" ng-show="folderOrFile.type">
+            <span class="fa-stack">
+              <i class="fa fa-arrow-down" aria-hidden="true"></i>
+            </span>
+          </a>
+          <button type="button" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Borrar" ng-disabled="user.id!=folderOrFile.owner.id" ng-click="delete($event)">
+            <span class="fa-stack">
+              <i class="fa fa-trash-o" aria-hidden="true"></i>
+            </span>
+          </button>
+          <a href="" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Ayuda" ng-click="CallMeInfo()">
+            <span class="fa-stack">
+              <i class="fa fa-question"></i>
+            </span>
+          </a>
+          <a href="" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Cerrar" ng-click="showInfo=false">
+            <span class="fa-stack">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+      <div class="panel-body">
+        <!--
+        * Name and Description
+        -->
+        <div class="row" id="step4">
+          <div class="col-md-12">
+            <form id="formFolderOrFile_{{$id}}">
+              <div class="form-group">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-folder-o fa-lg" aria-hidden="true" ng-if="!folderOrFile.type"></i>
+                    <i class="fa fa-file-o fa-lg" aria-hidden="true" ng-if="folderOrFile.type && !folderOrFile.image"></i>
+                    <i class="fa fa-picture-o fa-lg" aria-hidden="true" ng-if="folderOrFile.type && folderOrFile.image"></i>
+                  </span>
+                  <input type="text" class="form-control" placeholder="nombre del archivo" ng-model="folderOrFile.name" required ng-blur="save('name')">
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="2" placeholder="Descripcion" ng-model="folderOrFile.description" ng-blur="save('description')"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--
+        * Share with
+        -->
+        <div class="row" id="step5">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label><i class="fa fa-share-alt text-muted fa-fw"></i> Compartir con</label>
+              <tags-input class="ui-tags-input round template"
+                ng-model="folderOrFile.shared"
+                display-property="fullName"
+                add-from-autocomplete-only="true"
+                replace-spaces-with-dashes="false"
+                template="tag-template"
+                placeholder="nombre o usuario"
+                on-tag-added="save('shared')"
+                on-tag-removed="save('shared')">
+                <auto-complete
+                  source="loadUsers($query)"
+                  template="autocomplete-template">
+                </auto-complete>
+              </tags-input>
+            </div>
+          </div>
+        </div>
+        <!--
+        * More Info
+        -->
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-center">
+              <a href="" data-toggle="collapse" data-target="#collapseMore_{{$id}}">
+                <small>Más <i class="fa fa-angle-down" aria-hidden="true"></i></small>
+              </a>
+            </div>
+            <div class="collapse margin-top-10" id="collapseMore_{{$id}}">
+              <dl class="dl-horizontal margin-bottom-0">
+                <dt style="width:100px"><small>Tipo</small></dt>
+                <dd style="margin-left:120px"><small>{{folderOrFile.type || 'Folder'}}</small></dd>
+              </dl>
+              <dl class="dl-horizontal margin-bottom-0">
+                <dt style="width:100px"><small>Tamaño</small></dt>
+                <dd style="margin-left:120px"><small ng-show="folderOrFile.size">{{folderOrFile.size}}</small><small ng-hide="folderOrFile.size">--</small></dd>
+              </dl>
+              <dl class="dl-horizontal margin-bottom-0">
+                <dt style="width:100px"><small>Propietario</small></dt>
+                <dd style="margin-left:120px"><small>{{folderOrFile.owner.fullName}}</small></dd>
+              </dl>
+              <dl class="dl-horizontal margin-bottom-0">
+                <dt style="width:100px"><small>Creado</small></dt>
+                <dd style="margin-left:120px"><small>{{folderOrFile.createdAt | amDateFormat: 'll'}} por {{folderOrFile.createdUser.fullName}}</small></dd>
+              </dl>
+              <dl class="dl-horizontal margin-bottom-0">
+                <dt style="width:100px"><small>Modificado</small></dt>
+                <dd style="margin-left:120px"><small>{{folderOrFile.updatedAt | amDateFormat: 'll'}} por {{folderOrFile.updatedUser.fullName}}</small></dd>
+              </dl>
+            </div>
+          </div>
+        </div>
+        <hr>
+        <!--
+        * Comments
+        -->
+        <div class="row" id="step6">
+          <div class="col-md-12">
+            <comments model="isFileOrFolder" item="folderOrFile.id" src="folderOrFile.comments"></comments>
+          </div>
+        </div>
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel-->
+
+  </div><!-- /.col -->
+
+</div><!-- /.row -->
+
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Templates Share with
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<script type="text/ng-template" id="tag-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <img class="img-circle" ng-src="{{data.avatar}}"/>
+    </div>
+    <div class="right-panel">
+      <span>{{$getDisplayText()}}</span>
+      <a class="remove-button" ng-click="$removeTag()">×</a>
+    </div>
+  </div>
+</script>
+
+<script type="text/ng-template" id="autocomplete-template">
+  <div class="tag-template">
+    <div class="left-panel">
+      <img class="img-circle" ng-src="{{data.avatar}}" />
+    </div>
+    <div class="right-panel">
+      <span ng-bind-html="$highlight($getDisplayText())"></span>
+    </div>
+  </div>
+</script>
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Intro
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<div ng-intro-options="IntroOptions" ng-intro-method="CallMe" ng-intro-autostart="false">
+<div ng-intro-options="IntroOptionsInfo" ng-intro-method="CallMeInfo" ng-intro-autostart="false">

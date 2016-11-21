@@ -1,0 +1,24 @@
+<div class="comments">
+  <ul class="media-list">
+    <li class="media" ng-repeat="item in src" scroll-to-top>
+      <div class="media-left">
+        <img ng-src="{{item.user.avatar}}" class="img-circle avatar-sm">
+      </div>
+      <div class="media-body">
+        <b>{{item.user.fullName}}</b> <small class="text-muted" am-time-ago="item.createdAt" am-without-suffix="true"></small>
+        <p>{{item.comment}}</p>
+      </div>
+    </li>
+  </ul>
+  <form id="formComment_{{$id}}">
+    <div class="input-group">
+      <span class="input-group-addon">
+        <img ng-src="{{user.avatar}}" class="img-circle avatar-sm">
+      </span>
+      <textarea class="form-control" rows="2" placeholder="Escribe un comentario" ng-model="formComment.comment" ng-click="showCommentBtn()" required></textarea>
+    </div>
+    <div class="collapse text-right" id="collapseCommentBtn_{{$id}}">
+      <button class="btn btn-primary margin-top-5" type="button" ng-click="create($event)">Comentar</button>
+    </div>
+  </form>
+</div>

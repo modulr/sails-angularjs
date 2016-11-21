@@ -1,0 +1,55 @@
+.table{
+  thead{
+    tr{
+      &.active{
+        td, th{
+          background-color: inherit;
+        }
+      }
+      td, th{
+        &.active{
+          background-color: inherit;
+        }
+      }
+    }
+  }
+  tbody{
+    tr{
+      position: relative;
+      td{
+        &.avatar{
+          padding: 5px 8px;
+          img{
+            width: 25px;
+            height: 25px;
+          }
+        }
+        &.btn-edit {
+          position: absolute;
+          border: none;
+          right: 35px;
+          padding: 0;
+          margin: 2px;
+
+          > div {
+            background-color: #f5f5f5;
+            @include opacity(0);
+            //color: $gray;
+
+            a:hover {
+              color: $blue;
+            }
+          }
+        }
+      }
+      &:hover .btn-edit > div {
+        @include opacity(1);
+      }
+      &.selected{
+        background-color: $blue-light-10;
+        color: $white;
+      }
+    }
+
+  }
+}

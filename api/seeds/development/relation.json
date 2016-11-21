@@ -1,26 +1,26 @@
 [
-  {
-    "relation" : "father"
-  },
-  {
-    "relation" : "mother"
-  },
-  {
-    "relation" : "son"
-  },
-  {
-    "relation" : "daughter"
-  },
-  {
-    "relation" : "brother"
-  },
-  {
-    "relation" : "sister"
-  },
-  {
-    "relation" : "wife"
-  },
-  {
-    "relation" : "husband"
-  }
+    {
+        "relation" : "father"
+    },
+    {
+        "relation" : "mother"
+    },
+    {
+        "relation" : "son"
+    },
+    {
+        "relation" : "daughter"
+    },
+    {
+        "relation" : "brother"
+    },
+    {
+        "relation" : "sister"
+    },
+    {
+        "relation" : "wife"
+    },
+    {
+        "relation" : "husband"
+    }
 ]

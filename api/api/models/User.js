@@ -24,6 +24,25 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'string',
       required: true
     },
+    firstName: {
+      type: 'string',
+      defaultsTo: ''
+    },
+    lastName: {
+      type: 'string',
+      defaultsTo: ''
+    },
+    profile: {
+      model: 'profile'
+    },
+    logged: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    active: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     language: {
       type: 'string',
       defaultsTo: 'ENGLISH'
@@ -32,24 +51,28 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'string',
       defaultsTo: 'en'
     },
-    profile: {
-      model: 'profile'
-    },
     photo: {
       type: 'string',
       defaultsTo: 'avatar.jpg'
     },
-    photos: {
-      collection: 'photo',
-      via: 'user'
+    role: {
+      model: 'userrole'
     },
-    // chats: {
-    //     type: 'array',
-    //     defaultsTo: []
-    // },
+    permissions: {
+      type: 'json',
+      defaultsTo: {}
+    },
+    lock: {
+      type: 'boolean',
+      defaultsTo: false
+    },
     chats: {
       collection: 'chat',
       via: 'participants'
+    },
+    photos: {
+      collection: 'photo',
+      via: 'user'
     },
     contact: {
       collection: 'contact',
@@ -67,22 +90,12 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       collection: 'family',
       via: 'userId'
     },
-    // para el area de RH prospect
-    type: {
-      type: 'string',
-      defaultsTo: 'regular'// prospect, guest, regular, admin
-    },
-    authorizations: {
-      type: 'json',
-      defaultsTo: {}
-    },
-    logged: {
-      type: 'boolean',
-      defaultsTo: false
-    },
-    active: {
-      type: 'boolean',
-      defaultsTo: false
+    getFullName: function () {
+      var fullName = this.username;
+      if (this.firstName !== '' || this.lastName !== '') {
+        fullName = this.firstName + ' ' + this.lastName;
+      }
+      return fullName;
     },
     getAvatar: function () {
       var avatar = null;
@@ -96,51 +109,30 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     toJSON: function() {
       var obj = this.toObject();
       delete obj.password;
+      obj.fullName = this.getFullName();
       obj.avatar = this.getAvatar();
       return obj;
     }
   },
   beforeCreate: function(values, cb){
-    // Se encripta el password
+    // It encrypts the password
     EncryptService.encrypt(values.password, function (err, hash) {
       if(err) return cb(err);
       values.password = hash;
       cb();
     });
   },
-  // beforeUpdate: function(values, cb){
-  //   console.log(values);
-  //   if (values.deletedAt) {
-  //     console.log('deleted');
-  //   }
-  //   cb();
-  // },
-  // afterUpdate: function(values, cb){
-  //   if (!values.deletedAt) return cb();
-  //
-  //   console.log(values);
-  //
-  //   sails.models.user.update({ id: values.id }, { username: values.username + '-deleted', email: values.email + '-deleted'}).exec(function(err, update){
-  //     if(err) return cb(err);
-  //
-  //     return cb();
-  //   });
-  // }
-
-  // beforeUpdate: function(values, next){
-  // console.log('model User beforeUpdate ' + values.password);
-  // Si no es indefinido el valor password
-  // if(values.password !== undefined){
-  //     // Se comparan los passwords
-  //     AuthService.compare( values.password, user.password, function (err, valid) {
-  //     });
-  //     // Se encripta el password
-  //     AuthService.encrypt(values.password, function (err, hash) {
-  //         if(err) return next(err);
-  //         values.password = hash;
-  //     });
-  // }
-  // next();
-  // }
+  beforeUpdate: function(values, cb){
+    // It encrypts the password
+    if (values.password !== undefined) {
+      EncryptService.encrypt(values.password, function (err, hash) {
+        if(err) return cb(err);
+        values.password = hash;
+        cb();
+      });
+    } else {
+      cb();
+    }
+  }
 
 });

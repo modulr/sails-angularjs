@@ -1,0 +1,68 @@
+<div class="content" ng-controller="ChatCtrl">
+
+  <div class="users">
+    <div class="input-group search">
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+      </span>
+      <input type="text" class="form-control" ng-model="search" placeholder="{{'SEARCH' | translate}}" >
+    </div><!-- /.search -->
+
+    <div class="list-group user-list">
+      <a href="" class="list-group-item animated flipInX" ng-click="createChat(user)" ng-repeat="user in contacts | filter:search" >
+        <div class="media">
+          <div class="media-left media-middle">
+            <img ng-src="{{user.avatar}}" class="img-circle" ng-class="{'active': user.logged}"/>
+          </div>
+          <div class="media-body">
+            <p>{{user.name}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div><!-- /.user-list -->
+
+  <div class="messages" ng-class="{open: chat.open}">
+
+    <a href="" class="btn btn-default btn-block" ng-click="clearMessages()">
+      <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+      <img ng-src="{{chat.avatar}}" class="img-circle" ng-class="{'active': chat.logged}">
+      {{chat.name}}
+    </a><!-- /back-->
+
+    <ul class="list-group">
+      <li class="text-center" ng-if="chat.existMoreMessages">
+        <a href="" class="btn btn-link" ng-click="loadMoreMessages()" ng-hide="loaded.moreMessages">
+          {{'CHAT.LOADMORE' | translate}}
+        </a>
+        <p class="btn" ng-show="loaded.moreMessages">
+          <i class="fa fa-circle-o-notch fa-spin fa-lg"></i>
+        </p>
+      </li><!-- /loadMore-->
+
+      <li class="list-group-item" scroll-to-bottom ng-class="{'text-right': item.from == chat.message.from}" ng-repeat="item in chat.messages | orderBy:'createdAt'" >
+        <p data-toggle="collapse" data-target="#date-{{$index}}">{{item.msg}}</p>
+        <div class="collapse" id="date-{{$index}}">
+          <small class="text-muted" am-time-ago="item.createdAt" am-without-suffix="true"></small>
+        </div>
+      </li><!-- /messages -->
+    </ul>
+
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="{{'CHAT.MESSAGE' | translate}}" ng-model="chat.message.msg" ng-blur="chat.focus=false" focus="chat.focus" ng-focus="markReadMessages()" ng-click="markReadMessages()" enter="sendMesssage()">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-mousedown="chat.focus=true" ng-click="sendMesssage()">
+          <i class="fa fa-paper-plane"></i>
+        </button>
+      </span>
+    </div><!-- text-message-->
+
+    <audio id="audio">
+      <source src="http://i.cloudup.com/y29czRwU3R.m4a" type="audio/mp4">
+      <source src="http://i.cloudup.com/baNnhH1I7M.ogg" type="audio/wav">
+      <p>Your browser does not support the <code>audio</code> element.</p>
+    </audio>
+
+  </div><!-- /.messages -->
+
+</div><!-- /.content -->

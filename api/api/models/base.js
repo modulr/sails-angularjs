@@ -6,16 +6,17 @@
 */
 
 module.exports = {
- schema: true,
+
+  schema: true,
 
   attributes: {
     createdUser: {
-      model: 'User',
+      model: 'user',
       defaultsTo: null
       //required: true
     },
     updatedUser: {
-      model: 'User',
+      model: 'user',
       defaultsTo: null
       //required: true
     },
@@ -32,11 +33,15 @@ module.exports = {
     //   }
     // }
   }
+  // afterCreate: function(values, cb) {
+  //   if (values.user && values.body) {
+  //     values.body.createdUser = values.user;
+  //     values.body.updatedUser = values.user;
+  //     console.log(values);
+  //     cb();
+  //   } else {
+  //     cb();
+  //   }
+  // }
 
-  //beforeCreate: function(values, cb) {
-    //console.log(values);
-    //values.createdUser = values.currentUser;
-    //values.updatedUser = values.currentUser;
-    //cb();
-  //}
 };

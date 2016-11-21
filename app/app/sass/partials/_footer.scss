@@ -1,0 +1,52 @@
+footer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 0;
+  background-color: red;
+
+  .logo {
+    text-decoration: none;
+
+    svg {
+      width: 36px;
+      margin-bottom: -9px;
+
+      path{
+        @include transition(all .2s ease);
+      }
+
+      path:hover {
+        fill: lighten($orange, 20%);
+      }
+    }
+    // img:first-child {
+    //   margin-top: 6px;
+    //   height: 20px;
+    // }
+    img { //img:last-child
+        margin-top: 0;
+    }
+  }
+
+  img {
+    width: 110px;
+    margin-top: 5px;
+  }
+
+  .btn-group{
+    .btn-link {
+      text-decoration: none;
+    }
+    ul.dropdown-menu{
+      background: rgba($white, 0.9);
+      padding: 0;
+      border: none;
+      border-radius: 0;
+      a {
+        color: $gray-dark-10;
+      }
+    }
+  }
+}

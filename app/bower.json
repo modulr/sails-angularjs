@@ -1,48 +1,58 @@
 {
-  "name": "modulr",
-  "version": "0.1.0",
-  "authors": [
-    "Alfredo Barron <alfredobarronc@gmail.com>"
-  ],
-  "description": "modulr app",
-  "main": "main.js",
-  "license": "MIT",
-  "private": true,
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ],
+  "name": "modulr-app",
   "dependencies": {
-    "angular": "~1.4.5",
-    "angular-animate": "~1.4.5",
-    "angular-cookies": "~1.4.5",
-    "angular-sanitize": "~1.4.5",
+    "jquery": "~2.1.4",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-cookies": "~1.5.0",
+    "angular-sanitize": "~1.5.0",
     "angular-translate": "~2.9.0",
     "angular-translate-loader-static-files": "~2.9.0",
     "angular-translate-storage-local": "~2.9.0",
     "angular-ui-router": "~0.2.13",
     "angularSails": "~0.12.1",
-    "jquery": "~2.1.4",
-    "bootstrap": "~3.3.5",
-    "fontawesome": "~4.3.0",
+    "bootstrap": "~3.3.6",
     "animate.css": "~3.2.0",
     "moment": "~2.10.3",
+    "angular-moment": "~0.10.1",
     "password-generator": "~2.0.2",
     "Chart.js": "~1.0.2",
     "angular-chart.js": "~0.8.8",
     "ng-tags-input": "~3.0.0",
     "ng-tasty": "^0.6.1",
-    "angular-moment": "~0.10.1",
     "angular-ui-tree": "~2.13.0",
-    "smoke": "~3.0.1",
+    "smoke": "~3.1.0",
     "select2": "~4.0.1",
-    "mdr-angular-select2": "~1.0.3",
-    "bootstrap-datepicker": "~1.5.0",
-    "mdr-angular-datepicker": "~1.0.2",
-    "mdr-angular-file": "~1.0.4",
-    "sails.io.js": "~0.13.5"
+    "mdr-angular-select2": "~1.0.6",
+    "mdr-angular-file": "~1.0.5",
+    "sails.io.js": "~0.13.5",
+    "deep-diff": "^0.3.4",
+    "angular-eonasdan-datetimepicker": "^0.3.3",
+    "magnific-popup": "^1.1.0",
+    "font-awesome": "^4.6.3",
+    "angular-intro.js": "^2.1.1"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "font-awesome": {
+      "main": [
+        "css/font-awesome.css"
+      ]
+    },
+    "select2": {
+      "main": [
+        "dist/css/select2.css",
+        "dist/js/select2.js"
+      ]
+    },
+    "sails.io.js": {
+      "main": "**/*.js",
+      "ignore": true
+    }
   }
 }

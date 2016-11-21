@@ -1,0 +1,72 @@
+.nav-tabs,
+.nav-tabs.nav-justified {
+  border-bottom-color: transparent;
+  padding-bottom: 1px;
+
+  &.submodules {
+    margin-left: 15px;
+    border-bottom: 1px solid $gray-light-30;
+
+    a {
+      padding: 20px 35px 10px;
+    }
+  }
+
+  > li {
+
+    > a,
+    a:hover,
+    a:focus {
+      background-color: transparent;
+      border-radius: 0;
+      border-left: none;
+      border-top: none;
+      border-right: none;
+      border-bottom: 4px solid transparent;
+      margin-bottom: 0;
+
+      &:hover,
+      &:focus {
+
+        color: $gray-dark-30;
+      }
+    }
+
+    &.active {
+      > a,
+      a:hover,
+      a:focus {
+        background-color: transparent;
+        border-radius: 0;
+        border-left: none;
+        border-top: none;
+        border-right: none;
+        border-bottom: 4px solid $blue;
+      }
+    }
+
+
+
+  }
+
+}
+
+// responsive
+.nav-justified {
+  > li {
+    display: table-cell;
+    width: 1%;
+  }
+}
+
+.nav-center {
+  text-align: center;
+
+  .nav-tabs {
+    display: inline-block;
+  }
+}
+
+.tab-content {
+  margin-top: 20px;
+}

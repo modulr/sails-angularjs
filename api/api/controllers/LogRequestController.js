@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  charts: function(req, res, next)
+  charts: function(req, res, cb)
   {
     var params = req.allParams();
 
@@ -16,15 +16,15 @@ module.exports = {
     }
 
     sails.models.logrequest.find()
-    .groupBy(params.id)
     .sum('count')
-    .exec(function (err, data){
-      if(err) return next(err);
-      return res.json(200, { data: data });
+    .groupBy(params.id)
+    .exec(function (err, logrequest){
+      if(err) return cb(err);
+      return res.json(logrequest);
     });
   },
 
-  chartTime: function(req, res, next)
+  chartTime: function(req, res, cb)
   {
     var params = req.allParams();
 
@@ -37,42 +37,44 @@ module.exports = {
     sails.models.logrequest.find()
     .min(params.id)
     .exec(function (err, min){
-      if(err) return next(err);
+      if(err) return cb(err);
       data.push(min[0][params.id]);
 
       sails.models.logrequest.find()
 
       .average(params.id)
       .exec(function (err, average){
-        if(err) return next(err);
+        if(err) return cb(err);
         data.push(average[0][params.id].toFixed(2));
 
         sails.models.logrequest.find()
         .max(params.id)
         .exec(function (err, max){
-          if(err) return next(err);
+          if(err) return cb(err);
           data.push(max[0][params.id]);
 
-          return res.json(200, { data: data });
+          return res.json(data);
         });
       });
 
     });
   },
 
-  table: function(req, res, next)
+  table: function(req, res, cb)
   {
     if (req.isSocket){
       sails.models.logrequest.watch(req);
     }
 
-    sails.models.logrequest.find()
-    .sort('createdAt DESC')
-    .limit(10)
+    sails.models.logrequest.find({
+      url: { '!': '/__getcookie' }
+    })
+    .limit(50)
     .populate('user')
-    .exec(function (err, data){
-      if(err) return next(err);
-      return res.json(200, { data: data });
+    .sort('createdAt DESC')
+    .exec(function (err, logrequest){
+      if(err) return cb(err);
+      return res.json(logrequest);
     });
   }
 

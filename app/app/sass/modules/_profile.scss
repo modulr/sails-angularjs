@@ -1,0 +1,149 @@
+.panel.profile {
+    position: relative;
+    padding-top: 20px;
+
+    .btn-edit {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .photo {
+        position: relative;
+        display: inline-block;
+
+        img {
+            border: 6px solid;
+            border-color: rgba($black, 0.1);
+            width: 120px;
+            height: 120px;
+        }
+        .btn-upload {
+            background-color: rgba($black, 0.3);;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            @include opacity(0);
+
+            span {
+                font-size: 30px;
+                color: $white;
+                line-height: 105px;
+            }
+        }
+        &:hover .btn-upload{
+            @include opacity(1);
+        }
+
+    }
+
+    .info{
+        margin-top: 15px;
+        margin-bottom: 30px;
+
+        h4, p{
+            color: $gray-dark-30;
+            font-weight: lighter;
+            margin: 0;
+        }
+        p {
+            margin-top: 5px;
+        }
+    }
+
+    form {
+        .form-group {
+            margin-bottom: 0;
+
+            .form-control {
+                background-color: transparent;
+                border-color: transparent;
+                border-bottom-color: $gray-light-30;
+                box-shadow: none;
+                font-weight: lighter;
+                color: $gray-dark-30;
+                text-align: center;
+                font-size: 18px;
+
+                &::-webkit-input-placeholder,
+                &:-moz-placeholder,
+                &:-moz-placeholder,
+                &:-ms-input-placeholder {
+                    color: $gray-light-10;
+                }
+            }
+        }
+    }
+
+    .nav-tabs {
+        margin-bottom: -9px;
+
+        > li {
+
+            &.active {
+                > a,
+                a:hover,
+                a:focus {
+                    border-bottom-color: $blue;
+                }
+            }
+        }
+    }
+
+}
+
+.tab-content {
+
+    dl {
+        position: relative;
+        padding: 10px;
+        margin-bottom: 0;
+
+        .btn {
+            color: $gray;
+            border: none;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            @include opacity(0);
+
+
+            &:hover {
+                color: $blue;
+            }
+        }
+
+        &.dl-edit {
+            &:hover{
+                background-color: $gray-light-35;
+            }
+            &:hover .btn {
+                @include opacity(1);
+            }
+        }
+    }
+
+
+}
+
+// .list-edit{
+//   .list-group-item{
+//     color: $gray-dark-10;
+//     border: none;
+//     border-radius: 0;
+//     .icon{
+//       font-weight: bold;
+//       margin-right: 5px
+//     }
+//     .btn-circle{
+//       display: none;
+//     }
+//   }
+//   :hover .btn-circle{
+//     display: block
+//   }
+// }

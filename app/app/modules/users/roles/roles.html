@@ -1,0 +1,143 @@
+<div class="page">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal">
+            <i class="fa fa-key"></i> {{ 'ADD' | translate }}
+          </button>
+        </div><!-- /.panel-heading -->
+        <div class="panel-body">
+          <div tasty-table bind-resource="tableRoles" watch-resource="collection" bind-filters="filters" bind-theme="tableRoles.custom">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead tasty-thead></thead>
+              <tbody>
+                <tr ng-repeat="row in rows">
+                  <td ng-click="edit(row)">{{row.role}}<br><small class="text-muted">{{row.description}}</small></td>
+                  <td>
+                    <ul class="list-inline list-img">
+                      <li ng-repeat="user in row.users | limitTo: 5">
+                        <img class="img-circle" tooltip data-placement="top" data-title="{{user.username}}" src="{{user.avatar}}">
+                      </li>
+                      <a href="" ng-click="getUsers(row)" ng-if="row.users.length - 5 > 0">{{row.users.length - 5}}+</a>
+                    </ul>
+                  </td>
+                  <td ng-click="edit(row)">{{row.createdAt | amDateFormat:'LL'}}</td>
+                  <td class="btn-edit">
+                    <div class="btn-group">
+                      <a href="" class="btn" ng-click="edit(row)">
+                        <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="panel-footer">
+            <div tasty-pagination></div>
+          </div><!-- /.panel-footer -->
+        </div><!-- /tasty-table-->
+        </div><!-- /.panel-body -->
+      </div><!-- /.panel -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</div><!-- /.page -->
+
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Modals
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<!-- Modal Role -->
+<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" ng-if="form.config.add">{{ 'ROLES.NEWROLE' | translate }}</h4>
+        <h4 class="modal-title" id="myModalLabel" ng-if="!form.config.add">{{ 'ROLES.EDITROLE' | translate }}</h4>
+      </div>
+      <form id="form">
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <input type="text" class="form-control input-lg" placeholder="{{ 'ROLES.ROLE' | translate }}" data-smk-type="alphanumeric" ng-model="form.values.role" required autofocus>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" rows="2" placeholder="{{ 'ROLES.DESCRIPTION' | translate }}" ng-model="form.values.description"></textarea>
+              </div>
+            </div><!-- /.col -->
+            <div class="col-md-12">
+              <role-permissions modules="modules" ng-model="form.values.permissions"></role-permissions>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </div><!-- /.modal-body -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" ng-if="!form.config.add" ng-disabled="form.values.users.length > 0 || form.config.disabled" ng-click="delete($event)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+          <small class="pull-left" ng-if="form.values.users.length > 0">
+            {{form.values.users.length}} {{'ROLES.USEDROLE' | translate}}
+          </small>
+
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{ 'CLOSE' | translate }}
+          </button>
+          <button type="submit" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="create($event)" ng-if="form.config.add">
+            {{ 'ADD' | translate }}
+          </button>
+          {{form.value.lock}}
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="update($event)" ng-disabled="form.config.disabled" ng-show="!form.config.add">
+            {{ 'SAVE' | translate }}
+          </button>
+        </div><!-- /.modal-footer -->
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!-- Modal Users -->
+<div class="modal fade" id="modalUsers" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ role.role }}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div tasty-table bind-resource="tableUsers" watch-resource="collection" bind-filters="filters" bind-theme="tableUsers.custom">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead tasty-thead bind-not-sort-by="['avatar']"></thead>
+                  <tbody>
+                    <tr ng-repeat="row in rows">
+                      <td class="avatar"><img class="img-circle" src="{{row.avatar}}" alt=""></td>
+                      <td><a class="btn-link" href="/profile/{{row.id}}">{{ row.username }}</a></td>
+                      <td>{{row.fullName}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.modal-body -->
+      <div class="modal-footer">
+        <small class="pull-left">
+          {{role.users.length}} {{'ROLES.USEDROLE' | translate}}
+        </small>
+        <button type="button" class="btn btn-default" data-dismiss="modal">
+          {{ 'CLOSE' | translate }}
+        </button>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

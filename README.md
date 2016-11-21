@@ -1,6 +1,6 @@
 #[Modulr](http://www.modulr.io)
 
-Open Source Framework for ERP´s Development
+The Base for Developing any Project
 
 Before you start take a look at [http://www.modulr.io](http://www.modulr.io)
 
@@ -38,7 +38,7 @@ Modulr uses this technologies
 - [Node.js](https://nodejs.org/en/) v4.3.1 LTS tested
 - [NPM](https://www.npmjs.com/) v2.14.12 tested
 - [MongoDB](https://www.mongodb.org/) v3.2.3 tested
-- [Grunt](http://gruntjs.com/) v0.4.5 tested
+- [Gulp](http://gulpjs.com/) v3.9.1 tested
 - [Bower](http://bower.io/) v1.7.7 tested
 - [Sails](http://sailsjs.org/) v0.12.1 tested
 - [Angular](https://angularjs.org/) v1.4.5 tested
@@ -101,10 +101,10 @@ $ sudo apt-get install -y nodejs
 $ sudo npm install -g bower
 ```
 
-######8. Install Grunt
+######8. Install Gulp
 
 ```
-$ sudo npm install -g grunt-cli
+$ sudo npm install --global gulp-cli
 ```
 
 ######9. Install Sails
@@ -200,25 +200,17 @@ $ git clone https://github.com/modulr/modulr.git
 ######2. Install npm dependencies
 
 ```
-~/modulr/api$ sudo npm install -g node-gyp
-~/modulr/api$ npm install
-~/modulr/app$ npm install
+$ sudo npm install -g node-gyp
+~/modulr$ npm run install
 ```
 
-######3. Install bower dependencies
+> If you receive conflicts notifications please chose "angular#~1.5.0 which resolved to 1.5.8 and is required by modulr-app"
 
 ```
-~/modulr/app$ bower install
+Prefix the choice with ! to persist it to bower.json
+? Answer
+angular#~1.5.0 which resolved to 1.5.8 and is required by modulr-app
 ```
-
-> If you receive conflicts notifications please chose no. 5
-
-```
-- Prefix the choice with ! to persist it to bower.json
-- ? Answer
-- 5) angular#~1.4.5 which resolved to 1.4.9 and is required by modulr
-```
-
 
 
 ##Start modulr
@@ -229,28 +221,28 @@ $ git clone https://github.com/modulr/modulr.git
 $ mongod
 ```
 
-######1. Start sails
+######1. Configure enviroment files
+
+```
+~/modulr/api/config/env$ mv development.example.js development.js
+~/modulr/app/config/env$ mv development.example.json development.json
+```
+
+######2. Start sails
 
 ```
 ~/modulr/api$ sails lift
 ```
 
-######2. Start web server
+######3. Start web server
 
 ```
-~/modulr/app$ grunt serve
+~/modulr/app$ gulp
 ```
 
-######3. Finaly step
+######4. Finaly step
 
 *Go to [http://localhost:3000](http://localhost:3000) in you browser.*
-
->_Login credentials_
-
-*username:* demo
-
-*password:* 123456
-
 
 
 ##Documentation

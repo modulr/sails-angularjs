@@ -1,0 +1,16 @@
+.pagination{
+  margin: 0;
+
+  > .active {
+    > a {
+      background-color: $blue;
+      border-color: $blue;
+      &:hover,
+      &:focus {
+        background-color: $blue-dark-10;
+        border-color: $blue-dark-10;
+      }
+    }
+  }
+
+}

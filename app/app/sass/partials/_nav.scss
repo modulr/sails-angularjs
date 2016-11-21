@@ -1,0 +1,79 @@
+nav {
+  position: fixed;
+  top: 60px;
+  bottom: 0;
+  left: 0;
+  width: 230px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: 998;
+  @include transition(all .2s ease);
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+
+  &.min {
+    width: 60px;
+    @include transition(all .2s ease);
+
+    ul.nav li a .text-capitalize{
+      margin-left: 20px;
+    }
+  }
+
+  ul.nav{
+    margin-bottom: 0;
+    width: 230px;
+    padding-top: 20px;
+    //@include transition(all .2s ease);
+
+    li{
+      margin-top: 0 !important;
+
+
+      a {
+        color: $gray-dark-10;
+        border-radius: 0;
+
+        &.active,
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+
+        &:hover .fa-stack .fa-circle{
+          color: $gray-light-30;
+        }
+
+        .fa-stack {
+          @include transition(all .2s ease);
+          .fa-circle {
+            color: transparent;
+          }
+        }
+
+        .text-capitalize{
+          font-size: 14px;
+          margin-left: 5px;
+          @include transition(all .2s ease);
+        }
+
+      }
+
+      &.active a,
+      &.active a:hover,
+      &.active a:focus{
+        background-color: transparent;
+        color: $gray-dark-10;
+        .fa-stack .fa-circle {
+          color: $orange;
+        };
+        .fa-stack .fa-stack-1x {
+          color: $gray-light-35;
+        }
+      }
+    }
+  }
+
+}

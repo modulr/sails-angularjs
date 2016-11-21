@@ -6,36 +6,36 @@ module.exports = {
       if(err) sails.log(err);
 
       //if (req.isSocket) {
-        // Se avisa a todos los sockets que el usuario se ha conectado o desconectado
-        sails.sockets.join(req.socket, 'user_logged');
-        sails.sockets.blast('user_logged', user[0], req.socket);
+      // Se avisa a todos los sockets que el usuario se ha conectado o desconectado
+      sails.sockets.join(req.socket, 'user_logged');
+      sails.sockets.blast('user_logged', user[0], req.socket);
       //}
 
     });
   },
 
-  getDefaultAuthorizations: function(cb)
-  {
-    sails.models.module.find({ deletedAt: null }).exec(function(err, modules){
-      if(err) return cb(err);
-
-      var authorizations = {};
-
-      modules.forEach(function(v, k){
-        authorizations[v.title] = {access: false};
-        if (v.title == 'dashboard') {
-          authorizations[v.title] = {access: true};
-        }
-        if (v.sections !== undefined) {
-          v.sections.forEach(function(va, ke){
-            authorizations[v.title][va.title] = {access: false, write: false};
-          });
-        }
-      });
-
-      return cb(authorizations);
-    });
-  }
+  // getDefaultAuthorizations: function(cb)
+  // {
+  //     sails.models.module.find({ deletedAt: null }).exec(function(err, modules){
+  //         if(err) return cb(err);
+  //
+  //         var authorizations = {};
+  //
+  //         modules.forEach(function(v, k){
+  //             authorizations[v.title] = {access: false};
+  //             if (v.title == 'dashboard') {
+  //                 authorizations[v.title] = {access: true};
+  //             }
+  //             if (v.sections !== undefined) {
+  //                 v.sections.forEach(function(va, ke){
+  //                     authorizations[v.title][va.title] = {access: false, write: false};
+  //                 });
+  //             }
+  //         });
+  //
+  //         return cb(authorizations);
+  //     });
+  // }
 
   // findUser: function(id, next){
   //   sails.models.user.findOne({ id: id }).exec(function(err, user){

@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  charts: function(req, res, next)
+  charts: function(req, res, cb)
   {
     var params = req.allParams();
 
@@ -18,13 +18,13 @@ module.exports = {
     sails.models.loglogin.find()
     .groupBy(params.id)
     .sum('count')
-    .exec(function (err, data){
-      if(err) return next(err);
-      return res.json(200, { data: data });
+    .exec(function (err, loglogin){
+      if(err) return cb(err);
+      return res.json(loglogin);
     });
   },
 
-  table: function(req, res, next)
+  table: function(req, res, cb)
   {
     if (req.isSocket){
       sails.models.loglogin.watch(req);
@@ -32,11 +32,11 @@ module.exports = {
 
     sails.models.loglogin.find()
     .sort('createdAt DESC')
-    .limit(10)
+    .limit(50)
     .populate('user')
-    .exec(function (err, data){
-      if(err) return next(err);
-      return res.json(200, { data: data });
+    .exec(function (err, loglogin){
+      if(err) return cb(err);
+      return res.json(loglogin);
     });
   }
 

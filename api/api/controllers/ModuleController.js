@@ -7,17 +7,17 @@
 
 module.exports = {
 
-  nav: function(req, res, cb)
+  all: function(req, res, cb)
   {
-    sails.models.module.find({where: {active: true}, sort: 'order ASC'}).exec(function(err, modules){
+    sails.models.module.find({sort: 'order ASC'}).exec(function(err, modules){
       if(err) return cb(err);
       res.json(modules);
     });
   },
 
-  navSettings: function(req, res, cb)
+  nav: function(req, res, cb)
   {
-    sails.models.module.find({sort: 'order ASC'}).exec(function(err, modules){
+    sails.models.module.find({where: {active: true}, sort: 'order ASC'}).exec(function(err, modules){
       if(err) return cb(err);
       res.json(modules);
     });

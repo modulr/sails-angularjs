@@ -28,7 +28,7 @@ module.exports = {
 
   request: function(log, req, resp)
   {
-    var userId = -1;
+    //var userId = -1;
 
     // if (req.token) {
     //   userId = req.token;
@@ -41,17 +41,17 @@ module.exports = {
       protocol: log.protocol,
       method: log.method,
       url: log.diagnostic.url,
-      //headers: req.headers || {},
+      headers: req.headers || {},
       parameters: log.diagnostic.routeParams,
       body: log.diagnostic.bodyParams,
       query: log.diagnostic.queryParams,
-      responseTime: log.responseTime,
-      middlewareLatency: log.diagnostic.middlewareLatency,
-      user: userId
+      responseTime: log.responseTime || 0,
+      middlewareLatency: log.diagnostic.middlewareLatency || 0,
+      user: req.token || 0
     })
     .exec(function(err, created) {
       if(err) sails.log(err);
-      
+
       sails.models.logrequest.publishCreate(created);
     });
   }

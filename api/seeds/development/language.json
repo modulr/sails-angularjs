@@ -1,10 +1,10 @@
 [
-  {
-    "language" : "ENGLISH",
-    "lang" : "en"
-  },
-  {
-    "language" : "SPANISH",
-    "lang" : "es"
-  }
+    {
+        "language" : "ENGLISH",
+        "lang" : "en"
+    },
+    {
+        "language" : "SPANISH",
+        "lang" : "es"
+    }
 ]

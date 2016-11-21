@@ -1,51 +1,102 @@
 [
   {
-    "title" : "dashboard",
-    "icon" : "fa-home",
-    "state" : "layout.dashboard",
-    "url" : "/dashboard",
-    "order" : 1,
-    "active" : true
+    "title": "dashboard",
+    "icon": "fa-home",
+    "state": "dashboard",
+    "url": "/dashboard",
+    "order": 1,
+    "active": true,
+    "lock": true
   },
   {
-    "title" : "modules",
-    "icon" : "fa-cubes",
-    "state" : "layout.modules",
-    "url" : "/modules",
-    "order" : 3,
-    "active" : true
+    "title": "files",
+    "icon": "fa-folder-o",
+    "state": "files",
+    "url": "/files",
+    "order": 2,
+    "active": true
   },
   {
-    "title" : "access",
-    "icon" : "fa-lock",
-    "state" : "layout.access",
-    "url" : "/access",
-    "order" : 5,
-    "active" : true
-  },
-  {
-    "title" : "users",
-    "icon" : "fa-users",
-    "state" : "layout.users",
-    "url" : "/users",
-    "order" : 4,
-    "active" : true
-  },
-  {
-    "title" : "log",
-    "icon" : "fa-exchange",
-    "state" : "layout.login",
-    "url" : "/log/login",
-    "order" : 2,
-    "active" : true,
-    "sections" : [
+    "title": "log",
+    "icon": "fa-exchange",
+    "state": "logLogin",
+    "url": "/log/login",
+    "order": 3,
+    "active": true,
+    "lock": true,
+    "submodules": [
       {
-        "title" : "login",
-        "state" : "layout.log.login"
+        "title": "login",
+        "state": "logLogin"
       },
       {
-        "title" : "request",
-        "state" : "layout.log.request"
+        "title": "request",
+        "state": "logRequest"
+      }
+    ]
+  },
+  {
+    "title": "users",
+    "icon": "fa-users",
+    "state": "users",
+    "url": "/users",
+    "order": 4,
+    "active": true,
+    "lock": true,
+    "submodules": [
+      {
+        "title": "users",
+        "state": "users"
+      },
+      {
+        "title": "roles",
+        "state": "roles"
+      },
+      {
+        "title": "access",
+        "state": "access"
+      }
+    ]
+  },
+  {
+    "title": "profile",
+    "icon": "fa-user",
+    "state": "profile",
+    "url": "/profile",
+    "order": 6,
+    "active": true,
+    "lock": true,
+    "submodules": [
+      {
+        "title": "information",
+        "state": "information"
+      },
+      {
+        "title": "work",
+        "state": "work"
+      },
+      {
+        "title": "settings",
+        "state": "settings"
+      },
+      {
+        "title": "permissions",
+        "state": "permissions"
+      }
+    ]
+  },
+  {
+    "title": "settings",
+    "icon": "fa-cogs",
+    "state": "modules",
+    "url": "/settings/modules",
+    "order": 5,
+    "active": true,
+    "lock": true,
+    "submodules": [
+      {
+        "title": "modules",
+        "state": "modules"
       }
     ]
   }

@@ -1,0 +1,24 @@
+<div ng-controller="ProfilePermissionsCtrl">
+
+  <div class="row">
+    <div class="col-sm-12 col-md-12">
+
+      <div class="panel">
+        <div class="panel-body">
+          <div class="form-group">
+            <label class="control-label">{{ 'USERS.ROLE' | translate }}</label>
+            <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formPermissions.role" selected="user.role.id" required="true"></mdr-select2>
+          </div>
+          <role-permissions modules="modules" ng-model="formPermissions.permissions"></role-permissions>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right">
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="savePermissions($event)">
+            {{ 'SAVE' | translate }}
+          </button>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.work -->
+
+    </div><!-- /.col -->
+  </div><!-- /.row  -->
+
+</div>

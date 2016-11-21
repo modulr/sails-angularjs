@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300);
+$font : 'Open Sans', sans-serif;
+
+$orange: #FAAB4C; // #FAAB4C
+$green: #11B587; // 0DB0B5
+$blue: #45AFDC;
+$red: #F26C55;
+$yellow: #FFC107;
+//$orange-dark: #FA6A31;
+$white: #FEFEFE;
+$black: #212121;
+$gray: #9E9E9E;
+
+$green-dark-10: darken($green, 10%);
+
+$blue-light-10: lighten($blue, 10%);
+$blue-light-20: lighten($blue, 20%);
+$blue-dark-10: darken($blue, 10%);
+$blue-dark-20: darken($blue, 20%);
+
+$gray-light-10: lighten($gray, 10%);
+$gray-light-20: lighten($gray, 20%);
+// Border
+$gray-light-30: lighten($gray, 30%);
+// Background
+$gray-light-35: lighten($gray, 35%);
+// Font
+$gray-dark-10: darken($gray, 10%);
+$gray-dark-30: darken($gray, 30%);

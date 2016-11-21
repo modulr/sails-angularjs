@@ -1,0 +1,36 @@
+<div ui-tree data-drag-enabled="false">
+  <ol ui-tree-nodes ng-model="modules">
+    <li ng-repeat="item in modules" ui-tree-node collapsed="true">
+      <div class="tree-node-content text-capitalize">
+        <button type="button" class="close pull-left toggle" ng-if="item.children && item.children.length > 0" ng-click="toggle()">
+          <span class="glyphicon glyphicon-chevron-right"
+          ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+        </button>
+        <i class="fa {{item.icon}} fa-lg fa-fw"></i> | {{item.title}}
+        <label class="fancy-check pull-right">
+          <input type="checkbox" checkbox data-child-list="item.children" data-property="_access" ng-model="item._access" checked="fa-lock" unchecked="fa-unlock" indeterminate="fa-unlock-alt">
+          <i class="fa fa-lg" ng-class="item._access? 'fa-unlock' : 'fa-lock'"></i>
+        </label>
+        <label class="fancy-check pull-right">
+          <input type="checkbox" checkbox data-child-list="item.children" data-property="_write" ng-model="item._write" checked="fa-pencil" unchecked="fa-eye" indeterminate="fa-eye-slash">
+          <i class="fa fa-lg" ng-class="item._write? 'fa-pencil' : 'fa-eye'"></i>
+        </label>
+      </div>
+      <ol ui-tree-nodes ng-model="item.children" ng-class="{hidden: collapsed}">
+        <li ng-repeat="subItem in item.children" ui-tree-node>
+          <div class="tree-node-content text-capitalize">
+            {{subItem.title}}
+            <label class="fancy-check pull-right">
+              <input type="checkbox" ng-model="subItem._access" checked="fa-lock" unchecked="fa-unlock" indeterminate="fa-unlock-alt">
+              <i class="fa fa-lg" ng-class="subItem._access? 'fa-unlock' : 'fa-lock'"></i>
+            </label>
+            <label class="fancy-check pull-right">
+              <input type="checkbox" ng-model="subItem._write" checked="fa-pencil" unchecked="fa-eye" indeterminate="fa-eye-slash">
+              <i class="fa fa-lg" ng-class="subItem._write? 'fa-pencil' : 'fa-eye'"></i>
+            </label>
+          </div>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</div>

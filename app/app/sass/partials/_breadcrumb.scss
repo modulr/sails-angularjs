@@ -1,0 +1,8 @@
+.breadcrumb {
+  margin-bottom: 0;
+  background-color: transparent;
+
+  & > li + li:before {
+    color: #aaa;
+  }
+}
