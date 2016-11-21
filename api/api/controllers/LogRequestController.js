@@ -16,8 +16,8 @@ module.exports = {
     }
 
     sails.models.logrequest.find()
-    .groupBy(params.id)
     .sum('count')
+    .groupBy(params.id)
     .exec(function (err, logrequest){
       if(err) return cb(err);
       return res.json(logrequest);
@@ -66,10 +66,12 @@ module.exports = {
       sails.models.logrequest.watch(req);
     }
 
-    sails.models.logrequest.find()
-    .sort('createdAt DESC')
+    sails.models.logrequest.find({
+      url: { '!': '/__getcookie' }
+    })
     .limit(50)
     .populate('user')
+    .sort('createdAt DESC')
     .exec(function (err, logrequest){
       if(err) return cb(err);
       return res.json(logrequest);

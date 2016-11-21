@@ -23,10 +23,12 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       model: 'user'
     },
     shared: {
-      type: 'array'
+      type: 'array',
+      defaultsTo: []
     },
     comments: {
-      type: 'array'
+      type: 'array',
+      defaultsTo: []
     },
     parentId: {
       type: 'string'

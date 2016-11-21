@@ -10,7 +10,6 @@
       </div>
     </li>
   </ul>
-  <hr>
   <form id="formComment_{{$id}}">
     <div class="input-group">
       <span class="input-group-addon">
@@ -18,8 +17,8 @@
       </span>
       <textarea class="form-control" rows="2" placeholder="Escribe un comentario" ng-model="formComment.comment" ng-click="showCommentBtn()" required></textarea>
     </div>
-    <div class="collapse" id="collapseCommentBtn_{{$id}}">
-      <button class="btn btn-primary pull-right" type="button" ng-click="create()">Comentar</button>
+    <div class="collapse text-right" id="collapseCommentBtn_{{$id}}">
+      <button class="btn btn-primary margin-top-5" type="button" ng-click="create($event)">Comentar</button>
     </div>
   </form>
 </div>

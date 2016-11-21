@@ -40,7 +40,7 @@ gulp.task('preprocess', function() {
 });
 
 gulp.task('sass', function () {
-  gulp.src('sass/**/*.scss')
+  gulp.src('app/sass/**/*.scss')
     //.pipe(sass().on('error', sass.logError))
     .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     .pipe(rename({ extname: '.min.css' }))
@@ -58,14 +58,14 @@ gulp.task('js', function () {
 });
 
 gulp.task('jsonmin', function () {
-  gulp.src(['locales/**/*.json'])
+  gulp.src(['config/locales/**/*.json'])
     .pipe(jsonmin())
     .pipe(rename({ extname: '.min.json' }))
     .pipe(gulp.dest(dest + 'locales'));
 });
 
 gulp.task('imagemin', function () {
-  gulp.src('images/**/*')
+  gulp.src('app/images/**/*')
     .pipe(imagemin())
     .pipe(gulp.dest(dest + 'images'));
 });
@@ -99,10 +99,10 @@ gulp.task('copyvendor', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('sass/**/*.scss', ['sass']);
+  gulp.watch('app/sass/**/*.scss', ['sass']);
   gulp.watch('app/**/*.js', ['js']);
   gulp.watch('locales/**/*.json', ['jsonmin']);
-  gulp.watch('images/**/*', ['imagemin']);
+  gulp.watch('app/images/**/*', ['imagemin']);
   gulp.watch('app/**/*.html', ['copyhtml']);
 });
 

@@ -1,0 +1,198 @@
+<div class="page">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-box">
+        <div class="panel-item bg-primary">
+          <i class="fa fa-users fa-4x fa-inverse"></i>
+        </div>
+        <div class="panel-item">
+          <p class="lead">{{ countUsers.total }}</p>
+          <p class="text-muted">{{ 'USERS' | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-box">
+        <div class="panel-item bg-success">
+          <i class="fa fa-user fa-4x fa-inverse"></i>
+        </div>
+        <div class="panel-item">
+          <p class="lead">{{ countUsers.active }}</p>
+          <p class="text-muted">{{ 'USERS.ACTIVE' | translate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-4">
+      <div class="panel panel-box">
+        <div class="panel-item bg-danger">
+          <i class="fa fa-user-secret fa-4x fa-inverse"></i>
+        </div>
+        <div class="panel-item">
+          <p class="lead">{{ countUsers.deactive }}</p>
+          <p class="text-muted">{{ 'USERS.DEACTIVE' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div><!-- /.row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-6 col-md-8">
+              <button type="button" class="btn btn-success" ng-click="addUser()">
+                <i class="fa fa-user-plus"></i> {{ 'ADD' | translate }}
+              </button>
+              <!-- <a href=""  ng-disabled="disabled.btnsEditUsers" ng-click="activateUsers($event)">{{ 'USERS.ACTIVATE' | translate }}</a>
+              <a href=""  ng-disabled="disabled.btnsEditUsers" ng-click="deactivateUsers($event)">{{ 'USERS.DEACTIVATE' | translate }}</a>
+              <a href=""  ng-disabled="disabled.btnsEditUsers" ng-click="deleteUsers($event)">{{ 'DELETE' | translate }}</a>
+              <a href=""  ng-disabled="disabled.btnsEditUsers" data-toggle="modal" data-target="#modalAccessUsers">
+              <i class="fa fa-key"></i> {{ 'ACCESS' | translate }}
+            </a> -->
+          </div><!-- /.col -->
+            <div class="col-xs-6 col-md-4 text-right">
+              <div class="input-group search">
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span>
+                <input type="text" class="form-control" placeholder="{{ 'SEARCH' | translate }}" ng-model="filters">
+              </div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.panel-heading -->
+      <div class="panel-body">
+        <div tasty-table bind-resource="tableResource" watch-resource="collection" bind-filters="filters" bind-theme="tableResource.custom">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead tasty-thead></thead>
+            <tbody>
+              <tr ng-repeat="row in rows"> <!-- ng-class="{'selected':row.selected}" ng-click="selectedRow(row)" -->
+                <td class="avatar" ng-click="editUser(row.id)">
+                  <img ng-src="{{row.avatar}}" class="img-circle"> {{ row.username }}
+                </td>
+                <td ng-click="editUser(row)">{{ row.fullName }}</td>
+                <td ng-click="editUser(row)">{{ row.email }}</td>
+                <td ng-click="editUser(row)">{{ row.role.role }}</td>
+                <td ng-click="editUser(row)">
+                  <span class="glyphicon" aria-hidden="true" ng-class="{'glyphicon-ok-circle text-success': row.active, 'glyphicon-ban-circle text-danger': ! row.active}"></span>
+                </td>
+                <td ng-click="editUser(row)">{{ row.createdAt | amDateFormat:'LL' }}</td>
+                <td class="btn-edit">
+                  <div class="btn-group">
+                    <a href="" class="btn" ng-click="editUser(row)">
+                      <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                    </a>
+                    <a href="" class="btn" ng-click="goToProfile(row.id)">
+                      <i class="fa fa-share fa-lg" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+          <div tasty-pagination></div>
+        </div>
+      </div><!-- /tasty-table-->
+      </div><!-- /.panel-body -->
+    </div><!-- /.panel -->
+  </div><!-- /.col -->
+</div><!-- /.row -->
+
+</div><!-- /.page -->
+
+<!--
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* Modals
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+-->
+<!-- Modal User -->
+<div class="modal fade" id="modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" ng-if="!show.editUser">{{ 'USERS.NEWUSER' | translate }}</h4>
+        <h4 class="modal-title" id="myModalLabel" ng-if="show.editUser">{{ 'USERS.EDITUSER' | translate }}</h4>
+      </div>
+      <form id="formUser">
+        <div class="modal-body">
+          <div class="row">
+
+            <div class="col-md-12 text-right">
+              <div class="form-group">
+                <a href="#" class="fancy-check" checked-list-box ng-model="formUser.active">Active</a>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'USERS.USERNAME' | translate }}*</label>
+                <input type="text" class="form-control" placeholder="john" data-smk-type="alphanumeric" ng-model="formUser.username" required autofocus>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'USERS.EMAIL' | translate }}*</label>
+                <input type="email" class="form-control" placeholder="john.doe@company.com" ng-model="formUser.email" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'PROFILE.NAME' | translate }}</label>
+                <input type="text" class="form-control" placeholder="john" ng-model="formUser.firstName">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label">{{ 'PROFILE.LASTNAME' | translate }}</label>
+                <input type="text" class="form-control" placeholder="doe" ng-model="formUser.lastName">
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">{{ 'USERS.PASSWORD' | translate }}*</label>
+                <div class="input-group">
+                  <span class="input-group-addon" ng-if="show.editUser">
+                    <input type="checkbox" ng-model="show.password">
+                  </span>
+                  <input type="password" class="form-control" placeholder="{{ 'USERS.PASSWORD' | translate }}" ng-disabled="!show.password" ng-model="formUser.password" required data-smk-strongPass="strong">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-disabled="!show.password" ng-click="generatePassword()">{{ 'USERS.GENERATE' | translate }} {{ 'USERS.PASSWORD' | translate }}</button>
+                  </span>
+                </div><!-- /input-group -->
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">{{ 'USERS.ROLE' | translate }}*</label>
+                <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formUser.getRole" selected="formUser.role" required="true" disabled="formUser.lock"></mdr-select2>
+              </div>
+            </div>
+
+
+          </div><!-- /.row -->
+        </div><!-- /.modal-body -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" ng-if="show.editUser" ng-disabled="formUser.id == user.id" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deleteUser($event)">
+            <span class="glyphicon glyphicon-trash"></span>
+          </button>
+          <button type="button" class="btn btn-default btn-outline pull-left"  ng-if="show.editUser" ng-click="sendUserData($event)">
+            <i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}
+          </button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            {{ 'CLOSE' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="createUser($event)" ng-if="!show.editUser">
+            {{ 'ADD' | translate }}
+          </button>
+          <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="updateUser($event)" ng-if="show.editUser">
+            {{ 'SAVE' | translate }}
+          </button>
+        </div><!-- /.modal-footer -->
+      </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

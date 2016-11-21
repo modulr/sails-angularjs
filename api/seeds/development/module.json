@@ -10,7 +10,7 @@
   },
   {
     "title": "files",
-    "icon": "fa-archive",
+    "icon": "fa-folder-o",
     "state": "files",
     "url": "/files",
     "order": 2,

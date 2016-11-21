@@ -5,13 +5,21 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var moment = require('moment');
+
 module.exports = {
 
   create: function(req, res, cb)
   {
-    var model = req.params.model;
-    var id = req.params.id;
-    var comment = req.body;
+    var params = req.allParams();
+    var model = params.model;
+    var id = params.id;
+
+    var comment = {
+      comment: params.comment,
+      createdAt: moment().format(),
+      userId: params.userId
+    };
 
     sails.models[model].findOne({id:id})
     .exec(function (err, response){
@@ -33,8 +41,15 @@ module.exports = {
           sails.models.user.findOne({ id: comment.userId })
           .exec(function(err, user) {
             if(err) return cb(err);
-            
+
             comment.user = user.toJSON();
+
+            // sails.models[model].publishUpdate(id, {
+            //   comment: comment
+            // }, req );
+
+            sails.sockets.broadcast(id, 'filesModule', { data: comment });
+
             res.json(comment);
           });
 

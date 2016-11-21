@@ -5,81 +5,170 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var moment = require('moment');
+
 module.exports = {
 
-  create: function(req, res, cb)
-  {
-    var data = req.body;
-
-    data.createdUser = req.token.id;
-    data.updatedUser = req.token.id;
-
-    sails.models.folder.create(data).exec(function(err, folder){
-      if(err) return cb(err);
-
-      sails.models.folder.findOne({ id: folder.id })
-      .populate('owner')
-      .exec(function(err, folder) {
-        if(err) return cb(err);
-
-        res.json(folder);
-      });
-
-    });
-  },
-
-  findOne: function(req, res, cb)
-  {
+  findOne: function(req, res, cb) {
     var id = req.param('id');
 
     sails.models.folder.findOne({id:id})
     .populate('owner')
     .populate('createdUser')
     .populate('updatedUser')
+    .then(function(folder){
+
+      if (folder.comments.length > 0) {
+        async.each(folder.comments, function(val, callback) {
+          sails.models.user.findOne({ id: val.userId })
+          .exec(function(err, user) {
+            if(err) return cb(err);
+
+            val.user = user.toJSON();
+            callback();
+          });
+        }, function(err) {
+          folder.comments.reverse();
+          res.json(folder);
+        });
+      } else {
+        res.json(folder);
+      }
+
+    })
+    .catch(function(err){
+      return cb(err);
+    });
+
+      // async.parallel([
+      //   function(callback){
+      //     if (folder.shared) {
+      //       var shared = [];
+      //       async.each(folder.shared, function(val, callback) {
+      //         sails.models.user.findOne({ id: val })
+      //         .exec(function(err, user) {
+      //           if(err) return cb(err);
+      //           shared.push(user.toJSON());
+      //           callback();
+      //         });
+      //       }, callback);
+      //       folder.shared = shared;
+      //     } else {
+      //       folder.shared = [];
+      //       callback();
+      //     }
+      //   },
+      //   function(callback){
+      //     if (folder.comments) {
+      //       async.each(folder.comments, function(val, callback) {
+      //         sails.models.user.findOne({ id: val.userId })
+      //         .exec(function(err, user) {
+      //           if(err) return cb(err);
+      //           val.user = user.toJSON();
+      //           callback();
+      //         });
+      //       }, callback);
+      //       folder.comments.reverse();
+      //     } else {
+      //       folder.comments = [];
+      //       callback();
+      //     }
+      //   }
+      // ],
+      // function(err){
+      //   res.json(folder);
+      // });
+
+  },
+
+  create: function(req, res, cb) {
+    var data = req.body;
+
+    data.createdUser = req.token.id;
+    data.updatedUser = req.token.id;
+
+    // Search parentFolder and get shared users (heredity)
+    sails.models.folder.findOne({ id: data.parentId })
+    .then(function(parentFolder){
+      data.shared = parentFolder.shared;
+      return data;
+    })
+    .then(function(data){
+      // Create folder
+      return sails.models.folder.create(data)
+      .then(function(folder){
+        return folder;
+      });
+    })
+    .then(function(folder){
+      // Get folder with owner
+      return sails.models.folder.findOne({id: folder.id}).populate('owner');
+    })
+    .then(function(folder){
+      // Get folder with shared user
+      if (folder.shared.length > 0) {
+        return sails.models.user.find({ id: folder.shared })
+        .then(function(users) {
+          folder.shared = [];
+          users.forEach(function(value){
+            folder.shared.push(value.toJSON());
+          });
+          return folder;
+        });
+      }
+      return folder;
+    })
+    .then(function(folder){
+      res.json(folder);
+    })
+    .catch(function(err){
+      return cb(err);
+    });
+
+  },
+
+  update: function(req, res, cb) {
+    var id = req.param('id');
+    var data = req.body;
+
+    data.updatedUser = req.token.id;
+    data.updatedAt = moment().format();
+
+    sails.models.folder.update({id: id}, data)
     .exec(function(err, folder){
       if(err) return cb(err);
 
-      async.parallel([
-        function(callback){
-          if (folder.shared !== undefined && folder.shared.length > 0) {
-            var shared = [];
-            async.each(folder.shared, function(val, callback) {
-              sails.models.user.findOne({ id: val })
-              .exec(function(err, user) {
-                if(err) return cb(err);
-                shared.push(user.toJSON());
-                callback();
-              });
-            }, callback);
-            folder.shared = shared;
-          } else {
-            folder.shared = [];
-            callback();
+      console.log(data.shared);
+
+      // If have change in shared
+      if (data.shared) {
+        sails.models.folder.findOne({ id: folder[0].parentId })
+        .exec(function(err, folderParent){
+          if(err) return cb(err);
+
+          if (folderParent.parentId) {
+            // If not exist someone user in folder shared
+            data.shared.forEach(function(index) {
+              if (folderParent.shared.indexOf(index) < 0){
+                folderParent.shared.push(index);
+              }
+            });
+
+            // Change shared parent folder
+            sails.models.folder.update({id: folderParent.id}, {shared:folderParent.shared})
+            .exec(function(err, folder){
+              if(err) return cb(err);
+
+              res.ok();
+            });
           }
-        },
-        function(callback){
-          if (folder.comments !== undefined && folder.comments.length > 0) {
-            async.each(folder.comments, function(val, callback) {
-              sails.models.user.findOne({ id: val.userId })
-              .exec(function(err, user) {
-                if(err) return cb(err);
-                val.user = user.toJSON();
-                callback();
-              });
-            }, callback);
-            folder.comments.reverse();
-          } else {
-            folder.comments = [];
-            callback();
-          }
-        }
-      ],
-      function(err){
-        res.json(folder);
-      });
+
+        });
+      } else {
+        res.ok();
+      }
 
     });
-
   },
 
   getFolderAndFiles: function(req, res, cb) {
@@ -95,20 +184,134 @@ module.exports = {
         children: []
       };
 
-      sails.models.folder.find({
-        parentId: id,
-        or : [
-          { owner: req.token.id },
-          { shared: { contains: req.token.id } }
-        ]
-      })
-      .populate('createdUser')
-      .populate('updatedUser')
-      .populate('owner')
-      .exec(function(err, result){
-        if(err) return cb(err);
+      // Search children
+      async.parallel({
+        folders: function(callback) {
 
-        response.children = result;
+          sails.models.folder.find({
+            parentId:id,
+            or : [
+              { owner: req.token.id },
+              { shared: { contains: req.token.id } }
+            ]
+          })
+          .populate('createdUser')
+          .populate('updatedUser')
+          .populate('owner')
+          .exec(function(err, folders){
+            if(err) return cb(err);
+
+            async.each(folders, function(folder, callback) {
+
+              if (folder.shared.length > 0) {
+                return sails.models.user.find({ id: folder.shared })
+                .then(function(users) {
+                  folder.shared = [];
+                  users.forEach(function(user){
+                    folder.shared.push(user.toJSON());
+                  });
+                  callback();
+                });
+              } else {
+                callback();
+              }
+
+            }, function(err){
+              callback(null, folders);
+            });
+
+          });
+
+        },
+        files: function(callback) {
+
+          sails.models.file.find({
+            folderId:id,
+            or : [
+              { owner: req.token.id },
+              { shared: { contains: req.token.id } }
+            ]
+          })
+          .populate('createdUser')
+          .populate('updatedUser')
+          .populate('owner')
+          .exec(function(err, files){
+            if(err) return cb(err);
+
+            async.each(files, function(file, callback) {
+
+              if (file.shared.length > 0) {
+                return sails.models.user.find({ id: file.shared })
+                .then(function(users) {
+                  file.shared = [];
+                  users.forEach(function(user){
+                    file.shared.push(user.toJSON());
+                  });
+                  callback();
+                });
+              } else {
+                callback();
+              }
+
+            }, function(err){
+              callback(null, files);
+            });
+
+          });
+
+        }
+      }, function(err, results) {
+        response.children = results.folders.concat(results.files);
+        res.json(response);
+      });
+
+    });
+
+  },
+
+  getFolderAndFilesByParent: function(req, res, cb) {
+
+    var id = req.param('id');
+
+    async.parallel({
+      folders: function(callback) {
+
+        sails.models.folder.find({
+          parentId:id,
+          or : [
+            { owner: req.token.id },
+            { shared: { contains: req.token.id } }
+          ]
+        })
+        .populate('createdUser')
+        .populate('updatedUser')
+        .populate('owner')
+        .exec(function(err, folders){
+          if(err) return cb(err);
+
+          async.each(folders, function(folder, callback) {
+
+            if (folder.shared.length > 0) {
+              return sails.models.user.find({ id: folder.shared })
+              .then(function(users) {
+                folder.shared = [];
+                users.forEach(function(user){
+                  folder.shared.push(user.toJSON());
+                });
+                callback();
+              });
+            } else {
+              callback();
+            }
+
+          }, function(err){
+            callback(null, folders);
+          });
+
+        });
+
+      },
+      files: function(callback) {
 
         sails.models.file.find({
           folderId:id,
@@ -120,61 +323,34 @@ module.exports = {
         .populate('createdUser')
         .populate('updatedUser')
         .populate('owner')
-        .exec(function(err, result){
+        .exec(function(err, files){
           if(err) return cb(err);
 
-          if (response.children.length > 0) {
-            response.children = response.children.concat(result);
-          } else {
-            response.children = result;
-          }
+          async.eachSeries(files, function(file, callback) {
 
-          res.json(response);
+            if (file.shared.length > 0) {
+              return sails.models.user.find({ id: file.shared })
+              .then(function(users) {
+                file.shared = [];
+                users.forEach(function(user){
+                  file.shared.push(user.toJSON());
+                });
+                callback();
+              });
+            } else {
+              callback();
+            }
+
+          }, function(err){
+            callback(null, files);
+          });
+
         });
 
-      });
-
-    });
-
-  },
-
-  getFolderAndFilesByParent: function(req, res, cb) {
-
-    var id = req.param('id');
-
-    sails.models.folder.find({
-      parentId:id,
-      or : [
-        { owner: req.token.id },
-        { shared: { contains: req.token.id } }
-      ]
-    })
-    .populate('createdUser')
-    .populate('updatedUser')
-    .populate('owner')
-    .exec(function(err, result){
-      if(err) return cb(err);
-
-      var response = result;
-
-      sails.models.file.find({
-        folderId:id,
-        or : [
-          { owner: req.token.id },
-          { shared: { contains: req.token.id } }
-        ]
-      })
-      .populate('createdUser')
-      .populate('updatedUser')
-      .populate('owner')
-      .exec(function(err, result){
-        if(err) return cb(err);
-
-        response = response.concat(result);
-
-        res.json(response);
-      });
-
+      }
+    }, function(err, results) {
+      response = results.folders.concat(results.files);
+      res.json(response);
     });
 
   }

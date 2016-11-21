@@ -1,43 +1,67 @@
-<div class="table-responsive">
+<div loading="loading">
+  <div class="table-responsive">
   <table class="table table-hover">
 
     <thead>
       <tr>
         <th>Nombre</th>
-        <th></th>
+        <th>Se compartió con</th>
+        <th class="text-right">Propietario</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr ng-repeat="item in foldersAndFiles" ng-class="{'active': item.id == folderOrFile.id}">
-
-        <td ng-click="view(item)">
+      <tr ng-repeat="item in foldersAndFiles | orderBy:'name'" ng-class="{'active': item.id == folderOrFile.id}" ng-click="view(item)">
+        <!--
+        * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        * Icon & Names
+        -->
+        <td>
           <!-- Icon Folder -->
-          <a href="" ng-click="openFolder(item)" title="{{item.name}}" ng-if="!item.type">
+          <a href="" class="text-primary" ng-click="openFolder(item)" title="{{item.name}}" ng-if="!item.type">
             <i class="fa fa-folder-o fa-2x fa-fw" aria-hidden="true"></i>
-            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
           </a>
           <!-- Icon File -->
-          <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image" title="{{item.name}}">
+          <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary" target="_blank" ng-if="item.type && !item.image" title="{{item.name}}">
             <i class="fa fa-file-o fa-2x fa-fw" aria-hidden="true"></i>
-            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
           </a>
           <!-- Icon Image -->
-          <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="image-link" ng-if="item.type && item.image" title="{{item.name}}">
+          <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary image-link" ng-if="item.type && item.image" title="{{item.name}}">
             <i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i>
-            <span style="vertical-align: super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
           </a>
+            <span style="vertical-align:super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
         </td>
 
-        <td class="text-right" ng-click="view(item)">
-          <i class="fa fa-share-alt text-muted fa-fw" aria-hidden="true" tooltip data-placement="bottom" data-title="Compartido" ng-show="item.shared.length>0">&nbsp;</i>
-          <i class="fa fa-comment-o text-muted fa-fw" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios" ng-show="item.comments.length>0">&nbsp;</i>
+        <!--
+        * Shared thumnails
+        -->
+        <td>
+          <ul class="list-inline list-img margin-bottom-0">
+            <li ng-repeat="user in item.shared | limitTo: 4">
+              <img class="img-circle" tooltip data-placement="bottom" data-title="{{user.fullName}}" src="{{user.avatar}}">
+            </li>
+            <a href="" class="btn btn-xs text-muted" ng-if="item.shared.length - 4 > 0">{{item.shared.length - 4}}+</a>
+          </ul>
+        </td>
+        <!--
+        * Owner Avatar
+        -->
+        <td class="text-right">
+          <a href="" class="btn btn-xs text-muted" ng-show="item.comments.length>0">
+            <i class="fa fa-comment-o fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios"></i>
+          </a>
+          <a class="btn btn-xs text-muted" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{item.name}}" ng-show="item.type">
+            <i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
+          </a>
           <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
-          <i class="fa fa-angle-right text-muted" aria-hidden="true"></i>
+          <a href="" class="btn btn-sm text-info">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </a>
         </td>
 
       </tr>
     </tbody>
 
   </table>
+</div>
 </div>

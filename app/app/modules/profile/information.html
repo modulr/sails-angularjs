@@ -1,0 +1,326 @@
+<div ng-controller="ProfileInformationCtrl">
+
+  <div class="row">
+    <div class="col-sm-6 col-md-6">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'PROFILE.PERSONAL' | translate }}</h3>
+        </div>
+        <div class="panel-body">
+          <dl>
+            <dt>{{ 'PROFILE.GENDER' | translate }}</dt>
+            <dd>{{user.profile.gender | translate}}</dd>
+          </dl>
+          <dl>
+            <dt>{{ 'PROFILE.BIRTHDAY' | translate }}</dt>
+            <dd ng-if="user.profile.birthday">{{user.profile.birthday | amDateFormat:'LL'}}</dd>
+          </dl>
+          <dl>
+            <dt>{{ 'PROFILE.RELATIONSHIP' | translate }}</dt>
+            <dd>{{user.profile.relationship | translate}}</dd>
+          </dl>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right" ng-if="editMode.profile">
+          <a href="" class="btn btn-primary btn-circle" ng-click="editPersonal()">
+            <span class="fa-stack">
+              <i class="fa fa-pencil fa-stack-1x"></i>
+            </span>
+          </a>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.personal -->
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{'PROFILE.PLACES' | translate}}</h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-edit" ng-repeat="item in user.place">
+            <dt>{{item.adress}}</dt>
+            <dd ng-if="item.currently">{{'PROFILE.CURRENTLY' | translate}}</dd>
+            <a href="" class="btn btn-link" ng-click="editPlace(item, $index)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </dl>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right" ng-if="editMode.profile">
+          <a href="" class="btn btn-success btn-circle" data-toggle="modal" data-target="#modalPlace">
+            <span class="fa-stack">
+              <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+          </a>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.places -->
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{'PROFILE.FAMILY' | translate}}</h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-edit" ng-repeat="item in user.family">
+            <dt>{{item.name}}</dt>
+            <dd>{{item.birthday | amDateFormat:'LL'}}, {{item.relation}}</dd>
+            <a href="" class="btn btn-link" ng-click="editFamily(item, $index)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </dl>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right" ng-if="editMode.profile">
+          <a href="" class="btn btn-success btn-circle" data-toggle="modal" data-target="#modalFamily">
+            <span class="fa-stack">
+              <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+          </a>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.family -->
+
+    </div><!-- /.col -->
+
+    <div class="col-sm-6 col-md-6">
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{ 'PROFILE.CONTACT' | translate }}</h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-edit" ng-repeat="item in user.contact | filter:'PHONE'">
+            <dt>
+              <span class="glyphicon glyphicon-phone" aria-hidden="true"></span> {{item.contact}}
+            </dt>
+            <a href="" class="btn btn-link" ng-click="editContact(item)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </dl>
+          <dl class="dl-edit" ng-repeat="item in user.contact | filter:'EMAIL'">
+            <dt>
+              <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> {{item.contact}}
+            </dt>
+            <a href="" class="btn btn-link" ng-click="editContact(item)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </dl>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right" ng-if="editMode.profile">
+          <a href="" class="btn btn-success btn-circle" data-toggle="modal" data-target="#modalContact">
+            <span class="fa-stack">
+              <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+          </a>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.contact -->
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h3 class="panel-title">{{'PROFILE.EDUCATION' | translate}}</h3>
+        </div>
+        <div class="panel-body">
+          <dl class="dl-edit" ng-repeat="item in user.education">
+            <dt>{{item.schoolName}}</dt>
+            <dd>{{item.major}}, {{item.startYear}} - {{item.endYear}}</dd>
+            <a href="" class="btn btn-link" ng-click="editEducation(item, $index)">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </a>
+          </dl>
+        </div><!-- /.panel-body -->
+        <div class="panel-footer text-right" ng-if="editMode.profile">
+          <a href="" class="btn btn-success btn-circle" data-toggle="modal" data-target="#modalEducation">
+            <span class="fa-stack">
+              <i class="fa fa-plus fa-stack-1x"></i>
+            </span>
+          </a>
+        </div><!-- /.panel-footer -->
+      </div><!-- /.education -->
+
+    </div><!-- /.col -->
+  </div><!-- /.row  -->
+  <!--
+  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  * Modals
+  * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  -->
+  <!-- Modal Personal -->
+  <div class="modal fade" id="modalPersonal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{ 'PROFILE.PERSONAL' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formPersonal">
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.GENDER' | translate }}</label>
+              <mdr-select2 url="{{urlAPI}}/gender" options="gender.gender | translate for gender in genders | orderBy:'gender' track by gender.gender" model="formPersonal.gender" selected="formPersonal.gender"></mdr-select2>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.BIRTHDAY' | translate }}</label>
+              <div class="input-group input-group" datetimepicker options="dtp_options" ng-model="formPersonal.birthday">
+                <input type="text" class="form-control" required>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.RELATIONSHIP' | translate }}</label>
+              <mdr-select2 url="{{urlAPI}}/relationship" options="relationship.relationship | translate for relationship in relationships | orderBy:'relationship' track by relationship.relationship" model="formPersonal.relationship" selected="formPersonal.relationship"></mdr-select2>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="savePersonal($event)">{{ 'SAVE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Place -->
+  <div class="modal fade" id="modalPlace" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{ 'PROFILE.PLACES' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formPlace">
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.ADRESS' | translate}}</label>
+              <input type="text" class="form-control" placeholder="795 Folsom Ave, Suite 600 San Francisco, CA 94107" ng-model="formPlace.adress" required>
+            </div>
+            <div class"form-group">
+              <ul class="list-group">
+                <li class="list-group-item" checked-list-box ng-model="formPlace.currently"> {{ 'PROFILE.CURRENTLY' | translate }}</li>
+              </ul>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnPlace" ng-click="deletePlace($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnPlace" ng-click="savePlace($event)">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnPlace" ng-click="createPlace($event)">{{ 'CREATE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Family -->
+  <div class="modal fade" id="modalFamily" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{ 'PROFILE.FAMILY' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formFamily">
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.NAME' | translate}}</label>
+              <input type="text" class="form-control" placeholder="John Doe" ng-model="formFamily.name" required>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.BIRTHDAY' | translate}}</label>
+              <div class="input-group input-group" datetimepicker options="dtp_options" ng-model="formFamily.birthday">
+                <input type="text" class="form-control" required>
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.RELATION' | translate}}</label>
+              <mdr-select2 url="{{urlAPI}}/relation" options="relation.relation | translate for relation in relations | orderBy:'relation' track by relation.relation" model="formFamily.relation" selected="formFamily.relation" required="true"></mdr-select2>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnFamily" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i>" ng-click="deleteFamily($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnFamily" ng-click="saveFamily($event)">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnFamily" ng-click="createFamily($event)">{{ 'CREATE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Contact -->
+  <div class="modal fade" id="modalContact" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">{{ 'PROFILE.CONTACT' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formContact">
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.TYPE' | translate}}</label>
+              <mdr-select2 url="{{urlAPI}}/contactType" options="type.type | translate for type in types | orderBy:'type' track by type.type" model="formContact.type" selected="formContact.type" required="true"></mdr-select2>
+            </div>
+            <div class="form-group" ng-if="formContact.type.type == 'PHONE'">
+              <label class="control-label">{{ 'PHONE' | translate}}</label>
+              <input type="tel" class="form-control" placeholder="1234567890" ng-model="formContact.contact" required>
+            </div>
+            <div class="form-group" ng-if="formContact.type.type == 'EMAIL'">
+              <label class="control-label">{{ 'EMAIL' | translate}}</label>
+              <input type="email" class="form-control" placeholder="john.doe@company.com" ng-model="formContact.contact" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnContact" ng-click="deleteContact($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnContact" ng-click="saveContact($event)">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnContact" ng-click="createContact($event)">{{ 'CREATE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Education -->
+  <div class="modal fade" id="modalEducation" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">{{ 'PROFILE.EDUCATION' | translate }}</h4>
+        </div>
+        <div class="modal-body">
+          <form id="formEducation">
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.SCHOOLNAME' | translate}}</label>
+              <input type="text" class="form-control" placeholder="University of Oxford" ng-model="formEducation.schoolName" required>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.MAJOR' | translate}}</label>
+              <input type="text" class="form-control" placeholder="Medical Sciences" ng-model="formEducation.major" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">{{ 'PROFILE.STARTYEAR' | translate}}</label>
+                  <input type="text" class="form-control" placeholder="2005" ng-model="formEducation.startYear" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label">{{ 'PROFILE.ENDYEAR' | translate}}</label>
+                  <input type="text" class="form-control" placeholder="2010" ng-model="formEducation.endYear" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label">{{ 'PROFILE.DESCRIPTION' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{ 'PROFILE.DESCRIPTION' | translate}}" ng-model="formEducation.description">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnEducation" ng-click="deleteEducation($event)"><span class="glyphicon glyphicon-trash"></span></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'CLOSE' | translate }}</button>
+          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="show.btnEducation" ng-click="saveEducation($event)">{{ 'SAVE' | translate }}</button>
+          <button type="button" class="btn btn-success" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-hide="show.btnEducation" ng-click="createEducation($event)">{{ 'CREATE' | translate }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

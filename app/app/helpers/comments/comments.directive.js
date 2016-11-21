@@ -29,7 +29,7 @@
         src: '='
       },
       templateUrl: 'app/helpers/comments/comments.html',
-      controller: ['$rootScope', '$scope', 'restFulService', 'config', function($rootScope, $scope, restFulService, config)
+      controller: ['$rootScope', '$scope', 'restFulSocketService', '$sailsSocket', 'config', function($rootScope, $scope, restFulSocketService, $sailsSocket, config)
       {
         $scope.user = {};
         $scope.src = [];
@@ -44,7 +44,7 @@
           $('#collapseCommentBtn_' + $scope.$id).collapse('show');
         }
 
-        $scope.create = function()
+        $scope.create = function(event)
         {
           if ($('#formComment_' + $scope.$id).smkValidate()) {
             var btn = $(event.target);
@@ -52,11 +52,10 @@
 
             var data = {
               comment: $scope.formComment.comment,
-              userId: $scope.user.id,
-              createdAt: moment()
+              userId: $scope.user.id
             };
 
-            restFulService.post('comment/create/' +$scope.model+ '/' +$scope.item, data)
+            restFulSocketService.post('comment/create/' +$scope.model+ '/' +$scope.item, data)
             .then(function(response) {
 
               if ($scope.src == undefined) {
@@ -80,10 +79,24 @@
 
         };
 
+        /**
+        * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        * watch and calls
+        * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+        */
+
         $rootScope.$watch('user', function(nv, ov) {
           if (nv) {
             $scope.user = nv;
           }
+        });
+
+        $sailsSocket.subscribe('filesModule', function(obj){
+          //if(obj.verb === 'update'){
+
+            console.log(obj);
+
+          //}
         });
 
 

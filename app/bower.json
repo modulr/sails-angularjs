@@ -29,7 +29,8 @@
     "deep-diff": "^0.3.4",
     "angular-eonasdan-datetimepicker": "^0.3.3",
     "magnific-popup": "^1.1.0",
-    "font-awesome": "^4.6.3"
+    "font-awesome": "^4.6.3",
+    "angular-intro.js": "^2.1.1"
   },
   "overrides": {
     "bootstrap": {

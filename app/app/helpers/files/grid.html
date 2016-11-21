@@ -1,27 +1,37 @@
-<div class="row">
-  <div class="col-sm-4 col-md-2" ng-repeat="item in foldersAndFiles">
-    <div class="thumbnail text-center" ng-click="view(item)">
-      <!-- Icon Folder -->
-      <a href="" ng-click="openFolder(item)" ng-if="!item.type">
-        <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i>
-      </a>
-      <!-- Icon File -->
-      <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image">
-        <i class="fa fa-file-o fa-5x" aria-hidden="true"></i>
-      </a>
-      <!-- Thumnail -->
-      <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="image-link" ng-if="item.type && item.image">
-        <img ng-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" alt="{{item.name}}">
-      </a>
+<div loading="loading">
+  <div class="row">
+    <div class="col-sm-4 col-md-3" ng-repeat="item in foldersAndFiles">
+      <div class="thumbnail" ng-click="view(item)">
+        <!-- Icon Folder -->
+        <a href="" ng-click="openFolder(item)" ng-if="!item.type">
+          <i class="fa fa-folder fa-5x" aria-hidden="true"></i>
+        </a>
+        <!-- Icon File -->
+        <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image">
+          <i class="fa fa-file fa-5x" aria-hidden="true"></i>
+        </a>
+        <!-- Thumnail -->
+        <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="image-link" ng-if="item.type && item.image">
+          <img ng-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" alt="{{item.name}}">
+        </a>
 
-      <div class="caption">
-        <p>
-          <small>
-            {{item.name | limitTo : 12}}<span ng-if="item.name.length > 12">...</span>
-          </small>
-        </p>
+        <div class="caption">
+          <p>{{item.name | limitTo : 12}}<span ng-if="item.name.length > 12">...</span></p>
+          <p>
+            <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
+            <a href="" class="btn btn-xs text-muted" ng-show="item.shared.length>0">
+              <i class="fa fa-share-alt fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Compartir"></i>
+            </a>
+            <a href="" class="btn btn-xs text-muted" ng-show="item.comments.length>0">
+              <i class="fa fa-comment-o fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios"></i>
+            </a>
+            <a href="" class="btn btn-xs text-info">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+          </p>
+        </div>
+
       </div>
-
     </div>
   </div>
 </div>

@@ -55,9 +55,10 @@
 
         $scope.foldersAndFiles = [];
         $scope.folderOrFile = {};
+        $scope.isFileOrFolder = null;
+
         $scope.showCreateFolderInput = false;
         $scope.showInfo = false;
-        $scope.isFileOrFolder = null;
         $scope.loading = true;
 
         $('.files').each(function() { // the containers for all your galleries
@@ -69,6 +70,58 @@
             }
           });
         });
+
+        $scope.IntroOptions = {
+          steps:[
+            {
+              element: '#step1',
+              intro: "Crea una carpeta, carga archivos o cambia la vista."
+            },
+            {
+              element: '#step2',
+              intro: "Lista de carpetas/archivos.<br><small>Selecciona una carpeta/archivo para ver detalles</small>",
+              position: 'top'
+            },
+          ],
+          showStepNumbers: false,
+          showBullets: false,
+          exitOnOverlayClick: true,
+          exitOnEsc:true,
+          prevLabel: '<span>←</span>',
+          nextLabel: '<span>→</span>'
+        };
+
+        $scope.IntroOptionsInfo = {
+          steps:[
+            {
+              element: '#step3',
+              intro: 'Detalles de la carpeta/archivo seleccionado.',
+              position: 'left'
+            },
+            {
+              element: '#step4',
+              intro: "Edita el nombre y/o agrega una descripcion.",
+              position: 'left'
+            },
+            {
+              element: '#step5',
+              intro: 'Comparte la carpeta/archivo con algun usuario.',
+              position: 'left'
+            },
+            {
+              element: '#step6',
+              intro: 'Haz u comentario de la carpeta/archivo.',
+              position: 'left'
+            }
+          ],
+          showStepNumbers: false,
+          showBullets: false,
+          exitOnOverlayClick: true,
+          exitOnEsc:true,
+          prevLabel: '<span>←</span>',
+          nextLabel: '<span>→</span>'
+        };
+
 
         /**
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -104,13 +157,11 @@
         */
         $scope.toggleLayout = function()
         {
-
           if ($scope.layout === 'list'){
             $scope.layout = 'grid';
           } else {
             $scope.layout = 'list';
           }
-
         };
 
         $scope.loadUsers = function(query)
@@ -139,6 +190,8 @@
 
                 $scope.foldersAndFiles.push(response);
 
+                $scope.view(response);
+
                 $.smkAlert({
                   text: 'El folder se creo correctamente.',
                   type: 'success',
@@ -149,6 +202,9 @@
                 $scope.showCreateFolderInput = false;
                 $scope.formFolder = {};
               });
+            } else {
+              $scope.showCreateFolderInput = false;
+
             }
           }
         };
@@ -176,30 +232,67 @@
           }
         };
 
-        $scope.save = function(event)
+        $scope.view = function(item)
+        {
+          var url = isFileOrFolder(item.type);
+
+          restFulService.get(url + '/findOne/' + item.id)
+          .then(function(response) {
+            item.comments = response.comments;
+            $scope.folderOrFileOriginal = angular.copy(item);
+            $scope.folderOrFile = item;
+            $scope.folderOrFile.index = $scope.foldersAndFiles.indexOf(item);
+          });
+
+          if (!$scope.showInfo) {
+            $scope.showInfo = true;
+          }
+
+        };
+
+        $scope.save = function(field)
         {
           if ($('#formFolderOrFile_' + $scope.$id).smkValidate()) {
 
-            var data = {
-              name: $scope.folderOrFile.name,
-              description: $scope.folderOrFile.description,
-              shared: makeArray($scope.folderOrFile.shared),
-              updatedAt: moment()
-            };
+            var data = null;
 
-            var url = isFileOrFolder($scope.folderOrFile.type);
+            switch (field) {
+              case 'name':
+                if ($scope.folderOrFile.name !== $scope.folderOrFileOriginal.name) {
+                  data = {
+                    name: $scope.folderOrFile.name
+                  };
+                }
+                break;
+              case 'description':
+                if ($scope.folderOrFile.description !== $scope.folderOrFileOriginal.description) {
+                  data = {
+                    description: $scope.folderOrFile.description
+                  };
+                }
+                break;
+              case 'shared':
+                if ($scope.folderOrFile.shared.length !== $scope.folderOrFileOriginal.shared.length) {
+                  data = {
+                    shared: makeArray($scope.folderOrFile.shared)
+                  };
+                }
+                break;
+            }
 
-            restFulService.put(url + '/' + $scope.folderOrFile.id, data)
-            .then(function(response) {
+            if (data) {
+              var url = isFileOrFolder($scope.folderOrFile.type);
 
-              $scope.foldersAndFiles[$scope.folderOrFile.index] = response;
-
-              $.smkAlert({
-                text: 'Los cambios se guardaron correctamente',
-                type: 'success',
-                position: 'bottom-left'
+              restFulService.put(url + '/' + $scope.folderOrFile.id, data)
+              .then(function(response) {
+                $.smkAlert({
+                  text: 'Los cambios se guardaron correctamente',
+                  type: 'success',
+                  position: 'bottom-left'
+                });
               });
-            });
+            }
+
           }
         };
 
@@ -231,22 +324,6 @@
 
         };
 
-        $scope.view = function(item)
-        {
-          var url = isFileOrFolder(item.type);
-
-          restFulService.get(url + '/findOne/' + item.id)
-          .then(function(response) {
-            $scope.folderOrFile = response;
-            $scope.folderOrFile.index = $scope.foldersAndFiles.indexOf(item);
-          });
-
-          if (!$scope.showInfo) {
-            $scope.showInfo = true;
-          }
-
-        };
-
         /**
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         * watch
@@ -266,9 +343,11 @@
           }
         });
 
-        $scope.$watch('file', function(nv, ov) {
-          if (nv) {
-            $scope.foldersAndFiles.push(nv);
+        $scope.$watch('file', function(file) {
+          if (file) {
+            $scope.foldersAndFiles.push(file);
+            $scope.view(file);
+            $('#collapseUpload_' + $scope.$id).collapse('hide');
           }
         });
 

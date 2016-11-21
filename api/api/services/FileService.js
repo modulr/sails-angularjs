@@ -10,6 +10,7 @@ module.exports = {
 
     return Math.max(fileSizeInBytes, 0.1).toFixed(1) + byteUnits[i];
   },
+  
   getRealFileName: function(file) {
     var array = file.fd.split("/");
     return array[array.length - 1];
