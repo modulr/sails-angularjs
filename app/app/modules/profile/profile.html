@@ -12,19 +12,16 @@
               </a>
             </div>
 
-            <form class="form-inline" id="formFullName" ng-show="editMode.fullName">
+            <p class="info">{{user.username}} &middot; {{user.email}}</p>
+
+            <form class="form-inline" id="formFullName">
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{ 'PROFILE.NAME' | translate }}" ng-model="formFullName.firstName">
+                <input type="text" class="form-control" placeholder="{{ 'PROFILE.NAME' | translate }}" ng-model="user.firstName" ng-blur="saveFullName()">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="{{ 'PROFILE.LASTNAME' | translate }}" ng-model="formFullName.lastName">
+                <input type="text" class="form-control" placeholder="{{ 'PROFILE.LASTNAME' | translate }}" ng-model="user.lastName" ng-blur="saveFullName()">
               </div>
             </form>
-
-            <div class="info">
-              <h4 ng-hide="editMode.fullName">{{user.firstName}} {{user.lastName}}</h4>
-              <p>@{{user.username}}, {{'PROFILE.MEMBERSINCE' | translate}} {{user.createdAt | amDateFormat:'LL'}}</p>
-            </div>
 
             <div class="nav-center">
               <ul class="nav nav-tabs" role="tablist">
@@ -36,16 +33,6 @@
 
           </div><!-- /.col -->
         </div><!-- /.row -->
-
-        <div class="btn-edit" ng-if="editMode.profile">
-          <a href="" class="btn btn-primary btn-circle" ng-hide="editMode.fullName" ng-click="editFullName()">
-            <span class="fa-stack">
-              <i class="fa fa-pencil fa-stack-1x"></i>
-            </span>
-          </a>
-          <button type="button" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-show="editMode.fullName" ng-click="saveFullName($event)">{{ 'SAVE' | translate }}</button>
-          <button type="button" class="btn btn-default" ng-show="editMode.fullName" ng-click="editMode.fullName=false">{{ 'CANCEL' | translate }}</button>
-        </div>
 
       </div><!-- /.panel-->
 

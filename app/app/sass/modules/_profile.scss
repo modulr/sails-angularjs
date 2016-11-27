@@ -2,12 +2,6 @@
     position: relative;
     padding-top: 20px;
 
-    .btn-edit {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-    }
-
     .photo {
         position: relative;
         display: inline-block;
@@ -41,22 +35,14 @@
     }
 
     .info{
-        margin-top: 15px;
-        margin-bottom: 30px;
-
-        h4, p{
-            color: $gray-dark-30;
-            font-weight: lighter;
-            margin: 0;
-        }
-        p {
-            margin-top: 5px;
-        }
+      margin-top: 15px;
+      color: $gray-dark-30;
+      font-weight: lighter;
     }
 
     form {
+      margin-bottom: 30px;
         .form-group {
-            margin-bottom: 0;
 
             .form-control {
                 background-color: transparent;

@@ -12,12 +12,10 @@
 
     $scope.user = {};
 
-    $scope.formName = {};
-
     $scope.editMode = {
-      fullName: false,
       profile: false
     };
+
     $scope.show = {
       btnPlace: false,
       btnFamily: false,
@@ -47,25 +45,14 @@
     |   Events
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
-    $scope.editFullName = function()
-    {
-      $scope.editMode.fullName = !$scope.editMode.fullName;
-
-      $scope.formFullName = {
+    $scope.saveFullName = function() {
+      var data = {
         firstName: $scope.user.firstName,
-        lastName: $scope.user.lastName,
+        lastName: $scope.user.lastName
       };
-    };
-    $scope.saveFullName = function(event)
-    {
-      var btn = $(event.target);
-      btn.button('loading');
 
-      restFulService.put('user/' + $scope.user.id, $scope.formFullName)
+      restFulService.put('user/' + $scope.user.id, data)
       .then(function(response){
-
-        $scope.user.firstName = response.firstName;
-        $scope.user.lastName = response.lastName;
 
         $translate('MESSAGES.SUCCESS').then(function (translate) {
           $.smkAlert({
@@ -74,11 +61,6 @@
             position: 'bottom-left'
           });
         });
-      })
-      .finally(function(){
-        btn.button('reset');
-        $scope.editMode.fullName = false;
-
       });
     };
 

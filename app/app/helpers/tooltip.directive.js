@@ -1,3 +1,9 @@
+/**
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+* UsersCtrl
+* <a tooltip data-placement="bottom" data-title="title"></a>
+* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+*/
 (function(){
   'use strict';
 

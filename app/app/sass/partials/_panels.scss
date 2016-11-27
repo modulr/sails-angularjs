@@ -32,11 +32,12 @@
 
     &.min-box {
       padding: 10px;
-      span{
+      .fa-stack{
         margin-right: 10px;
+        float: left;
       }
-      div{
-        display: inline-block;
+      .min-box-text{
+        display: inline;
         vertical-align: top;
 
         h2{

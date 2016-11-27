@@ -24,10 +24,10 @@
       </g>
     </svg>
     <!-- <img src="images/icon-white.svg" alt="Modulr"> -->
-    <img src="/images/modulr-white.svg" alt="Modulr" class="hidden-xs">
+    <!-- <img src="/images/modulr-white.svg" alt="Modulr" class="hidden-xs"> -->
   </a>
 
-  <ol class="breadcrumb pull-left hidden-xs">
+  <ol class="breadcrumb hidden-xs">
     <li ng-repeat="breadcrumb in breadcrumbs as result">
       <span translate='{{ breadcrumb.name | uppercase }}'></span>
     </li>
@@ -55,13 +55,14 @@
     </li> -->
     <li>
       <a href="" ng-click="toggleChat()">
-        <i class="fa fa-comments-o fa-lg"></i>
+        <i class="fa fa-comment fa-lg"></i>
         <span class="label label-danger animated tada" ng-if="notifications.chat > 0"> {{ notifications.chat }}</span>
       </a>
     </li>
     <li class="dropdown userData">
       <a href="" class="dropdown-toggle user-btn" data-toggle="dropdown">
         <img src="{{user.avatar}}" class="img-circle"/>
+        <span class="caret"></span>
       </a>
       <ul class="dropdown-menu dropdown-menu-right">
         <li class="userData-header">
@@ -88,7 +89,7 @@
   </ul><!-- /.nav .nav-pills -->
 </header>
 
-<nav role="navigation" ng-class="class.layout">
+<nav role="navigation" ng-class="class.layout" ng-click="closeChat()">
   <ul class="nav nav-pills nav-stacked">
     <li ng-repeat="item in modules | filter:{'active': true} | orderBy: 'order'" ui-sref-active="active" ng-hide="item.state == 'profile'">
       <a href="" ui-sref="{{item.state}}">
@@ -102,11 +103,11 @@
   </ul>
 </nav>
 
-<aside ng-class="{open: class.chat}">
+<aside ng-class="{open: class.chat}" ng-click="closeNav()">
   <div ng-include="'app/modules/chat/chat.html'"></div>
 </aside>
 
-<section ng-class="class.layout" ng-click="closeChat()">
+<section ng-class="class.layout" ng-click="closeChatAndNav()">
   <ul class="nav nav-tabs submodules" ng-if="submodules.length > 0" ng-hide="isProfile">
     <li ng-repeat="item in submodules" ui-sref-active="active">
       <a href="" ui-sref="{{item.state}}">{{item.title | uppercase | translate}}</a>

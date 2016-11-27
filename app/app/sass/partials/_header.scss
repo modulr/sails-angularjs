@@ -43,9 +43,8 @@ header{
   .breadcrumb{
     background-color: transparent;
     border-radius: 0;
-    margin: 16px 0 0 20px;
-    padding: 0 0 0 20px;
-    border-left: 1px solid $white;
+    display: inline-block;
+    line-height: 44px;
     font-size: 18px;
     font-weight: lighter;
 

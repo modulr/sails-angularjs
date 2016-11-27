@@ -163,6 +163,8 @@
         index: $scope.users.indexOf(row),
         id: row.id,
         username: row.username,
+        firstName: row.firstName,
+        lastName: row.lastName,
         email: row.email,
         role: row.role.id,
         active: row.active,
@@ -259,14 +261,11 @@
       });
     };
 
-    $scope.sendUserData = function (event)
+    $scope.sendUserData = function (user)
     {
-      if ($scope.formUser.active) {
+      if (user.active) {
 
-        var btn = $(event.target);
-        btn.button('loading');
-
-        restFulService.get('user/sendUserData/' + $scope.formUser.id)
+        restFulService.get('user/sendUserData/' + user.id)
         .then(function(response){
 
           $translate('USERS.MESSAGES.SEND-USER-DATA.SUCCESS')
@@ -290,9 +289,6 @@
             });
           });
 
-        })
-        .finally(function(){
-          btn.button('reset');
         });
       }
     };

@@ -106,7 +106,6 @@
     |- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     */
     $scope.toggleNav = function() {
-
       if ($scope.class.layout === '' || $scope.class.layout === null){
         $scope.class.layout = 'min';
       } else {
@@ -114,19 +113,23 @@
       }
       // Se guarda la clase en la variable layout en localStorage
       localStorage.setItem('layout', $scope.class.layout);
-
+    };
+    $scope.closeNav = function() {
+      $scope.class.layout = 'min';
+      // Se guarda la clase en la variable layout en localStorage
+      localStorage.setItem('layout', $scope.class.layout);
     };
 
     $scope.toggleChat = function() {
       $scope.class.chat = !$scope.class.chat;
     };
-
-    $scope.openChat = function() {
-      $scope.class.chat = true;
-    };    
-
     $scope.closeChat = function() {
       $scope.class.chat = false;
+    };
+
+    $scope.closeChatAndNav = function() {
+      $scope.closeNav();
+      $scope.closeChat();
     };
 
     $scope.goToProfile = function(id) {

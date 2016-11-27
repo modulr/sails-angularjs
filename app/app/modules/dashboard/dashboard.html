@@ -2,16 +2,32 @@
 
   <div class="row">
     <div class="col-md-3">
+      <a href="files">
+        <div class="panel min-box">
+          <span class="fa-stack fa-3x text-success">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-folder-o fa-stack-1x fa-inverse"></i>
+          </span>
+          <div class="min-box-text">
+            <h4>{{ 'FILES' | translate }}</h4>
+            <p>Administra tus archivos</p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </a>
+    </div>
+    <div class="col-md-3">
       <a href="users">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-users fa-stack-1x fa-inverse"></i>
           </span>
-          <div>
+          <div class="min-box-text">
             <h4>{{ 'USERS' | translate }}</h4>
             <p>Administra los usuarios</p>
           </div>
+          <div class="clearfix"></div>
         </div>
       </a>
     </div>
@@ -22,10 +38,11 @@
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
           </span>
-          <div>
+          <div class="min-box-text">
             <h4>{{ 'ACCESS' | translate }}</h4>
             <p>Administra los accesos</p>
           </div>
+          <div class="clearfix"></div>
         </div>
       </a>
     </div>
@@ -36,10 +53,11 @@
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-area-chart fa-stack-1x fa-inverse"></i>
           </span>
-          <div>
+          <div class="min-box-text">
             <h4>{{ 'LOG' | translate }}</h4>
             <p>Historial de actividad en sistema</p>
           </div>
+          <div class="clearfix"></div>
         </div>
       </a>
     </div>
@@ -50,38 +68,26 @@
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-user fa-stack-1x fa-inverse"></i>
           </span>
-          <div>
+          <div class="min-box-text">
             <h4>{{ 'PROFILE' | translate }}</h4>
             <p>Personaliza tu perfil de usuario</p>
           </div>
+          <div class="clearfix"></div>
         </div>
       </a>
     </div>
     <div class="col-md-3">
-      <a href="" ng-click="openChat()">
+      <a href="">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-comments-o fa-stack-1x fa-inverse"></i>
           </span>
-          <div>
+          <div class="min-box-text">
             <h4>{{ 'CHAT' | translate }}</h4>
             <p>Conversa con tus compañeros</p>
           </div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3">
-      <a href="files">
-        <div class="panel min-box">
-          <span class="fa-stack fa-3x text-success">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-folder-o fa-stack-1x fa-inverse"></i>
-          </span>
-          <div>
-            <h4>{{ 'FILES' | translate }}</h4>
-            <p>Administra tus archivos</p>
-          </div>
+          <div class="clearfix"></div>
         </div>
       </a>
     </div>
