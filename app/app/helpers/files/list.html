@@ -23,7 +23,15 @@
           </a>
           <!-- Icon File -->
           <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary" target="_blank" ng-if="item.type && !item.image" title="{{item.name}}">
-            <i class="fa fa-file-o fa-2x fa-fw" aria-hidden="true"></i>
+            <i class="fa fa-2x fa-fw" aria-hidden="true" ng-class="{
+              'fa-file-pdf-o': item.type == 'application/pdf',
+              'fa-file-powerpoint-o': item.type == 'application/vnd.ms-powerpoint',
+              'fa-file-excel-o': item.type == 'application/vnd.ms-excel',
+              'fa-file-word-o': item.type == 'application/msword',
+              'fa-file-archive-o': item.type == 'application/zip',
+              'fa-file-text-o': item.type !== 'application/pdf'
+            }"
+            ></i>
           </a>
           <!-- Icon Image -->
           <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary image-link" ng-if="item.type && item.image" title="{{item.name}}">

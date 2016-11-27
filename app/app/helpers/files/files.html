@@ -111,7 +111,14 @@
                 <div class="input-group">
                   <span class="input-group-addon">
                     <i class="fa fa-folder-o fa-lg" aria-hidden="true" ng-if="!folderOrFile.type"></i>
-                    <i class="fa fa-file-o fa-lg" aria-hidden="true" ng-if="folderOrFile.type && !folderOrFile.image"></i>
+                    <i class="fa fa-lg" aria-hidden="true" ng-if="folderOrFile.type && !folderOrFile.image"ng-class="{
+                      'fa-file-pdf-o': folderOrFile.type == 'application/pdf',
+                      'fa-file-powerpoint-o': folderOrFile.type == 'application/vnd.ms-powerpoint',
+                      'fa-file-excel-o': folderOrFile.type == 'application/vnd.ms-excel',
+                      'fa-file-word-o': folderOrFile.type == 'application/msword',
+                      'fa-file-archive-o': folderOrFile.type == 'application/zip',
+                      'fa-file-text-o': folderOrFile.type !== 'application/pdf'
+                    }"></i>
                     <i class="fa fa-picture-o fa-lg" aria-hidden="true" ng-if="folderOrFile.type && folderOrFile.image"></i>
                   </span>
                   <input type="text" class="form-control" placeholder="nombre del archivo" ng-model="folderOrFile.name" required ng-blur="save('name')">
