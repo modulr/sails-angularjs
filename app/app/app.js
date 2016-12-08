@@ -42,7 +42,8 @@
     'chat',
     'log',
     'dashboard',
-    'files'
+    'files',
+    'tests'
 
   ])
   .run(['$rootScope', '$state', '$urlRouter', 'authService', 'restFulService', function($rootScope, $state, $urlRouter, authService, restFulService){

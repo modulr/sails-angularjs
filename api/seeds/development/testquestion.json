@@ -1,0 +1,28 @@
+[
+  {
+    "name" : "Pregunta 1",
+    "testId" : "5840f651a82ea9b6caec001d",
+    "type" : "choice",
+    "possibleAnswers" : [
+      {"title": "Respuesta 1"},
+      {"title": "Respuesta 2"},
+      {"title": "Respuesta 3"},
+      {"title": "Respuesta 4"}
+    ],
+    "answer": "Respuesta 3",
+    "active": 1
+  },
+  {
+    "name" : "Pregunta 2",
+    "testId" : "5840f651a82ea9b6caec001d",
+    "type" : "choice",
+    "possibleAnswers" : [
+      {"title": "Respuesta 1"},
+      {"title": "Respuesta 2"},
+      {"title": "Respuesta 3"},
+      {"title": "Respuesta 4"}
+    ],
+    "answer": "Respuesta 4",
+    "active": 1
+  }
+]

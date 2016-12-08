@@ -17,11 +17,19 @@
     "active": true
   },
   {
+    "title": "tests",
+    "icon": "fa-pencil-square-o",
+    "state": "tests",
+    "url": "/tests",
+    "order": 3,
+    "active": true
+  },
+  {
     "title": "log",
     "icon": "fa-exchange",
     "state": "logLogin",
     "url": "/log/login",
-    "order": 3,
+    "order": 4,
     "active": true,
     "lock": true,
     "submodules": [
@@ -40,7 +48,7 @@
     "icon": "fa-users",
     "state": "users",
     "url": "/users",
-    "order": 4,
+    "order": 5,
     "active": true,
     "lock": true,
     "submodules": [
@@ -90,7 +98,7 @@
     "icon": "fa-cogs",
     "state": "modules",
     "url": "/settings/modules",
-    "order": 5,
+    "order": 7,
     "active": true,
     "lock": true,
     "submodules": [

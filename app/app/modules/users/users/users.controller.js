@@ -261,11 +261,14 @@
       });
     };
 
-    $scope.sendUserData = function (user)
+    $scope.sendUserData = function (event)
     {
-      if (user.active) {
+      if ($scope.formUser.active) {
 
-        restFulService.get('user/sendUserData/' + user.id)
+        var btn = $(event.target);
+        btn.button('loading');
+
+        restFulService.get('user/sendUserData/' + $scope.formUser.id)
         .then(function(response){
 
           $translate('USERS.MESSAGES.SEND-USER-DATA.SUCCESS')
@@ -289,6 +292,9 @@
             });
           });
 
+        })
+        .finally(function(){
+          btn.button('reset');
         });
       }
     };

@@ -69,8 +69,10 @@
             <thead tasty-thead></thead>
             <tbody>
               <tr ng-repeat="row in rows"> <!-- ng-class="{'selected':row.selected}" ng-click="selectedRow(row)" -->
-                <td class="avatar" ng-click="editUser(row.id)">
-                  <img ng-src="{{row.avatar}}" class="img-circle"> {{ row.username }}
+                <td class="avatar" ng-click="goToProfile(row.id)">
+                  <a href="" tooltip data-placement="right" data-title="{{ 'PROFILE' | translate }}">
+                    <img ng-src="{{row.avatar}}" class="img-circle"> {{ row.username }}
+                  </a>
                 </td>
                 <td ng-click="editUser(row)">{{ row.fullName }}</td>
                 <td ng-click="editUser(row)">{{ row.email }}</td>
@@ -81,11 +83,8 @@
                 <td ng-click="editUser(row)">{{ row.createdAt | amDateFormat:'LL' }}</td>
                 <td class="btn-edit">
                   <div class="btn-group">
-                    <a href="" class="btn" tooltip data-placement="left" data-title="{{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}" ng-click="sendUserData(row)" ng-if="row.active">
-                      <i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i>
-                    </a>
-                    <a href="" class="btn" tooltip data-placement="left" data-title="{{ 'PROFILE' | translate }}" ng-click="goToProfile(row.id)">
-                      <i class="fa fa-chevron-right fa-lg" aria-hidden="true"></i>
+                    <a href="" class="btn" tooltip data-placement="left" data-title="{{ 'EDIT' | translate }}" ng-click="editUser(row)">
+                      <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                     </a>
                   </div>
                 </td>
@@ -121,12 +120,6 @@
       <form id="formUser">
         <div class="modal-body">
           <div class="row">
-
-            <div class="col-md-12 text-right">
-              <div class="form-group">
-                <a href="#" class="fancy-check" checked-list-box ng-model="formUser.active">Active</a>
-              </div>
-            </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label class="control-label">{{ 'USERS.USERNAME' | translate }}*</label>
@@ -171,16 +164,23 @@
                 <mdr-select2 url="{{urlAPI}}/userrole" options="role.role for role in roles | orderBy:'role' track by role.id" model="formUser.getRole" selected="formUser.role" required="true" disabled="formUser.lock"></mdr-select2>
               </div>
             </div>
-
-
+            <div class="col-md-12">
+              <div class="form-group">
+                <a href="#" class="fancy-check" checked-list-box ng-model="formUser.active">{{'USERS.USER'|translate}} {{'USERS.ACTIVE' | translate}}</a>
+              </div>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.modal-body -->
         <div class="modal-footer">
           <button type="button" class="btn btn-default pull-left" ng-if="show.editUser" ng-disabled="formUser.id == user.id" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="deleteUser($event)">
             <span class="glyphicon glyphicon-trash"></span>
           </button>
+          <button type="button" class="btn btn-default btn-outline pull-left"  ng-if="show.editUser" ng-click="sendUserData($event)">
+             <i class="fa fa-paper-plane-o" aria-hidden="true"></i> {{ 'SEND' | translate }} {{ 'USERS.INFORMATION' | translate }}
+          </button>
+
           <button type="button" class="btn btn-default" data-dismiss="modal">
-            {{ 'CLOSE' | translate }}
+            {{ 'CANCEL' | translate }}
           </button>
           <button type="submit" class="btn btn-primary" data-loading-text="<i class='fa fa-circle-o-notch fa-pulse'></i> Loading..." ng-click="createUser($event)" ng-if="!show.editUser">
             {{ 'ADD' | translate }}

@@ -13,6 +13,10 @@
         "_access" : true,
         "_write" : true
       },
+      "tests" : {
+        "_access" : true,
+        "_write" : true
+      },
       "log" : {
         "_access" : true,
         "_write" : true,
@@ -85,6 +89,10 @@
         "_access" : true,
         "_write" : true
       },
+      "tests" : {
+        "_access" : true,
+        "_write" : true
+      },
       "log" : {
         "_access" : true,
         "_write" : true,
@@ -154,6 +162,10 @@
         "_write" : false
       },
       "files" : {
+        "_access" : true,
+        "_write" : false
+      },
+      "tests" : {
         "_access" : true,
         "_write" : false
       },

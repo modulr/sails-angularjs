@@ -1,0 +1,76 @@
+<div class="page tests">
+  <div class="row">
+    <div class="col-md-3">
+      <a href="" class="btn btn-primary btn-block btn-outline">
+        <span class="fa fa-plus"></span> Create Test
+      </a>
+      <br>
+      <div ui-tree data-drag-enabled="false">
+        <ol ui-tree-nodes ng-model="modules">
+          <li ng-repeat="item in testGroups" ui-tree-node collapsed="true">
+            <div class="tree-node-content text-capitalize">
+              <button type="button" class="close pull-left toggle" ng-if="item.tests && item.tests.length > 0" ng-click="toggle()">
+                <span class="glyphicon glyphicon-chevron-right"
+                ng-class="{'glyphicon-chevron-right': collapsed,'glyphicon-chevron-down': !collapsed}" aria-hidden="true"></span>
+              </button>
+              {{item.name}}
+            </div>
+            <ol ui-tree-nodes ng-model="item.tests" ng-class="{hidden: collapsed}">
+              <li ng-repeat="subItem in item.tests" ui-tree-node>
+                <div class="tree-node-content text-capitalize">
+                  <a href="" ng-click="getQuestions($event, subItem)"><i class="fa fa-file-text fa-fw" aria-hidden="true"></i>&nbsp; {{subItem.name}}</a>
+                </div>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </div><!-- /.col -->
+    <div class="col-md-9">
+      <div class="panel">
+        <div class="panel-body">
+          <div ng-show="questions.length == 0">
+            <h2 class="text-center">  Selecciona un test </h2>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane"
+              ng-repeat="item in questions track by $index"
+              ng-class="{'active': count == $index+1}">
+              <div class="row">
+                <div class="col-md-12">
+                  <h4>{{test.name}}</h4>
+                  <hr>
+                </div>
+                <div class="col-md-8 col-md-offset-2">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="{{count}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentaje}}%;">
+                      {{count}} - {{questions.length}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-10 col-md-offset-1">
+                  <br>
+                  <h3>{{item.name}}</h3>
+                  <form id="form">
+                    <div class"form-group">
+                      <ul class="list-group" ng-repeat="subItem in item.possibleAnswers">
+                        <li class="list-group-item" checked-list-box ng-model="subItem.answer">{{ subItem.title }} {{subItem}}</li>
+                      </ul>
+                    </div>
+                  </form>
+                </div><!-- /.col -->
+              </div><!-- /.row -->
+            </div><!-- /.tabpanel -->
+          </div><!-- /.tab-content -->
+        </div>
+        <div class="panel-footer" ng-show="questions.length>0">
+          <button type="button" class="btn btn-default btn-outline"
+            ng-click="next(count-1)" ng-disabled="count == 1">Atras</button>
+          <button type="button" class="btn btn-success btn-outline pull-right"
+            ng-click="next(count+1)">Calificar</button>
+          </div>
+        </div>
+      </div><!-- /.panel -->
+    </div><!-- /.col-->
+  </div><!-- /.row-->
+</div><!-- /.page -->
