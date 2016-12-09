@@ -3,8 +3,7 @@
 
   angular
   .module('dashboard')
-  .controller('DashboardCtrl', ['$scope', function($scope){
-
+  .controller('DashboardCtrl', ['$rootScope', '$scope', function($rootScope, $scope) {
 
   }]);
 

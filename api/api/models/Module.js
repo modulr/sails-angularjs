@@ -14,6 +14,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
       type: 'string',
       required: true
     },
+    description: {
+      type: 'string'
+    },
     icon: {
       type: 'string',
       defaultsTo: ''

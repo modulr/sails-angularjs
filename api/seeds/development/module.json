@@ -1,6 +1,7 @@
 [
   {
     "title": "dashboard",
+    "description": "Una vista rapida de lo mas importante",
     "icon": "fa-home",
     "state": "dashboard",
     "url": "/dashboard",
@@ -10,6 +11,7 @@
   },
   {
     "title": "files",
+    "description": "Administra tus archivos",
     "icon": "fa-folder-o",
     "state": "files",
     "url": "/files",
@@ -18,6 +20,7 @@
   },
   {
     "title": "tests",
+    "description": "Crea encuestas, aplica examenes",
     "icon": "fa-pencil-square-o",
     "state": "tests",
     "url": "/tests",
@@ -26,6 +29,7 @@
   },
   {
     "title": "log",
+    "description": "Historial de actividad en sistema",
     "icon": "fa-exchange",
     "state": "logLogin",
     "url": "/log/login",
@@ -35,16 +39,19 @@
     "submodules": [
       {
         "title": "login",
+        "description": "",
         "state": "logLogin"
       },
       {
         "title": "request",
+        "description": "",
         "state": "logRequest"
       }
     ]
   },
   {
     "title": "users",
+    "description": "Administra los usuarios",
     "icon": "fa-users",
     "state": "users",
     "url": "/users",
@@ -54,20 +61,24 @@
     "submodules": [
       {
         "title": "users",
+        "description": "",
         "state": "users"
       },
       {
         "title": "roles",
+        "description": "",
         "state": "roles"
       },
       {
         "title": "access",
+        "description": "Administra los accesos",
         "state": "access"
       }
     ]
   },
   {
     "title": "profile",
+    "description": "Personaliza tu perfil de usuario",
     "icon": "fa-user",
     "state": "profile",
     "url": "/profile",
@@ -77,24 +88,29 @@
     "submodules": [
       {
         "title": "information",
+        "description": "",
         "state": "information"
       },
       {
         "title": "work",
+        "description": "",
         "state": "work"
       },
       {
         "title": "settings",
+        "description": "",
         "state": "settings"
       },
       {
         "title": "permissions",
+        "description": "",
         "state": "permissions"
       }
     ]
   },
   {
     "title": "settings",
+    "description": "Personaliza modulr",
     "icon": "fa-cogs",
     "state": "modules",
     "url": "/settings/modules",
@@ -104,6 +120,7 @@
     "submodules": [
       {
         "title": "modules",
+        "description": "",
         "state": "modules"
       }
     ]

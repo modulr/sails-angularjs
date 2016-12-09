@@ -1,37 +1,24 @@
 <div class="page">
 
   <div class="row">
-    <div class="col-md-3">
-      <a href="files">
-        <div class="panel min-box">
-          <span class="fa-stack fa-3x text-success">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-folder-o fa-stack-1x fa-inverse"></i>
-          </span>
-          <div class="min-box-text">
-            <h4>{{ 'FILES' | translate }}</h4>
-            <p>Administra tus archivos</p>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3">
-      <a href="users">
+
+    <div class="col-xs-12 col-sm-4 col-md-3" ng-repeat="item in modules">
+      <a href="{{item.url}}">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
             <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-users fa-stack-1x fa-inverse"></i>
+            <i class="fa fa-stack-1x fa-inverse {{item.icon}}"></i>
           </span>
           <div class="min-box-text">
-            <h4>{{ 'USERS' | translate }}</h4>
-            <p>Administra los usuarios</p>
+            <h4 class="text-capitalize">{{ item.title | translate }}</h4>
+            <p>{{item.description}}</p>
           </div>
           <div class="clearfix"></div>
         </div>
       </a>
     </div>
-    <div class="col-md-3">
+
+    <div class="col-xs-12 col-sm-4 col-md-3">
       <a href="users/access">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
@@ -46,22 +33,8 @@
         </div>
       </a>
     </div>
-    <div class="col-md-3">
-      <a href="log/login">
-        <div class="panel min-box">
-          <span class="fa-stack fa-3x text-primary">
-            <i class="fa fa-circle fa-stack-2x"></i>
-            <i class="fa fa-area-chart fa-stack-1x fa-inverse"></i>
-          </span>
-          <div class="min-box-text">
-            <h4>{{ 'LOG' | translate }}</h4>
-            <p>Historial de actividad en sistema</p>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-      </a>
-    </div>
-    <div class="col-md-3">
+
+    <div class="col-xs-12 col-sm-4 col-md-3">
       <a href="profile/{{user.id}}">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
@@ -76,7 +49,8 @@
         </div>
       </a>
     </div>
-    <div class="col-md-3">
+
+    <div class="col-xs-12 col-sm-4 col-md-3">
       <a href="">
         <div class="panel min-box">
           <span class="fa-stack fa-3x text-primary">
@@ -91,6 +65,7 @@
         </div>
       </a>
     </div>
+
   </div>
 
 </div><!-- /.page -->
