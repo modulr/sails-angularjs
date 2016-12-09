@@ -1,0 +1,33 @@
+<div class="page tests">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-xs-10"><h4>{{group.name}}</h4></div>
+        <div class="col-xs-2"><a href="/tests" class="btn pull-right">Atras</a></div>
+      </div>
+      <hr class="margin-top-5 margin-bottom-20">
+      <div class="row">
+        <div class="col-xs-6 col-sm-4 col-md-3">
+          <div class="thumbnail">
+            <a href="#" class="btn btn-default btn-block padding-top-50 padding-bottom-50">
+              <span class="fa fa-plus fa-5x text-muted"></span><br>Crear Examen
+            </a>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-3" ng-repeat="item in group.tests">
+          <div class="thumbnail">
+            <div class="caption">
+              <h4>{{item.name}}</h4>
+              <p class="text-muted">{{item.description}}</p>
+              <p>
+                <a href="#" class="btn btn-primary btn-block btn-outline" role="button" ng-click="getTest(group.id, item.id)">Empezar</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.page -->

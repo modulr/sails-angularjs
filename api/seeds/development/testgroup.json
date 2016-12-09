@@ -2,7 +2,21 @@
   {
     "id" : "5840f5dea82ea9b6caec001c",
     "name" : "Matematicas",
-    "test" : "5840f651a82ea9b6caec001d",
+    "description" : "Desarrolla tus habilidades en Algebra, trigonometria y Matrices.",
+    "order" : 1,
+    "active" : 1
+  },
+  {
+    "id" : "5840f5dea82ea9b6caec0012",
+    "name" : "Español",
+    "description" : "Entraremos en los temas de silabas, consonantes y bocales.",
+    "order" : 1,
+    "active" : 1
+  },
+  {
+    "id" : "5840f5dea82ea9b6caec0013",
+    "name" : "Ingles",
+    "description" : "Aprende a escuchar, ablar y escribir el idioma.",
     "order" : 1,
     "active" : 1
   }

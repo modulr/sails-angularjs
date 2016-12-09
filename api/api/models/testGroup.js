@@ -13,6 +13,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     name: {
       type: 'string'
     },
+    description: {
+      type: 'string'
+    },
     tests: {
       collection: 'test',
       via: 'group'

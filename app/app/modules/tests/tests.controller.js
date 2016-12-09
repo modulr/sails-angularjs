@@ -3,52 +3,24 @@
 
   angular
   .module('tests')
-  .controller('TestsCtrl', ['$scope', 'restFulService', function($scope, restFulService){
+  .controller('TestsCtrl', ['$scope', 'restFulService', '$state', function($scope, restFulService, $state){
 
-    $scope.testGroups = [];
-    $scope.test = null;
-    $scope.questions = [];
-    $scope.count = 1;
-    $scope.percentaje = 0;
+    $scope.groups = [];
 
     // Methods
-    function getTestGroups() {
-      restFulService.get('testgroup/findTestGroup')
+    function getGroups() {
+      restFulService.get('testgroup/findAllTestGroup')
       .then(function(response){
-        $scope.testGroups = response;
+        $scope.groups = response;
       });
     }
 
-    function getPercentage() {
-      $scope.percentaje = ($scope.count)*100/($scope.questions.length);
-    }
-
-    // Events
-    $scope.getQuestions = function(event, test) {
-      console.log(test);
-      $scope.test = test;
-      restFulService.get('testquestion/findByTest/' + test.id)
-      .then(function(response){
-        $scope.questions = response;
-        $scope.count = 1;
-        getPercentage();
-      });
-    };
-
-    $scope.next = function(index) {
-      $scope.count = index;
-      getPercentage();
-      if ($scope.questions.length == $scope.count) {
-        $scope.finish();
-      }
-    };
-
-    $scope.finish = function() {
-      console.log($scope.questions.length);
+    $scope.getTests = function(groupId) {
+      $state.go('group', { groupId: groupId });
     };
 
     // Watch
-    getTestGroups();
+    getGroups();
 
   }]);
 

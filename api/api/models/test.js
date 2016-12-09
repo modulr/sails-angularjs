@@ -13,8 +13,14 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     name: {
       type: 'string'
     },
+    description: {
+      type: 'string'
+    },
     group: {
       model: 'testGroup'
+    },
+    questions: {
+      type: 'array'
     },
     order: {
       type: 'string'

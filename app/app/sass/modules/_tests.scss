@@ -1,5 +1,15 @@
 .tests {
-  .tab-content, h3 {
+  .tab-content {
     margin-top: 0;
+  }
+  .thumbnail {
+    .caption {
+      p.text-muted {
+        height: 81px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 10px;
+      }
+    }
   }
 }

@@ -2,8 +2,79 @@
   {
     "id" : "5840f651a82ea9b6caec001d",
     "name" : "Algebra",
+    "description" : "Aprende algebra con Baldor.",
     "group" : "5840f5dea82ea9b6caec001c",
     "order" : 1,
-    "active" : 1
+    "active" : 1,
+    "questions": [
+      {
+        "name" : "Pregunta 1",
+        "type" : "choice",
+        "possibleAnswers" : [
+          {"title": "Respuesta 1"},
+          {"title": "Respuesta 2"},
+          {"title": "Respuesta 3"},
+          {"title": "Respuesta 4"}
+        ],
+        "answer": "Respuesta 3",
+        "active": 1
+      },
+      {
+        "name" : "Pregunta 2",
+        "type" : "choice",
+        "possibleAnswers" : [
+          {"title": "Respuesta 1"},
+          {"title": "Respuesta 2"},
+          {"title": "Respuesta 3"},
+          {"title": "Respuesta 4"}
+        ],
+        "answer": "Respuesta 4",
+        "active": 1
+      }
+    ]
+  },
+  {
+    "id" : "5840f651a82ea9b6caec0012",
+    "name" : "Matrices",
+    "description" : "Matrices en 2d y 3d.",
+    "group" : "5840f5dea82ea9b6caec001c",
+    "order" : 1,
+    "active" : 1,
+    "questions": [
+      {
+        "name" : "Pregunta 1",
+        "type" : "choice",
+        "possibleAnswers" : [
+          {"title": "Respuesta 1"},
+          {"title": "Respuesta 2"},
+          {"title": "Respuesta 3"},
+          {"title": "Respuesta 4"}
+        ],
+        "answer": "Respuesta 3",
+        "active": 1
+      },
+      {
+        "name" : "Pregunta 2",
+        "type" : "choice",
+        "possibleAnswers" : [
+          {"title": "Respuesta 1"},
+          {"title": "Respuesta 2"},
+          {"title": "Respuesta 3"},
+          {"title": "Respuesta 4"}
+        ],
+        "answer": "Respuesta 4",
+        "active": 1
+      },
+      {
+        "name" : "Pregunta 3",
+        "type" : "choice",
+        "possibleAnswers" : [
+          {"title": "Respuesta 1"},
+          {"title": "Respuesta 2"}
+        ],
+        "answer": "Respuesta 4",
+        "active": 1
+      }
+    ]
   }
 ]
