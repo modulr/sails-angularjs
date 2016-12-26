@@ -13,24 +13,27 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     name: {
       type: 'string'
     },
-    testId: {
+    test: {
       model: 'test'
     },
     type: {
       type: 'text'
     },
-    possibleAnswers: {
-      type: 'array'
-    },
-    answer: {
-      type: 'text'
-    },
-    dateDeactivate: {
-      type: 'date'
+    order: {
+      type: 'string'
     },
     active: {
       type: 'boolean',
       defaultsTo: true
+    },
+    possibleAnswers: {
+      type: 'array'
+    },
+    correctAnswers: {
+      type: 'text'
+    },
+    dateDeactivate: {
+      type: 'date'
     },
     permissions: {
       type: 'array'

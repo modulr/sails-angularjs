@@ -3,17 +3,20 @@
   <div class="row">
     <div class="col-md-12">
       <div class="row">
-        <div class="col-xs-10"><h4><small>{{test.group.name}} / </small>{{test.name}}</h4></div>
-        <div class="col-xs-2"><a href="/tests/{{$state.params.groupId}}" class="btn pull-right">Salir</a></div>
-      </div>
-      <hr class="margin-top-5 margin-bottom-20">
-      <div class="row">
         <div class="col-md-12">
           <div class="panel">
             <div class="panel-body">
+              <div class="row">
+                <div class="col-xs-10">
+                  <h4>{{test.group.name}} / {{test.name}}</h4>
+                </div>
+                <div class="col-xs-2 text-right">
+                  <span ng-show="percentaje>0">{{count}} - {{test.questions.length}}</span>
+                  <a href="/tests/{{$state.params.groupId}}">Salir</a>
+                </div>
+              </div>
               <div class="progress">
                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{count}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentaje}}%;">
-                  <span ng-show="percentaje>0">{{count}} - {{test.questions.length}}</span>
                 </div>
               </div>
               <div class="tab-content">
@@ -32,14 +35,19 @@
                   </div><!-- /.row -->
                 </div><!-- /.tabpanel -->
               </div><!-- /.tab-content -->
-            </div>
-            <div class="panel-footer" ng-show="test.questions.length>0">
-              <button type="button" class="btn btn-default btn-outline"
-              ng-click="skip(count+1)">Saltar</button>
-              <button type="button" class="btn btn-success btn-outline pull-right"
-              ng-click="rate()">Calificar</button>
-              <button type="button" class="btn btn-success btn-outline pull-right"
-              ng-click="next(count+1)">Continuar</button>
+              <hr>
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="button" class="btn btn-default btn-outline"
+                  ng-click="skip(count+1)">Saltar</button>
+                </div>
+                <div class="col-md-6 text-right">
+                  <button type="button" class="btn btn-success btn-outline"
+                  ng-click="rate(count)">Calificar</button>
+                  <button type="button" class="btn btn-success btn-outline"
+                  ng-click="next(count+1)">Continuar</button>
+                </div>
+              </div>
             </div>
           </div><!-- /.panel -->
         </div><!-- /.col-->

@@ -58,7 +58,7 @@ gulp.task('js', function () {
 });
 
 gulp.task('jsonmin', function () {
-  gulp.src(['config/locales/**/*.json'])
+  gulp.src(['app/config/locales/**/*.json'])
     .pipe(jsonmin())
     .pipe(rename({ extname: '.min.json' }))
     .pipe(gulp.dest(dest + 'locales'));
@@ -104,6 +104,7 @@ gulp.task('watch', function () {
   gulp.watch('locales/**/*.json', ['jsonmin']);
   gulp.watch('app/images/**/*', ['imagemin']);
   gulp.watch('app/**/*.html', ['copyhtml']);
+  gulp.watch('app/config/locales/*.json', ['jsonmin']);
 });
 
 gulp.task('compile', ['preprocess', 'sass', 'js', 'jsonmin', 'imagemin', 'vendorjs', 'vendorcss', 'copyhtml', 'copyvendor', 'symlink']);

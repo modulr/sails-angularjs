@@ -29,7 +29,7 @@
   },
   {
     "title": "log",
-    "description": "Historial de actividad en sistema",
+    "description": "Historial de actividad",
     "icon": "fa-exchange",
     "state": "logLogin",
     "url": "/log/login",

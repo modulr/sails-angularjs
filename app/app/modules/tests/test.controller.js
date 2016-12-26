@@ -22,7 +22,28 @@
 
     function getPercentage() {
       $scope.percentaje = ($scope.count)*100/($scope.test.questions.length);
-      console.log($scope.percentaje);
+    }
+
+    function validateAnswers(correctAnswers, possibleAnswers) {
+      var answeredAnswers = 0;
+      var result = false;
+
+      possibleAnswers.forEach(function(v, k){
+        if (v.answer) {
+          answeredAnswers++;
+
+          if (v.title == correctAnswers.title) {
+            result = true;
+          }
+        }
+      });
+
+      // Si el total de respuestas correctas es igual al total de respuestas contestadas por el usuario
+      if ((correctAnswers.length == answeredAnswers) && result) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     // Events
@@ -45,6 +66,13 @@
     };
 
     $scope.rate = function(index) {
+
+      console.log(validateAnswers($scope.test.questions[index].correctAnswers, $scope.test.questions[index].possibleAnswers));
+
+      validateAnswers($scope.test.questions[index].correctAnswers, $scope.test.questions[index].possibleAnswers);
+
+      console.log('bien');
+
       $scope.finish();
     };
 

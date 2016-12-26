@@ -19,11 +19,12 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     group: {
       model: 'testGroup'
     },
-    questions: {
-      type: 'array'
-    },
     order: {
       type: 'string'
+    },
+    active: {
+      type: 'boolean',
+      defaultsTo: true
     },
     dateActivate: {
       type: 'date'
@@ -31,11 +32,10 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     dateDeactivate: {
       type: 'date'
     },
-    active: {
-      type: 'boolean',
-      defaultsTo: true
-    },
     permissions: {
+      type: 'array'
+    },
+    questions: {
       type: 'array'
     }
   }
