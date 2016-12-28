@@ -35,23 +35,40 @@ module.exports = {
 
       data.comments.push(comment);
 
-      sails.models[model].update({id: id}, data).exec(function(err, response){
+      sails.models[model].update({id: id}, data)
+      .exec(function(err, response){
         if(err) return cb(err);
 
-          sails.models.user.findOne({ id: comment.userId })
-          .exec(function(err, user) {
-            if(err) return cb(err);
+        // Se envian las notificaciones
+        var text = comment.userId+ ' ha comentado el archivo ' +response[0].name;
 
-            comment.user = user.toJSON();
+        // Owner
+        EmailService.sendSimple('notification', {
+          to: response[0].owner,
+          subject: text,
+          data: {
+            paragraph: text
+          }
+        }, req);
 
-            // sails.models[model].publishUpdate(id, {
-            //   comment: comment
-            // }, req );
-
-            sails.sockets.broadcast(id, 'filesModule', { data: comment });
-
+        // shared
+        if (response[0].shared.length) {
+          async.each(response[0].shared, function(user, callback) {
+            // It send the mail
+            EmailService.sendSimple('notification', {
+              to: user,
+              subject: text,
+              data: {
+                paragraph: text
+              }
+            }, req);
+            callback();
+          }, function(err) {
             res.json(comment);
           });
+        } else {
+          res.json(comment);
+        }
 
       });
 

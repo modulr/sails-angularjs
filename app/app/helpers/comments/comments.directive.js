@@ -29,7 +29,7 @@
         src: '='
       },
       templateUrl: 'app/helpers/comments/comments.html',
-      controller: ['$rootScope', '$scope', 'restFulSocketService', '$sailsSocket', 'config', function($rootScope, $scope, restFulSocketService, $sailsSocket, config)
+      controller: ['$rootScope', '$scope', 'restFulService', 'config', function($rootScope, $scope, restFulService, config)
       {
         $scope.user = {};
         $scope.src = [];
@@ -42,7 +42,7 @@
         $scope.showCommentBtn = function()
         {
           $('#collapseCommentBtn_' + $scope.$id).collapse('show');
-        }
+        };
 
         $scope.create = function(event)
         {
@@ -55,12 +55,14 @@
               userId: $scope.user.id
             };
 
-            restFulSocketService.post('comment/create/' +$scope.model+ '/' +$scope.item, data)
+            restFulService.post('comment/create/' +$scope.model+ '/' +$scope.item, data)
             .then(function(response) {
 
               if ($scope.src == undefined) {
                 $scope.src = [];
               }
+
+              response.user = $scope.user;
 
               $scope.src.unshift(response);
 
@@ -84,19 +86,10 @@
         * watch and calls
         * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         */
-
         $rootScope.$watch('user', function(nv, ov) {
           if (nv) {
             $scope.user = nv;
           }
-        });
-
-        $sailsSocket.subscribe('filesModule', function(obj){
-          //if(obj.verb === 'update'){
-
-            console.log(obj);
-
-          //}
         });
 
 

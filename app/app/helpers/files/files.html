@@ -144,8 +144,8 @@
                 replace-spaces-with-dashes="false"
                 template="tag-template"
                 placeholder="nombre o usuario"
-                on-tag-added="save('shared')"
-                on-tag-removed="save('shared')">
+                on-tag-added="save('shared', {action:'added', user:$tag})"
+                on-tag-removed="save('shared', {action:'removed', user:$tag})">
                 <auto-complete
                   source="loadUsers($query)"
                   template="autocomplete-template">

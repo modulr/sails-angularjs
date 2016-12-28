@@ -56,10 +56,12 @@ module.exports = {
 
       // If have change in shared
       if (data.shared) {
+
+        // Se comparten tambien las carpetas padre para que el usuario pueda tener acceso al archivo
         sails.models.folder.findOne({ id: file[0].folderId })
         .exec(function(err, folder){
           if(err) return cb(err);
-
+          // If have parent folder
           if (folder.parentId) {
             // If not exist someone user in folder shared
             data.shared.forEach(function(index) {
@@ -67,7 +69,6 @@ module.exports = {
                 folder.shared.push(index);
               }
             });
-
             // Change shared parent folder
             sails.models.folder.update({id: folder.id}, {shared:folder.shared})
             .exec(function(err, folder){
@@ -76,8 +77,58 @@ module.exports = {
               res.ok();
             });
           }
-
         });
+
+        // Se envian las notificaciones
+        var text = null;
+        if (data.action == 'added') {
+          text = 'El archivo ' +file[0].name+ ' ahora se comparte con ' +data.user.fullName || data.user.username;
+        } else if (data.action == 'removed') {
+          text = 'El archivo ' +file[0].name+ ' se dejo de compartir con ' +data.user.fullName || data.user.username;
+          // Removed
+          req.setLocale(data.user.lang);
+          EmailService.send('notification', {
+            to: data.user.email,
+            subject: 'Dejaron de compartirte el archivo ' +file[0].name,
+            data: {
+              hi: req.__('hi', data.user.fullName || data.user.username),
+              paragraph: 'Dejaron de compartirte la carpeta ' +file[0].name,
+              team: req.__('team')
+            }
+          });
+        }
+
+        // Owner
+        EmailService.sendSimple('notification', {
+          to: file[0].owner,
+          subject: text,
+          data: {
+            paragraph: text
+          }
+        }, req);
+
+        // shared
+        async.each(data.sharedUsers, function(user, callback) {
+
+          // It send the mail
+          req.setLocale(user.lang);
+          EmailService.send('notification', {
+            to: user.email,
+            subject: text,
+            data: {
+              hi: req.__('hi', user.fullName || user.username),
+              paragraph: text,
+              team: req.__('team')
+            }
+          });
+
+          callback();
+
+        }, function(err) {
+
+          res.ok();
+        });
+
       } else {
         res.ok();
       }

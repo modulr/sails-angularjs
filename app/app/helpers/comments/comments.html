@@ -15,10 +15,10 @@
       <span class="input-group-addon">
         <img ng-src="{{user.avatar}}" class="img-circle avatar-sm">
       </span>
-      <textarea class="form-control" rows="2" placeholder="Escribe un comentario" ng-model="formComment.comment" ng-click="showCommentBtn()" required></textarea>
+      <textarea class="form-control" rows="2" placeholder="Escribe un comentario" ng-model="formComment.comment" ng-focus="showCommentBtn()" required></textarea>
     </div>
     <div class="collapse text-right" id="collapseCommentBtn_{{$id}}">
-      <button class="btn btn-primary margin-top-5" type="button" ng-click="create($event)">Comentar</button>
+      <button class="btn btn-primary btn-sm margin-top-5" type="button" ng-click="create($event)">Comentar</button>
     </div>
   </form>
 </div>
