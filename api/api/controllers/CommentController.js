@@ -44,14 +44,19 @@ module.exports = {
           if(err) return cb(err);
 
           // Se envian las notificaciones
-          var text = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
+          var subject = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
+          var paragraph = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
+          var paragraph2 = 'Comentario:';
+          var paragraph3 = comment.comment;
 
           // Owner
           EmailService.sendSimple('notification', {
             to: response[0].owner,
-            subject: text,
+            subject: subject,
             data: {
-              paragraph: text
+              paragraph: paragraph,
+              paragraph2: paragraph2,
+              paragraph3: paragraph3
             }
           }, req);
 
@@ -61,9 +66,11 @@ module.exports = {
               // It send the mail
               EmailService.sendSimple('notification', {
                 to: user,
-                subject: text,
+                subject: subject,
                 data: {
-                  paragraph: text
+                  paragraph: paragraph,
+                  paragraph2: paragraph2,
+                  paragraph3: paragraph3
                 }
               }, req);
               callback();

@@ -29,6 +29,10 @@ module.exports = {
       options.data.hi = req.__('hi', options.name);
       options.data.team = req.__('team');
 
+      options.data.paragraph2 = (options.data.paragraph2) ? options.data.paragraph2 : '';
+      options.data.paragraph3 = (options.data.paragraph3) ? options.data.paragraph3 : '';
+      options.data.paragraph4 = (options.data.paragraph4) ? options.data.paragraph4 : '';
+
       sails.hooks.email.send(template, options,
         {
           to: options.email,
