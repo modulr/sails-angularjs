@@ -39,36 +39,42 @@ module.exports = {
       .exec(function(err, response){
         if(err) return cb(err);
 
-        // Se envian las notificaciones
-        var text = comment.userId+ ' ha comentado el archivo ' +response[0].name;
+        sails.models.user.findOne({id:comment.userId})
+        .exec(function (err, user){
+          if(err) return cb(err);
 
-        // Owner
-        EmailService.sendSimple('notification', {
-          to: response[0].owner,
-          subject: text,
-          data: {
-            paragraph: text
-          }
-        }, req);
+          // Se envian las notificaciones
+          var text = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
 
-        // shared
-        if (response[0].shared.length) {
-          async.each(response[0].shared, function(user, callback) {
-            // It send the mail
-            EmailService.sendSimple('notification', {
-              to: user,
-              subject: text,
-              data: {
-                paragraph: text
-              }
-            }, req);
-            callback();
-          }, function(err) {
+          // Owner
+          EmailService.sendSimple('notification', {
+            to: response[0].owner,
+            subject: text,
+            data: {
+              paragraph: text
+            }
+          }, req);
+
+          // shared
+          if (response[0].shared.length) {
+            async.each(response[0].shared, function(user, callback) {
+              // It send the mail
+              EmailService.sendSimple('notification', {
+                to: user,
+                subject: text,
+                data: {
+                  paragraph: text
+                }
+              }, req);
+              callback();
+            }, function(err) {
+              res.json(comment);
+            });
+          } else {
             res.json(comment);
-          });
-        } else {
-          res.json(comment);
-        }
+          }
+
+        });
 
       });
 
