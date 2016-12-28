@@ -250,7 +250,7 @@
 
         };
 
-        $scope.save = function(field)
+        $scope.save = function(field, options)
         {
           if ($('#formFolderOrFile_' + $scope.$id).smkValidate()) {
 
@@ -274,8 +274,12 @@
               case 'shared':
                 if ($scope.folderOrFile.shared.length !== $scope.folderOrFileOriginal.shared.length) {
                   data = {
-                    shared: makeArray($scope.folderOrFile.shared)
+                    shared: makeArray($scope.folderOrFile.shared),
+                    sharedUsers: $scope.folderOrFile.shared,
+                    action: options.action,
+                    user: options.user
                   };
+                  $scope.folderOrFileOriginal.shared = angular.copy($scope.folderOrFile.shared);
                 }
                 break;
             }
