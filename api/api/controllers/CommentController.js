@@ -44,8 +44,14 @@ module.exports = {
           if(err) return cb(err);
 
           // Se envian las notificaciones
-          var subject = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
-          var paragraph = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
+          var text = null;
+          if (model == 'folder') {
+            text = user.fullName || user.username+ ' ha comentado la carpeta ' +response[0].name;
+          } else if(model == 'file') {
+            text = user.fullName || user.username+ ' ha comentado el archivo ' +response[0].name;
+          }
+          var subject = text;
+          var paragraph = text;
           var paragraph2 = 'Comentario:';
           var paragraph3 = comment.comment;
 
