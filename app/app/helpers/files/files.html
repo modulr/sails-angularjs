@@ -9,12 +9,13 @@
         <ol class="breadcrumb pull-left">
           <li ng-repeat="item in breadcrumb">
             <a href="" ng-click="openFolder(item)">
-              <span class="glyphicon glyphicon-home" aria-hidden="true" ng-show="$first"></span>
+              <!-- <span class="glyphicon glyphicon-home" aria-hidden="true" ng-show="$first"></span> -->
+              <span ng-show="$first">Files</span>
               <span ng-show="!$last && !$first">{{item.name}}</span>
             </a>
             <a href="" ng-show="$last && !$first" ng-click="view(item)">
-              {{item.name}}
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
+              <span class="margin-right-10">{{item.name}}</span>
+              <i class="fa fa-cog" aria-hidden="true"></i>
             </a>
             <!-- <span ng-if="$last">{{item.name}}</span> -->
           </li>
@@ -22,22 +23,22 @@
         <!--
         * Buttons Create, Upload and ViewMode
         -->
-        <div class="btn-group pull-right" role="group">
+        <div class="btn-group pull-right" role="group" id="step1">
           <form class="form-inline" id="formFolder_{{$id}}">
-            <div class="input-group" id="step1">
+            <div class="input-group">
               <input type="text" class="form-control" placeholder="My Folder" focus="showCreateFolderInput" ng-show="showCreateFolderInput" enter="createFolder()" ng-model="formFolder.name" required>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="createFolder()">
                   <i class="fa fa-plus" aria-hidden="true"></i> Carpeta
                 </button>
-                <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseUpload_{{$id}}">
+                <!-- <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#collapseUpload_{{$id}}">
                   <i class="fa fa-upload" aria-hidden="true"></i> Cargar
-                </button>
-                <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Vista" ng-click="toggleLayout()">
-                  <i class="fa" aria-hidden="true"ng-class="{'fa-list': layout=='list', 'fa-th': layout=='grid' }"></i>
-                </button>
+                </button> -->
               </span>
             </div>
+            <button type="button" class="btn btn-default" tooltip data-placement="bottom" data-title="Visualizacion" ng-click="toggleLayout()">
+              <i class="fa" aria-hidden="true" ng-class="{'fa-th': layout=='list', 'fa-list': layout=='grid' }"></i>
+            </button>
             <a href="" class="btn btn-default" tooltip data-placement="bottom" data-title="Ayuda" ng-click="CallMe()">
               <i class="fa fa-question-circle-o fa-lg"></i>
             </a>
@@ -49,15 +50,149 @@
         <!--
         * Upload Dran&Drop
         -->
-        <div class="collapse" id="collapseUpload_{{$id}}">
+        <!-- <div class="collapse" id="collapseUpload_{{$id}}">
           <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
           <hr>
-        </div>
+        </div> -->
         <!--
         * List Folders & Files
         -->
         <div id="step2">
-          <div ng-include src="'app/helpers/files/'+ layout + '.html'"></div>
+          <!-- <div ng-include src="'app/helpers/files/'+ layout + '.html'"></div> -->
+          <div ng-show="layout == 'list'">
+            <div loading="loading">
+              <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Propietario</th>
+                    <th>Se compartió con</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in foldersAndFiles track by $index" ng-class="{'active': item.id == folderOrFile.id}" ng-click="view(item)">
+                    <!--
+                    * - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+                    * Icon & Names
+                    -->
+                    <td>
+                      <!-- Icon Folder -->
+                      <a href="" class="text-primary" ng-click="openFolder(item)" title="{{item.name}}" ng-if="!item.type">
+                        <i class="fa fa-folder-o fa-2x fa-fw" aria-hidden="true"></i>
+                      </a>
+                      <!-- Icon File -->
+                      <a href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary" target="_blank" ng-if="item.type && !item.image" title="{{item.name}}">
+                        <i class="fa fa-2x fa-fw" aria-hidden="true" ng-class="{
+                          'fa-file-pdf-o': item.type == 'application/pdf',
+                          'fa-file-powerpoint-o': item.type == 'application/vnd.ms-powerpoint',
+                          'fa-file-excel-o': item.type == 'application/vnd.ms-excel',
+                          'fa-file-word-o': item.type == 'application/msword',
+                          'fa-file-archive-o': item.type == 'application/zip',
+                          'fa-file-text-o': item.type !== 'application/pdf'
+                        }"
+                        ></i>
+                      </a>
+                      <!-- Icon Image -->
+                      <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="text-primary image-link" ng-if="item.type && item.image" title="{{item.name}}">
+                        <i class="fa fa-picture-o fa-2x fa-fw" aria-hidden="true"></i>
+                      </a>
+                        <span style="vertical-align:super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
+                    </td>
+                    <!--
+                    * Owner Avatar
+                    -->
+                    <td>
+                      <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
+                    </td>
+                    <!--
+                    * Shared thumnails
+                    -->
+                    <td>
+                      <ul class="list-inline list-img margin-bottom-0">
+                        <li ng-repeat="user in item.shared | limitTo: 4">
+                          <img class="img-circle" tooltip data-placement="bottom" data-title="{{user.fullName}}" src="{{user.avatar}}">
+                        </li>
+                        <a href="" class="btn btn-xs text-muted" ng-if="item.shared.length - 4 > 0">{{item.shared.length - 4}}+</a>
+                      </ul>
+                    </td>
+                    <!--
+                    * Actions
+                    -->
+                    <td class="text-right">
+                      <a href="" class="btn btn-xs" ng-show="item.comments.length>0">
+                        <i class="fa fa-comment-o fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a class="btn btn-xs text-muted" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" download="{{item.name}}" ng-show="item.type">
+                        <i class="fa fa-download fa-lg" aria-hidden="true"></i>
+                      </a>
+                      <a href="" class="btn btn-xs text-muted">
+                        <i class="fa fa-angle-right fa-lg" aria-hidden="true"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+              <div class="margin-left-10 margin-right-10 mdr-file-dad-xs">
+                <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}" ></mdr-file>
+              </div>
+            </div>
+          </div>
+          <div ng-show="layout == 'grid'">
+            <div loading="loading">
+              <div class="row">
+                <div class="col-sm-4 col-md-3 mdr-file-dad-sm">
+                  <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}"></mdr-file>
+                </div>
+                <div class="col-sm-4 col-md-3" ng-repeat="item in foldersAndFiles track by $index">
+                  <div class="thumbnail" ng-click="view(item)">
+                    <!-- Icon Folder -->
+                    <a href="" class="back" ng-click="openFolder(item)" ng-if="!item.type">
+                      <i class="fa fa-folder-o fa-5x" aria-hidden="true"></i>
+                    </a>
+                    <!-- Icon File -->
+                    <a class="back" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" target="_blank" ng-if="item.type && !item.image">
+                      <i class="fa fa-5x" aria-hidden="true" ng-class="{
+                        'fa-file-pdf-o': item.type == 'application/pdf',
+                        'fa-file-powerpoint-o': item.type == 'application/vnd.ms-powerpoint',
+                        'fa-file-excel-o': item.type == 'application/vnd.ms-excel',
+                        'fa-file-word-o': item.type == 'application/msword',
+                        'fa-file-archive-o': item.type == 'application/zip',
+                        'fa-file-text-o': item.type !== 'application/pdf'
+                      }"></i>
+                    </a>
+                    <!-- Thumnail -->
+                    <a href="" data-mfp-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" class="back image-link" ng-if="item.type && item.image">
+                      <img ng-src="{{storageUrl}}/{{item.folderId}}/{{item.file}}" alt="{{item.name}}">
+                    </a>
+
+                    <div class="caption">
+                      <p>{{item.name | limitTo : 12}}<span ng-if="item.name.length > 12">...</span></p>
+                      <p>
+                        <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="Propietario" src="{{item.owner.avatar}}">
+                        <a class="btn btn-xs text-muted" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{item.name}}" ng-show="item.type">
+                          <i class="fa fa-link fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <a href="" class="btn btn-xs" ng-class="{'text-primary': item.shared.length>0, 'text-muted': item.shared.length == 0}">
+                          <i class="fa fa-share-alt fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Compartir"></i>
+                        </a>
+                        <a href="" class="btn btn-xs" ng-class="{'text-primary': item.comments.length>0, 'text-muted': item.comments.length == 0}">
+                          <i class="fa fa-comment-o fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios"></i>
+                        </a>
+                        <a href="" class="btn btn-xs text-muted">
+                          <i class="fa fa-edit fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Editar"></i>
+                        </a>
+                      </p>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div><!-- /.panel-body -->
     </div><!-- /.panel -->
@@ -78,11 +213,6 @@
         * Buttons
         -->
         <div class="pull-right">
-          <a class="btn btn-default btn-circle" href="{{storageUrl}}/{{folderOrFile.folderId}}/{{folderOrFile.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{folderOrFile.name}}" ng-show="folderOrFile.type">
-            <span class="fa-stack">
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-            </span>
-          </a>
           <button type="button" class="btn btn-default btn-circle" tooltip data-placement="bottom" data-title="Borrar" ng-disabled="user.id!=folderOrFile.owner.id" ng-click="delete($event)">
             <span class="fa-stack">
               <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -164,7 +294,7 @@
                 <small>Más <i class="fa fa-angle-down" aria-hidden="true"></i></small>
               </a>
             </div>
-            <div class="collapse margin-top-10" id="collapseMore_{{$id}}">
+            <div class="collapse" id="collapseMore_{{$id}}">
               <dl class="dl-horizontal margin-bottom-0">
                 <dt style="width:100px"><small>Tipo</small></dt>
                 <dd style="margin-left:120px"><small>{{folderOrFile.type || 'Folder'}}</small></dd>

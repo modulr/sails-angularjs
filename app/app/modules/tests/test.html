@@ -4,30 +4,33 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-12">
-          <div class="panel">
+          <div class="panel" ng-hide="test.percentajeScore!=null">
             <div class="panel-body">
               <div class="row">
                 <div class="col-xs-10">
                   <h4>{{test.group.name}} / {{test.name}}</h4>
                 </div>
-                <div class="col-xs-2 text-right">
-                  <span ng-show="percentaje>0">{{count}} - {{test.questions.length}}</span>
-                  <a href="/tests/{{$state.params.groupId}}">Salir</a>
+                <div class="col-xs-2 text-right margin-top-10">
+                  <a href="/tests/{{test.group.id}}">Salir</a>
                 </div>
-              </div>
-              <div class="progress">
-                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{count}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentaje}}%;">
+                <div class="col-xs-12">
+                  <div class="progress margin-bottom-10">
+                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{test.currentCuestion}}" aria-valuemin="0" aria-valuemax="100" style="width: {{test.percentajeAnswered}}%;"></div>
+                  </div>
+                </div>
+                <div class="col-xs-12 text-right">
+                  <span>{{test.currentCuestion + 1}} - {{test.questions.length}}</span>
                 </div>
               </div>
               <div class="tab-content">
-                <div role="tabpanel" class="tab-pane" ng-repeat="item in test.questions track by $index" ng-class="{'active': count == $index}">
+                <div role="tabpanel" class="tab-pane" ng-repeat="item in test.questions track by $index" ng-class="{'active': test.currentCuestion == $index}">
                   <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                      <h3 class="margin-top-20 margin-bottom-50">{{item.name}}</h3>
+                      <h3 class="margin-top-30 margin-bottom-30">{{item.name}}</h3>
                       <form id="form">
                         <div class"form-group">
-                          <ul class="list-group" ng-repeat="subItem in item.possibleAnswers">
-                            <li class="list-group-item" checked-list-box ng-model="subItem.answer">{{ subItem.title }} {{subItem}}</li>
+                          <ul class="list-group" ng-repeat="subItem in item.answers">
+                            <li class="list-group-item" checked-list-box ng-model="subItem.selected">{{ subItem.title }} {{subItem}}</li>
                           </ul>
                         </div>
                       </form>
@@ -35,20 +38,44 @@
                   </div><!-- /.row -->
                 </div><!-- /.tabpanel -->
               </div><!-- /.tab-content -->
-              <hr>
+            </div><!-- /.panel-body -->
+            <div class="panel-footer">
               <div class="row">
-                <div class="col-md-6">
-                  <button type="button" class="btn btn-default btn-outline"
-                  ng-click="skip(count+1)">Saltar</button>
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                  <button type="button" class="btn btn-default btn-block btn-outline"
+                  ng-click="prev(test.currentCuestion)">Atras</button>
                 </div>
-                <div class="col-md-6 text-right">
-                  <button type="button" class="btn btn-success btn-outline"
-                  ng-click="rate(count)">Calificar</button>
-                  <button type="button" class="btn btn-success btn-outline"
-                  ng-click="next(count+1)">Continuar</button>
+                <div class="col-xs-4 col-sm-6 col-md-6 col-md-offset-1 col-lg-4 col-lg-offset-2 text-center">
+                  <button type="button" class="btn btn-success btn-block btn-outline"
+                  ng-click="rate(test.currentCuestion)">Calificar</button>
                 </div>
-              </div>
-            </div>
+                <div class="col-xs-4 col-sm-3 col-md-2 col-md-offset-1 col-lg-offset-2 text-right">
+                  <button type="button" class="btn btn-primary btn-block btn-outline"
+                  ng-click="next(test.currentCuestion)">Continuar</button>
+                </div>
+              </div><!-- /.row-->
+            </div><!-- /.panel-footer -->
+          </div><!-- /.panel -->
+          <div class="panel" ng-show="test.percentajeScore!=null">
+            <div class="panel-body text-center">
+              <h1>¡Examen completado!</h1>
+              <p class="score text-success">{{test.percentajeScore | number : 1}}</p>
+            </div><!-- /.panel-body -->
+            <div class="panel-footer">
+              <div class="row">
+                <div class="col-xs-4 col-sm-3 col-md-2">
+                  <button type="button" class="btn btn-default btn-block btn-outline"
+                  ng-click="repeat()">Repetir</button>
+                </div>
+                <div class="col-xs-4 col-sm-6 col-md-6 col-md-offset-1 col-lg-4 col-lg-offset-2 text-center">
+                  <button type="button" class="btn btn-success btn-block btn-outline">
+                    <span class="fa fa-share-alt"></span> Compartir</button>
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-2 col-md-offset-1 col-lg-offset-2 text-right">
+                  <a href="/tests/{{test.group.id}}" class="btn btn-primary btn-block btn-outline">Continuar</a>
+                </div>
+              </div><!-- /.row-->
+            </div><!-- /.panel-footer -->
           </div><!-- /.panel -->
         </div><!-- /.col-->
       </div><!-- /.row-->

@@ -19,6 +19,9 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     testId: {
       model: 'test'
     },
+    test: {
+      type: 'json'
+    },
     score: {
       type: 'string'
     },
@@ -27,9 +30,6 @@ module.exports = _.merge(_.cloneDeep(require('./base')), {
     },
     dateFinish: {
       type: 'date'
-    },
-    results: {
-      type: 'array'
     }
   }
 

@@ -1,0 +1,29 @@
+.mdr-file-dad-xs {
+  .mdr-file-dad {
+    min-height: 120px;
+    border-width: 2px;
+    .mdr-file-dad-text{
+      h3 {
+        font-size: 18px !important;
+        span {
+          margin-bottom: 10px!important;
+        }
+      }
+    }
+  }
+}
+
+.mdr-file-dad-sm {
+  .mdr-file-dad {
+    min-height: 150px;
+    border-width: 3px;
+    .mdr-file-dad-text{
+      h3 {
+        font-size: 20px !important;
+        span {
+          margin-bottom: 10px!important;
+        }
+      }
+    }
+  }
+}

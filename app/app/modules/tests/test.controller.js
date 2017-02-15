@@ -5,83 +5,91 @@
   .module('tests')
   .controller('TestCtrl', ['$scope', 'restFulService', '$state', function($scope, restFulService, $state){
 
-    $scope.test = null;
-
-    $scope.count = 0;
-    $scope.percentaje = 0;
+    $scope.test = {
+      currentCuestion: 0
+    };
 
     // Methods
     function getQuestions(testId) {
       restFulService.get('test/' + testId)
       .then(function(response){
         $scope.test = response;
-        $scope.count = 0;
-        getPercentage();
+        $scope.test.currentCuestion = 0;
+        $scope.test.questionsAnswered = [];
+        $scope.test.percentajeAnswered = 0;
+        $scope.test.score = 0;
+        $scope.test.percentajeScore = null;
       });
     }
 
-    function getPercentage() {
-      $scope.percentaje = ($scope.count)*100/($scope.test.questions.length);
-    }
+    function setPercentage(index) {
+      var count = 0;
 
-    function validateAnswers(correctAnswers, possibleAnswers) {
-      var answeredAnswers = 0;
-      var result = false;
-
-      possibleAnswers.forEach(function(v, k){
-        if (v.answer) {
-          answeredAnswers++;
-
-          if (v.title == correctAnswers.title) {
-            result = true;
-          }
+      $scope.test.questions[index].answers.forEach(function(v){
+        if (v.selected) {
+          count++;
         }
       });
 
-      // Si el total de respuestas correctas es igual al total de respuestas contestadas por el usuario
-      if ((correctAnswers.length == answeredAnswers) && result) {
-        return true;
+      var i = $scope.test.questionsAnswered.indexOf(index);
+
+      if (count>0) {
+        if (i == -1) {
+          $scope.test.questionsAnswered.push(index);
+        }
       } else {
-        return false;
+        if (i > -1) {
+          $scope.test.questionsAnswered.splice(i, 1);
+        }
       }
+
+      $scope.test.percentajeAnswered = ($scope.test.questionsAnswered.length)*100/($scope.test.questions.length);
     }
 
     // Events
-    $scope.skip = function(index) {
-      if ($scope.test.questions.length > index) {
-        $scope.count = index;
+    $scope.prev = function(index) {
+      setPercentage(index);
+      if (index> 0) {
+        $scope.test.currentCuestion = index-1;
       } else {
-        $scope.count = 0;
+        $scope.test.currentCuestion = $scope.test.questions.length - 1;
       }
     };
 
     $scope.next = function(index) {
-      if ($scope.test.questions.length > index) {
-        $scope.count = index;
+      setPercentage(index);
+      if ($scope.test.questions.length > index + 1) {
+        $scope.test.currentCuestion = index+1;
       } else {
-        $scope.count = 0;
+        $scope.test.currentCuestion = 0;
       }
-      getPercentage();
-      $scope.finish();
     };
 
     $scope.rate = function(index) {
+      setPercentage(index);
 
-      console.log(validateAnswers($scope.test.questions[index].correctAnswers, $scope.test.questions[index].possibleAnswers));
+      $scope.test.score = 0;
 
-      validateAnswers($scope.test.questions[index].correctAnswers, $scope.test.questions[index].possibleAnswers);
+      $scope.test.questions.forEach(function(v) {
+        var result = true;
+        v.answers.forEach(function(v, k) {
+          if (v.correct && !v.selected) {
+            result = false;
+          } else if (!v.correct && v.selected) {
+            result = false;
+          }
+        });
+        if (result) {
+          $scope.test.score++;
+        }
+      });
 
-      console.log('bien');
-
-      $scope.finish();
+      $scope.test.percentajeScore = ($scope.test.score)*100/($scope.test.questions.length);
+      console.log($scope.test);
     };
 
-    $scope.finish = function() {
-      console.log($scope.test.questions.length);
-      console.log($scope.count);
-      if ($scope.test.questions.length == $scope.count) {
-        console.log($scope.test.questions.length);
-      }
+    $scope.repeat = function() {
+      getQuestions($state.params.testId);
     };
 
 

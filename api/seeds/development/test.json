@@ -12,14 +12,11 @@
         "type" : "choice",
         "order" : 1,
         "active": 1,
-        "possibleAnswers" : [
-          {"title" : "Respuesta 1"},
-          {"title" : "Respuesta 2"},
-          {"title" : "Respuesta 3"},
-          {"title" : "Respuesta 4"}
-        ],
-        "correctAnswers": [
-          {"title" : "Respuesta 3"}
+        "answers" : [
+          {"title" : "Respuesta 1", "correct" : true},
+          {"title" : "Respuesta 2", "correct" : false},
+          {"title" : "Respuesta 3", "correct" : false},
+          {"title" : "Respuesta 4", "correct" : false}
         ]
       },
       {
@@ -27,14 +24,11 @@
         "type" : "choice",
         "order" : 2,
         "active": 1,
-        "possibleAnswers" : [
-          {"title" : "Respuesta 1"},
-          {"title" : "Respuesta 2"},
-          {"title" : "Respuesta 3"},
-          {"title" : "Respuesta 4"}
-        ],
-        "correctAnswers": [
-          {"title" : "Respuesta 4"}
+        "answers" : [
+          {"title" : "Respuesta 1", "correct" : false},
+          {"title" : "Respuesta 2", "correct" : true},
+          {"title" : "Respuesta 3", "correct" : false},
+          {"title" : "Respuesta 4", "correct" : false}
         ]
       }
     ]
@@ -52,14 +46,11 @@
         "type" : "choice",
         "order" : 1,
         "active": 1,
-        "possibleAnswers" : [
-          {"title" : "Respuesta 1"},
-          {"title" : "Respuesta 2"},
-          {"title" : "Respuesta 3"},
-          {"title" : "Respuesta 4"}
-        ],
-        "correctAnswers": [
-          {"title" : "Respuesta 1"}
+        "answers" : [
+          {"title" : "Respuesta 1", "correct" : true},
+          {"title" : "Respuesta 2", "correct" : false},
+          {"title" : "Respuesta 3", "correct" : false},
+          {"title" : "Respuesta 4", "correct" : false}
         ]
       },
       {
@@ -67,14 +58,11 @@
         "type" : "choice",
         "order" : 2,
         "active": 1,
-        "possibleAnswers" : [
-          {"title" : "Respuesta 1"},
-          {"title" : "Respuesta 2"},
-          {"title" : "Respuesta 3"},
-          {"title" : "Respuesta 4"}
-        ],
-        "correctAnswers": [
-          {"title" : "Respuesta 2"}
+        "answers" : [
+          {"title" : "Respuesta 1", "correct" : false},
+          {"title" : "Respuesta 2", "correct" : true},
+          {"title" : "Respuesta 3", "correct" : false},
+          {"title" : "Respuesta 4", "correct" : false}
         ]
       },
       {
@@ -82,14 +70,11 @@
         "type" : "choice",
         "order" : 3,
         "active": 1,
-        "possibleAnswers" : [
-          {"title" : "Respuesta 1"},
-          {"title" : "Respuesta 2"},
-          {"title" : "Respuesta 3"},
-          {"title" : "Respuesta 4"}
-        ],
-        "correctAnswers": [
-          {"title" : "Respuesta 3"}
+        "answers" : [
+          {"title" : "Respuesta 1", "correct" : true},
+          {"title" : "Respuesta 2", "correct" : false},
+          {"title" : "Respuesta 3", "correct" : false},
+          {"title" : "Respuesta 4", "correct" : true}
         ]
       }
     ]

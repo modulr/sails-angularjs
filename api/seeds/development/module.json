@@ -124,5 +124,25 @@
         "state": "modules"
       }
     ]
+  },
+  {
+    "title": "helpers",
+    "description": "Utiliza los helpers para crear tu modulo",
+    "icon": "fa-cogs",
+    "state": "helpers",
+    "url": "/dev/templates",
+    "order": 8,
+    "active": true,
+    "lock": true
+  },
+  {
+    "title": "templates",
+    "description": "Utiliza algun template para crear tu modulo",
+    "icon": "fa-cogs",
+    "state": "templates",
+    "url": "/dev/templates",
+    "order": 9,
+    "active": true,
+    "lock": true
   }
 ]

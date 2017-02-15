@@ -4,8 +4,6 @@
   angular
   .module('modulr', [
 
-
-
     // Packages
     'sails.io',
     'ui.router',

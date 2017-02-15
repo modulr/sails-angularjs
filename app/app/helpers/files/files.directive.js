@@ -56,6 +56,7 @@
         $scope.foldersAndFiles = [];
         $scope.folderOrFile = {};
         $scope.isFileOrFolder = null;
+        $scope.file = null;
 
         $scope.showCreateFolderInput = false;
         $scope.showInfo = false;
@@ -75,7 +76,7 @@
           steps:[
             {
               element: '#step1',
-              intro: "Crea una carpeta, carga archivos o cambia la vista."
+              intro: "Crea una carpeta o cambia la visualizacion de los archivos."
             },
             {
               element: '#step2',
@@ -343,11 +344,11 @@
           }
         });
 
-        $scope.$watch('file', function(file) {
-          if (file) {
-            $scope.foldersAndFiles.push(file);
-            $scope.view(file);
-            $('#collapseUpload_' + $scope.$id).collapse('hide');
+        $scope.$watch('file', function(nv) {
+          if (nv) {
+            $scope.foldersAndFiles.push(nv);
+            $scope.view(nv);
+            //$('#collapseUpload_' + $scope.$id).collapse('hide');
           }
         });
 

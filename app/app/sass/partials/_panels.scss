@@ -25,7 +25,7 @@
       padding: 20px;
     }
 
-    .panel-footer{
+    .panel-footer {
       background-color: $white;
       border-top: 1px solid transparent;
     }
@@ -36,12 +36,18 @@
         margin-right: 10px;
         float: left;
       }
-      .min-box-text{
+      .min-box-text {
         display: inline;
         vertical-align: top;
 
-        h2{
+        h2 {
           margin: 15px 0 5px 0;
+        }
+
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          height: 40px;
         }
       }
     }

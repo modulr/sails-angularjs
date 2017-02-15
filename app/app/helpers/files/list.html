@@ -1,15 +1,15 @@
 <div loading="loading">
+
   <div class="table-responsive">
   <table class="table table-hover">
-
     <thead>
       <tr>
         <th>Nombre</th>
         <th>Se compartió con</th>
-        <th class="text-right">Propietario</th>
+        <th>Propietario</th>
+        <th class="text-right">Acciones</th>
       </tr>
     </thead>
-
     <tbody>
       <tr ng-repeat="item in foldersAndFiles | orderBy:'name'" ng-class="{'active': item.id == folderOrFile.id}" ng-click="view(item)">
         <!--
@@ -39,7 +39,12 @@
           </a>
             <span style="vertical-align:super">{{item.name | limitTo : 35}}<span ng-if="item.name.length > 35">...</span></span>
         </td>
-
+        <!--
+        * Owner Avatar
+        -->
+        <td>
+          <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
+        </td>
         <!--
         * Shared thumnails
         -->
@@ -52,24 +57,31 @@
           </ul>
         </td>
         <!--
-        * Owner Avatar
+        * Actions
         -->
         <td class="text-right">
+          <a class="btn btn-xs text-muted" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{item.name}}" ng-show="item.type">
+            <i class="fa fa-link fa-lg" aria-hidden="true"></i>
+          </a>
+          <a href="" class="btn btn-xs text-muted" ng-show="item.shared.length>0">
+            <i class="fa fa-share-alt fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Compartir"></i>
+          </a>
           <a href="" class="btn btn-xs text-muted" ng-show="item.comments.length>0">
             <i class="fa fa-comment-o fa-lg" aria-hidden="true" tooltip data-placement="bottom" data-title="Comentarios"></i>
           </a>
-          <a class="btn btn-xs text-muted" href="{{storageUrl}}/{{item.folderId}}/{{item.file}}" tooltip data-placement="bottom" data-title="Descargar" target="_blank" download="{{item.name}}" ng-show="item.type">
-            <i class="fa fa-arrow-circle-down fa-lg" aria-hidden="true"></i>
-          </a>
-          <img ng-src="{{item.owner.avatar}}" class="img-circle avatar-sm" tooltip data-placement="bottom" data-title="{{item.owner.fullName}}" src="{{item.owner.avatar}}">
-          <a href="" class="btn btn-sm text-info">
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          <a href="" class="btn btn-xs text-muted">
+            <i class="fa fa-edit fa-lg" aria-hidden="true"></i>
           </a>
         </td>
 
       </tr>
     </tbody>
-
   </table>
-</div>
+  </div>
+
+  <div class="margin-left-10 margin-right-10 mdr-file-dad-xs" ng-model="file">
+    <mdr-file url="{{urlAPI}}/file/uploadInFolder/{{currentFolderId}}" headers="{authorization: token}" model="file" multiple="uploadMultiple" formats="uploadFormats" text="{{uploadText}}" ></mdr-file>
+  </div>
+
+
 </div>
